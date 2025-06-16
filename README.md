@@ -1,6 +1,21 @@
-React Router v7 + tRPC + Better Auth + Prisma!
+<div align="center">
+	<h1 align="center">🐶Dogokit Shiba</h1>
+  <p align="center">
+    <span>Full Stack App Development Kit</span>
+    <br />
+    <a href="https://shiba.dogokit.com">🚧 Live Demo</a>
+  </p>
+</div>
 
-A modern template for building full-stack React applications using React Router v7 with tRPC, Better Auth and Prisma .
+## Goal
+
+🐶Dogokit Shiba is the implementation details of [Akita], mainly using:
+
+- React Router v7 Framework
+- tRPC
+- Prisma
+- Better Auth
+- Tailwind CSS and shadcn/ui
 
 ## Getting Started
 
@@ -18,32 +33,31 @@ This repo is using Neon Postgres as our database. make sure to replace the place
 Install the dependencies:
 
 ```bash
-npm install
-npx prisma db push
+bun install
+```
+
+### Database Migration
+
+Migrate the database:
+
+```bash
+bun prisma db migrate dev
 ```
 
 ### Development
 
-Start the development server with HMR:
+Start the development server:
 
 ```bash
-npm run dev
+bun dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Application is available at `http://localhost:5173`.
 
 ## Building for Production
 
 Create a production build:
 
 ```bash
-npm run build
+bun run build
 ```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
