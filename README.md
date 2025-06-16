@@ -9,7 +9,7 @@
 
 ## Goal
 
-🐶Dogokit Shiba is the implementation details of [Akita], mainly using:
+Dogokit Shiba is the implementation details of [Dogokit Akita](https://github.com/dogokit/dogokit-akita), mainly using:
 
 - React Router v7 Framework
 - tRPC
