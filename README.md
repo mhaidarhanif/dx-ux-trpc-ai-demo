@@ -61,3 +61,7 @@ Create a production build:
 ```bash
 bun run build
 ```
+
+## Credits
+
+This repo was initialized from [`ayoubphy/react-router-trpc-prisma-better-auth`](https://github.com/ayoubphy/react-router-trpc-prisma-better-auth)
