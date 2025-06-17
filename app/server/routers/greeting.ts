@@ -1,7 +1,6 @@
 import type { TRPCRouterRecord } from "@trpc/server";
-
+import { db } from "@/server/db";
 import { protectedProcedure, publicProcedure } from "@/server/trpc";
-import { db } from "../db";
 
 export const greetingRouter = {
   hello: publicProcedure.query(async () => {

@@ -1,5 +1,5 @@
-import { greetingRouter } from "./routers/greeting";
-import { createTRPCRouter } from "./trpc";
+import { greetingRouter } from "@/server/routers/greeting";
+import { createTRPCRouter } from "@/server/trpc";
 
 export const appRouter = createTRPCRouter({
   greeting: greetingRouter,

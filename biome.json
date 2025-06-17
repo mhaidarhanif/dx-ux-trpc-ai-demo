@@ -15,13 +15,19 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noArrayIndexKey": "off"
+      },
+      "nursery": {
+        "noNestedComponentDefinitions": "off"
+      }
     }
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "double",
-      "trailingCommas": "all"
+      "trailingCommas": "es5"
     }
   },
   "assist": {
