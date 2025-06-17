@@ -13,7 +13,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 
   const userEmail = authSession?.user.email;
 
-  console.info(`🔹 tRPC Request from ${source} by ${userEmail ?? "Anonymous"}`);
+  console.info(`🔹 tRPC Request: [${source}] by [${userEmail ?? "Anonymous"}]`);
 
   return {
     db,

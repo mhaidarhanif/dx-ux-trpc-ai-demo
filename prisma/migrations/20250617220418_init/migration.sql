@@ -3,10 +3,9 @@ CREATE TABLE "user" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "emailVerified" BOOLEAN NOT NULL,
+    "emailVerified" BOOLEAN NOT NULL DEFAULT false,
+    "username" TEXT NOT NULL,
     "image" TEXT,
-    "createdAt" TIMESTAMP(3),
-    "updatedAt" TIMESTAMP(3),
     "role" TEXT,
     "banned" BOOLEAN,
     "banReason" TEXT,
@@ -14,6 +13,8 @@ CREATE TABLE "user" (
     "firstName" TEXT,
     "lastName" TEXT,
     "phone" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -23,12 +24,12 @@ CREATE TABLE "session" (
     "id" TEXT NOT NULL,
     "expiresAt" TIMESTAMP(3) NOT NULL,
     "token" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3),
-    "updatedAt" TIMESTAMP(3),
     "ipAddress" TEXT,
     "userAgent" TEXT,
     "userId" TEXT NOT NULL,
     "impersonatedBy" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "session_pkey" PRIMARY KEY ("id")
 );
@@ -46,8 +47,8 @@ CREATE TABLE "account" (
     "refreshTokenExpiresAt" TIMESTAMP(3),
     "scope" TEXT,
     "password" TEXT,
-    "createdAt" TIMESTAMP(3),
-    "updatedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "account_pkey" PRIMARY KEY ("id")
 );
@@ -58,8 +59,8 @@ CREATE TABLE "verification" (
     "identifier" TEXT NOT NULL,
     "value" TEXT NOT NULL,
     "expiresAt" TIMESTAMP(3) NOT NULL,
-    "createdAt" TIMESTAMP(3),
-    "updatedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "verification_pkey" PRIMARY KEY ("id")
 );
@@ -67,6 +68,7 @@ CREATE TABLE "verification" (
 -- CreateTable
 CREATE TABLE "Example" (
     "id" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
 
     CONSTRAINT "Example_pkey" PRIMARY KEY ("id")
@@ -76,7 +78,13 @@ CREATE TABLE "Example" (
 CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "user_username_key" ON "user"("username");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "session_token_key" ON "session"("token");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Example_slug_key" ON "Example"("slug");
 
 -- AddForeignKey
 ALTER TABLE "session" ADD CONSTRAINT "session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
