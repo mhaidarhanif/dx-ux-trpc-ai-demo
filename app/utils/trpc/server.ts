@@ -1,6 +1,6 @@
-import { createCallerFactory, createTRPCContext } from "@/server/trpc";
+import type { LoaderFunctionArgs } from "react-router";
 import { appRouter } from "@/server/main";
-import { type LoaderFunctionArgs } from "react-router";
+import { createCallerFactory, createTRPCContext } from "@/server/trpc";
 
 const createContext = (opts: { headers: Headers }) => {
   const headers = new Headers(opts.headers);

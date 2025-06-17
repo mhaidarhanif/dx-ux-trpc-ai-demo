@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@better-auth/cli": "^1.2.8",
+    "@biomejs/biome": "2.0.0",
     "@react-router/dev": "^7.2.0",
     "@tailwindcss/vite": "^4.0.8",
     "@types/node": "^20.17.19",

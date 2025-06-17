@@ -1,4 +1,10 @@
 {
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.action.useSortedKeys.biome": "explicit"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "peacock.color": "#a5b4fc",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#d6ddfe",
     "activityBar.background": "#d6ddfe",
@@ -17,6 +23,5 @@
     "titleBar.activeForeground": "#15202b",
     "titleBar.inactiveBackground": "#a5b4fc99",
     "titleBar.inactiveForeground": "#15202b99"
-  },
-  "peacock.color": "#a5b4fc"
+  }
 }

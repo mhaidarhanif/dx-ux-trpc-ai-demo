@@ -4,13 +4,13 @@ import { protectedProcedure, publicProcedure } from "@/server/trpc";
 import { db } from "../db";
 
 export const greetingRouter = {
-  hello: publicProcedure.query(async (ctx) => {
+  hello: publicProcedure.query(async () => {
     return await db.example.findMany({
       cacheStrategy: { ttl: 60 },
     });
   }),
 
-  user: protectedProcedure.query(async ({ input, ctx }) => {
+  user: protectedProcedure.query(async ({ ctx }) => {
     const user = await ctx.db.user.findFirst({
       where: {
         id: ctx.user?.id,

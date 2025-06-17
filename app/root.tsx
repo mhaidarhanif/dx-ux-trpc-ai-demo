@@ -6,9 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-import { TRPCReactProvider } from "./utils/trpc/react";
-
 import type { Route } from "./+types/root";
+import { TRPCReactProvider } from "./utils/trpc/react";
 import "@/app.css";
 
 export const links: Route.LinksFunction = () => [

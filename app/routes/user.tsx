@@ -1,5 +1,5 @@
-import { caller } from "@/utils/trpc/server";
 import { redirect } from "react-router";
+import { caller } from "@/utils/trpc/server";
 import type { Route } from "./+types/user";
 
 export async function loader(loaderArgs: Route.LoaderArgs) {
@@ -9,6 +9,7 @@ export async function loader(loaderArgs: Route.LoaderArgs) {
     if (!user) return redirect("/");
     return user;
   } catch (error) {
+    console.error(error);
     return redirect("/");
   }
 }
