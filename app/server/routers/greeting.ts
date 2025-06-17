@@ -11,9 +11,7 @@ export const greetingRouter = {
 
   user: protectedProcedure.query(async ({ ctx }) => {
     const user = await ctx.db.user.findFirst({
-      where: {
-        id: ctx.user?.id,
-      },
+      where: { id: ctx.user?.id },
     });
 
     return user;

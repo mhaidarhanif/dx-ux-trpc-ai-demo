@@ -1,6 +1,7 @@
 .DS_Store
+.env
 .react-router/
 .react-router/*
 build/
+generated/
 node_modules/
-.env

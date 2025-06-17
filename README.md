@@ -1,7 +1,7 @@
 <div align="center">
 	<h1 align="center">🐶Dogokit Corgi</h1>
   <p align="center">
-    <span>Full Stack App Development Kit</span>
+    <span>React Router v7 Framework, tRPC, Prisma, Better Auth, Tailwind CSS, shadcn/ui</span>
     <br />
     <a href="https://corgi.dogokit.com">🚧 Live Demo</a>
   </p>

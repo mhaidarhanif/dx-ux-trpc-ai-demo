@@ -1,16 +1,24 @@
-import { redirect } from "react-router";
+import { href, redirect } from "react-router";
+import { auth } from "@/utils/auth/server";
 import { caller } from "@/utils/trpc/server";
 import type { Route } from "./+types/user";
 
 export async function loader(loaderArgs: Route.LoaderArgs) {
+  const session = await auth.api.getSession({
+    headers: loaderArgs.request.headers,
+  });
+
+  if (!session?.user) return redirect(href("/signin"));
+
   const api = await caller(loaderArgs);
+
   try {
     const user = await api.greeting.user();
-    if (!user) return redirect("/");
+    if (!user) return redirect(href("/signin"));
     return user;
   } catch (error) {
     console.error(error);
-    return redirect("/");
+    return redirect(href("/signin"));
   }
 }
 

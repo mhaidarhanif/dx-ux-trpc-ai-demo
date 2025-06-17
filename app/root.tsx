@@ -25,14 +25,15 @@ export const links: Route.LinksFunction = () => [
 
 export const meta: Route.MetaFunction = () => {
   return [
-    { title: "React Router v7 + tRPC + Better Auth + Prisma" },
+    { title: "Dogokit Corgi" },
     {
       property: "og:title",
-      content: "React Router v7 + tRPC + Better Auth + Prisma",
+      content: "Dogokit Corgi",
     },
     {
       name: "description",
-      content: "Starter for React Router v7 with tRPC, Better Auth & Prisma ",
+      content:
+        "Full stack app development kit with React Router v7 Framework, tRPC, Prisma, Better Auth, Tailwind CSS, shadcn/ui",
     },
   ];
 };
