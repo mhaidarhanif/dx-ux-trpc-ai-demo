@@ -1,21 +1,36 @@
 <div align="center">
-	<h1 align="center">🐶Dogokit Shiba</h1>
+	<h1 align="center">🐶Dogokit Corgi</h1>
   <p align="center">
     <span>Full Stack App Development Kit</span>
     <br />
-    <a href="https://shiba.dogokit.com">🚧 Live Demo</a>
+    <a href="https://corgi.dogokit.com">🚧 Live Demo</a>
   </p>
 </div>
 
 ## Goal
 
-Dogokit Shiba is the implementation details of [Dogokit Akita](https://github.com/dogokit/dogokit-akita), mainly using:
+Dogokit Corgi is the implementation details of [Dogokit Akita](https://github.com/dogokit/dogokit-akita), mainly using:
 
+Core:
+
+- React v19
 - React Router v7 Framework
-- tRPC
-- Prisma
-- Better Auth
-- Tailwind CSS and shadcn/ui
+- tRPC v11
+- Prisma v6 & PostgreSQL v7
+- Better Auth v1
+- Tailwind CSS v4 & shadcn/ui
+- Zod v4 & Conform v1
+
+Tools:
+
+- Vite v6 & Vitest v3
+- Biome v2
+
+Services:
+
+- Resend & React Email
+- Uploadcare or Cloudflare R2
+- Polar
 
 ## Getting Started
 
