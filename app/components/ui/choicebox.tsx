@@ -1,8 +1,7 @@
-import { RadioGroup } from "@repo/shadcn-ui/components/ui/radio-group";
-import { cn } from "@repo/shadcn-ui/lib/utils";
 import { CircleIcon } from "lucide-react";
 import { RadioGroup as RadioGroupPrimitive } from "radix-ui";
 import type { ComponentProps, HTMLAttributes } from "react";
+
 import {
   Card,
   CardContent,
@@ -10,6 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { RadioGroup } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
 
 export type ChoiceboxProps = ComponentProps<typeof RadioGroup>;
 
