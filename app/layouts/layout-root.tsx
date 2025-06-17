@@ -1,25 +1,21 @@
 import { href, NavLink, Outlet } from "react-router";
+
 import { cn } from "@/lib/utils";
-import { auth } from "@/utils/auth/server";
-import { caller } from "@/utils/trpc/server";
+import { requireAuth } from "@/utils/auth/helper";
 import type { Route } from "./+types/layout-root";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const session = await auth.api.getSession({ headers: request.headers });
-  if (!session?.user) return { isAuthenticated: false, user: null };
-
-  const api = await caller(request);
-  const user = await api.greeting.user();
-  const isAuthenticated = user !== null;
-
-  return { isAuthenticated, user };
+  return requireAuth(request);
 }
 
 const navLinks = [
   { to: href("/"), text: "Home" },
+  { to: href("/about"), text: "About" },
   { to: href("/examples"), text: "Examples" },
+
   { to: href("/signup"), text: "Sign Up", auth: false },
   { to: href("/signin"), text: "Sign In", auth: false },
+
   { to: href("/signout"), text: "Sign Out", auth: true },
   { to: href("/user"), text: "User", auth: true },
 ];

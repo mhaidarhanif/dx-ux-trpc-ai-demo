@@ -1,6 +1,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+
 import { db } from "@/server/db";
 import { auth } from "@/utils/auth/server";
 
@@ -35,7 +36,9 @@ const t = initTRPC.context<Context>().create({
 });
 
 export const createCallerFactory = t.createCallerFactory;
+
 export const createTRPCRouter = t.router;
+
 export const publicProcedure = t.procedure;
 
 export const protectedProcedure = t.procedure.use(({ ctx, next }) => {

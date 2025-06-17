@@ -1,4 +1,5 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
+
 import { auth } from "@/utils/auth/server";
 
 export async function loader({ request }: LoaderFunctionArgs) {

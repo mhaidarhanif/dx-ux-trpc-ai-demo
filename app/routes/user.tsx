@@ -1,15 +1,8 @@
-import { href, redirect } from "react-router";
-import { auth } from "@/utils/auth/server";
-import { caller } from "@/utils/trpc/server";
+import { requireAuthTrue } from "@/utils/auth/helper";
 import type { Route } from "./+types/user";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const session = await auth.api.getSession({ headers: request.headers });
-  if (!session?.user) return redirect(href("/signin"));
-  const api = await caller(request);
-  const user = await api.greeting.user();
-  if (!user) return redirect(href("/signin"));
-  return { user };
+  return requireAuthTrue(request);
 }
 
 export default function UserDashboardRoute({

@@ -1,6 +1,13 @@
 import { useNavigate } from "react-router";
+
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/utils/auth/client";
+import { requireAuthTrue } from "@/utils/auth/helper";
+import type { Route } from "./+types/signout";
+
+export async function loader({ request }: Route.LoaderArgs) {
+  return requireAuthTrue(request);
+}
 
 export default function SignOutRoute() {
   const navigate = useNavigate();
