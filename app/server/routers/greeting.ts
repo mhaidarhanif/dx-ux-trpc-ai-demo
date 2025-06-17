@@ -2,7 +2,7 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { db } from "@/server/db";
 import { protectedProcedure, publicProcedure } from "@/server/trpc";
 
-export const greetingRouter = {
+export const greeting = {
   hello: publicProcedure.query(async () => {
     return await db.example.findMany({
       cacheStrategy: { ttl: 60 },
