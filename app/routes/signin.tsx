@@ -10,8 +10,10 @@ export default function SignIn() {
   };
 
   return (
-    <div className="px-6 sm:px-0 max-w-sm min-h-screen mx-auto flex items-center justify-center">
-      <Button onClick={() => signIn()}>Sign in with GitHub</Button>
+    <div className="flex items-center justify-center">
+      <section className="p-10">
+        <Button onClick={() => signIn()}>Sign in with GitHub</Button>
+      </section>
     </div>
   );
 }

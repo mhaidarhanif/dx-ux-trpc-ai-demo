@@ -10,8 +10,10 @@ export default function SignUpRoute() {
   };
 
   return (
-    <div className="px-6 sm:px-0 max-w-sm min-h-screen mx-auto flex items-center justify-center">
-      <Button onClick={() => signUp()}>Sign Up with GitHub</Button>
+    <div className="flex items-center justify-center">
+      <section className="p-10">
+        <Button onClick={() => signUp()}>Sign Up with GitHub</Button>
+      </section>
     </div>
   );
 }

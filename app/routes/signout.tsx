@@ -16,8 +16,10 @@ export default function SignOutRoute() {
   };
 
   return (
-    <div className="px-6 sm:px-0 max-w-sm min-h-screen mx-auto flex items-center justify-center">
-      <Button onClick={() => signOut()}>Sign Out</Button>
+    <div className="flex items-center justify-center ">
+      <section className="p-10">
+        <Button onClick={() => signOut()}>Sign Out</Button>
+      </section>
     </div>
   );
 }

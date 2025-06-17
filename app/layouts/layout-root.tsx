@@ -41,7 +41,7 @@ export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                cn(isActive && "font-bold underline text-accent-foreground")
+                cn("font-bold", isActive && "text-primary")
               }
             >
               {link.text}
