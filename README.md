@@ -83,6 +83,16 @@ Create a production build:
 bun run build
 ```
 
+## Components
+
+Get more:
+
+- [shadcn/ui](https://ui.shadcn.com)
+- [OriginUI](https://originui.com)
+- [Kibo UI](https://kibo-ui.com)
+- [shadcn Registries](https://shadcn-registries.vercel.app)
+- [registry.directory](https://registry.directory)
+
 ## Credits
 
 This repo was initialized from [`ayoubphy/react-router-trpc-prisma-better-auth`](https://github.com/ayoubphy/react-router-trpc-prisma-better-auth)
