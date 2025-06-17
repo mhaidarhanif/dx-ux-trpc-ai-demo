@@ -1,13 +1,17 @@
 import {
+  href,
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
 } from "react-router";
+
+import { TRPCReactProvider } from "@/utils/trpc/react";
 import type { Route } from "./+types/root";
-import { TRPCReactProvider } from "./utils/trpc/react";
+
 import "@/app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -49,36 +53,36 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <nav className="bg-gray-100 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-3 px-6 flex items-center gap-4">
-          <a
-            href={"/"}
+          <Link
+            to={href("/")}
             className="font-bold text-lg text-blue-600 dark:text-blue-400"
           >
             Home
-          </a>
-          <a
-            href={"/examples"}
+          </Link>
+          <Link
+            to={href("/examples")}
             className="text-gray-700 dark:text-gray-200 hover:underline"
           >
             Examples
-          </a>
-          <a
-            href={"/signin"}
+          </Link>
+          <Link
+            to={href("/signin")}
             className="text-gray-700 dark:text-gray-200 hover:underline"
           >
-            Login
-          </a>
-          <a
-            href={"/register"}
+            Sign In
+          </Link>
+          <Link
+            to={href("/signup")}
             className="text-gray-700 dark:text-gray-200 hover:underline"
           >
-            Register
-          </a>
-          <a
-            href={"/user"}
+            Sign Up
+          </Link>
+          <Link
+            to={href("/user")}
             className="text-gray-700 dark:text-gray-200 hover:underline"
           >
             User
-          </a>
+          </Link>
         </nav>
         {children}
         <ScrollRestoration />

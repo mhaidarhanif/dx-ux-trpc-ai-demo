@@ -3,7 +3,7 @@ import { db } from "@/server/db";
 import { protectedProcedure, publicProcedure } from "@/server/trpc";
 
 export const greeting = {
-  hello: publicProcedure.query(async () => {
+  getExamples: publicProcedure.query(async () => {
     return await db.example.findMany({
       cacheStrategy: { ttl: 60 },
     });

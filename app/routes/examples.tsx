@@ -3,7 +3,7 @@ import type { Route } from "./+types/examples";
 
 export async function loader(loaderArgs: Route.LoaderArgs) {
   const api = await caller(loaderArgs);
-  return await api.greeting.hello();
+  return await api.greeting.getExamples();
 }
 
 export default function Examples({ loaderData }: Route.ComponentProps) {

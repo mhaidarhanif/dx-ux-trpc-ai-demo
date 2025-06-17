@@ -3,13 +3,15 @@ import type { Route } from "./+types/home";
 
 export async function loader(loaderArgs: Route.LoaderArgs) {
   const api = await caller(loaderArgs);
-  return await api.greeting.hello();
+  return await api.greeting.getExamples();
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <div className="container mx-auto py-12">
-      <h1 className="text-3xl font-bold mb-8 text-center">Examples</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">
+        Home with Examples
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {Array.isArray(loaderData) && loaderData.length > 0 ? (
           loaderData.map((example: { id: string; name: string }) => (

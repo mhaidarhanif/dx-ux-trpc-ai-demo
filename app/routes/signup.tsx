@@ -1,6 +1,6 @@
 import { authClient } from "@/utils/auth/client";
 
-export default function RegisterRoute() {
+export default function SignUpRoute() {
   const signUp = async () => {
     await authClient.signIn.social({
       provider: "github",
