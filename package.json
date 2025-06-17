@@ -15,11 +15,12 @@
     "db:up": "docker compose up -d",
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
-    "db:gen": "prisma generate --no-engine --no-hints",
-    "db:gen:prod": "prisma generate --no-hints --generator client --generator zod",
+    "db:gen": "prisma generate --no-engine",
+    "db:gen:prod": "prisma generate --no-hints",
     "db:studio": "prisma studio --browser none",
-    "db:reset": "prisma migrate reset",
-    "db:seed": "prisma db seed"
+    "db:reset": "prisma migrate reset --skip-seed",
+    "db:seed": "prisma db seed",
+    "db:prune": "bun db:reset && bun db:migrate && bun db:seed"
   },
   "prisma": {
     "seed": "bun prisma/seed.ts"
@@ -64,6 +65,7 @@
     "react-resizable-panels": "^3.0.3",
     "react-router": "^7.6.2",
     "recharts": "^2.15.3",
+    "remix-themes": "^2.0.4",
     "shiki": "^3.6.0",
     "sonner": "^2.0.5",
     "superjson": "^2.2.2",

@@ -1,8 +1,8 @@
 import { caller } from "@/utils/trpc/server";
 import type { Route } from "./+types/home";
 
-export async function loader(loaderArgs: Route.LoaderArgs) {
-  const api = await caller(loaderArgs);
+export async function loader({ request }: Route.LoaderArgs) {
+  const api = await caller(request);
   return await api.greeting.getExamples();
 }
 

@@ -1,4 +1,3 @@
-import type { LoaderFunctionArgs } from "react-router";
 import { appRouter } from "@/server/main";
 import { createCallerFactory, createTRPCContext } from "@/server/trpc";
 
@@ -12,5 +11,5 @@ const createContext = (opts: { headers: Headers }) => {
 
 const createCaller = createCallerFactory(appRouter);
 
-export const caller = async (loaderArgs: LoaderFunctionArgs) =>
-  createCaller(await createContext({ headers: loaderArgs.request.headers }));
+export const caller = async (request: Request) =>
+  createCaller(await createContext({ headers: request.headers }));

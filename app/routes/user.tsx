@@ -3,26 +3,20 @@ import { auth } from "@/utils/auth/server";
 import { caller } from "@/utils/trpc/server";
 import type { Route } from "./+types/user";
 
-export async function loader(loaderArgs: Route.LoaderArgs) {
-  const session = await auth.api.getSession({
-    headers: loaderArgs.request.headers,
-  });
-
+export async function loader({ request }: Route.LoaderArgs) {
+  const session = await auth.api.getSession({ headers: request.headers });
   if (!session?.user) return redirect(href("/signin"));
-
-  const api = await caller(loaderArgs);
-
-  try {
-    const user = await api.greeting.user();
-    if (!user) return redirect(href("/signin"));
-    return user;
-  } catch (error) {
-    console.error(error);
-    return redirect(href("/signin"));
-  }
+  const api = await caller(request);
+  const user = await api.greeting.user();
+  if (!user) return redirect(href("/signin"));
+  return { user };
 }
 
-export default function Home({ loaderData: user }: Route.ComponentProps) {
+export default function UserDashboardRoute({
+  loaderData,
+}: Route.ComponentProps) {
+  const { user } = loaderData;
+
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">

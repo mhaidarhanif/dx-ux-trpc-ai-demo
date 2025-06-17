@@ -1,13 +1,19 @@
+import clsx from "clsx";
 import {
-  href,
   isRouteErrorResponse,
-  Link,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "react-router";
+import {
+  PreventFlashOnWrongTheme,
+  ThemeProvider,
+  useTheme,
+} from "remix-themes";
+import { themeSessionResolver } from "@/themes.server";
 
 import { TRPCReactProvider } from "@/utils/trpc/react";
 import type { Route } from "./+types/root";
@@ -42,61 +48,47 @@ export const meta: Route.MetaFunction = () => {
   ];
 };
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export async function loader({ request }: Route.LoaderArgs) {
+  const { getTheme } = await themeSessionResolver(request);
+  return {
+    theme: getTheme(),
+  };
+}
+
+export default function RootRoute({ loaderData }: Route.ComponentProps) {
   return (
-    <html lang="en">
+    <ThemeProvider
+      specifiedTheme={loaderData.theme}
+      themeAction="/action/set-theme"
+    >
+      <App />
+    </ThemeProvider>
+  );
+}
+
+export function App() {
+  const loaderData = useLoaderData();
+  const [theme] = useTheme();
+
+  return (
+    <html lang="en" className={clsx(theme)}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
+        <PreventFlashOnWrongTheme ssrTheme={Boolean(loaderData.theme)} />
         <Links />
       </head>
+
       <body>
-        <nav className="bg-gray-100 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-3 px-6 flex items-center gap-4">
-          <Link
-            to={href("/")}
-            className="font-bold text-lg text-blue-600 dark:text-blue-400"
-          >
-            Home
-          </Link>
-          <Link
-            to={href("/examples")}
-            className="text-gray-700 dark:text-gray-200 hover:underline"
-          >
-            Examples
-          </Link>
-          <Link
-            to={href("/signin")}
-            className="text-gray-700 dark:text-gray-200 hover:underline"
-          >
-            Sign In
-          </Link>
-          <Link
-            to={href("/signup")}
-            className="text-gray-700 dark:text-gray-200 hover:underline"
-          >
-            Sign Up
-          </Link>
-          <Link
-            to={href("/user")}
-            className="text-gray-700 dark:text-gray-200 hover:underline"
-          >
-            User
-          </Link>
-        </nav>
-        {children}
+        <TRPCReactProvider>
+          <Outlet />
+        </TRPCReactProvider>
+
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
-  );
-}
-
-export default function App() {
-  return (
-    <TRPCReactProvider>
-      <Outlet />
-    </TRPCReactProvider>
   );
 }
 
