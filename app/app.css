@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -11,7 +12,8 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-background text-foreground;
+  @apply transition-colors duration-200 ease-in-out;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
@@ -132,5 +134,11 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .prose-config {
+    @apply prose dark:prose-invert;
   }
 }

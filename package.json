@@ -79,6 +79,7 @@
     "@better-auth/cli": "^1.2.9",
     "@biomejs/biome": "2.0.0",
     "@react-router/dev": "^7.6.2",
+    "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.10",
     "@types/color": "^4.2.0",
     "@types/culori": "^4.0.0",

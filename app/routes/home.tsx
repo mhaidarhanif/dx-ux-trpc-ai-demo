@@ -8,10 +8,38 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="container mx-auto py-12">
-      <h1 className="text-3xl font-bold mb-8 text-center">
-        Home with Examples
-      </h1>
+    <div className="py-10">
+      <article className="prose-config mx-auto">
+        <h1>🐶Dogokit Corgi</h1>
+        <p>
+          <a href="https://github.com/dogokit/dogokit-corgi">Dogokit Corgi</a>{" "}
+          is a full stack web app development kit. It is the implementation
+          details of{" "}
+          <a href="https://github.com/dogokit/dogokit-akita">Dogokit Akita</a>,
+          mainly using:
+        </p>
+        <ul>
+          <li>React v19</li>
+          <li>React Router v7 Framework</li>
+          <li>tRPC v11</li>
+          <li>Prisma v6</li>
+          <li>Tailwind CSS v4</li>
+          <li>`shadcn/ui` with single `radix-ui`</li>
+          <li>Zod v4 & Conform v1</li>
+          <li>Better Auth v1</li>
+          <li>Docker v28</li>
+          <li>PostgreSQL v17</li>
+          <li>Biome v2</li>
+          <li>Vite v6</li>
+          <li>Vitest v3</li>
+          <li>React Email v4</li>
+          <li>Resend</li>
+          <li>Uploadcare or Cloudflare R2</li>
+          <li>Polar</li>
+          <li>Arcjet</li>
+        </ul>
+      </article>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {Array.isArray(loaderData) && loaderData.length > 0 ? (
           loaderData.map((example: { id: string; name: string }) => (

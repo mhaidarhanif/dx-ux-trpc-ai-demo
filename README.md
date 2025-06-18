@@ -9,9 +9,7 @@
 
 ## Goal
 
-Dogokit Corgi is the implementation details of [Dogokit Akita](https://github.com/dogokit/dogokit-akita), mainly using:
-
-Core:
+[Dogokit Corgi](https://github.com/dogokit/dogokit-corgi) is the implementation details of [Dogokit Akita](https://github.com/dogokit/dogokit-akita), using:
 
 - [x] React v19
 - [x] React Router v7 Framework
@@ -19,24 +17,16 @@ Core:
 - [x] tRPC v11
 - [x] Prisma v6
 - [x] Tailwind CSS v4
-- [x] `shadcn/ui` with single `radix-ui`
-  - [x] All components
+  - [x] `shadcn/ui` with single `radix-ui`
+  - [x] React Email
 - [x] Zod v4 & Conform v1
 - [x] Better Auth v1
-  - [x] All plugins
-
-Tools:
-
 - [x] Docker v28
 - [x] PostgreSQL v17
 - [x] Biome v2
 - [x] Vite v6
 - [ ] Vitest v3
-
-Services:
-
 - [ ] Resend
-- [ ] React Email
 - [ ] Uploadcare or Cloudflare R2
 - [ ] Polar
 - [ ] Arcjet

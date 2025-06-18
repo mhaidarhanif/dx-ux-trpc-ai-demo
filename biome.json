@@ -20,7 +20,13 @@
         "noArrayIndexKey": "off"
       },
       "nursery": {
-        "noNestedComponentDefinitions": "off"
+        "noNestedComponentDefinitions": "off",
+        "useSortedClasses": {
+          "options": {
+            "attributes": ["className", "classList"],
+            "functions": ["clsx", "cva", "tw", "tw.*"]
+          }
+        }
       }
     }
   },

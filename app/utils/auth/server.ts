@@ -28,7 +28,7 @@ export const auth = betterAuth({
   plugins: [
     admin(),
     multiSession(),
-    openAPI(),
+    openAPI(), // Check on /api/auth/reference
     haveIBeenPwned({
       customPasswordCompromisedMessage:
         "That password is compromised. Please choose a more secure one.",
