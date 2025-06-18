@@ -9,7 +9,13 @@ import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth/client";
 import { cn } from "@/lib/utils";
 
-export function AuthCard({ className, ...props }: React.ComponentProps<"div">) {
+export function AuthCard({
+  mode = "signin",
+  className,
+  ...props
+}: React.ComponentProps<"div"> & {
+  mode: "signup" | "signin" | "signout" | "forgot-password";
+}) {
   const signInGitHub = async () => {
     await authClient.signIn.social({
       provider: "github",

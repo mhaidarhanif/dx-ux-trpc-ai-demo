@@ -9,7 +9,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function SignInRoute() {
   return (
     <>
-      <AuthCard />
+      <AuthCard mode="signin" />
     </>
   );
 }
