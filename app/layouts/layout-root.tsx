@@ -25,7 +25,7 @@ export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
   const { isAuthenticated } = loaderData;
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <nav className="flex items-center justify-between gap-4 border-gray-200 border-b bg-gray-100 px-6 py-3 dark:border-gray-800 dark:bg-gray-900">
         <ul className="inline-flex gap-4">
           {navLinks
@@ -57,7 +57,7 @@ export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
       </main>
 
       <footer className="p-4">
-        <p className="text-sm text-center">&copy; {new Date().getFullYear()}</p>
+        <p className="text-center text-sm">&copy; {new Date().getFullYear()}</p>
       </footer>
     </div>
   );
