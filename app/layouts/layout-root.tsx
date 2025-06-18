@@ -1,5 +1,6 @@
 import { href, NavLink, Outlet } from "react-router";
-import ThemeToggle from "@/components/shared/theme-toggle";
+
+import { ThemeSwitcherAction } from "@/components/shared/theme-switcher-action";
 import { cn } from "@/lib/utils";
 import { requireAuth } from "@/utils/auth/helper";
 import type { Route } from "./+types/layout-root";
@@ -46,8 +47,8 @@ export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
               </li>
             ))}
         </ul>
-        <div>
-          <ThemeToggle />
+        <div className="flex gap-2">
+          <ThemeSwitcherAction />
         </div>
       </nav>
 

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Theme, useTheme } from "remix-themes";
 
-export default function ThemeToggle() {
+export function ThemeToggle() {
   const [theme, setTheme, themeMetaData] = useTheme();
   const { definedBy } = themeMetaData;
 
@@ -12,7 +12,6 @@ export default function ThemeToggle() {
   return (
     <div>
       <label className="flex items-center gap-2">
-        <span>Theme:</span>
         <select
           name="theme"
           value={definedBy === "SYSTEM" ? "" : (theme ?? "")}

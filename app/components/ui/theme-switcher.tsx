@@ -1,39 +1,36 @@
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { Monitor, Moon, Sun } from "lucide-react";
+import { type LucideProps, Monitor, Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
+import type { Theme } from "remix-themes";
 
 import { cn } from "@/lib/utils";
 
-const themes = [
-  {
-    key: "system",
-    icon: Monitor,
-    label: "System theme",
-  },
-  {
-    key: "light",
-    icon: Sun,
-    label: "Light theme",
-  },
-  {
-    key: "dark",
-    icon: Moon,
-    label: "Dark theme",
-  },
+type ThemeOption = {
+  key: "" | "light" | "dark";
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
+  label: string;
+};
+
+const themes: ThemeOption[] = [
+  { key: "", label: "System theme", icon: Monitor },
+  { key: "light", label: "Light theme", icon: Sun },
+  { key: "dark", label: "Dark theme", icon: Moon },
 ];
 
 export type ThemeSwitcherProps = {
-  value?: "light" | "dark" | "system";
-  onChange?: (theme: "light" | "dark" | "system") => void;
-  defaultValue?: "light" | "dark" | "system";
+  value?: Theme | "";
+  onChange?: (themeKey: Theme | "") => void;
+  defaultValue?: Theme | "";
   className?: string;
 };
 
 export const ThemeSwitcher = ({
   value,
   onChange,
-  defaultValue = "system",
+  defaultValue = "",
   className,
 }: ThemeSwitcherProps) => {
   const [theme, setTheme] = useControllableState({
@@ -41,23 +38,13 @@ export const ThemeSwitcher = ({
     prop: value,
     onChange,
   });
-  const [mounted, setMounted] = useState(false);
 
   const handleThemeClick = useCallback(
-    (themeKey: "light" | "dark" | "system") => {
+    (themeKey: Theme | "") => {
       setTheme(themeKey);
     },
     [setTheme]
   );
-
-  // Prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <div
@@ -74,7 +61,7 @@ export const ThemeSwitcher = ({
             type="button"
             key={key}
             className="relative h-6 w-6 rounded-full"
-            onClick={() => handleThemeClick(key as "light" | "dark" | "system")}
+            onClick={() => handleThemeClick(key as Theme)}
             aria-label={label}
           >
             {isActive && (
