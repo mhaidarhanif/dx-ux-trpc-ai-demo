@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/utils/auth/client";
-import { requireAuthFalse } from "@/utils/auth/helper";
+import { authClient } from "@/lib/auth/client";
+import { requireAuthFalse } from "@/lib/auth/helper";
 import type { Route } from "./+types/signup";
 
 export async function loader({ request }: Route.LoaderArgs) {

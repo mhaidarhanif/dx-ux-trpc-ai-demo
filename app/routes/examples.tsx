@@ -1,4 +1,4 @@
-import { caller } from "@/utils/trpc/server";
+import { caller } from "@/lib/trpc/server";
 import type { Route } from "./+types/examples";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -9,15 +9,15 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function Examples({ loaderData }: Route.ComponentProps) {
   return (
     <div className="container mx-auto py-12">
-      <h1 className="text-3xl font-bold mb-8 text-center">All Examples</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <h1 className="mb-8 text-center font-bold text-3xl">All Examples</h1>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {Array.isArray(loaderData) && loaderData.length > 0 ? (
           loaderData.map((example: { id: string; name: string }) => (
             <div
               key={example.id}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col items-center justify-center border border-gray-200 dark:border-gray-700"
+              className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800"
             >
-              <div className="text-xl font-semibold mb-2">{example.name}</div>
+              <div className="mb-2 font-semibold text-xl">{example.name}</div>
               <div className="text-gray-500 text-xs">ID: {example.id}</div>
             </div>
           ))

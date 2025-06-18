@@ -21,12 +21,7 @@
       },
       "nursery": {
         "noNestedComponentDefinitions": "off",
-        "useSortedClasses": {
-          "options": {
-            "attributes": ["className", "classList"],
-            "functions": ["clsx", "cva", "tw", "tw.*"]
-          }
-        }
+        "useSortedClasses": "on"
       }
     }
   },

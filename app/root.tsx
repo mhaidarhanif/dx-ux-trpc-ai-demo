@@ -13,9 +13,9 @@ import {
   ThemeProvider,
   useTheme,
 } from "remix-themes";
-import { themeSessionResolver } from "@/themes.server";
 
-import { TRPCReactProvider } from "@/utils/trpc/react";
+import { TRPCReactProvider } from "@/lib/trpc/react";
+import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
 
 import "@/app.css";
@@ -26,6 +26,10 @@ export const links: Route.LinksFunction = () => [
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,100..900,100,1&display=swap",
   },
   {
     rel: "stylesheet",

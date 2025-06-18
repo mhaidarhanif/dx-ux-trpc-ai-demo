@@ -1,6 +1,6 @@
 import { AvatarAuto } from "@/components/ui/avatar";
+import { requireAuthTrue } from "@/lib/auth/helper";
 import { formatDate } from "@/lib/datetime";
-import { requireAuthTrue } from "@/utils/auth/helper";
 import type { Route } from "./+types/user";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -14,7 +14,7 @@ export default function UserDashboardRoute({
 
   if (!user) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex min-h-screen flex-col items-center justify-center">
         <div className="text-gray-500">No user data found.</div>
       </div>
     );
@@ -37,14 +37,14 @@ export default function UserDashboardRoute({
   ];
 
   return (
-    <div className="flex justify-center my-8 mx-4">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full max-w-md border border-gray-200 dark:border-gray-700">
-        <div className="flex flex-col items-center mb-6 space-y-2">
+    <div className="mx-4 my-8 flex justify-center">
+      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-8 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+        <div className="mb-6 flex flex-col items-center space-y-2">
           <AvatarAuto user={user} className="size-20" />
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">
             {user.name || "No Name"}
           </h3>
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
+          <p className="text-gray-500 text-sm dark:text-gray-400">
             {user.email}
           </p>
         </div>
@@ -52,12 +52,12 @@ export default function UserDashboardRoute({
           {userFields.map((item) => (
             <div
               key={item.label}
-              className="py-2 flex justify-between items-center"
+              className="flex items-center justify-between py-2"
             >
               <dt className="font-medium text-gray-700 dark:text-gray-300">
                 {item.label}
               </dt>
-              <dd className="text-sm text-gray-900 dark:text-gray-100">
+              <dd className="text-gray-900 text-sm dark:text-gray-100">
                 {item.value ?? "-"}
               </dd>
             </div>

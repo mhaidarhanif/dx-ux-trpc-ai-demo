@@ -18,7 +18,8 @@
 - [x] Prisma v6
 - [x] Tailwind CSS v4
   - [x] `shadcn/ui` with single `radix-ui`
-  - [x] React Email
+  - [ ] Google Fonts
+  - [ ] React Email
 - [x] Zod v4 & Conform v1
 - [x] Better Auth v1
 - [x] Docker v28

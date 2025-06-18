@@ -1,8 +1,8 @@
 import { href, NavLink, Outlet } from "react-router";
 
 import { ThemeSwitcherAction } from "@/components/shared/theme-switcher-action";
+import { requireAuth } from "@/lib/auth/helper";
 import { cn } from "@/lib/utils";
-import { requireAuth } from "@/utils/auth/helper";
 import type { Route } from "./+types/layout-root";
 
 export async function loader({ request }: Route.LoaderArgs) {

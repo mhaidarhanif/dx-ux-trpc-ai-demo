@@ -1,7 +1,7 @@
 import { redirect } from "react-router";
 
-import { auth } from "@/utils/auth/server";
-import { caller } from "@/utils/trpc/server";
+import { auth } from "@/lib/auth/server";
+import { caller } from "@/lib/trpc/server";
 
 export async function requireAuth(request: Request) {
   const session = await auth.api.getSession({ headers: request.headers });
