@@ -5,11 +5,12 @@ import { caller } from "@/utils/trpc/server";
 
 export async function requireAuth(request: Request) {
   const session = await auth.api.getSession({ headers: request.headers });
-  if (!session?.user)
+  if (!session?.user) {
     return {
       isAuthenticated: false,
       user: null,
     };
+  }
 
   const api = await caller(request);
   const user = await api.greeting.user();

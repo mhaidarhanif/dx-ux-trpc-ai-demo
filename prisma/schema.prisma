@@ -3,6 +3,7 @@ generator client {
   output   = "../app/server/generated/prisma"
 }
 
+// https://prisma.io/docs/accelerate/local-development
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")

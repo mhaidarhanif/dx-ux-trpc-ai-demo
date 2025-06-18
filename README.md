@@ -17,7 +17,7 @@ Core:
 - [x] React Router v7 Framework
   - [x] Themes
 - [x] tRPC v11
-- [x] Prisma v6 & PostgreSQL v7
+- [x] Prisma v6
 - [x] Better Auth v1
 - [x] Tailwind CSS v4
   - [x] `shadcn/ui` with single `radix-ui`
@@ -25,7 +25,8 @@ Core:
 
 Tools:
 
-- [x] Docker
+- [x] Docker v28
+- [x] PostgreSQL v17
 - [x] Biome v2
 - [x] Vite v6
 - [ ] Vitest v3
