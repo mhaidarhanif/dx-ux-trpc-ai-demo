@@ -10,7 +10,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-20 py-10">
       <section className="container max-w-xl">
-        <h1 className="font-brand text-3xl">🐶Dogokit Corgi</h1>
+        <h1 className="font-bold font-brand text-5xl text-primary">
+          🐶Dogokit Corgi
+        </h1>
 
         <article className="prose-config">
           <p className="font-brand text-xl">
