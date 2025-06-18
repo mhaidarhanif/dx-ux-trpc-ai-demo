@@ -16,6 +16,7 @@ export default [
     route("/signout", "routes/signout.tsx"),
     route("/user", "routes/user.tsx"),
 
+    route("/action/set-theme", "routes/action/set-theme.ts"),
     route("/api/auth/*", "routes/api/auth.ts"),
     route("/api/trpc/*", "routes/api/trpc.ts"),
   ]),

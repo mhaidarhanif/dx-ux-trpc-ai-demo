@@ -1,3 +1,5 @@
+import { AvatarAuto } from "@/components/ui/avatar";
+import { formatDate } from "@/lib/datetime";
 import { requireAuthTrue } from "@/utils/auth/helper";
 import type { Route } from "./+types/user";
 
@@ -18,127 +20,48 @@ export default function UserDashboardRoute({
     );
   }
 
+  const userFields = [
+    { label: "ID", value: user.id },
+    { label: "Name", value: user.name },
+    { label: "First Name", value: user.firstName },
+    { label: "Last Name", value: user.lastName },
+    { label: "Phone", value: user.phone },
+    { label: "Email", value: user.email },
+    { label: "Email Verified", value: String(user.emailVerified) },
+    { label: "Role", value: user.role },
+    { label: "Banned", value: user.banned ? "Yes" : "No" },
+    { label: "Ban Reason", value: user.banReason },
+    { label: "Ban Expires", value: formatDate(user.banExpires) },
+    { label: "Created At", value: formatDate(user.createdAt) },
+    { label: "Updated At", value: formatDate(user.updatedAt) },
+  ];
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex justify-center my-8 mx-4">
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full max-w-md border border-gray-200 dark:border-gray-700">
-        <div className="flex flex-col items-center mb-6">
-          {user.image ? (
-            <img
-              src={user.image}
-              alt={user.name || user.email || "User avatar"}
-              className="w-24 h-24 rounded-full object-cover border-2 border-blue-400 mb-2"
-            />
-          ) : (
-            <div className="w-24 h-24 rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-3xl text-gray-500 mb-2">
-              {user.name?.[0] || user.email?.[0] || "?"}
-            </div>
-          )}
-          <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+        <div className="flex flex-col items-center mb-6 space-y-2">
+          <AvatarAuto user={user} className="size-20" />
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {user.name || "No Name"}
-          </div>
-          <div className="text-gray-500 dark:text-gray-400 text-sm">
+          </h3>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">
             {user.email}
-          </div>
+          </p>
         </div>
         <dl className="divide-y divide-gray-200 dark:divide-gray-700">
-          <div className="py-2 flex justify-between">
-            <dt className="font-medium text-gray-700 dark:text-gray-300">ID</dt>
-            <dd className="text-gray-900 dark:text-gray-100">{user.id}</dd>
-          </div>
-          <div className="py-2 flex justify-between">
-            <dt className="font-medium text-gray-700 dark:text-gray-300">
-              Email Verified
-            </dt>
-            <dd className="text-gray-900 dark:text-gray-100">
-              {user.emailVerified ? "Yes" : "No"}
-            </dd>
-          </div>
-          {user.role && (
-            <div className="py-2 flex justify-between">
+          {userFields.map((item) => (
+            <div
+              key={item.label}
+              className="py-2 flex justify-between items-center"
+            >
               <dt className="font-medium text-gray-700 dark:text-gray-300">
-                Role
+                {item.label}
               </dt>
-              <dd className="text-gray-900 dark:text-gray-100">{user.role}</dd>
-            </div>
-          )}
-          {user.banned !== undefined && (
-            <div className="py-2 flex justify-between">
-              <dt className="font-medium text-gray-700 dark:text-gray-300">
-                Banned
-              </dt>
-              <dd className="text-gray-900 dark:text-gray-100">
-                {user.banned ? "Yes" : "No"}
+              <dd className="text-sm text-gray-900 dark:text-gray-100">
+                {item.value ?? "-"}
               </dd>
             </div>
-          )}
-          {user.banReason && (
-            <div className="py-2 flex justify-between">
-              <dt className="font-medium text-gray-700 dark:text-gray-300">
-                Ban Reason
-              </dt>
-              <dd className="text-gray-900 dark:text-gray-100">
-                {user.banReason}
-              </dd>
-            </div>
-          )}
-          {user.banExpires && (
-            <div className="py-2 flex justify-between">
-              <dt className="font-medium text-gray-700 dark:text-gray-300">
-                Ban Expires
-              </dt>
-              <dd className="text-gray-900 dark:text-gray-100">
-                {new Date(user.banExpires).toLocaleString()}
-              </dd>
-            </div>
-          )}
-          {user.firstName && (
-            <div className="py-2 flex justify-between">
-              <dt className="font-medium text-gray-700 dark:text-gray-300">
-                First Name
-              </dt>
-              <dd className="text-gray-900 dark:text-gray-100">
-                {user.firstName}
-              </dd>
-            </div>
-          )}
-          {user.lastName && (
-            <div className="py-2 flex justify-between">
-              <dt className="font-medium text-gray-700 dark:text-gray-300">
-                Last Name
-              </dt>
-              <dd className="text-gray-900 dark:text-gray-100">
-                {user.lastName}
-              </dd>
-            </div>
-          )}
-          {user.phone && (
-            <div className="py-2 flex justify-between">
-              <dt className="font-medium text-gray-700 dark:text-gray-300">
-                Phone
-              </dt>
-              <dd className="text-gray-900 dark:text-gray-100">{user.phone}</dd>
-            </div>
-          )}
-          {user.createdAt && (
-            <div className="py-2 flex justify-between">
-              <dt className="font-medium text-gray-700 dark:text-gray-300">
-                Created At
-              </dt>
-              <dd className="text-gray-900 dark:text-gray-100">
-                {new Date(user.createdAt).toLocaleString()}
-              </dd>
-            </div>
-          )}
-          {user.updatedAt && (
-            <div className="py-2 flex justify-between">
-              <dt className="font-medium text-gray-700 dark:text-gray-300">
-                Updated At
-              </dt>
-              <dd className="text-gray-900 dark:text-gray-100">
-                {new Date(user.updatedAt).toLocaleString()}
-              </dd>
-            </div>
-          )}
+          ))}
         </dl>
       </div>
     </div>

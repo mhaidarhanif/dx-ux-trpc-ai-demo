@@ -48,4 +48,33 @@ function AvatarFallback({
   );
 }
 
-export { Avatar, AvatarImage, AvatarFallback };
+function AvatarAuto({
+  user,
+  className,
+  ...props
+}: {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    image: string | null;
+  };
+} & React.ComponentProps<typeof AvatarPrimitive.Root>) {
+  const userImageText = user.name || user.email || "User avatar";
+  const userImageSource =
+    user.image ||
+    `https://api.dicebear.com/9.x/shapes/svg?seed=${userImageText}`;
+  const userImageFallback = user.name?.[0] || user.email?.[0] || "?";
+
+  return (
+    <Avatar className={cn("rounded-lg", className)} {...props}>
+      <AvatarImage
+        src={userImageSource}
+        alt={user.name || user.email || "User avatar"}
+      />
+      <AvatarFallback>{userImageFallback}</AvatarFallback>
+    </Avatar>
+  );
+}
+
+export { Avatar, AvatarImage, AvatarFallback, AvatarAuto };

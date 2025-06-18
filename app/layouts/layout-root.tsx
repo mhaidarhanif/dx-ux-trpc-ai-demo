@@ -56,7 +56,7 @@ export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
       </main>
 
       <footer className="p-4">
-        <p className="text-sm">&copy; {new Date().getFullYear()}</p>
+        <p className="text-sm text-center">&copy; {new Date().getFullYear()}</p>
       </footer>
     </div>
   );
