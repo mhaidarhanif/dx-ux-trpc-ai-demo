@@ -5,6 +5,7 @@ CREATE TABLE "user" (
     "email" TEXT NOT NULL,
     "emailVerified" BOOLEAN NOT NULL DEFAULT false,
     "username" TEXT,
+    "displayUsername" TEXT,
     "image" TEXT,
     "role" TEXT,
     "banned" BOOLEAN,

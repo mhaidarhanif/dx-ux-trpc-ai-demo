@@ -13,14 +13,18 @@ model User {
   id String @id
 
   name          String
-  email         String    @unique
-  emailVerified Boolean   @default(false)
-  username      String?   @unique
-  image         String?
-  Session       Session[]
-  Account       Account[]
+  email         String  @unique
+  emailVerified Boolean @default(false)
 
-  role       String?
+  username        String? @unique
+  displayUsername String?
+
+  image String?
+
+  sessions Session[]
+  accounts Account[]
+
+  role       String? // user | admin
   banned     Boolean?
   banReason  String?
   banExpires DateTime?

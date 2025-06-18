@@ -1,7 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { admin } from "better-auth/plugins";
+import {
+  admin,
+  haveIBeenPwned,
+  multiSession,
+  openAPI,
+  username,
+} from "better-auth/plugins";
 
 const prisma = new PrismaClient();
 
@@ -19,5 +25,22 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  plugins: [admin()],
+  plugins: [
+    admin(),
+    multiSession(),
+    openAPI(),
+    haveIBeenPwned({
+      customPasswordCompromisedMessage:
+        "That password is compromised. Please choose a more secure one.",
+    }),
+    username({
+      usernameValidator: (username) => {
+        if (username === "admin") {
+          return false;
+        } else {
+          return true;
+        }
+      },
+    }),
+  ],
 });

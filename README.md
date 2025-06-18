@@ -18,10 +18,12 @@ Core:
   - [x] Themes
 - [x] tRPC v11
 - [x] Prisma v6
-- [x] Better Auth v1
 - [x] Tailwind CSS v4
-  - [x] `shadcn/ui` with single `radix-ui`
+- [x] `shadcn/ui` with single `radix-ui`
+  - [x] All components
 - [x] Zod v4 & Conform v1
+- [x] Better Auth v1
+  - [x] All plugins
 
 Tools:
 
