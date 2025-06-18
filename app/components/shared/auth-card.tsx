@@ -3,16 +3,13 @@ import { Form, href, Link } from "react-router";
 
 import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth/client";
 import { cn } from "@/lib/utils";
 
-export function SignInCard({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+export function AuthCard({ className, ...props }: React.ComponentProps<"div">) {
   const signInGitHub = async () => {
     await authClient.signIn.social({
       provider: "github",
@@ -33,7 +30,7 @@ export function SignInCard({
         <Logo classNameText="font-black font-brand" />
       </div>
 
-      <Card>
+      <div className="bg-none">
         <CardContent className="grid w-full max-w-md gap-6">
           <div className="flex flex-col gap-4">
             <Button variant="outline" onClick={() => signInGitHub()}>
@@ -47,7 +44,7 @@ export function SignInCard({
           </div>
 
           <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
-            <span className="relative z-10 bg-card px-2 text-muted-foreground">
+            <span className="relative z-10 bg-background px-2 text-muted-foreground">
               Or continue with
             </span>
           </div>
@@ -86,7 +83,7 @@ export function SignInCard({
             </Link>
           </div>
         </CardContent>
-      </Card>
+      </div>
 
       <div className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
         By clicking continue, you agree to our{" "}

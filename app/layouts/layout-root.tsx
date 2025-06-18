@@ -1,8 +1,7 @@
 import { href, Link, Outlet } from "react-router";
-
-import { type NavLinkItem, NavLinks } from "@/components/logic/navlinks";
 import { Logo } from "@/components/shared/logo";
-import { ThemeSwitcherAction } from "@/components/shared/theme-switcher-action";
+import { type NavLinkItem, NavLinks } from "@/components/shared/navlinks";
+import { ThemeSwitcherAction } from "@/components/theme/theme-switcher-action";
 import { requireAuth } from "@/lib/auth/helper";
 import { cn } from "@/lib/utils";
 import type { Route } from "./+types/layout-root";

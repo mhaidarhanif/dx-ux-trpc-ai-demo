@@ -1,4 +1,4 @@
-import { SignInCard } from "@/components/auth/signin-card";
+import { AuthCard } from "@/components/shared/auth-card";
 import { requireAuthFalse } from "@/lib/auth/helper";
 import type { Route } from "./+types/signin";
 
@@ -9,7 +9,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function SignInRoute() {
   return (
     <>
-      <SignInCard />
+      <AuthCard />
     </>
   );
 }

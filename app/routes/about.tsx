@@ -1,4 +1,4 @@
-import { Anchor } from "@/components/logic/anchor";
+import { Anchor } from "@/components/shared/anchor";
 import {
   ContentHeadingPage,
   ContentIntroParagraph,

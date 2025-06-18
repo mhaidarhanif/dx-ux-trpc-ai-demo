@@ -1,8 +1,8 @@
 import { href, Link } from "react-router";
 
-import { Examples } from "@/components/data/examples";
-import { Flex } from "@/components/layout/flex";
-import { Anchor } from "@/components/logic/anchor";
+import { Anchor } from "@/components/shared/anchor";
+import { Examples } from "@/components/shared/examples";
+import { Flex } from "@/components/shared/flex";
 import { LogoBrand } from "@/components/shared/logo-brand";
 import { Button } from "@/components/ui/button";
 import { ContentIntroParagraph } from "@/components/ui/content";
