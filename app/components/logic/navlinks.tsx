@@ -28,7 +28,7 @@ export function NavLinks({
             <NavLink
               to={item.to}
               className={({ isActive }) =>
-                cn("font-bold", isActive && "text-primary")
+                cn("font-normal", isActive && "text-primary")
               }
             >
               {item.text}

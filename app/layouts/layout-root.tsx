@@ -3,6 +3,7 @@ import { href, Outlet } from "react-router";
 import { type NavLinkItem, NavLinks } from "@/components/logic/navlinks";
 import { ThemeSwitcherAction } from "@/components/shared/theme-switcher-action";
 import { requireAuth } from "@/lib/auth/helper";
+import { cn } from "@/lib/utils";
 import type { Route } from "./+types/layout-root";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -27,7 +28,11 @@ export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <nav className="flex items-center justify-between gap-4 border-border border-b bg-accent px-6 py-3">
+      <nav
+        className={cn(
+          "sticky top-0 z-40 hidden items-center justify-between gap-4 bg-background p-4 sm:p-6 lg:flex"
+        )}
+      >
         <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
         <NavLinks items={authNavLinkItems} isAuthenticated={isAuthenticated} />
       </nav>
@@ -36,11 +41,13 @@ export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
         <Outlet />
       </main>
 
-      <footer className="p-4">
-        <div className="flex gap-2">
+      <footer className="space-y-4 p-4">
+        <div className="flex justify-center gap-2">
           <ThemeSwitcherAction />
         </div>
-        <p className="text-center text-sm">&copy; {new Date().getFullYear()}</p>
+        <p className="text-center text-sm">
+          &copy; {new Date().getFullYear()} Dogokit
+        </p>
       </footer>
     </div>
   );

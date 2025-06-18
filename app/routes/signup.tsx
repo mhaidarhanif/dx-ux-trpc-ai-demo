@@ -16,10 +16,10 @@ export default function SignUpRoute() {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <>
       <section className="p-10">
         <Button onClick={() => signUp()}>Sign Up with GitHub</Button>
       </section>
-    </div>
+    </>
   );
 }

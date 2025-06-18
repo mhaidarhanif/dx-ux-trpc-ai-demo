@@ -53,6 +53,7 @@
         "superjson": "^2.2.2",
         "tailwind-merge": "^3.3.1",
         "ts-key-enum": "^3.0.13",
+        "ts-plugin-sort-import-suggestions": "^1.0.4",
         "tunnel-rat": "^0.1.2",
         "vaul": "^1.1.2",
         "zod": "^3.25.67",
@@ -1660,6 +1661,8 @@
     "ts-key-enum": ["ts-key-enum@3.0.13", "", {}, "sha512-2J5QVm+HLfToI6IpJQADzYYWvJQ0P9i8qV0loewy5UQ9PBcwILkw09te/+NPu6aw8OXIn9jVYOT6xCBZnGg8Yg=="],
 
     "ts-morph": ["ts-morph@18.0.0", "", { "dependencies": { "@ts-morph/common": "~0.19.0", "code-block-writer": "^12.0.0" } }, "sha512-Kg5u0mk19PIIe4islUI/HWRvm9bC1lHejK4S0oh1zaZ77TMZAEmQC0sHQYiu2RgCQFZKXz1fMVi/7nOOeirznA=="],
+
+    "ts-plugin-sort-import-suggestions": ["ts-plugin-sort-import-suggestions@1.0.4", "", {}, "sha512-85n5lm2OQQ+b7aRNK9omU1gmjMNXRsgeLwojm5u4OSY5sVBkAHTcgMQPEeHMNlyyfFW0uXnwgqAU0pNfhD96Bw=="],
 
     "tsconfck": ["tsconfck@3.1.6", "", { "peerDependencies": { "typescript": "^5.0.0" }, "optionalPeers": ["typescript"], "bin": { "tsconfck": "bin/tsconfck.js" } }, "sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w=="],
 

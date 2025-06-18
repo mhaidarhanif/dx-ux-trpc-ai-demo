@@ -23,10 +23,10 @@ export default function SignOutRoute() {
   };
 
   return (
-    <div className="flex items-center justify-center ">
+    <>
       <section className="p-10">
         <Button onClick={() => signOut()}>Sign Out</Button>
       </section>
-    </div>
+    </>
   );
 }

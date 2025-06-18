@@ -1,60 +1,68 @@
+import { href, Link } from "react-router";
+import { Examples } from "@/components/data/examples";
+import { Flex } from "@/components/layout/flex";
+import { Anchor } from "@/components/logic/anchor";
+import { Button } from "@/components/ui/button";
+import {
+  ContentHeadingPage,
+  ContentIntroParagraph,
+} from "@/components/ui/content";
 import { caller } from "@/lib/trpc/server";
 import type { Route } from "./+types/home";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const api = await caller(request);
-  return await api.greeting.getExamples();
+  const examples = await api.greeting.getExamples();
+  return { examples };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
+  const { examples } = loaderData;
+
   return (
-    <div className="flex flex-col items-center justify-center gap-20 py-10">
+    <>
       <section className="container max-w-xl">
-        <h1 className="font-bold font-brand text-5xl text-primary">
+        <ContentHeadingPage className="mb-10">
           🐶Dogokit Corgi
-        </h1>
-
+        </ContentHeadingPage>
         <article className="prose-config">
-          <p className="font-brand text-xl">
-            <a href="https://github.com/dogokit/dogokit-corgi">Dogokit Corgi</a>{" "}
-            is a full stack web app kit for quick development. It is the
-            implementation details of{" "}
-            <a href="https://github.com/dogokit/dogokit-akita">Dogokit Akita</a>
-            , mainly using:
+          <ContentIntroParagraph>
+            <Anchor href="https://github.com/dogokit/dogokit-corgi">
+              Dogokit Corgi
+            </Anchor>{" "}
+            is a full stack web app kit. The quick implementation details of{" "}
+            <Anchor href="https://github.com/dogokit/dogokit-akita">
+              Dogokit Akita
+            </Anchor>
+          </ContentIntroParagraph>
+
+          <p>
+            Using React React Router Framework, tRPC, Prisma, Better Auth, Zod,
+            Conform, Tailwind CSS, shadcn/ui, and{" "}
+            <Anchor href="https://github.com/dogokit/dogokit-corgi">
+              much more
+            </Anchor>
+            .
           </p>
-          <ul>
-            <li>React</li>
-            <li>React Router Framework</li>
-            <li>tRPC</li>
-            <li>Prisma</li>
-            <li>Tailwind CSS and shadcn/ui</li>
-            <li>Zod & Conform</li>
-            <li>Better Auth</li>
-            <li>
-              and{" "}
-              <a href="https://github.com/dogokit/dogokit-corgi">much more</a>
-            </li>
-          </ul>
         </article>
+
+        <Flex>
+          <Button asChild>
+            <Anchor
+              href={
+                "https://github.com/new?template_name=dogokit-corgi&template_owner=dogokit"
+              }
+            >
+              Use this template
+            </Anchor>
+          </Button>
+          <Button asChild>
+            <Link to={href("/about")}>Go to About</Link>
+          </Button>
+        </Flex>
       </section>
 
-      <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {Array.isArray(loaderData) && loaderData.length > 0 ? (
-          loaderData.map((example: { id: string; name: string }) => (
-            <div
-              key={example.id}
-              className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800"
-            >
-              <div className="mb-2 font-semibold text-xl">{example.name}</div>
-              <div className="text-gray-500 text-xs">ID: {example.id}</div>
-            </div>
-          ))
-        ) : (
-          <div className="col-span-full text-center text-gray-500">
-            No examples found.
-          </div>
-        )}
-      </section>
-    </div>
+      <Examples examples={examples} />
+    </>
   );
 }

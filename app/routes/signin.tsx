@@ -16,10 +16,10 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <>
       <section className="p-10">
         <Button onClick={() => signIn()}>Sign in with GitHub</Button>
       </section>
-    </div>
+    </>
   );
 }

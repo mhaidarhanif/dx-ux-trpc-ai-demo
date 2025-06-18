@@ -1,7 +1,27 @@
+import { Anchor } from "@/components/logic/anchor";
+import {
+  ContentHeadingPage,
+  ContentIntroParagraph,
+} from "@/components/ui/content";
+
 export default function AboutRoute() {
   return (
-    <section>
-      <h1>About</h1>
-    </section>
+    <>
+      <section className="container max-w-xl">
+        <ContentHeadingPage>About</ContentHeadingPage>
+
+        <article className="prose-config">
+          <ContentIntroParagraph>
+            This is just an example. Please enjoy...!
+          </ContentIntroParagraph>
+          <p>
+            Made by{" "}
+            <Anchor href="https://github.com/mhaidarhanif">
+              M Haidar Hanif
+            </Anchor>
+          </p>
+        </article>
+      </section>
+    </>
   );
 }

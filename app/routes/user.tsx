@@ -38,7 +38,7 @@ export default function UserDashboardRoute({
   ];
 
   return (
-    <div className="mx-4 my-8 flex justify-center">
+    <>
       <Card className="w-full max-w-md rounded-xl border border-border p-8">
         <CardHeader className="mb-6 flex flex-col items-center space-y-2">
           <AvatarAuto user={user} className="size-20" />
@@ -69,6 +69,6 @@ export default function UserDashboardRoute({
           </dl>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 }
