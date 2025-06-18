@@ -32,6 +32,8 @@
     "@icons-pack/react-simple-icons": "^13.1.0",
     "@prisma/client": "^6.10.0",
     "@prisma/extension-accelerate": "^2.0.1",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@react-router/node": "^7.6.2",
     "@react-router/serve": "^7.6.2",

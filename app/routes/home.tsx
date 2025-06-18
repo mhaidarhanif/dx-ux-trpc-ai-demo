@@ -1,12 +1,11 @@
 import { href, Link } from "react-router";
+
 import { Examples } from "@/components/data/examples";
 import { Flex } from "@/components/layout/flex";
 import { Anchor } from "@/components/logic/anchor";
+import { LogoBrand } from "@/components/shared/logo-brand";
 import { Button } from "@/components/ui/button";
-import {
-  ContentHeadingPage,
-  ContentIntroParagraph,
-} from "@/components/ui/content";
+import { ContentIntroParagraph } from "@/components/ui/content";
 import { caller } from "@/lib/trpc/server";
 import type { Route } from "./+types/home";
 
@@ -22,9 +21,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <section className="container max-w-xl">
-        <ContentHeadingPage className="mb-10">
-          🐶Dogokit Corgi
-        </ContentHeadingPage>
+        <LogoBrand />
+
         <article className="prose-config">
           <ContentIntroParagraph>
             <Anchor href="https://github.com/dogokit/dogokit-corgi">

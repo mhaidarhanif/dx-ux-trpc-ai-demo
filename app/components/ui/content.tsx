@@ -4,7 +4,7 @@ export function ContentHeadingPage({
   className,
   children,
   ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+}: React.ComponentProps<"h1">) {
   return (
     <h1
       className={cn(
@@ -22,7 +22,7 @@ export function ContentIntroParagraph({
   className,
   children,
   ...props
-}: React.HTMLAttributes<HTMLParagraphElement>) {
+}: React.ComponentProps<"p">) {
   return (
     <p
       className={cn("text-pretty font-brand text-lg sm:text-xl", className)}

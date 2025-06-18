@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth/client";
+import { SignInCard } from "@/components/auth/signin-card";
 import { requireAuthFalse } from "@/lib/auth/helper";
 import type { Route } from "./+types/signin";
 
@@ -7,19 +6,10 @@ export async function loader({ request }: Route.LoaderArgs) {
   return requireAuthFalse(request);
 }
 
-export default function SignIn() {
-  const signIn = async () => {
-    await authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/user",
-    });
-  };
-
+export default function SignInRoute() {
   return (
     <>
-      <section className="p-10">
-        <Button onClick={() => signIn()}>Sign in with GitHub</Button>
-      </section>
+      <SignInCard />
     </>
   );
 }

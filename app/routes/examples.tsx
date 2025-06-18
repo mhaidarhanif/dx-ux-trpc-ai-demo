@@ -1,4 +1,5 @@
 import { Examples } from "@/components/data/examples";
+import { ContentHeadingPage } from "@/components/ui/content";
 import { caller } from "@/lib/trpc/server";
 import type { Route } from "./+types/examples";
 
@@ -14,7 +15,7 @@ export default function ExamplesRoute({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <section>
-        <h1 className="mb-8 text-center font-bold text-3xl">All Examples</h1>
+        <ContentHeadingPage className="mb-10">Examples</ContentHeadingPage>
         <Examples examples={examples} />
       </section>
     </>

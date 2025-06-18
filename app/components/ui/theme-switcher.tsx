@@ -49,7 +49,7 @@ export const ThemeSwitcher = ({
   return (
     <div
       className={cn(
-        "relative isolate flex h-8 rounded-full bg-background p-1 ring-1 ring-border",
+        "relative isolate flex h-8 rounded-full bg-card p-1 ring-1 ring-border",
         className
       )}
     >
@@ -67,14 +67,14 @@ export const ThemeSwitcher = ({
             {isActive && (
               <motion.div
                 layoutId="activeTheme"
-                className="absolute inset-0 rounded-full bg-secondary"
+                className="absolute inset-0 rounded-full bg-primary"
                 transition={{ type: "spring", duration: 0.5 }}
               />
             )}
             <Icon
               className={cn(
                 "relative z-10 m-auto h-4 w-4",
-                isActive ? "text-foreground" : "text-muted-foreground"
+                isActive ? "text-primary-foreground" : "text-muted-foreground"
               )}
             />
           </button>

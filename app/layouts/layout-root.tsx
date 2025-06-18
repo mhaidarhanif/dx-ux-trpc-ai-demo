@@ -1,6 +1,7 @@
-import { href, Outlet } from "react-router";
+import { href, Link, Outlet } from "react-router";
 
 import { type NavLinkItem, NavLinks } from "@/components/logic/navlinks";
+import { Logo } from "@/components/shared/logo";
 import { ThemeSwitcherAction } from "@/components/shared/theme-switcher-action";
 import { requireAuth } from "@/lib/auth/helper";
 import { cn } from "@/lib/utils";
@@ -30,10 +31,15 @@ export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
     <div className="flex min-h-screen flex-col">
       <nav
         className={cn(
-          "sticky top-0 z-40 hidden items-center justify-between gap-4 bg-background p-4 sm:p-6 lg:flex"
+          "sticky top-0 z-40 hidden items-center justify-between gap-8 bg-background p-2 sm:p-4 lg:flex"
         )}
       >
+        <Link to={href("/")} className="block">
+          <Logo classNameText="font-black font-brand" />
+        </Link>
+
         <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
+
         <NavLinks items={authNavLinkItems} isAuthenticated={isAuthenticated} />
       </nav>
 

@@ -20,6 +20,7 @@
         "noArrayIndexKey": "off"
       },
       "nursery": {
+        "useUniqueElementIds": "off",
         "noNestedComponentDefinitions": "off",
         "useSortedClasses": "on"
       }

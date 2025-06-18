@@ -6,13 +6,13 @@ export default [
       index("routes/home.tsx"),
       route("/about", "routes/about.tsx"),
       route("/examples", "routes/examples.tsx"),
+    ]),
 
-      layout("layouts/layout-auth.tsx", [
-        route("/signup", "routes/signup.tsx"),
-        route("/signin", "routes/signin.tsx"),
-        route("/signout", "routes/signout.tsx"),
-        route("/user", "routes/user.tsx"),
-      ]),
+    layout("layouts/layout-auth.tsx", [
+      route("/signup", "routes/signup.tsx"),
+      route("/signin", "routes/signin.tsx"),
+      route("/signout", "routes/signout.tsx"),
+      route("/user", "routes/user.tsx"),
     ]),
   ]),
 

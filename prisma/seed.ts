@@ -2,11 +2,10 @@ import { PrismaClient } from "@/server/generated/prisma";
 
 const prisma = new PrismaClient();
 
-const dataExamples = [
-  { slug: "a", name: "A" },
-  { slug: "b", name: "B" },
-  { slug: "c", name: "C" },
-];
+const dataExamples = Array.from({ length: 26 }, (_, i) => ({
+  slug: String.fromCharCode(97 + i),
+  name: String.fromCharCode(65 + i),
+}));
 
 async function main() {
   for (const dataExample of dataExamples) {
