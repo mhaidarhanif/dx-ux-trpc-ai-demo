@@ -83,7 +83,7 @@ export function AuthCard({
               <Label htmlFor="password">Password</Label>
 
               {isSignIn && (
-                <Link to="/forgot-password" className="text-xs leading-none">
+                <Link to={href("/forgot-password")} className="text-xs leading-none">
                   Forgot password?
                 </Link>
               )}
