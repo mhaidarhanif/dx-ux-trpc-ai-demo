@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import Layout from "@/components/shared/layout";
+import { Layout } from "@/components/shared/layout";
 import { requireAuth } from "@/lib/auth/helper";
 import type { Route } from "./+types/layout-root";
 

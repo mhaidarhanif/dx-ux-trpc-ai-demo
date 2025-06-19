@@ -14,7 +14,7 @@ import {
   useTheme,
 } from "remix-themes";
 
-import Layout from "@/components/shared/layout";
+import { Layout } from "@/components/shared/layout";
 import { TRPCReactProvider } from "@/lib/trpc/react";
 import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";

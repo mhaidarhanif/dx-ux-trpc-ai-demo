@@ -20,7 +20,7 @@ const authNavLinkItems: NavLinkItem[] = [
   { to: href("/user"), text: "User", auth: true },
 ];
 
-export default function LayoutRoot({
+export function Layout({
   hasTheme = false,
   isAuthenticated = false,
   children,
@@ -30,11 +30,13 @@ export default function LayoutRoot({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
+      <nav id="navbar-mobile"></nav>
+
       <nav
+        id="navbar-desktop"
         className={cn(
           "p-2 sm:p-4",
-          "flex flex-wrap gap-2 sm:gap-8",
-          // "hidden lg:flex",
+          "grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-8",
           "sticky top-0 z-40 items-center justify-between bg-background"
         )}
       >
@@ -42,9 +44,16 @@ export default function LayoutRoot({
           <Logo text="Dogokit Corgi" />
         </Link>
 
-        <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
+        <div className="flex justify-center">
+          <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
+        </div>
 
-        <NavLinks items={authNavLinkItems} isAuthenticated={isAuthenticated} />
+        <div className="flex justify-end">
+          <NavLinks
+            items={authNavLinkItems}
+            isAuthenticated={isAuthenticated}
+          />
+        </div>
       </nav>
 
       <main className="flex-auto">{children}</main>
