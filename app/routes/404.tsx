@@ -1,3 +1,4 @@
+import { ButtonLink } from "@/components/shared/button-link";
 import type { Route } from "./+types/404";
 
 export const meta: Route.MetaFunction = () => {
@@ -6,8 +7,12 @@ export const meta: Route.MetaFunction = () => {
 
 export default function NotFoundRoute() {
   return (
-    <div>
-      <h1>404 Not Found</h1>
+    <div className="flex justify-center">
+      <section className="my-10 text-center">
+        <h1 className="mb-4 font-bold text-9xl">404</h1>
+        <p className="mb-8">Page is not found or does not exist.</p>
+        <ButtonLink to="/">Go to Home</ButtonLink>
+      </section>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { TrashIcon } from "lucide-react";
 import { useState } from "react";
 import { useFetcher, useLocation } from "react-router";
 
+import { ButtonLoading } from "@/components/shared/button-loading";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -13,7 +14,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { ButtonLoading } from "@/components/ui/button-loading";
 
 export function FormDelete({
   dialogTrigger,
