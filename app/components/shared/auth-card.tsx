@@ -18,14 +18,14 @@ export function AuthCard({
   const signInGitHub = async () => {
     await authClient.signIn.social({
       provider: "github",
-      callbackURL: "/user",
+      callbackURL: "/dashboard",
     });
   };
 
   const signInGoogle = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/user",
+      callbackURL: "/dashboard",
     });
   };
 

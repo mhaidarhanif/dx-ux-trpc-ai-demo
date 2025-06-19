@@ -17,7 +17,7 @@ const authNavLinkItems: NavLinkItem[] = [
   { to: href("/signup"), text: "Sign Up", auth: false },
   { to: href("/signin"), text: "Sign In", auth: false },
   { to: href("/signout"), text: "Sign Out", auth: true },
-  { to: href("/user"), text: "User", auth: true },
+  { to: href("/dashboard"), text: "Dashboard", auth: true },
 ];
 
 export function Layout({
@@ -45,11 +45,7 @@ export function Layout({
   );
 }
 
-export function NavbarMobile({
-  isAuthenticated = false,
-}: {
-  isAuthenticated?: boolean;
-}) {
+export function NavbarMobile({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
   return (
     <nav id="navbar-mobile">
       <Link to={href("/")} className="block">
@@ -62,11 +58,7 @@ export function NavbarMobile({
   );
 }
 
-export function NavbarDesktop({
-  isAuthenticated = false,
-}: {
-  isAuthenticated?: boolean;
-}) {
+export function NavbarDesktop({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
   return (
     <nav
       id="navbar-desktop"
@@ -101,9 +93,7 @@ export function Footer({ hasTheme }: { hasTheme?: boolean }) {
       )}
       <p className="text-center text-sm">
         <span>&copy; {new Date().getFullYear()} Dogokit. </span>
-        <Anchor href="https://github.com/dogokit/dogokit-corgi">
-          Source Code on GitHub
-        </Anchor>
+        <Anchor href="https://github.com/dogokit/dogokit-corgi">Source Code on GitHub</Anchor>
       </p>
     </footer>
   );

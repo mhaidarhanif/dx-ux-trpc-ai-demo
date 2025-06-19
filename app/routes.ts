@@ -12,7 +12,7 @@ export default [
       route("/signup", "routes/signup.tsx"),
       route("/signin", "routes/signin.tsx"),
       route("/signout", "routes/signout.tsx"),
-      route("/user", "routes/user.tsx"),
+      route("/dashboard", "routes/dashboard.tsx"),
     ]),
 
     route("*", "routes/404.tsx"),

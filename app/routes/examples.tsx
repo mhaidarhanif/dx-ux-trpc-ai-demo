@@ -14,7 +14,7 @@ export default function ExamplesRoute({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <section>
+      <section className="w-full max-w-6xl">
         <ContentHeadingPage className="mb-10">Examples</ContentHeadingPage>
         <Examples examples={examples} />
       </section>

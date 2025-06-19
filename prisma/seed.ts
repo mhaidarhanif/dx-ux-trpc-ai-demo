@@ -9,21 +9,25 @@ async function main() {
       where: { slug: example.slug },
       update: {
         name: example.name,
-        items: { connect: { slug: `item-${example.slug}` } },
+        items: {
+          connect: Array.from({ length: 3 }, (_, i) => ({
+            slug: `item-${example.slug}-${i + 1}`,
+          })),
+        },
       },
       create: {
         slug: example.slug,
         name: example.name,
         items: {
-          create: {
-            slug: `item-${example.slug}`,
-            name: `Item of ${example.name}`,
-          },
+          create: Array.from({ length: 3 }, (_, i) => ({
+            slug: `item-${example.slug}-${i + 1}`,
+            name: `Item ${example.name} ${i + 1}`,
+          })),
         },
       },
     });
 
-    console.info(`${upsertedExample.name} and item`);
+    console.info(`Example: ${upsertedExample.name}`);
   }
 }
 

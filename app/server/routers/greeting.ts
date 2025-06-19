@@ -8,6 +8,11 @@ export const greetingRouter = {
   }),
 
   getExamples: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.db.example.findMany({ cacheStrategy: { ttl: 60 } });
+    return await ctx.db.example.findMany({
+      include: {
+        items: true,
+      },
+      cacheStrategy: { ttl: 60 },
+    });
   }),
 } satisfies TRPCRouterRecord;

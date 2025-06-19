@@ -5,14 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/datetime";
 import { requireAuth } from "@/server/auth-helper";
 import { caller } from "@/server/trpc-caller";
-import type { Route } from "./+types/user";
+import type { Route } from "./+types/dashboard";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { isAuthenticated } = await requireAuth(request);
   if (!isAuthenticated) return redirect("/signin");
 
   const api = await caller(request);
-  const user = await api.user.getUser();
+  const user = await api.auth.getUser();
   return { user };
 }
 
@@ -45,14 +45,15 @@ export default function UserDashboardRoute({ loaderData }: Route.ComponentProps)
 
   return (
     <>
-      <Card className="w-full max-w-md rounded-xl border border-border p-8">
-        <CardHeader className="mb-6 flex flex-col items-center space-y-2">
+      <Card className="w-full max-w-md rounded-xl border border-border">
+        <CardHeader className="flex flex-col items-center space-y-2">
           <AvatarAuto user={user} className="size-20" />
           <CardTitle className="text-center">
             <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">{user.name || "No Name"}</h3>
             <p className="text-gray-500 text-sm dark:text-gray-400">{user.email}</p>
           </CardTitle>
         </CardHeader>
+
         <CardContent>
           <dl className="divide-y divide-gray-200 dark:divide-gray-700">
             {userFields.map((item) => (

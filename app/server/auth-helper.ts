@@ -18,7 +18,7 @@ export async function requireUser(request: Request) {
   if (!session?.user?.id) return { isAuthenticated: false, user: null };
 
   const api = await caller(request);
-  const user = await api.user.getUser();
+  const user = await api.user.getUserByUsername();
   const isAuthenticated = user !== null;
 
   return { isAuthenticated, user };
@@ -34,6 +34,6 @@ export async function requireAuthTrue(request: Request) {
 // Redirect to /user if authenticated
 export async function requireAuthFalse(request: Request) {
   const { isAuthenticated } = await requireAuth(request);
-  if (isAuthenticated) return redirect("/user");
+  if (isAuthenticated) return redirect("/dashboard");
   return { isAuthenticated };
 }

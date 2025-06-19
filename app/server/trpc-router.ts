@@ -1,4 +1,4 @@
-// import { authRouter } from "@/server/routers/auth";
+import { authRouter } from "@/server/routers/auth";
 import { greetingRouter } from "@/server/routers/greeting";
 import { userRouter } from "@/server/routers/user";
 import { router } from "@/server/trpc";
@@ -6,7 +6,7 @@ import { router } from "@/server/trpc";
 export const appRouter = router({
   greeting: greetingRouter,
   user: userRouter,
-  // auth: authRouter,
+  auth: authRouter,
 });
 
 export type AppRouter = typeof appRouter;
