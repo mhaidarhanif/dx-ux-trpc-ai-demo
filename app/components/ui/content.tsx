@@ -13,7 +13,7 @@ export function ContentHeading({ className, children, ...props }: React.Componen
 
 export function ContentIntro({ className, children, ...props }: React.ComponentProps<"p">) {
   return (
-    <div className={cn("text-pretty font-brand text-lg sm:text-xl", className)} {...props}>
+    <div className={cn("text-pretty font-brand font-light text-lg sm:text-xl", className)} {...props}>
       {children}
     </div>
   );

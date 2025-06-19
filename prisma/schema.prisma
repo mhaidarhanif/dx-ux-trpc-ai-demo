@@ -13,9 +13,12 @@ datasource db {
 model User {
   id String @id @default(ulid())
 
-  name          String
   email         String  @unique
   emailVerified Boolean @default(false)
+
+  name      String
+  firstName String?
+  lastName  String?
 
   username        String? @unique
   displayUsername String?
@@ -35,9 +38,7 @@ model User {
   banReason  String?
   banExpires DateTime?
 
-  firstName String?
-  lastName  String?
-  phone     String?
+  isAnonymous Boolean?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

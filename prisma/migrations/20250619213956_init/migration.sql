@@ -1,9 +1,11 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "emailVerified" BOOLEAN NOT NULL DEFAULT false,
+    "name" TEXT NOT NULL,
+    "firstName" TEXT,
+    "lastName" TEXT,
     "username" TEXT,
     "displayUsername" TEXT,
     "phoneNumber" TEXT,
@@ -15,9 +17,7 @@ CREATE TABLE "User" (
     "banned" BOOLEAN,
     "banReason" TEXT,
     "banExpires" TIMESTAMP(3),
-    "firstName" TEXT,
-    "lastName" TEXT,
-    "phone" TEXT,
+    "isAnonymous" BOOLEAN,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

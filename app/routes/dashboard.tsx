@@ -1,8 +1,10 @@
+import { CheckIcon, MinusIcon, XIcon } from "lucide-react";
 import { redirect } from "react-router";
 import { Debug } from "@/components/shared/debug";
 import { AvatarAuto } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/datetime";
+import { cn } from "@/lib/utils";
 import { requireAuth } from "@/server/auth-helper";
 import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/dashboard";
@@ -28,15 +30,16 @@ export default function UserDashboardRoute({ loaderData }: Route.ComponentProps)
   }
 
   const userFields = [
-    { label: "ID", value: user.id },
+    { label: "ID", value: user.id, isCode: true },
     { label: "Name", value: user.name },
     { label: "First Name", value: user.firstName },
     { label: "Last Name", value: user.lastName },
-    { label: "Phone", value: user.phone },
+    { label: "Phone Number", value: user.phoneNumber },
+    { label: "Phone Verified", value: user.phoneNumberVerified },
     { label: "Email", value: user.email },
-    { label: "Email Verified", value: String(user.emailVerified) },
+    { label: "Email Verified", value: user.emailVerified },
     { label: "Role", value: user.role },
-    { label: "Banned", value: user.banned ? "Yes" : "No" },
+    { label: "Banned", value: user.banned },
     { label: "Ban Reason", value: user.banReason },
     { label: "Ban Expires", value: formatDate(user.banExpires) },
     { label: "Created At", value: formatDate(user.createdAt) },
@@ -56,12 +59,23 @@ export default function UserDashboardRoute({ loaderData }: Route.ComponentProps)
 
         <CardContent>
           <dl className="divide-y divide-gray-200 dark:divide-gray-700">
-            {userFields.map((item) => (
-              <div key={item.label} className="flex items-center justify-between py-2">
-                <dt className="font-medium text-gray-700 dark:text-gray-300">{item.label}</dt>
-                <dd className="text-gray-900 text-sm dark:text-gray-100">{item.value ?? "-"}</dd>
-              </div>
-            ))}
+            {userFields.map((item) => {
+              const valueIsBoolean = typeof item.value === "boolean";
+
+              return (
+                <div key={item.label} className="flex items-center justify-between py-2">
+                  <dt className="font-medium text-gray-700 dark:text-gray-300">{item.label}</dt>
+                  <dd className={cn("text-gray-900 text-sm dark:text-gray-100", item.isCode && "font-mono")}>
+                    {!valueIsBoolean && (item.value ?? <MinusIcon />)}
+                    {valueIsBoolean && item.value && item.value === true ? (
+                      <CheckIcon className="text-green-600 dark:text-green-400"></CheckIcon>
+                    ) : (
+                      item.value === false && <XIcon className="text-red-600 dark:text-red-400" />
+                    )}
+                  </dd>
+                </div>
+              );
+            })}
           </dl>
         </CardContent>
       </Card>

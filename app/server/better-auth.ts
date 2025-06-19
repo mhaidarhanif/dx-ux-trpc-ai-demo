@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { admin, haveIBeenPwned, multiSession, openAPI, username } from "better-auth/plugins";
+import { admin, anonymous, haveIBeenPwned, multiSession, openAPI, username } from "better-auth/plugins";
 
 import { prisma } from "@/server/prisma";
 
@@ -61,6 +61,7 @@ export const auth = betterAuth({
   },
 
   plugins: [
+    anonymous(),
     admin(),
     multiSession(),
     openAPI(), // Check on /api/auth/reference
