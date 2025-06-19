@@ -8,6 +8,7 @@ CREATE TABLE "User" (
     "lastName" TEXT,
     "username" TEXT,
     "displayUsername" TEXT,
+    "phone" TEXT,
     "phoneNumber" TEXT,
     "phoneNumberVerified" BOOLEAN DEFAULT false,
     "image" TEXT,
@@ -18,6 +19,7 @@ CREATE TABLE "User" (
     "banReason" TEXT,
     "banExpires" TIMESTAMP(3),
     "isAnonymous" BOOLEAN,
+    "twoFactorEnabled" BOOLEAN,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -71,6 +73,18 @@ CREATE TABLE "Verification" (
 );
 
 -- CreateTable
+CREATE TABLE "TwoFactor" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "secret" TEXT,
+    "backupCodes" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "TwoFactor_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Example" (
     "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
@@ -96,6 +110,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_phone_key" ON "User"("phone");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 
 -- CreateIndex
@@ -112,6 +129,9 @@ ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "TwoFactor" ADD CONSTRAINT "TwoFactor_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ExampleItem" ADD CONSTRAINT "ExampleItem_exampleId_fkey" FOREIGN KEY ("exampleId") REFERENCES "Example"("id") ON DELETE SET NULL ON UPDATE CASCADE;

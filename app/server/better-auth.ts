@@ -1,10 +1,12 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { admin, anonymous, haveIBeenPwned, multiSession, openAPI, username } from "better-auth/plugins";
+import { admin, anonymous, haveIBeenPwned, multiSession, openAPI, twoFactor, username } from "better-auth/plugins";
 
 import { prisma } from "@/server/prisma";
 
 export const auth = betterAuth({
+  appName: "Dogokit Corgi",
+
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
@@ -65,6 +67,7 @@ export const auth = betterAuth({
     admin(),
     multiSession(),
     openAPI(), // Check on /api/auth/reference
+    twoFactor(),
     haveIBeenPwned({
       customPasswordCompromisedMessage: "That password is compromised. Please choose a more secure one.",
     }),

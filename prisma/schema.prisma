@@ -23,6 +23,7 @@ model User {
   username        String? @unique
   displayUsername String?
 
+  phone               String?  @unique
   phoneNumber         String?  @unique
   phoneNumberVerified Boolean? @default(false)
 
@@ -30,15 +31,17 @@ model User {
   lang  String? @default("en")
   theme String? @default("")
 
-  sessions Session[]
-  accounts Account[]
-
   role       String? // user | admin
   banned     Boolean?
   banReason  String?
   banExpires DateTime?
 
-  isAnonymous Boolean?
+  isAnonymous      Boolean?
+  twoFactorEnabled Boolean?
+
+  sessions   Session[]
+  accounts   Account[]
+  twoFactors TwoFactor[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -88,6 +91,19 @@ model Verification {
   identifier String
   value      String
   expiresAt  DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TwoFactor {
+  id String @id @default(ulid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  secret      String?
+  backupCodes String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

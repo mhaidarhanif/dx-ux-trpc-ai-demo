@@ -69,7 +69,7 @@ export function NavbarDesktop({ isAuthenticated = false }: { isAuthenticated?: b
       )}
     >
       <Link to={href("/")} className="block">
-        <Logo text="Dogokit Corgi" />
+        <Logo />
       </Link>
 
       <div className="flex justify-center">

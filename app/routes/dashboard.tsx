@@ -1,3 +1,4 @@
+import type { User } from "@prisma/client";
 import { CheckIcon, MinusIcon, XIcon } from "lucide-react";
 import { redirect } from "react-router";
 import { Debug } from "@/components/shared/debug";
@@ -18,6 +19,12 @@ export async function loader({ request }: Route.LoaderArgs) {
   return { user };
 }
 
+type UserField = {
+  label: string;
+  value: string | number | boolean | null;
+  isCode?: boolean;
+};
+
 export default function UserDashboardRoute({ loaderData }: Route.ComponentProps) {
   const { user } = loaderData;
 
@@ -29,22 +36,27 @@ export default function UserDashboardRoute({ loaderData }: Route.ComponentProps)
     );
   }
 
-  const userFields = [
-    { label: "ID", value: user.id, isCode: true },
-    { label: "Name", value: user.name },
-    { label: "First Name", value: user.firstName },
-    { label: "Last Name", value: user.lastName },
-    { label: "Phone Number", value: user.phoneNumber },
-    { label: "Phone Verified", value: user.phoneNumberVerified },
-    { label: "Email", value: user.email },
-    { label: "Email Verified", value: user.emailVerified },
-    { label: "Role", value: user.role },
-    { label: "Banned", value: user.banned },
-    { label: "Ban Reason", value: user.banReason },
-    { label: "Ban Expires", value: formatDate(user.banExpires) },
-    { label: "Created At", value: formatDate(user.createdAt) },
-    { label: "Updated At", value: formatDate(user.updatedAt) },
-  ];
+  function createUserFields(user: User): UserField[] {
+    return [
+      { label: "ID", value: user.id, isCode: true },
+      { label: "Name", value: user.name },
+      { label: "First Name", value: user.firstName },
+      { label: "Last Name", value: user.lastName },
+      { label: "Email", value: user.email },
+      { label: "Email Verified", value: user.emailVerified },
+      { label: "Phone Number", value: user.phoneNumber },
+      { label: "Phone Verified", value: user.phoneNumberVerified },
+      { label: "Role", value: user.role },
+      { label: "2FA", value: user.twoFactorEnabled },
+      { label: "Banned", value: user.banned },
+      { label: "Ban Reason", value: user.banReason },
+      { label: "Ban Expires", value: formatDate(user.banExpires) },
+      { label: "Created At", value: formatDate(user.createdAt) },
+      { label: "Updated At", value: formatDate(user.updatedAt) },
+    ];
+  }
+
+  const userFields = createUserFields(user);
 
   return (
     <>
