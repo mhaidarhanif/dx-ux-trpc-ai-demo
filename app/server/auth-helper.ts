@@ -1,24 +1,24 @@
 import { redirect } from "react-router";
 
-import { auth } from "@/server/better-auth";
+import { betterAuth } from "@/server/better-auth";
 import { caller } from "@/server/trpc-caller";
 
 export async function requireSession(request: Request) {
-  return await auth.api.getSession({ headers: request.headers });
+  return await betterAuth.api.getSession({ headers: request.headers });
 }
 
-export async function requireAuth(request: Request) {
+export async function requireAuthSession(request: Request) {
   const session = await requireSession(request);
-  if (!session?.user?.id) return { isAuthenticated: false };
-  return { isAuthenticated: true };
+  if (!session?.user.id) return { isAuthenticated: false, user: null };
+  return { isAuthenticated: true, user: session.user };
 }
 
-export async function requireUser(request: Request) {
+export async function requireAuthUserData(request: Request) {
   const session = await requireSession(request);
-  if (!session?.user?.id) return { isAuthenticated: false, user: null };
+  if (!session?.user.id) return { isAuthenticated: false, user: null };
 
   const api = await caller(request);
-  const user = await api.user.getUserByUsername();
+  const user = await api.auth.getUser();
   const isAuthenticated = user !== null;
 
   return { isAuthenticated, user };
@@ -26,14 +26,14 @@ export async function requireUser(request: Request) {
 
 // Redirect to /signin if not authenticated
 export async function requireAuthTrue(request: Request) {
-  const { isAuthenticated } = await requireAuth(request);
+  const { isAuthenticated } = await requireAuthSession(request);
   if (!isAuthenticated) return redirect("/signin");
   return { isAuthenticated };
 }
 
 // Redirect to /user if authenticated
 export async function requireAuthFalse(request: Request) {
-  const { isAuthenticated } = await requireAuth(request);
+  const { isAuthenticated } = await requireAuthSession(request);
   if (isAuthenticated) return redirect("/dashboard");
   return { isAuthenticated };
 }

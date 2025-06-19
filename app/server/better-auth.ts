@@ -1,10 +1,10 @@
-import { betterAuth } from "better-auth";
+import { betterAuth as betterAuthConfig } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { admin, anonymous, haveIBeenPwned, multiSession, openAPI, twoFactor, username } from "better-auth/plugins";
 
 import { prisma } from "@/server/prisma";
 
-export const auth = betterAuth({
+export const betterAuth = betterAuthConfig({
   appName: "Dogokit Corgi",
 
   database: prismaAdapter(prisma, {

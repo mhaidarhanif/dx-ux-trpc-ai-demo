@@ -1,41 +1,31 @@
+import type { User } from "better-auth/types";
 import { href, Link } from "react-router";
-
 import { Anchor } from "@/components/shared/anchor";
 import { Logo } from "@/components/shared/logo";
-import { type NavLinkItem, NavLinks } from "@/components/shared/navlinks";
+import { NavLinks } from "@/components/shared/navlinks";
 import { ThemeSwitcherAction } from "@/components/theme/theme-switcher-action";
+import { authNavLinkItems, navLinkItems } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 
-const navLinkItems: NavLinkItem[] = [
-  { to: href("/"), text: "Home" },
-  { to: href("/about"), text: "About" },
-  { to: href("/examples"), text: "Examples" },
-  { to: "/404", text: "404" },
-];
-
-const authNavLinkItems: NavLinkItem[] = [
-  { to: href("/signup"), text: "Sign Up", auth: false },
-  { to: href("/signin"), text: "Sign In", auth: false },
-  { to: href("/signout"), text: "Sign Out", auth: true },
-  { to: href("/dashboard"), text: "Dashboard", auth: true },
-];
+interface SharedProps {
+  hasTheme?: boolean;
+  isAuthenticated?: boolean;
+  user?: User | null;
+}
 
 export function Layout({
   hasTheme = false,
   isAuthenticated = false,
+  user,
   children,
-}: React.ComponentProps<"div"> & {
-  hasTheme?: boolean;
-  isAuthenticated?: boolean;
-}) {
+}: React.ComponentProps<"div"> & SharedProps) {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="sm:hidden">
-        <NavbarMobile isAuthenticated={isAuthenticated} />
+        <NavbarMobile isAuthenticated={isAuthenticated} user={user} />
       </div>
-
       <div className="hidden sm:block">
-        <NavbarDesktop isAuthenticated={isAuthenticated} />
+        <NavbarDesktop isAuthenticated={isAuthenticated} user={user} />
       </div>
 
       <main className="flex-auto">{children}</main>
@@ -45,20 +35,19 @@ export function Layout({
   );
 }
 
-export function NavbarMobile({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
+export function NavbarMobile({ isAuthenticated = false }: SharedProps) {
   return (
     <nav id="navbar-mobile" className={cn("p-2 sm:p-4")}>
       <Link to={href("/")} className="block">
         <Logo text="Dogokit Corgi" />
       </Link>
-
       <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
       <NavLinks items={authNavLinkItems} isAuthenticated={isAuthenticated} />
     </nav>
   );
 }
 
-export function NavbarDesktop({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
+export function NavbarDesktop({ isAuthenticated = false }: SharedProps) {
   return (
     <nav
       id="navbar-desktop"
@@ -68,7 +57,7 @@ export function NavbarDesktop({ isAuthenticated = false }: { isAuthenticated?: b
         "sticky top-0 z-40 items-center justify-between bg-background"
       )}
     >
-      <Link to={href("/")} className="block">
+      <Link to={href("/")} className="flex items-center gap-2">
         <Logo />
       </Link>
 
@@ -83,7 +72,7 @@ export function NavbarDesktop({ isAuthenticated = false }: { isAuthenticated?: b
   );
 }
 
-export function Footer({ hasTheme }: { hasTheme?: boolean }) {
+export function Footer({ hasTheme }: SharedProps) {
   return (
     <footer className="space-y-4 p-4">
       {hasTheme && (

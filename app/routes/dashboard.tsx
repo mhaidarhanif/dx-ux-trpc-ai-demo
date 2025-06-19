@@ -7,16 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { User } from "@/generated/prisma/client";
 import { formatDate } from "@/lib/datetime";
 import { cn } from "@/lib/utils";
-import { requireAuth } from "@/server/auth-helper";
-import { caller } from "@/server/trpc-caller";
+import { requireAuthUserData } from "@/server/auth-helper";
 import type { Route } from "./+types/dashboard";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const { isAuthenticated } = await requireAuth(request);
+  const { isAuthenticated, user } = await requireAuthUserData(request);
   if (!isAuthenticated) return redirect("/signin");
-
-  const api = await caller(request);
-  const user = await api.auth.getUser();
   return { user };
 }
 
@@ -93,7 +89,7 @@ export default function UserDashboardRoute({ loaderData }: Route.ComponentProps)
         </CardContent>
       </Card>
 
-      <Debug>{user}</Debug>
+      <Debug className="max-w-xs">{user}</Debug>
     </>
   );
 }

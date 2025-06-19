@@ -1,20 +1,8 @@
-import { type href, NavLink } from "react-router";
-
+import { NavLink } from "react-router";
+import type { NavLinkItem } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 
-export type NavLinkItem = {
-  to: ReturnType<typeof href>;
-  text: string;
-  auth?: boolean;
-};
-
-export function NavLinks({
-  items,
-  isAuthenticated = true,
-}: {
-  items: NavLinkItem[];
-  isAuthenticated?: boolean;
-}) {
+export function NavLinks({ items, isAuthenticated = true }: { items: NavLinkItem[]; isAuthenticated?: boolean }) {
   return (
     <ul className="inline-flex gap-4 font-brand">
       {items
@@ -27,9 +15,7 @@ export function NavLinks({
           <li key={item.to}>
             <NavLink
               to={item.to}
-              className={({ isActive }) =>
-                cn("whitespace-nowrap font-normal", isActive && "text-primary")
-              }
+              className={({ isActive }) => cn("whitespace-nowrap font-normal", isActive && "text-primary")}
             >
               {item.text}
             </NavLink>

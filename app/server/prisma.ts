@@ -2,7 +2,9 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 import { PrismaClient } from "@/generated/prisma/client";
 
 const prismaClientSingleton = () => {
-  return new PrismaClient().$extends(withAccelerate());
+  return new PrismaClient({
+    log: ["query"],
+  }).$extends(withAccelerate());
 };
 
 type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;

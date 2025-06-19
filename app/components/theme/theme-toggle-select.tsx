@@ -23,7 +23,7 @@ export default function ThemeToggleSelect() {
 
   return (
     <Select name="theme" value={value} onValueChange={handleChange}>
-      <SelectTrigger className="w-28">
+      <SelectTrigger className="w-26">
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
       <SelectContent>

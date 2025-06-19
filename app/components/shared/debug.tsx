@@ -2,11 +2,7 @@ import { XIcon } from "lucide-react";
 import { useState } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { stringifyCode } from "@/lib/string";
 import { cn } from "@/lib/utils";
 
@@ -39,17 +35,12 @@ export function Debug({
     <div>
       <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-1">
         <div className="flex flex-nowrap gap-1">
-          <CollapsibleTrigger
-            className={cn(buttonVariants({ variant: "outline", size: "xs" }))}
-          >
+          <CollapsibleTrigger className={cn(buttonVariants({ variant: "outline", size: "xs" }))}>
             <span>DEBUG</span>
             {name && <span>: {name}</span>}
           </CollapsibleTrigger>
-          <Button
-            variant="outline"
-            size="xs"
-            onClick={() => setIsVisible(false)}
-          >
+
+          <Button variant="outline" size="xs" onClick={() => setIsVisible(false)}>
             <XIcon />
           </Button>
         </div>
@@ -57,9 +48,7 @@ export function Debug({
         <CollapsibleContent>
           <pre
             className={cn(
-              "my-1 overflow-scroll rounded border p-1 text-xs",
-              "border-surface-200 bg-white dark:border-surface-800 dark:bg-black",
-              "whitespace-pre-wrap", // alternative: break-spaces
+              "break-spaces my-1 overflow-scroll rounded border border-surface-200 bg-white p-1 text-xs dark:border-surface-800 dark:bg-black",
               className
             )}
           >

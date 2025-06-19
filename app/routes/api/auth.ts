@@ -1,11 +1,11 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
 
-import { auth } from "@/server/better-auth";
+import { betterAuth } from "@/server/better-auth";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  return auth.handler(request);
+  return betterAuth.handler(request);
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  return auth.handler(request);
+  return betterAuth.handler(request);
 }
