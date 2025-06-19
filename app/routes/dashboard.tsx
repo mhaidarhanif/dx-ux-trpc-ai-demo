@@ -1,9 +1,10 @@
-import type { User } from "@prisma/client";
 import { CheckIcon, MinusIcon, XIcon } from "lucide-react";
 import { redirect } from "react-router";
+
 import { Debug } from "@/components/shared/debug";
 import { AvatarAuto } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { User } from "@/generated/prisma/client";
 import { formatDate } from "@/lib/datetime";
 import { cn } from "@/lib/utils";
 import { requireAuth } from "@/server/auth-helper";
