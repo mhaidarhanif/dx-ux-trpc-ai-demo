@@ -1,9 +1,9 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 
-import { protectedProcedure, publicProcedure } from "@/server/trpc";
+import { procedure, protectedProcedure } from "@/server/trpc";
 
 export const userRouter = {
-  getPublicUsers: publicProcedure.query(async ({ ctx }) => {
+  getPublicUsers: procedure.query(async ({ ctx }) => {
     return await ctx.db.example.findMany({ cacheStrategy: { ttl: 60 } });
   }),
 

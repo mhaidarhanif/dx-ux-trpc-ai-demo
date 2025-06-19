@@ -1,10 +1,10 @@
 import { greetingRouter } from "@/server/routers/greeting";
 import { userRouter } from "@/server/routers/user";
-import { createTRPCRouter } from "@/server/trpc";
+import { router } from "@/server/trpc";
 
-export const trpcRouter = createTRPCRouter({
+export const appRouter = router({
   greeting: greetingRouter,
   user: userRouter,
 });
 
-export type TRPCRouter = typeof trpcRouter;
+export type AppRouter = typeof appRouter;

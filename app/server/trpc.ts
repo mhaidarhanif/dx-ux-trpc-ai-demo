@@ -3,7 +3,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 import { auth } from "@/server/better-auth";
 import { prisma } from "@/server/prisma";
-import { trpcRouter } from "@/server/trpc-router";
+import { appRouter } from "@/server/trpc-router";
 
 export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
   const authSession = await auth.api.getSession({ headers });
@@ -35,7 +35,7 @@ const t = initTRPC.context<Context>().create({
 
 export const createCallerFactory = t.createCallerFactory;
 
-export const createTRPCRouter = t.router;
+export const router = t.router;
 
 export const publicProcedure = t.procedure;
 
@@ -61,6 +61,6 @@ const createContext = (opts: { headers: Headers }) => {
   });
 };
 
-const createCaller = createCallerFactory(trpcRouter);
+const createCaller = createCallerFactory(appRouter);
 
 export const caller = async (request: Request) => createCaller(await createContext({ headers: request.headers }));
