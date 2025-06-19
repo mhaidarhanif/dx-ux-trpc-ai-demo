@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id String @id
+  id String @id @default(ulid())
 
   name          String
   email         String  @unique
@@ -44,7 +44,7 @@ model User {
 }
 
 model Session {
-  id String @id
+  id String @id @default(ulid())
 
   expiresAt DateTime
   token     String   @unique
@@ -61,7 +61,7 @@ model Session {
 }
 
 model Account {
-  id String @id
+  id String @id @default(ulid())
 
   accountId  String
   providerId String
@@ -82,7 +82,7 @@ model Account {
 }
 
 model Verification {
-  id String @id
+  id String @id @default(ulid())
 
   identifier String
   value      String
