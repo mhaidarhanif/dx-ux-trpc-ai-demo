@@ -68,7 +68,7 @@ body {
   --popover-foreground: oklch(14.5% 0 0);
   --primary: var(--color-indigo-700);
   --primary-foreground: oklch(98.5% 0 0);
-  --secondary: oklch(97% 0 0);
+  --secondary: var(--color-wood-200);
   --secondary-foreground: oklch(20.5% 0 0);
   --muted: oklch(97% 0 0);
   --muted-foreground: oklch(55.6% 0 0);
@@ -115,7 +115,7 @@ body {
   --popover-foreground: oklch(98.5% 0 0);
   --primary: var(--color-indigo-400);
   --primary-foreground: oklch(20.5% 0 0);
-  --secondary: oklch(26.9% 0 0);
+  --secondary: var(--color-wood-700);
   --secondary-foreground: oklch(98.5% 0 0);
   --muted: oklch(26.9% 0 0);
   --muted-foreground: oklch(70.8% 0 0);

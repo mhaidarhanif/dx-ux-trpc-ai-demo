@@ -50,11 +50,11 @@ export function AuthCard({
 
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-4">
-          <Button variant="outline" onClick={signInGitHub}>
+          <Button variant="secondary" onClick={signInGitHub}>
             <SiGithub />
             <span>{buttonText} with GitHub</span>
           </Button>
-          <Button variant="outline" onClick={signInGoogle}>
+          <Button variant="secondary" onClick={signInGoogle}>
             <SiGoogle />
             <span>{buttonText} with Google</span>
           </Button>
@@ -66,28 +66,32 @@ export function AuthCard({
           </span>
         </div>
 
-        <Form className="grid gap-6">
-          <div className="grid gap-3">
-            <Label htmlFor="fullname">Full Name</Label>
-            <Input
-              id="fullname"
-              type="text"
-              placeholder="First Last"
-              required
-            />
-          </div>
+        <Form className="grid gap-4">
+          {isSignUp && (
+            <div className="grid gap-2">
+              <Label htmlFor="fullname">Full Name</Label>
+              <Input
+                id="fullname"
+                type="text"
+                placeholder="First Last"
+                required
+              />
+            </div>
+          )}
 
-          <div className="grid gap-3">
-            <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              type="text"
-              placeholder="yourhandle"
-              required
-            />
-          </div>
+          {isSignUp && (
+            <div className="grid gap-2">
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                type="text"
+                placeholder="yourhandle"
+                required
+              />
+            </div>
+          )}
 
-          <div className="grid gap-3">
+          <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
@@ -97,7 +101,7 @@ export function AuthCard({
             />
           </div>
 
-          <div className="grid gap-3">
+          <div className="grid gap-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
 
