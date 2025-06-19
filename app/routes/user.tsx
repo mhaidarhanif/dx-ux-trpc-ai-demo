@@ -1,6 +1,6 @@
 import { AvatarAuto } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { requireAuthTrue } from "@/lib/auth/helper";
+import { requireAuthTrue } from "@/lib/better-auth/helper";
 import { formatDate } from "@/lib/datetime";
 import type { Route } from "./+types/user";
 

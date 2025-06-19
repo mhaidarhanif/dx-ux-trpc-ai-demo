@@ -2,7 +2,7 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import { auth } from "@/lib/auth/server";
+import { auth } from "@/lib/better-auth/server";
 import { prisma } from "@/server/prisma";
 
 export const createTRPCContext = async ({ headers }: { headers: Headers }) => {

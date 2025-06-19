@@ -4,22 +4,19 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
 import { appRouter } from "@/server/main";
 import { createTRPCContext } from "@/server/trpc";
 
-export const loader = async (args: LoaderFunctionArgs) => {
-  return handleRequest(args);
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  return handleRequest(request);
 };
 
-export const action = async (args: ActionFunctionArgs) => {
-  return handleRequest(args);
+export const action = async ({ request }: ActionFunctionArgs) => {
+  return handleRequest(request);
 };
 
-function handleRequest(args: LoaderFunctionArgs | ActionFunctionArgs) {
+function handleRequest(request: Request) {
   return fetchRequestHandler({
     endpoint: "/api/trpc",
-    req: args.request,
+    req: request,
     router: appRouter,
-    createContext: () =>
-      createTRPCContext({
-        headers: args.request.headers,
-      }),
+    createContext: () => createTRPCContext({ headers: request.headers }),
   });
 }

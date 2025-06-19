@@ -5,7 +5,7 @@ import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authClient } from "@/lib/auth/client";
+import { authClient } from "@/lib/better-auth/client";
 import { cn } from "@/lib/utils";
 
 export function AuthCard({
