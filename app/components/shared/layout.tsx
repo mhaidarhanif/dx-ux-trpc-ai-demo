@@ -32,7 +32,9 @@ export default function LayoutRoot({
     <div className="flex min-h-screen flex-col">
       <nav
         className={cn(
-          "sticky top-0 z-40 hidden items-center justify-between gap-8 bg-background p-2 sm:p-4 lg:flex"
+          "flex",
+          // "hidden lg:flex",
+          "sticky top-0 z-40 items-center justify-between gap-8 bg-background p-2 sm:p-4"
         )}
       >
         <Link to={href("/")} className="block">

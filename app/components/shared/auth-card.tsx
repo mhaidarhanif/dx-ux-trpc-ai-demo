@@ -35,20 +35,23 @@ export function AuthCard({
 
   return (
     <section
-      className={cn("flex flex-col items-center gap-6", className)}
+      className={cn(
+        "flex w-full max-w-xs flex-col items-center gap-6",
+        className
+      )}
       {...props}
     >
       <div className="flex self-center">
         <Logo classNameText="font-black font-brand" />
       </div>
 
-      <div className="grid w-full gap-6">
+      <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-4">
-          <Button variant="outline" onClick={() => signInGitHub()}>
+          <Button variant="outline" onClick={signInGitHub}>
             <SiGithub />
             <span>{buttonText} with GitHub</span>
           </Button>
-          <Button variant="outline" onClick={() => signInGoogle()}>
+          <Button variant="outline" onClick={signInGoogle}>
             <SiGoogle />
             <span>{buttonText} with Google</span>
           </Button>
@@ -73,9 +76,10 @@ export function AuthCard({
           <div className="grid gap-3">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
+
               {mode === "signin" && (
-                <Link to="/forgot-password" className="text-xs">
-                  Forgot your password?
+                <Link to="/forgot-password" className="text-xs leading-none">
+                  Forgot password?
                 </Link>
               )}
             </div>
@@ -97,11 +101,11 @@ export function AuthCard({
       </div>
 
       {!isSignIn && (
-        <div className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
+        <p className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
           By clicking continue, you agree to our{" "}
           <Link to={href("/about")}>Terms of Service</Link> and{" "}
           <Link to={href("/about")}>Privacy Policy</Link>.
-        </div>
+        </p>
       )}
     </section>
   );
