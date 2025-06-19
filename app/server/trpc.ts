@@ -1,22 +1,21 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+
 import { auth } from "@/lib/auth/server";
-import { db } from "@/server/db";
+import { prisma } from "@/server/prisma";
 
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const authSession = await auth.api.getSession({
-    headers: opts.headers,
-  });
+export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
+  const authSession = await auth.api.getSession({ headers });
 
-  const source = opts.headers.get("x-trpc-source") ?? "unknown";
+  const source = headers.get("x-trpc-source") ?? "unknown";
 
   const userEmail = authSession?.user.email;
 
   console.info(`🔹 tRPC Request: [${source}] by [${userEmail ?? "Anonymous"}]`);
 
   return {
-    db,
+    db: prisma,
     user: authSession?.user,
   };
 };

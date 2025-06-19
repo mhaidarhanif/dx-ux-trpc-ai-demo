@@ -42,7 +42,7 @@ export default function UserDashboardRoute({
       <Card className="w-full max-w-md rounded-xl border border-border p-8">
         <CardHeader className="mb-6 flex flex-col items-center space-y-2">
           <AvatarAuto user={user} className="size-20" />
-          <CardTitle>
+          <CardTitle className="text-center">
             <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">
               {user.name || "No Name"}
             </h3>
