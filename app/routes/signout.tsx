@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/better-auth-client";
-import { requireAuthTrue } from "@/server/auth";
+import { requireAuthTrue } from "@/server/auth-helper";
 import type { Route } from "./+types/signout";
 
 export async function loader({ request }: Route.LoaderArgs) {

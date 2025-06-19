@@ -1,28 +1,33 @@
 import { PrismaClient } from "@/generated/prisma/client";
+import { dataExamples } from "./data/examples";
 
 const prisma = new PrismaClient();
 
-const dataExamples = Array.from({ length: 26 }, (_, i) => ({
-  slug: String.fromCharCode(97 + i),
-  name: String.fromCharCode(65 + i),
-}));
-
 async function main() {
-  for (const dataExample of dataExamples) {
-    const example = await prisma.example.upsert({
-      where: { slug: dataExample.slug },
-      update: dataExample,
-      create: dataExample,
-    });
+  for (const example of dataExamples) {
+    await prisma.$transaction(async (tx) => {
+      const newExample = await tx.example.upsert({
+        where: { slug: example.slug },
+        update: { name: example.name },
+        create: { slug: example.slug, name: example.name },
+      });
 
-    console.log(`Example: ${example.name}`);
+      await Promise.all(
+        example.items.map((item) =>
+          tx.exampleItem.upsert({
+            where: { slug: item.slug },
+            update: { name: item.name, exampleId: newExample.id },
+            create: { slug: item.slug, name: item.name, exampleId: newExample.id },
+          })
+        )
+      );
+    });
+    console.info(`${example.name} and items upserted`);
   }
 }
 
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
+  .then(() => prisma.$disconnect())
   .catch(async (e) => {
     console.error(e);
     await prisma.$disconnect();

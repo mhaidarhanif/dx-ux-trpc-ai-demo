@@ -1,6 +1,6 @@
 import { Examples } from "@/components/shared/examples";
 import { ContentHeadingPage } from "@/components/ui/content";
-import { caller } from "@/server/trpc";
+import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/examples";
 
 export async function loader({ request }: Route.LoaderArgs) {

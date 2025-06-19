@@ -5,6 +5,15 @@ import { admin, haveIBeenPwned, multiSession, openAPI, username } from "better-a
 import { prisma } from "@/server/prisma";
 
 export const auth = betterAuth({
+  user: {
+    modelName: "User",
+  },
+  session: {
+    modelName: "Session",
+  },
+  account: {
+    modelName: "Account",
+  },
   socialProviders: {
     github: {
       clientId: process.env.GITHUB_CLIENT_ID as string,

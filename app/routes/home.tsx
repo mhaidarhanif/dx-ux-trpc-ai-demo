@@ -6,7 +6,7 @@ import { Flex } from "@/components/shared/flex";
 import { LogoBrand } from "@/components/shared/logo-brand";
 import { Button } from "@/components/ui/button";
 import { ContentIntroParagraph } from "@/components/ui/content";
-import { caller } from "@/server/trpc";
+import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/home";
 
 export async function loader({ request }: Route.LoaderArgs) {

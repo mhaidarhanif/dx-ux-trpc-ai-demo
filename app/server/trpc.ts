@@ -1,9 +1,9 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+
 import { auth } from "@/server/better-auth";
 import { prisma } from "@/server/prisma";
-import { appRouter } from "@/server/trpc-router";
 
 export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
   const authSession = await auth.api.getSession({ headers });
@@ -40,8 +40,6 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 
 export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
-  // const session = await auth.api.getSession({ headers: request.headers });
-
   if (!ctx.user?.id) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -52,15 +50,3 @@ export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
     },
   });
 });
-
-const createContext = (opts: { headers: Headers }) => {
-  const headers = new Headers(opts.headers);
-  headers.set("x-trpc-source", "server-loader");
-  return createTRPCContext({
-    headers,
-  });
-};
-
-const createCaller = createCallerFactory(appRouter);
-
-export const caller = async (request: Request) => createCaller(await createContext({ headers: request.headers }));

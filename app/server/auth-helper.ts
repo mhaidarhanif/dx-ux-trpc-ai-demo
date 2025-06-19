@@ -1,7 +1,7 @@
 import { redirect } from "react-router";
 
 import { auth } from "@/server/better-auth";
-import { caller } from "@/server/trpc";
+import { caller } from "@/server/trpc-caller";
 
 export async function requireSession(request: Request) {
   return await auth.api.getSession({ headers: request.headers });
@@ -18,7 +18,7 @@ export async function requireUser(request: Request) {
   if (!session?.user?.id) return { isAuthenticated: false, user: null };
 
   const api = await caller(request);
-  const user = await api.auth.getUser();
+  const user = await api.user.getUser();
   const isAuthenticated = user !== null;
 
   return { isAuthenticated, user };

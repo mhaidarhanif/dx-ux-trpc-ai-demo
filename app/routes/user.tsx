@@ -3,8 +3,8 @@ import { Debug } from "@/components/shared/debug";
 import { AvatarAuto } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/datetime";
-import { requireAuth } from "@/server/auth";
-import { caller } from "@/server/trpc";
+import { requireAuth } from "@/server/auth-helper";
+import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/user";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -12,7 +12,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   if (!isAuthenticated) return redirect("/signin");
 
   const api = await caller(request);
-  const user = await api.auth.getUser();
+  const user = await api.user.getUser();
   return { user };
 }
 
