@@ -30,47 +30,81 @@ export function Layout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <nav id="navbar-mobile"></nav>
+      <div className="sm:hidden">
+        <NavbarMobile isAuthenticated={isAuthenticated} />
+      </div>
 
-      <nav
-        id="navbar-desktop"
-        className={cn(
-          "p-2 sm:p-4",
-          "grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-8",
-          "sticky top-0 z-40 items-center justify-between bg-background"
-        )}
-      >
-        <Link to={href("/")} className="block">
-          <Logo text="Dogokit Corgi" />
-        </Link>
-
-        <div className="flex justify-center">
-          <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
-        </div>
-
-        <div className="flex justify-end">
-          <NavLinks
-            items={authNavLinkItems}
-            isAuthenticated={isAuthenticated}
-          />
-        </div>
-      </nav>
+      <div className="hidden sm:block">
+        <NavbarDesktop isAuthenticated={isAuthenticated} />
+      </div>
 
       <main className="flex-auto">{children}</main>
 
-      <footer className="space-y-4 p-4">
-        {hasTheme && (
-          <div className="flex justify-center gap-2">
-            <ThemeSwitcherAction />
-          </div>
-        )}
-        <p className="text-center text-sm">
-          <span>&copy; {new Date().getFullYear()} Dogokit. </span>
-          <Anchor href="https://github.com/dogokit/dogokit-corgi">
-            Source Code on GitHub
-          </Anchor>
-        </p>
-      </footer>
+      <Footer hasTheme={hasTheme} />
     </div>
+  );
+}
+
+export function NavbarMobile({
+  isAuthenticated = false,
+}: {
+  isAuthenticated?: boolean;
+}) {
+  return (
+    <nav id="navbar-mobile">
+      <Link to={href("/")} className="block">
+        <Logo text="Dogokit Corgi" />
+      </Link>
+
+      <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
+      <NavLinks items={authNavLinkItems} isAuthenticated={isAuthenticated} />
+    </nav>
+  );
+}
+
+export function NavbarDesktop({
+  isAuthenticated = false,
+}: {
+  isAuthenticated?: boolean;
+}) {
+  return (
+    <nav
+      id="navbar-desktop"
+      className={cn(
+        "p-2 sm:p-4",
+        "grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-8",
+        "sticky top-0 z-40 items-center justify-between bg-background"
+      )}
+    >
+      <Link to={href("/")} className="block">
+        <Logo text="Dogokit Corgi" />
+      </Link>
+
+      <div className="flex justify-center">
+        <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
+      </div>
+
+      <div className="flex justify-end">
+        <NavLinks items={authNavLinkItems} isAuthenticated={isAuthenticated} />
+      </div>
+    </nav>
+  );
+}
+
+export function Footer({ hasTheme }: { hasTheme?: boolean }) {
+  return (
+    <footer className="space-y-4 p-4">
+      {hasTheme && (
+        <div className="flex justify-center gap-2">
+          <ThemeSwitcherAction />
+        </div>
+      )}
+      <p className="text-center text-sm">
+        <span>&copy; {new Date().getFullYear()} Dogokit. </span>
+        <Anchor href="https://github.com/dogokit/dogokit-corgi">
+          Source Code on GitHub
+        </Anchor>
+      </p>
+    </footer>
   );
 }
