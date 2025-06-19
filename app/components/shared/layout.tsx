@@ -32,13 +32,14 @@ export default function LayoutRoot({
     <div className="flex min-h-screen flex-col">
       <nav
         className={cn(
-          "flex",
+          "p-2 sm:p-4",
+          "flex flex-wrap gap-2 sm:gap-8",
           // "hidden lg:flex",
-          "sticky top-0 z-40 items-center justify-between gap-8 bg-background p-2 sm:p-4"
+          "sticky top-0 z-40 items-center justify-between bg-background"
         )}
       >
         <Link to={href("/")} className="block">
-          <Logo classNameText="font-black font-brand" />
+          <Logo text="Dogokit Corgi" />
         </Link>
 
         <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />

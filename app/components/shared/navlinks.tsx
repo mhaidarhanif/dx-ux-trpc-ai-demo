@@ -28,7 +28,7 @@ export function NavLinks({
             <NavLink
               to={item.to}
               className={({ isActive }) =>
-                cn("font-normal", isActive && "text-primary")
+                cn("whitespace-nowrap font-normal", isActive && "text-primary")
               }
             >
               {item.text}

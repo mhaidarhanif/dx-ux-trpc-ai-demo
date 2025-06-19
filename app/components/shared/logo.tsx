@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const logoVariants = cva("flex items-center gap-1 font-semibold", {
+const logoVariants = cva("inline-flex items-center gap-1 font-semibold", {
   variants: {
     variant: {
       default: "",
@@ -62,7 +62,11 @@ export function Logo({
         height={35}
         className={cn(logoImageVariants({ size, className: classNameIcon }))}
       />
-      <span className={cn(classNameText)}>{text}</span>
+      <span
+        className={cn("whitespace-nowrap font-black font-brand", classNameText)}
+      >
+        {text}
+      </span>
     </span>
   );
 }
