@@ -89,4 +89,5 @@ Get more:
 
 ## Credits
 
-This repo was initialized from [`ayoubphy/react-router-trpc-prisma-better-auth`](https://github.com/ayoubphy/react-router-trpc-prisma-better-auth)
+- This repo was initialized from [`ayoubphy/react-router-trpc-prisma-better-auth`](https://github.com/ayoubphy/react-router-trpc-prisma-better-auth)
+- [Better Auth: Demo](https://demo.better-auth.com)

@@ -29,6 +29,7 @@ export function AuthCard({
     });
   };
 
+  const isSignUp = mode === "signup";
   const isSignIn = mode === "signin";
   const buttonText = isSignIn ? "Sign In" : "Sign Up";
   const buttonCTA = isSignIn ? "Continue with Email" : "Create New Account";
@@ -41,8 +42,10 @@ export function AuthCard({
       )}
       {...props}
     >
-      <div className="flex self-center">
+      <div className="text-center">
         <Logo classNameText="font-black font-brand" />
+        {isSignUp && <p>Create your new account.</p>}
+        {isSignIn && <p>Continue with your account.</p>}
       </div>
 
       <div className="flex w-full flex-col gap-6">
@@ -65,6 +68,26 @@ export function AuthCard({
 
         <Form className="grid gap-6">
           <div className="grid gap-3">
+            <Label htmlFor="fullname">Full Name</Label>
+            <Input
+              id="fullname"
+              type="text"
+              placeholder="First Last"
+              required
+            />
+          </div>
+
+          <div className="grid gap-3">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              type="text"
+              placeholder="yourhandle"
+              required
+            />
+          </div>
+
+          <div className="grid gap-3">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
@@ -73,11 +96,12 @@ export function AuthCard({
               required
             />
           </div>
+
           <div className="grid gap-3">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
 
-              {mode === "signin" && (
+              {isSignIn && (
                 <Link to="/forgot-password" className="text-xs leading-none">
                   Forgot password?
                 </Link>
@@ -85,6 +109,7 @@ export function AuthCard({
             </div>
             <Input id="password" type="password" required />
           </div>
+
           <Button type="submit" className="w-full">
             {buttonCTA}
           </Button>
@@ -100,11 +125,12 @@ export function AuthCard({
         )}
       </div>
 
-      {!isSignIn && (
+      {isSignUp && (
         <p className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
           By clicking continue, you agree to our{" "}
-          <Link to={href("/about")}>Terms of Service</Link> and{" "}
-          <Link to={href("/about")}>Privacy Policy</Link>.
+          <Link to={href("/about")}>Terms of Service</Link>,{" "}
+          <Link to={href("/about")}>Privacy Policy</Link>, and{" "}
+          <Link to={href("/about")}>Cookies Policy</Link>.
         </p>
       )}
     </section>
