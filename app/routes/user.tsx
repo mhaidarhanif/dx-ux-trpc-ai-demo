@@ -1,14 +1,18 @@
+import { redirect } from "react-router";
+import { Debug } from "@/components/shared/debug";
 import { AvatarAuto } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { requireAuthTrue } from "@/lib/better-auth/helper";
+import { requireAuth } from "@/lib/better-auth/helper";
 import { formatDate } from "@/lib/datetime";
 import { caller } from "@/lib/trpc/server";
 import type { Route } from "./+types/user";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  await requireAuthTrue(request);
+  const { isAuthenticated } = await requireAuth(request);
+  if (!isAuthenticated) return redirect("/signin");
+
   const api = await caller(request);
-  const user = await api.greeting.user();
+  const user = await api.greeting.getUserComplete();
   return { user };
 }
 
@@ -60,6 +64,8 @@ export default function UserDashboardRoute({ loaderData }: Route.ComponentProps)
           </dl>
         </CardContent>
       </Card>
+
+      <Debug>{user}</Debug>
     </>
   );
 }

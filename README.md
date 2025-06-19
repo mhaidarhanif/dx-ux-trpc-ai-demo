@@ -43,6 +43,14 @@ In the Google Cloud Console > Credentials > Authorized redirect URIs, make sure 
 
 This repo is using Neon Postgres as our database. make sure to replace the placeholder connection string with your actual Neon Postgres connection string.
 
+### Setup Environment Variables
+
+Copy from `.env.example` to `.env` and fill in the required values:
+
+```bash
+cp -n .env.example .env
+```
+
 ### Installation
 
 Install the dependencies:
@@ -51,26 +59,12 @@ Install the dependencies:
 bun install
 ```
 
-### Setup Database
-
-#### With Prisma Postgres
+### Start Database
 
 ```bash
 bun db:up
-# prisma dev
+# docker compose up -d
 ```
-
-Then hit `H` key on the keyboard to get the HTTP URL. Copy the `DATABASE_URL`, save into `.env` file.
-
-It should look like this:
-
-```sh
-DATABASE_URL="prisma+postgres://localhost:51213/?api_key=___API_KEY_GENERATED___"
-```
-
-#### Without Prisma Postgres
-
-Need to reconfigure the `prisma.ts` file to remove the `@prisma/extension-accelerate`.
 
 ### Database Migration
 

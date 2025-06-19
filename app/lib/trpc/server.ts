@@ -1,4 +1,4 @@
-import { appRouter } from "@/server/main";
+import { appRouter } from "@/server/app-router";
 import { createCallerFactory, createTRPCContext } from "@/server/trpc";
 
 const createContext = (opts: { headers: Headers }) => {
@@ -11,5 +11,4 @@ const createContext = (opts: { headers: Headers }) => {
 
 const createCaller = createCallerFactory(appRouter);
 
-export const caller = async (request: Request) =>
-  createCaller(await createContext({ headers: request.headers }));
+export const caller = async (request: Request) => createCaller(await createContext({ headers: request.headers }));
