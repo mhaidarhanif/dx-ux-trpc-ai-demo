@@ -24,6 +24,8 @@ model User {
   phoneNumberVerified Boolean? @default(false)
 
   image String?
+  lang  String? @default("en")
+  theme String? @default("")
 
   sessions Session[]
   accounts Account[]

@@ -5,24 +5,25 @@ const prisma = new PrismaClient();
 
 async function main() {
   for (const example of dataExamples) {
-    await prisma.$transaction(async (tx) => {
-      const newExample = await tx.example.upsert({
-        where: { slug: example.slug },
-        update: { name: example.name },
-        create: { slug: example.slug, name: example.name },
-      });
-
-      await Promise.all(
-        example.items.map((item) =>
-          tx.exampleItem.upsert({
-            where: { slug: item.slug },
-            update: { name: item.name, exampleId: newExample.id },
-            create: { slug: item.slug, name: item.name, exampleId: newExample.id },
-          })
-        )
-      );
+    const upsertedExample = await prisma.example.upsert({
+      where: { slug: example.slug },
+      update: {
+        name: example.name,
+        items: { connect: { slug: `item-${example.slug}` } },
+      },
+      create: {
+        slug: example.slug,
+        name: example.name,
+        items: {
+          create: {
+            slug: `item-${example.slug}`,
+            name: `Item of ${example.name}`,
+          },
+        },
+      },
     });
-    console.info(`${example.name} and items upserted`);
+
+    console.info(`${upsertedExample.name} and item`);
   }
 }
 

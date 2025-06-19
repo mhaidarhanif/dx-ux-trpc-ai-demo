@@ -7,6 +7,18 @@ import { prisma } from "@/server/prisma";
 export const auth = betterAuth({
   user: {
     modelName: "User",
+    additionalFields: {
+      lang: {
+        type: "string",
+        required: false,
+        defaultValue: "en",
+      },
+      theme: {
+        type: "string",
+        required: false,
+        defaultValue: "",
+      },
+    },
   },
   session: {
     modelName: "Session",

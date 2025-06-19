@@ -9,6 +9,8 @@ CREATE TABLE "User" (
     "phoneNumber" TEXT,
     "phoneNumberVerified" BOOLEAN DEFAULT false,
     "image" TEXT,
+    "lang" TEXT DEFAULT 'en',
+    "theme" TEXT DEFAULT '',
     "role" TEXT,
     "banned" BOOLEAN,
     "banReason" TEXT,
