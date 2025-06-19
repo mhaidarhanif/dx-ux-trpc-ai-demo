@@ -5,7 +5,7 @@ import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authClient } from "@/lib/better-auth/client";
+import { authClient } from "@/lib/better-auth-client";
 import { cn } from "@/lib/utils";
 
 export function AuthCard({
@@ -35,13 +35,7 @@ export function AuthCard({
   const buttonCTA = isSignIn ? "Continue with Email" : "Create New Account";
 
   return (
-    <section
-      className={cn(
-        "flex w-full max-w-xs flex-col items-center gap-6",
-        className
-      )}
-      {...props}
-    >
+    <section className={cn("flex w-full max-w-xs flex-col items-center gap-6", className)} {...props}>
       <div className="text-center">
         <Logo classNameText="font-black font-brand" />
         {isSignUp && <p>Create your new account.</p>}
@@ -61,44 +55,27 @@ export function AuthCard({
         </div>
 
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
-          <span className="relative z-10 bg-background px-2 text-muted-foreground">
-            or
-          </span>
+          <span className="relative z-10 bg-background px-2 text-muted-foreground">or</span>
         </div>
 
         <Form className="grid gap-4">
           {isSignUp && (
             <div className="grid gap-2">
               <Label htmlFor="fullname">Full Name</Label>
-              <Input
-                id="fullname"
-                type="text"
-                placeholder="First Last"
-                required
-              />
+              <Input id="fullname" type="text" placeholder="First Last" required />
             </div>
           )}
 
           {isSignUp && (
             <div className="grid gap-2">
               <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                type="text"
-                placeholder="yourhandle"
-                required
-              />
+              <Input id="username" type="text" placeholder="yourhandle" required />
             </div>
           )}
 
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="email@example.com"
-              required
-            />
+            <Input id="email" type="email" placeholder="email@example.com" required />
           </div>
 
           <div className="grid gap-2">
@@ -131,10 +108,8 @@ export function AuthCard({
 
       {isSignUp && (
         <p className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
-          By clicking continue, you agree to our{" "}
-          <Link to={href("/about")}>Terms of Service</Link>,{" "}
-          <Link to={href("/about")}>Privacy Policy</Link>, and{" "}
-          <Link to={href("/about")}>Cookies Policy</Link>.
+          By clicking continue, you agree to our <Link to={href("/about")}>Terms of Service</Link>,{" "}
+          <Link to={href("/about")}>Privacy Policy</Link>, and <Link to={href("/about")}>Cookies Policy</Link>.
         </p>
       )}
     </section>

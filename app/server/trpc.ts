@@ -1,9 +1,9 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-
-import { auth } from "@/lib/better-auth/server";
+import { auth } from "@/server/better-auth";
 import { prisma } from "@/server/prisma";
+import { trpcRouter } from "@/server/trpc-router";
 
 export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
   const authSession = await auth.api.getSession({ headers });
@@ -52,3 +52,15 @@ export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
     },
   });
 });
+
+const createContext = (opts: { headers: Headers }) => {
+  const headers = new Headers(opts.headers);
+  headers.set("x-trpc-source", "server-loader");
+  return createTRPCContext({
+    headers,
+  });
+};
+
+const createCaller = createCallerFactory(trpcRouter);
+
+export const caller = async (request: Request) => createCaller(await createContext({ headers: request.headers }));

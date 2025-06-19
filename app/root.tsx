@@ -1,21 +1,9 @@
 import clsx from "clsx";
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-} from "react-router";
-import {
-  PreventFlashOnWrongTheme,
-  ThemeProvider,
-  useTheme,
-} from "remix-themes";
+import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "react-router";
+import { PreventFlashOnWrongTheme, ThemeProvider, useTheme } from "remix-themes";
 
 import { Layout } from "@/components/shared/layout";
-import { TRPCReactProvider } from "@/lib/trpc/react";
+import { TRPCReactProvider } from "@/lib/trpc-client";
 import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
 import "@/app.css";
@@ -61,10 +49,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export default function RootRoute({ loaderData }: Route.ComponentProps) {
   return (
-    <ThemeProvider
-      specifiedTheme={loaderData.theme}
-      themeAction="/action/set-theme"
-    >
+    <ThemeProvider specifiedTheme={loaderData.theme} themeAction="/action/set-theme">
       <App />
     </ThemeProvider>
   );

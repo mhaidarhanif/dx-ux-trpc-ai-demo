@@ -2,9 +2,9 @@ import { redirect } from "react-router";
 import { Debug } from "@/components/shared/debug";
 import { AvatarAuto } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { requireAuth } from "@/lib/better-auth/helper";
 import { formatDate } from "@/lib/datetime";
-import { caller } from "@/lib/trpc/server";
+import { requireAuth } from "@/server/auth";
+import { caller } from "@/server/trpc/server";
 import type { Route } from "./+types/user";
 
 export async function loader({ request }: Route.LoaderArgs) {

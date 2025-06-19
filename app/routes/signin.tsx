@@ -1,5 +1,5 @@
 import { AuthCard } from "@/components/shared/auth-card";
-import { requireAuthFalse } from "@/lib/better-auth/helper";
+import { requireAuthFalse } from "@/server/auth";
 import type { Route } from "./+types/signin";
 
 export async function loader({ request }: Route.LoaderArgs) {
