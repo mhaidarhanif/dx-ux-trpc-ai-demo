@@ -14,6 +14,8 @@ export default [
       route("/signout", "routes/signout.tsx"),
       route("/user", "routes/user.tsx"),
     ]),
+
+    route("*", "routes/404.tsx"),
   ]),
 
   route("/action/set-theme", "routes/action/set-theme.ts"),

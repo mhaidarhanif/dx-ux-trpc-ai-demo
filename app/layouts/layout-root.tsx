@@ -1,59 +1,18 @@
-import { href, Link, Outlet } from "react-router";
-import { Logo } from "@/components/shared/logo";
-import { type NavLinkItem, NavLinks } from "@/components/shared/navlinks";
-import { ThemeSwitcherAction } from "@/components/theme/theme-switcher-action";
+import { Outlet } from "react-router";
+import Layout from "@/components/shared/layout";
 import { requireAuth } from "@/lib/auth/helper";
-import { cn } from "@/lib/utils";
 import type { Route } from "./+types/layout-root";
 
 export async function loader({ request }: Route.LoaderArgs) {
   return requireAuth(request);
 }
 
-const navLinkItems: NavLinkItem[] = [
-  { to: href("/"), text: "Home" },
-  { to: href("/about"), text: "About" },
-  { to: href("/examples"), text: "Examples" },
-];
-
-const authNavLinkItems: NavLinkItem[] = [
-  { to: href("/signup"), text: "Sign Up", auth: false },
-  { to: href("/signin"), text: "Sign In", auth: false },
-  { to: href("/signout"), text: "Sign Out", auth: true },
-  { to: href("/user"), text: "User", auth: true },
-];
-
 export default function LayoutRoot({ loaderData }: Route.ComponentProps) {
   const { isAuthenticated } = loaderData;
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <nav
-        className={cn(
-          "sticky top-0 z-40 hidden items-center justify-between gap-8 bg-background p-2 sm:p-4 lg:flex"
-        )}
-      >
-        <Link to={href("/")} className="block">
-          <Logo classNameText="font-black font-brand" />
-        </Link>
-
-        <NavLinks items={navLinkItems} isAuthenticated={isAuthenticated} />
-
-        <NavLinks items={authNavLinkItems} isAuthenticated={isAuthenticated} />
-      </nav>
-
-      <main className="flex-auto">
-        <Outlet />
-      </main>
-
-      <footer className="space-y-4 p-4">
-        <div className="flex justify-center gap-2">
-          <ThemeSwitcherAction />
-        </div>
-        <p className="text-center text-sm">
-          &copy; {new Date().getFullYear()} Dogokit
-        </p>
-      </footer>
-    </div>
+    <Layout hasTheme isAuthenticated={isAuthenticated}>
+      <Outlet />
+    </Layout>
   );
 }

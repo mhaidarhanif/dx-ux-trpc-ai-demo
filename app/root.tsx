@@ -14,10 +14,10 @@ import {
   useTheme,
 } from "remix-themes";
 
+import Layout from "@/components/shared/layout";
 import { TRPCReactProvider } from "@/lib/trpc/react";
 import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
-
 import "@/app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -97,30 +97,29 @@ export function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
-
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
+    return (
+      <Layout>
+        <h1>
+          {error.status} {error.statusText}
+        </h1>
+        <p>{error.data}</p>
+      </Layout>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <Layout>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+        <p>The stack trace is:</p>
+        <pre>{error.stack}</pre>
+      </Layout>
+    );
+  } else {
+    return (
+      <Layout>
+        <h1>Unknown Error</h1>
+      </Layout>
+    );
   }
-
-  return (
-    <main className="container mx-auto p-4 pt-16">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full overflow-x-auto p-4">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
-  );
 }
