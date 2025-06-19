@@ -1,27 +1,32 @@
 import { Anchor } from "@/components/shared/anchor";
-import {
-  ContentHeadingPage,
-  ContentIntroParagraph,
-} from "@/components/ui/content";
+import { ContentHeading, ContentIntro } from "@/components/ui/content";
 
 export default function AboutRoute() {
   return (
     <>
-      <section className="container max-w-xl">
-        <ContentHeadingPage>About</ContentHeadingPage>
-
-        <article className="prose-config">
-          <ContentIntroParagraph>
-            This is just an example. Please enjoy...!
-          </ContentIntroParagraph>
-          <p>
-            Made by{" "}
-            <Anchor href="https://github.com/mhaidarhanif">
-              M Haidar Hanif
-            </Anchor>
-          </p>
-        </article>
-      </section>
+      <AboutHero />
     </>
+  );
+}
+
+function AboutHero() {
+  return (
+    <section className="container max-w-xl">
+      <ContentHeading>About</ContentHeading>
+
+      <article className="prose-config">
+        <ContentIntro>
+          <p>
+            Made by <Anchor href="https://github.com/mhaidarhanif">M Haidar Hanif</Anchor>
+          </p>
+        </ContentIntro>
+        <p>This is the about page. Please enjoy...!</p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem assumenda minima eius autem cupiditate
+          debitis illo ea, commodi ullam alias similique porro! Facere quod itaque tempora suscipit dignissimos qui
+          doloribus.
+        </p>
+      </article>
+    </section>
   );
 }

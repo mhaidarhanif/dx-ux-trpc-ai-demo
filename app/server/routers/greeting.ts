@@ -1,18 +1,11 @@
 import type { TRPCRouterRecord } from "@trpc/server";
+import z from "zod";
 
 import { publicProcedure } from "@/server/trpc";
 
 export const greetingRouter = {
-  sayHello: publicProcedure.query(() => {
-    return "Hello";
-  }),
-
-  getExamples: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.db.example.findMany({
-      include: {
-        items: true,
-      },
-      cacheStrategy: { ttl: 60 },
-    });
+  sayHello: publicProcedure.input(z.string().optional()).query(({ input }) => {
+    if (!input) return "Hello";
+    return `Hello, ${input}`;
   }),
 } satisfies TRPCRouterRecord;

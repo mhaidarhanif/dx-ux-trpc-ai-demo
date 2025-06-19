@@ -47,7 +47,7 @@ export function Layout({
 
 export function NavbarMobile({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
   return (
-    <nav id="navbar-mobile">
+    <nav id="navbar-mobile" className={cn("p-2 sm:p-4")}>
       <Link to={href("/")} className="block">
         <Logo text="Dogokit Corgi" />
       </Link>
