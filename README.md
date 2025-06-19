@@ -51,12 +51,34 @@ Install the dependencies:
 bun install
 ```
 
+### Setup Database
+
+#### With Prisma Postgres
+
+```bash
+bun db:up
+# prisma dev
+```
+
+Then hit `H` key on the keyboard to get the HTTP URL. Copy the `DATABASE_URL`, save into `.env` file.
+
+It should look like this:
+
+```sh
+DATABASE_URL="prisma+postgres://localhost:51213/?api_key=___API_KEY_GENERATED___"
+```
+
+#### Without Prisma Postgres
+
+Need to reconfigure the `prisma.ts` file to remove the `@prisma/extension-accelerate`.
+
 ### Database Migration
 
 Migrate the database:
 
 ```bash
-bun prisma db migrate dev
+bun db:migrate
+# prisma db migrate dev
 ```
 
 ### Development
@@ -65,16 +87,18 @@ Start the development server:
 
 ```bash
 bun dev
+# react-router dev
 ```
 
 Application is available at `http://localhost:5173`.
 
 ## Building for Production
 
-Create a production build:
+Create a production build, that will also migrate deploy and generate Prisma client:
 
 ```bash
 bun run build
+# bun db:migrate:deploy && bun db:gen:prod && react-router build
 ```
 
 ## Components

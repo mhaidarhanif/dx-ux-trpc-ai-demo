@@ -8,6 +8,12 @@ export const greeting = {
   }),
 
   user: protectedProcedure.query(async ({ ctx }) => {
-    return await ctx.db.user.findFirst({ where: { id: ctx.user?.id } });
+    return await ctx.db.user.findFirst({
+      where: { id: ctx.user?.id },
+      include: {
+        sessions: true,
+        accounts: true,
+      },
+    });
   }),
 } satisfies TRPCRouterRecord;

@@ -2,15 +2,17 @@ import { AvatarAuto } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireAuthTrue } from "@/lib/better-auth/helper";
 import { formatDate } from "@/lib/datetime";
+import { caller } from "@/lib/trpc/server";
 import type { Route } from "./+types/user";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  return requireAuthTrue(request);
+  await requireAuthTrue(request);
+  const api = await caller(request);
+  const user = await api.greeting.user();
+  return { user };
 }
 
-export default function UserDashboardRoute({
-  loaderData,
-}: Route.ComponentProps) {
+export default function UserDashboardRoute({ loaderData }: Route.ComponentProps) {
   const { user } = loaderData;
 
   if (!user) {
@@ -43,27 +45,16 @@ export default function UserDashboardRoute({
         <CardHeader className="mb-6 flex flex-col items-center space-y-2">
           <AvatarAuto user={user} className="size-20" />
           <CardTitle className="text-center">
-            <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">
-              {user.name || "No Name"}
-            </h3>
-            <p className="text-gray-500 text-sm dark:text-gray-400">
-              {user.email}
-            </p>
+            <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">{user.name || "No Name"}</h3>
+            <p className="text-gray-500 text-sm dark:text-gray-400">{user.email}</p>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <dl className="divide-y divide-gray-200 dark:divide-gray-700">
             {userFields.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-center justify-between py-2"
-              >
-                <dt className="font-medium text-gray-700 dark:text-gray-300">
-                  {item.label}
-                </dt>
-                <dd className="text-gray-900 text-sm dark:text-gray-100">
-                  {item.value ?? "-"}
-                </dd>
+              <div key={item.label} className="flex items-center justify-between py-2">
+                <dt className="font-medium text-gray-700 dark:text-gray-300">{item.label}</dt>
+                <dd className="text-gray-900 text-sm dark:text-gray-100">{item.value ?? "-"}</dd>
               </div>
             ))}
           </dl>

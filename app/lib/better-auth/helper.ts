@@ -9,6 +9,12 @@ export async function requireSession(request: Request) {
 
 export async function requireAuth(request: Request) {
   const session = await requireSession(request);
+  if (!session?.user?.id) return { isAuthenticated: false };
+  return { isAuthenticated: true };
+}
+
+export async function requireUser(request: Request) {
+  const session = await requireSession(request);
   if (!session?.user?.id) return { isAuthenticated: false, user: null };
 
   const api = await caller(request);
@@ -20,9 +26,9 @@ export async function requireAuth(request: Request) {
 
 // Redirect to /signin if not authenticated
 export async function requireAuthTrue(request: Request) {
-  const { isAuthenticated, user } = await requireAuth(request);
+  const { isAuthenticated } = await requireAuth(request);
   if (!isAuthenticated) return redirect("/signin");
-  return { isAuthenticated, user };
+  return { isAuthenticated };
 }
 
 // Redirect to /user if authenticated

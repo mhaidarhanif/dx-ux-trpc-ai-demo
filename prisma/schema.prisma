@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../app/server/generated/prisma"
+  provider        = "prisma-client"
+  previewFeatures = ["relationJoins"]
+  output          = "../app/generated/prisma"
 }
 
 // https://prisma.io/docs/accelerate/local-development
