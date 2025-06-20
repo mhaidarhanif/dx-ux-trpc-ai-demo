@@ -1,8 +1,8 @@
 import { NavLink } from "react-router";
-import type { NavLinkItem } from "@/config/navigation";
+import type { NavLinkItem } from "@/config/site";
 import { useAuthUser } from "@/hooks/use-auth-user";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 
 export function NavigationLinks({ items }: { items: NavLinkItem[] }) {
   const [{ isAuthenticated }] = useAuthUser();
@@ -17,19 +17,19 @@ export function NavigationLinks({ items }: { items: NavLinkItem[] }) {
         })
         .map((item) => (
           <li key={item.to}>
-            <Button asChild key={item.to} variant="ghost" size="sm">
-              <NavLink
-                to={item.to}
-                className={({ isActive }) =>
-                  cn(
-                    "whitespace-nowrap font-normal",
-                    isActive && "text-primary"
-                  )
-                }
-              >
-                {item.label}
-              </NavLink>
-            </Button>
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                cn(
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "whitespace-nowrap font-normal",
+                  isActive && "text-primary"
+                )
+              }
+            >
+              {item.label}
+            </NavLink>
           </li>
         ))}
     </ul>
