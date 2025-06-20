@@ -3,12 +3,13 @@ import { NavigationMobile } from "@/components/shared/navigation-mobile";
 
 export function LayoutHeader() {
   return (
-    <header className="px-4 py-2">
+    <header className="sticky top-0 z-40">
+      <div id="navigation-desktop" className="hidden p-4 md:flex">
+        <NavigationDesktop />
+      </div>
+
       <div id="navigation-mobile" className="flex md:hidden">
         <NavigationMobile />
-      </div>
-      <div id="navigation-desktop" className="hidden md:flex">
-        <NavigationDesktop />
       </div>
     </header>
   );

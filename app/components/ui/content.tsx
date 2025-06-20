@@ -25,10 +25,7 @@ export function ContentIntro({
 }: React.ComponentProps<"p">) {
   return (
     <div
-      className={cn(
-        "text-pretty font-brand font-light text-lg sm:text-xl",
-        className
-      )}
+      className={cn("text-pretty text-lg sm:text-xl md:text-2xl", className)}
       {...props}
     >
       {children}

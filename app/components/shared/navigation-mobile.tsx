@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, type LinkProps, useNavigate } from "react-router";
+import { href, Link, type LinkProps, useNavigate } from "react-router";
 import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,59 +9,34 @@ import {
 } from "@/components/ui/popover";
 import { type NavLinkItem, siteConfig } from "@/config/site";
 import { useAuthUser } from "@/hooks/use-auth-user";
+import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
-
-function filterNavItems(items: NavLinkItem[], isAuthenticated: boolean) {
-  return items.filter((item) => {
-    if (item.auth === true) return isAuthenticated;
-    if (item.auth === false) return !isAuthenticated;
-    return true;
-  });
-}
-
-function NavSection({
-  title,
-  items,
-  onOpenChange,
-}: {
-  title: string;
-  items: NavLinkItem[];
-  onOpenChange: (open: boolean) => void;
-}) {
-  const [{ isAuthenticated }] = useAuthUser();
-
-  return (
-    <section className="flex flex-col gap-4">
-      <div className="font-medium text-muted-foreground text-sm">{title}</div>
-      <ul className="flex flex-col gap-3">
-        {filterNavItems(items, isAuthenticated).map((item, index) => (
-          <li key={index}>
-            <MobileLink to={item.to} onOpenChange={onOpenChange}>
-              {item.label}
-            </MobileLink>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
 
 export function NavigationMobile() {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="flex w-full items-center justify-between">
-      <Logo size="default" className="shrink-0" />
+    <nav
+      id="navigation-mobile"
+      className={cn(
+        "bg-background px-4 py-2",
+        "flex w-full items-center justify-between"
+      )}
+    >
+      <Link to={href("/")} className="flex items-center gap-2">
+        <Logo />
+      </Link>
+
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            size="lg"
             variant="ghost"
             className={cn(
               "extend-touch-target touch-manipulation items-center justify-start gap-2.5 pr-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent"
             )}
           >
-            <div className="relative flex h-8 w-4 items-center justify-center">
+            <div className="relative flex items-center justify-center">
+              <span className="sr-only">Toggle Menu</span>
               <div id="menu-icon-animated" className="relative size-4">
                 <span
                   className={cn(
@@ -76,19 +51,20 @@ export function NavigationMobile() {
                   )}
                 />
               </div>
-              <span className="sr-only">Toggle Menu</span>
             </div>
-            <span className="flex h-8 items-center font-medium text-lg leading-none">
+
+            <span className="flex items-center font-medium text-lg leading-none">
               Menu
             </span>
           </Button>
         </PopoverTrigger>
+
         <PopoverContent
           className="no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none bg-background/90 p-0 shadow-none backdrop-blur duration-100"
           align="start"
           side="bottom"
           alignOffset={-16}
-          sideOffset={14}
+          sideOffset={8}
         >
           <div className="flex flex-col gap-12 overflow-auto px-6 py-6">
             <NavSection
@@ -104,7 +80,34 @@ export function NavigationMobile() {
           </div>
         </PopoverContent>
       </Popover>
-    </div>
+    </nav>
+  );
+}
+
+function NavSection({
+  title,
+  items,
+  onOpenChange,
+}: {
+  title: string;
+  items: NavLinkItem[];
+  onOpenChange: (open: boolean) => void;
+}) {
+  const [{ isAuthenticated }] = useAuthUser();
+
+  return (
+    <section className="flex flex-col gap-4">
+      <span className="font-medium text-muted-foreground text-sm">{title}</span>
+      <ul className="flex flex-col gap-3">
+        {filterNavItems(items, isAuthenticated).map((item, index) => (
+          <li key={index}>
+            <MobileLink to={item.to} onOpenChange={onOpenChange}>
+              {item.label}
+            </MobileLink>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 

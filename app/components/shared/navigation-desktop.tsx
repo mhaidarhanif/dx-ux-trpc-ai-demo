@@ -1,16 +1,16 @@
 import { href, Link } from "react-router";
 import { Logo } from "@/components/shared/logo";
-import { NavigationLinks } from "@/components/shared/navigation-links";
+import { NavigationDesktopLinks } from "@/components/shared/navigation-desktop-links";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 export function NavigationDesktop() {
   return (
     <nav
-      id="navbar-desktop"
+      id="navigation-desktop"
       className={cn(
-        "grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-8",
-        "sticky top-0 z-40 w-full bg-background"
+        "w-full rounded-full border bg-background px-4 py-2",
+        "grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-8"
       )}
     >
       <Link to={href("/")} className="flex items-center gap-2">
@@ -18,11 +18,11 @@ export function NavigationDesktop() {
       </Link>
 
       <div className="flex justify-center">
-        <NavigationLinks items={siteConfig.navItems} />
+        <NavigationDesktopLinks items={siteConfig.navItems} />
       </div>
 
       <div className="flex justify-end">
-        <NavigationLinks items={siteConfig.navAuthItems} />
+        <NavigationDesktopLinks items={siteConfig.navAuthItems} />
       </div>
     </nav>
   );
