@@ -14,6 +14,7 @@
     "b:lint": "biome lint --write .",
     "dep:check": "depcheck",
     "dep:update": "taze",
+    "auth:gen": "@better-auth/cli generate --config app/server/better-auth.ts",
     "db:up": "docker compose up -d",
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",

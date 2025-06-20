@@ -7,7 +7,7 @@ import {
   type BetterAuthResponse,
   requireAuthFalse,
 } from "@/server/auth-helper";
-import { betterAuth } from "@/server/better-auth";
+import { auth } from "@/server/better-auth";
 import type { Route } from "./+types/signin";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -29,7 +29,7 @@ export async function action({ request }: Route.ActionArgs) {
   const submission = parseWithZod(formData, { schema: AuthSignInSchema });
   if (submission.status !== "success") return submission.reply();
 
-  const response = await betterAuth.api.signInEmail({
+  const response = await auth.api.signInEmail({
     asResponse: true,
     headers: request.headers,
     body: submission.value,

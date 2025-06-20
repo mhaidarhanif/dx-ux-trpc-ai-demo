@@ -4,14 +4,14 @@ import { cn } from "@/lib/utils";
 
 export interface AnchorProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  href: string;
+  href?: string;
 }
 
 const Anchor = React.forwardRef<HTMLAnchorElement, AnchorProps>(
   ({ href, className, children, ...props }, ref) => {
     return (
       <a
-        href={href}
+        href={href || "/"}
         target="_blank"
         rel="noreferrer noopener"
         className={cn(className)}

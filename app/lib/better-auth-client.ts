@@ -9,7 +9,7 @@ import {
 } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 
-export const betterAuthClient = createAuthClient({
+export const authClient = createAuthClient({
   baseURL: process.env.VITE_APP_URL,
   plugins: [
     adminClient(),
@@ -26,4 +26,4 @@ export const betterAuthClient = createAuthClient({
   ],
 });
 
-export const { signIn, signOut, signUp, useSession } = betterAuthClient;
+export const { signIn, signOut, signUp, useSession } = authClient;

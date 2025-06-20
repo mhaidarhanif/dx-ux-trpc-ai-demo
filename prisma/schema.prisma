@@ -5,6 +5,7 @@ generator client {
 }
 
 // https://prisma.io/docs/accelerate/local-development
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -41,7 +42,8 @@ model User {
 
   sessions   Session[]
   accounts   Account[]
-  twoFactors TwoFactor[]
+  twofactors TwoFactor[]
+  passkeys   Passkey[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -94,6 +96,8 @@ model Verification {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("verification")
 }
 
 model TwoFactor {
@@ -107,6 +111,29 @@ model TwoFactor {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("twoFactor")
+}
+
+model Passkey {
+  id String @id @default(ulid())
+
+  name      String?
+  publicKey String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  credentialID String
+  counter      Int
+  deviceType   String
+  backedUp     Boolean
+  transports   String?
+  aaguid       String?
+
+  createdAt DateTime? @default(now())
+
+  @@map("passkey")
 }
 
 model Example {

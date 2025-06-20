@@ -5,7 +5,7 @@ import {
   type BetterAuthResponseSignOut,
   requireAuthTrue,
 } from "@/server/auth-helper";
-import { betterAuth } from "@/server/better-auth";
+import { auth } from "@/server/better-auth";
 import type { Route } from "./+types/signout";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -33,7 +33,7 @@ export default function SignOutRoute({ loaderData }: Route.ComponentProps) {
 export async function action({ request }: Route.ActionArgs) {
   const timer = createTimer();
 
-  const response = await betterAuth.api.signOut({
+  const response = await auth.api.signOut({
     asResponse: true,
     headers: request.headers,
   });

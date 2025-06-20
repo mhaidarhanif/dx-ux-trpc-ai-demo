@@ -1,5 +1,5 @@
 import { href, redirect } from "react-router";
-import { betterAuth } from "@/server/better-auth";
+import { auth } from "@/server/better-auth";
 import { caller } from "@/server/trpc-caller";
 
 export type BetterAuthResponse = {
@@ -17,7 +17,7 @@ export type BetterAuthResponseOAuth = {
 };
 
 export async function requireSession(request: Request) {
-  return await betterAuth.api.getSession({ headers: request.headers });
+  return await auth.api.getSession({ headers: request.headers });
 }
 
 export async function requireAuthSession(request: Request) {

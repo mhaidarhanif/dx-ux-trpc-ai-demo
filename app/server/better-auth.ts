@@ -14,7 +14,7 @@ import { passkey } from "better-auth/plugins/passkey";
 import { createUsername, createUsernameGitHub } from "@/lib/string";
 import { prisma } from "@/server/prisma";
 
-export const betterAuth = betterAuthConfig({
+export const auth = betterAuthConfig({
   appName: "Dogokit Corgi",
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   advanced: { database: { generateId: false } },

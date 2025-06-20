@@ -4,7 +4,7 @@ import { redirect } from "react-router";
 import { createTimer } from "@/lib/timer";
 import { AuthSocialSchema } from "@/modules/auth/schema";
 import type { BetterAuthResponseOAuth } from "@/server/auth-helper";
-import { betterAuth } from "@/server/better-auth";
+import { auth } from "@/server/better-auth";
 import type { Route } from "./+types/social";
 
 export async function loader() {
@@ -18,7 +18,7 @@ export async function action({ request }: Route.ActionArgs) {
   const submission = parseWithZod(formData, { schema: AuthSocialSchema });
   if (submission.status !== "success") return submission.reply();
 
-  const response = await betterAuth.api.signInSocial({
+  const response = await auth.api.signInSocial({
     asResponse: true,
     headers: request.headers,
     body: {
