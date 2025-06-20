@@ -1,8 +1,21 @@
 import { betterAuth as betterAuthConfig } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { admin, anonymous, haveIBeenPwned, multiSession, openAPI, twoFactor, username } from "better-auth/plugins";
+import {
+  admin,
+  anonymous,
+  haveIBeenPwned,
+  multiSession,
+  openAPI,
+  twoFactor,
+  username,
+} from "better-auth/plugins";
 
 import { prisma } from "@/server/prisma";
+
+export type BetterAuthResponse = {
+  code: string;
+  message: string;
+};
 
 export const betterAuth = betterAuthConfig({
   appName: "Dogokit Corgi",
@@ -20,16 +33,10 @@ export const betterAuth = betterAuthConfig({
   user: {
     modelName: "User",
     additionalFields: {
-      lang: {
-        type: "string",
-        required: false,
-        defaultValue: "en",
-      },
-      theme: {
-        type: "string",
-        required: false,
-        defaultValue: "",
-      },
+      firstName: { type: "string", required: false },
+      lastName: { type: "string", required: false },
+      lang: { type: "string", required: false, defaultValue: "en" },
+      theme: { type: "string", required: false, defaultValue: "" },
     },
   },
   session: {
@@ -37,6 +44,11 @@ export const betterAuth = betterAuthConfig({
   },
   account: {
     modelName: "Account",
+  },
+
+  emailAndPassword: {
+    enabled: true,
+    requireEmailVerification: false,
   },
 
   socialProviders: {
@@ -68,9 +80,7 @@ export const betterAuth = betterAuthConfig({
     multiSession(),
     openAPI(), // Check on /api/auth/reference
     twoFactor(),
-    haveIBeenPwned({
-      customPasswordCompromisedMessage: "That password is compromised. Please choose a more secure one.",
-    }),
+    haveIBeenPwned(),
     username({
       minUsernameLength: 2,
       maxUsernameLength: 20,

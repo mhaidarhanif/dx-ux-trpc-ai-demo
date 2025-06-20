@@ -11,4 +11,5 @@ const createContext = (opts: { headers: Headers }) => {
 
 const createCaller = createCallerFactory(appRouter);
 
-export const caller = async (request: Request) => createCaller(await createContext({ headers: request.headers }));
+export const caller = async (request: Request) =>
+  createCaller(await createContext({ headers: request.headers }));

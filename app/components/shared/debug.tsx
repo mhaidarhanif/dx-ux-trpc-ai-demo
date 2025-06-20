@@ -2,7 +2,11 @@ import { XIcon } from "lucide-react";
 import { useState } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { stringifyCode } from "@/lib/string";
 import { cn } from "@/lib/utils";
 
@@ -35,12 +39,18 @@ export function Debug({
     <div>
       <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-1">
         <div className="flex flex-nowrap gap-1">
-          <CollapsibleTrigger className={cn(buttonVariants({ variant: "outline", size: "xs" }))}>
+          <CollapsibleTrigger
+            className={cn(buttonVariants({ variant: "outline", size: "xs" }))}
+          >
             <span>DEBUG</span>
             {name && <span>: {name}</span>}
           </CollapsibleTrigger>
 
-          <Button variant="outline" size="xs" onClick={() => setIsVisible(false)}>
+          <Button
+            variant="outline"
+            size="xs"
+            onClick={() => setIsVisible(false)}
+          >
             <XIcon />
           </Button>
         </div>

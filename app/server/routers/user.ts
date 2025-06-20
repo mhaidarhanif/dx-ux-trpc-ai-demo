@@ -7,11 +7,15 @@ export const userRouter = {
     return await ctx.db.user.findMany({ cacheStrategy: { ttl: 60 } });
   }),
 
-  getUserByUsername: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
-    return await ctx.db.user.findUnique({ where: { username: input } });
-  }),
+  getUserByUsername: publicProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) => {
+      return await ctx.db.user.findUnique({ where: { username: input } });
+    }),
 
-  getUserByEmail: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
-    return await ctx.db.user.findUnique({ where: { email: input } });
-  }),
+  getUserByEmail: protectedProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) => {
+      return await ctx.db.user.findUnique({ where: { email: input } });
+    }),
 } satisfies TRPCRouterRecord;

@@ -82,7 +82,9 @@ export function Footer({ hasTheme }: SharedProps) {
       )}
       <p className="text-center text-sm">
         <span>&copy; {new Date().getFullYear()} Dogokit. </span>
-        <Anchor href="https://github.com/dogokit/dogokit-corgi">Source Code on GitHub</Anchor>
+        <Anchor href="https://github.com/dogokit/dogokit-corgi">
+          Source Code on GitHub
+        </Anchor>
       </p>
     </footer>
   );

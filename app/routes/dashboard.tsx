@@ -1,5 +1,5 @@
 import { CheckIcon, MinusIcon, XIcon } from "lucide-react";
-import { redirect } from "react-router";
+import { href, redirect } from "react-router";
 
 import { Debug } from "@/components/shared/debug";
 import { AvatarAuto } from "@/components/ui/avatar";
@@ -12,7 +12,7 @@ import type { Route } from "./+types/dashboard";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { isAuthenticated, user } = await requireAuthUserData(request);
-  if (!isAuthenticated) return redirect("/signin");
+  if (!isAuthenticated) return redirect(href("/signin"));
   return { user };
 }
 
@@ -22,7 +22,9 @@ type UserField = {
   isCode?: boolean;
 };
 
-export default function UserDashboardRoute({ loaderData }: Route.ComponentProps) {
+export default function UserDashboardRoute({
+  loaderData,
+}: Route.ComponentProps) {
   const { user } = loaderData;
 
   if (!user) {
@@ -61,8 +63,12 @@ export default function UserDashboardRoute({ loaderData }: Route.ComponentProps)
         <CardHeader className="flex flex-col items-center space-y-2">
           <AvatarAuto user={user} className="size-20" />
           <CardTitle className="text-center">
-            <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">{user.name || "No Name"}</h3>
-            <p className="text-gray-500 text-sm dark:text-gray-400">{user.email}</p>
+            <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">
+              {user.name || "No Name"}
+            </h3>
+            <p className="text-gray-500 text-sm dark:text-gray-400">
+              {user.email}
+            </p>
           </CardTitle>
         </CardHeader>
 
@@ -72,14 +78,26 @@ export default function UserDashboardRoute({ loaderData }: Route.ComponentProps)
               const valueIsBoolean = typeof item.value === "boolean";
 
               return (
-                <div key={item.label} className="flex items-center justify-between py-2">
-                  <dt className="font-medium text-gray-700 dark:text-gray-300">{item.label}</dt>
-                  <dd className={cn("text-gray-900 text-sm dark:text-gray-100", item.isCode && "font-mono")}>
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between py-2"
+                >
+                  <dt className="font-medium text-gray-700 dark:text-gray-300">
+                    {item.label}
+                  </dt>
+                  <dd
+                    className={cn(
+                      "text-gray-900 text-sm dark:text-gray-100",
+                      item.isCode && "font-mono"
+                    )}
+                  >
                     {!valueIsBoolean && (item.value ?? <MinusIcon />)}
                     {valueIsBoolean && item.value && item.value === true ? (
                       <CheckIcon className="text-green-600 dark:text-green-400"></CheckIcon>
                     ) : (
-                      item.value === false && <XIcon className="text-red-600 dark:text-red-400" />
+                      item.value === false && (
+                        <XIcon className="text-red-600 dark:text-red-400" />
+                      )
                     )}
                   </dd>
                 </div>

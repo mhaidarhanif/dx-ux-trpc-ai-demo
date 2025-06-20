@@ -49,10 +49,12 @@ function AvatarFallback({
 }
 
 function AvatarAuto({
+  styleName = "shapes",
   user,
   className,
   ...props
 }: {
+  styleName?: string;
   user: {
     id: string;
     name: string;
@@ -61,9 +63,11 @@ function AvatarAuto({
   };
 } & React.ComponentProps<typeof AvatarPrimitive.Root>) {
   const userImageText = user.name || user.email || "User avatar";
+
   const userImageSource =
     user.image ||
-    `https://api.dicebear.com/9.x/shapes/svg?seed=${userImageText}`;
+    `https://api.dicebear.com/9.x/${styleName}/svg?seed=${userImageText}`;
+
   const userImageFallback = user.name?.[0] || user.email?.[0] || "?";
 
   return (

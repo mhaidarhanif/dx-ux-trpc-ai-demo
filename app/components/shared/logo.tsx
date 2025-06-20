@@ -33,7 +33,9 @@ const logoImageVariants = cva("", {
   },
 });
 
-interface LogoProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof logoVariants> {
+interface LogoProps
+  extends React.HTMLAttributes<HTMLElement>,
+    VariantProps<typeof logoVariants> {
   imageUrl?: string;
   altText?: string;
   text?: string;
@@ -60,7 +62,11 @@ export function Logo({
         height={35}
         className={cn(logoImageVariants({ size, className: classNameIcon }))}
       />
-      <span className={cn("whitespace-nowrap font-black font-brand", classNameText)}>{text}</span>
+      <span
+        className={cn("whitespace-nowrap font-black font-brand", classNameText)}
+      >
+        {text}
+      </span>
     </span>
   );
 }
