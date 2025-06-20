@@ -4,26 +4,20 @@ import {
   admin,
   anonymous,
   haveIBeenPwned,
+  magicLink,
   multiSession,
   openAPI,
   twoFactor,
   username,
 } from "better-auth/plugins";
+import { passkey } from "better-auth/plugins/passkey";
 import { createUsername, createUsernameGitHub } from "@/lib/string";
 import { prisma } from "@/server/prisma";
 
 export const betterAuth = betterAuthConfig({
   appName: "Dogokit Corgi",
-
-  database: prismaAdapter(prisma, {
-    provider: "postgresql",
-  }),
-
-  advanced: {
-    database: {
-      generateId: false,
-    },
-  },
+  database: prismaAdapter(prisma, { provider: "postgresql" }),
+  advanced: { database: { generateId: false } },
 
   user: {
     modelName: "User",
@@ -73,12 +67,18 @@ export const betterAuth = betterAuthConfig({
   },
 
   plugins: [
-    anonymous(),
     admin(),
-    multiSession(),
-    openAPI(), // Check on /api/auth/reference
-    twoFactor(),
+    anonymous(),
     haveIBeenPwned(),
+    multiSession(),
+    openAPI(), // Available on /api/auth/reference
+    passkey(),
+    twoFactor(),
+    magicLink({
+      sendMagicLink(data, request) {
+        console.info({ data, request });
+      },
+    }),
     username({
       minUsernameLength: 2,
       maxUsernameLength: 20,

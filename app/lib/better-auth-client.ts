@@ -1,6 +1,8 @@
 import {
   adminClient,
+  magicLinkClient,
   multiSessionClient,
+  passkeyClient,
   phoneNumberClient,
   twoFactorClient,
   usernameClient,
@@ -8,11 +10,14 @@ import {
 import { createAuthClient } from "better-auth/react";
 
 export const betterAuthClient = createAuthClient({
+  baseURL: process.env.VITE_APP_URL,
   plugins: [
-    usernameClient(),
     adminClient(),
+    magicLinkClient(),
     multiSessionClient(),
+    passkeyClient(),
     phoneNumberClient(),
+    usernameClient(),
     twoFactorClient({
       onTwoFactorRedirect() {
         window.location.href = "/2fa";
@@ -20,3 +25,5 @@ export const betterAuthClient = createAuthClient({
     }),
   ],
 });
+
+export const { signIn, signOut, signUp, useSession } = betterAuthClient;
