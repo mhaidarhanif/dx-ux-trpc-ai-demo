@@ -1,7 +1,7 @@
 import { type SubmissionResult, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
+import { KeyIcon } from "lucide-react";
 import { Form, href, Link, useNavigation } from "react-router";
-
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { Logo } from "@/components/shared/logo";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -67,11 +67,11 @@ export function AuthCard({
       </div>
 
       <div className="flex w-full flex-col gap-6">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           {configSite.authSocialProviders.map((authSocial) => (
             <Form
-              action="/action/social"
               method="post"
+              action="/action/social"
               key={authSocial.provider}
             >
               <input
@@ -92,6 +92,18 @@ export function AuthCard({
               </ButtonLoading>
             </Form>
           ))}
+          {isSignIn && (
+            <Form method="post" action="/action/passkey">
+              <ButtonLoading
+                className="w-full"
+                variant="secondary"
+                hasSpinner={false}
+              >
+                <KeyIcon />
+                <span>{buttonSocialText} with Passkey</span>
+              </ButtonLoading>
+            </Form>
+          )}
         </div>
 
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">

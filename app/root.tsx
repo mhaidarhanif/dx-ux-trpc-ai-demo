@@ -14,7 +14,6 @@ import {
   useTheme,
 } from "remix-themes";
 
-import { Layout } from "@/components/shared/layout";
 import { ContentHeading } from "@/components/ui/content";
 import { TRPCReactProvider } from "@/lib/trpc-client";
 import { themeSessionResolver } from "@/themes.server";
@@ -108,7 +107,9 @@ export function HTMLDocument({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>{children}</body>
+      <body>
+        <div className="space-y-4 p-4">{children}</div>
+      </body>
     </html>
   );
 }
@@ -116,30 +117,26 @@ export function HTMLDocument({ children }: { children: React.ReactNode }) {
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   if (isRouteErrorResponse(error)) {
     return (
-      <HTMLDocumentThemed>
-        <Layout>
-          <h1>
-            {error.status} {error.statusText}
-          </h1>
-          <p>{error.data}</p>
-        </Layout>
-      </HTMLDocumentThemed>
+      <HTMLDocument>
+        <ContentHeading>
+          {error.status} {error.statusText}
+        </ContentHeading>
+        <pre className="text-xs">{error.data}</pre>
+      </HTMLDocument>
     );
   } else if (error instanceof Error) {
     return (
       <HTMLDocument>
-        <div className="space-y-4 p-4">
-          <ContentHeading>Error</ContentHeading>
-          <p>{error.message}</p>
-          <p>The stack trace:</p>
-          <pre className="text-xs">{error.stack}</pre>
-        </div>
+        <ContentHeading>Error</ContentHeading>
+        <p>{error.message}</p>
+        <p>The stack trace:</p>
+        <pre className="text-xs">{error.stack}</pre>
       </HTMLDocument>
     );
   } else {
     return (
       <HTMLDocument>
-        <h1>Unknown Error</h1>
+        <ContentHeading>Unknown Error</ContentHeading>
       </HTMLDocument>
     );
   }
