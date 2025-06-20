@@ -44,13 +44,15 @@ In the Google Cloud Console > Credentials > Authorized redirect URIs, make sure 
 
 This repo is using Neon Postgres as our database. make sure to replace the placeholder connection string with your actual Neon Postgres connection string.
 
-### Setup Environment Variables
+### Setup Environment Variables and Compose
 
 Copy from `.env.example` to `.env` and fill in the required values:
 
 ```bash
 cp -n .env.example .env
 ```
+
+Also make sure to reconfigure the default `docker-compose.yml` port for PostgreSQL.
 
 ### Installation
 
