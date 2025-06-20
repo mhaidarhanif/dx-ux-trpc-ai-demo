@@ -108,18 +108,18 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     );
   } else if (error instanceof Error) {
     return (
-      <Layout>
+      <>
         <h1>Error</h1>
         <p>{error.message}</p>
         <p>The stack trace is:</p>
         <pre>{error.stack}</pre>
-      </Layout>
+      </>
     );
   } else {
     return (
-      <Layout>
+      <>
         <h1>Unknown Error</h1>
-      </Layout>
+      </>
     );
   }
 }

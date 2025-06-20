@@ -1,8 +1,7 @@
-import { SiGithub } from "@icons-pack/react-simple-icons";
-import { href, Link } from "react-router";
+import { CodeIcon, StarIcon } from "lucide-react";
 import { Anchor } from "@/components/shared/anchor";
+import { ButtonAnchor } from "@/components/shared/button-anchor";
 import { Flex } from "@/components/shared/flex";
-import { Button } from "@/components/ui/button";
 import { ContentIntro } from "@/components/ui/content";
 import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/home";
@@ -53,19 +52,20 @@ function HomeHero({ hello }: { hello: string }) {
       </article>
 
       <Flex>
-        <Button asChild>
-          <Anchor
-            href={
-              "https://github.com/new?template_name=dogokit-corgi&template_owner=dogokit"
-            }
-          >
-            <SiGithub />
-            <span>Use this template</span>
-          </Anchor>
-        </Button>
-        <Button asChild>
-          <Link to={href("/about")}>Go to About</Link>
-        </Button>
+        <ButtonAnchor
+          size="lg"
+          href="https://github.com/new?template_name=dogokit-corgi&template_owner=dogokit"
+        >
+          <StarIcon />
+          <span>Star on GitHub</span>
+        </ButtonAnchor>
+        <ButtonAnchor
+          size="lg"
+          href="https://github.com/new?template_name=dogokit-corgi&template_owner=dogokit"
+        >
+          <CodeIcon />
+          <span>Use Template</span>
+        </ButtonAnchor>
       </Flex>
     </section>
   );
