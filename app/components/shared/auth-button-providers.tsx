@@ -5,7 +5,7 @@ import { configSite } from "@/config/site";
 export function AuthButtonProviders({ textAction }: { textAction: string }) {
   return (
     <>
-      {configSite.authSocialProviders.map((authSocial) => (
+      {configSite.socialProviderButtons.map((authSocial) => (
         <Form method="post" action="/action/social" key={authSocial.provider}>
           <input type="hidden" name="provider" value={authSocial.provider} />
           <Button className="w-full" variant="secondary">

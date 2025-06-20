@@ -74,6 +74,9 @@ export const auth = betterAuthConfig({
     openAPI(), // Available on /api/auth/reference
     passkey({
       schema: { passkey: { modelName: "Passkey" } },
+      authenticatorSelection: {
+        authenticatorAttachment: "platform",
+      },
     }),
     twoFactor({
       schema: { twoFactor: { modelName: "TwoFactor" } },

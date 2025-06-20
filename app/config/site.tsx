@@ -12,11 +12,14 @@ export const configSite: ConfigSite = {
     x: "https://x.com/mhaidarhanif",
     github: "https://github.com/dogokit/dogokit-corgi",
   },
+
+  authOptions: ["social", "passkey", "email", "magic", "anonymous"],
   socialProviders: ["github", "google"],
-  authSocialProviders: [
+  socialProviderButtons: [
     { provider: "github", label: "GitHub", icon: <SiGithub /> },
     { provider: "google", label: "Google", icon: <SiGoogle /> },
   ],
+
   navItems: [
     { to: href("/"), label: "Home" },
     { to: href("/about"), label: "About" },
@@ -34,14 +37,19 @@ export const configSite: ConfigSite = {
 export type ConfigSite = {
   name: string;
   url: string;
-  ogImage: string;
+  ogImage?: string;
   description: string;
   links: Partial<Record<SocialProvider, string>>;
+
+  authOptions: AuthOption[];
   socialProviders: SocialProvider[];
-  authSocialProviders: AuthSocialProvider[];
+  socialProviderButtons: SocialProviderButton[];
+
   navItems: NavItem[];
   navAuthItems: NavItem[];
 };
+
+export type AuthOption = "social" | "passkey" | "email" | "magic" | "anonymous";
 
 export type SocialProvider =
   | "allnimal"
@@ -60,8 +68,8 @@ export type SocialProvider =
   | "zoom"
   | "x";
 
-export type AuthSocialProvider = {
-  provider: string;
+export type SocialProviderButton = {
+  provider: SocialProvider;
   label: string;
   icon: JSX.Element;
 };

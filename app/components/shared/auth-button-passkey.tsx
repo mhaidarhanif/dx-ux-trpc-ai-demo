@@ -1,4 +1,5 @@
 import { KeyIcon } from "lucide-react";
+import { useEffect } from "react";
 import { href, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/better-auth-client";
@@ -16,6 +17,17 @@ export function AuthButtonPasskey({
     const response = await authClient.signIn.passkey();
     if (response) navigate(href("/dashboard"));
   };
+
+  useEffect(() => {
+    if (
+      !PublicKeyCredential.isConditionalMediationAvailable ||
+      !PublicKeyCredential.isConditionalMediationAvailable()
+    ) {
+      return;
+    }
+
+    void authClient.signIn.passkey({ autoFill: true });
+  }, []);
 
   return (
     <>
