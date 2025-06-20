@@ -27,7 +27,7 @@ export default function UserDashboardRoute({
   return (
     <>
       <UserInfoCard user={user} />
-      <Debug className="max-w-xs">{user}</Debug>
+      <Debug>{user}</Debug>
     </>
   );
 }

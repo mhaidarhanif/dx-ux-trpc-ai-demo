@@ -48,17 +48,18 @@ export function Debug({
 
           <Button
             variant="outline"
-            size="xs"
+            size="icon-xs"
             onClick={() => setIsVisible(false)}
           >
-            <XIcon />
+            <XIcon className="size-3" />
           </Button>
         </div>
 
         <CollapsibleContent>
           <pre
             className={cn(
-              "break-spaces my-1 overflow-scroll rounded border border-surface-200 bg-white p-1 text-xs dark:border-surface-800 dark:bg-black",
+              "max-w-md text-[0.5rem]",
+              "break-spaces my-1 overflow-scroll rounded-xl border border-surface-200 bg-white p-1 dark:border-surface-800 dark:bg-black",
               className
             )}
           >
