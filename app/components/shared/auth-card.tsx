@@ -10,6 +10,7 @@ import { authClient } from "@/lib/better-auth-client";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
 import { Alert, AlertDescription } from "../ui/alert";
+import { ButtonLoading } from "./button-loading";
 
 export function AuthCard({
   mode = "signin",
@@ -52,7 +53,10 @@ export function AuthCard({
   const isSignUp = mode === "signup";
   const isSignIn = mode === "signin";
   const buttonText = isSignIn ? "Sign In" : "Sign Up";
-  const buttonCTA = isSignIn ? "Continue with Email" : "Create New Account";
+  const buttonSubmittingText = isSignIn ? "Signing In..." : "Signing Up...";
+  const buttonPrimaryText = isSignIn
+    ? "Continue with Email"
+    : "Create New Account";
 
   const formActionPath = isSignUp ? href("/signup") : href("/signin");
   const form = isSignUp ? formSignUp : formSignIn;
@@ -155,9 +159,13 @@ export function AuthCard({
             />
           </div>
 
-          <Button type="submit" className="w-full">
-            {buttonCTA}
-          </Button>
+          <ButtonLoading
+            type="submit"
+            className="w-full"
+            submittingText={buttonSubmittingText}
+          >
+            {buttonPrimaryText}
+          </ButtonLoading>
 
           {form.errors && (
             <Alert variant="destructive">

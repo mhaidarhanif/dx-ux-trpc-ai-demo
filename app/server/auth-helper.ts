@@ -26,14 +26,14 @@ export async function requireAuthUserData(request: Request) {
 
 // Redirect to /signin if not authenticated
 export async function requireAuthTrue(request: Request) {
-  const { isAuthenticated } = await requireAuthSession(request);
+  const { isAuthenticated, user } = await requireAuthSession(request);
   if (!isAuthenticated) return redirect(href("/signin"));
-  return { isAuthenticated };
+  return { isAuthenticated, user };
 }
 
 // Redirect to /user if authenticated
 export async function requireAuthFalse(request: Request) {
-  const { isAuthenticated } = await requireAuthSession(request);
+  const { isAuthenticated, user } = await requireAuthSession(request);
   if (isAuthenticated) return redirect(href("/dashboard"));
-  return { isAuthenticated };
+  return { isAuthenticated, user };
 }

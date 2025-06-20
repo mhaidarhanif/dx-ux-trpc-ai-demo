@@ -1,6 +1,7 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { href, redirect } from "react-router";
 import { AuthCard } from "@/components/shared/auth-card";
+import { createTimer } from "@/lib/timer";
 import { AuthSignInSchema } from "@/modules/auth/schema";
 import { requireAuthFalse } from "@/server/auth-helper";
 import { type BetterAuthResponse, betterAuth } from "@/server/better-auth";
@@ -19,6 +20,8 @@ export default function SignInRoute({ actionData }: Route.ComponentProps) {
 }
 
 export async function action({ request }: Route.ActionArgs) {
+  const timer = createTimer();
+
   const formData = await request.formData();
   const submission = parseWithZod(formData, { schema: AuthSignInSchema });
   if (submission.status !== "success") return submission.reply();
@@ -38,6 +41,8 @@ export async function action({ request }: Route.ActionArgs) {
       // fieldErrors
     });
   }
+
+  await timer.delay();
 
   return redirect(href("/dashboard"), { headers: response.headers });
 }

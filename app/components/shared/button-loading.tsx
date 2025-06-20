@@ -1,37 +1,24 @@
 import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
-
+import { useNavigation } from "react-router";
 import { Button, type buttonVariants } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner-icon";
 
 interface ButtonLoadingProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  isLoading: boolean;
-  loadingText: React.ReactNode;
-  isDisabledWhenLoading?: boolean;
-  icon?: React.ReactNode;
+  submittingText?: React.ReactNode;
 }
 
 const ButtonLoading = React.forwardRef<HTMLButtonElement, ButtonLoadingProps>(
-  (
-    {
-      isDisabledWhenLoading = true,
-      isLoading = false,
-      loadingText = "",
-      icon,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const isActive = isDisabledWhenLoading ? isLoading : isDisabledWhenLoading;
+  ({ submittingText = "", children, ...props }, ref) => {
+    const navigation = useNavigation();
+    const isSubmitting = navigation.state === "submitting";
 
     return (
-      <Button ref={ref} disabled={isActive} {...props}>
-        {icon && icon}
-        {!icon && isActive && <Spinner />}
-        {isLoading ? loadingText : children}
+      <Button ref={ref} disabled={isSubmitting} {...props}>
+        {isSubmitting && <Spinner />}
+        {isSubmitting ? submittingText : children}
       </Button>
     );
   }
