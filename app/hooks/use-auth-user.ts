@@ -1,9 +1,9 @@
 import { useRouteLoaderData } from "react-router";
-import type { loader as layoutRootLoader } from "@/layouts/layout-root";
+
+import type { loader } from "@/layouts/layout-app";
 
 export function useAuthUser() {
-  const loaderData = useRouteLoaderData<typeof layoutRootLoader>("layout-root");
+  const loaderData = useRouteLoaderData<typeof loader>("root");
   if (!loaderData) return { isAuthenticated: false, user: null };
-
   return loaderData;
 }

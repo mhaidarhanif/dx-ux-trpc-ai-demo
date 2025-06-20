@@ -22,6 +22,7 @@ import type { Route } from "./+types/root";
 
 import "@/app.css";
 import { siteConfig } from "./config/site";
+import { requireAuthSession } from "./server/auth-helper";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -51,7 +52,12 @@ export const meta: Route.MetaFunction = () => {
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { getTheme } = await themeSessionResolver(request);
-  return { theme: getTheme() };
+  const { isAuthenticated, user } = await requireAuthSession(request);
+  return {
+    theme: getTheme(),
+    isAuthenticated,
+    user,
+  };
 }
 
 export default function RootRoute({ loaderData }: Route.ComponentProps) {

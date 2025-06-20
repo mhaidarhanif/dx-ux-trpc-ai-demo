@@ -81,7 +81,7 @@ function NavSection({
   items: NavLinkItem[];
   onOpenChange: (open: boolean) => void;
 }) {
-  const [{ isAuthenticated }] = useAuthUser();
+  const { isAuthenticated } = useAuthUser();
 
   return (
     <section className="flex flex-col items-end gap-4">
