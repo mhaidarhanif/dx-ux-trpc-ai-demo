@@ -5,3 +5,4 @@
 build/
 generated/
 node_modules/
+__*

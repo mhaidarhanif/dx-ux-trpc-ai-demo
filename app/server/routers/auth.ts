@@ -17,6 +17,8 @@ export const authRouter = {
       include: {
         sessions: true,
         accounts: true,
+        twofactors: true,
+        passkeys: true,
       },
     });
   }),

@@ -31,7 +31,7 @@ export async function requireAuthUserData(request: Request) {
   if (!session?.user.id) return { isAuthenticated: false, user: null };
 
   const api = await caller(request);
-  const user = await api.auth.getUser();
+  const user = await api.auth.getUserComplete();
   const isAuthenticated = user !== null;
 
   return { isAuthenticated, user };
