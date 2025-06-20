@@ -6,6 +6,7 @@ import {
   haveIBeenPwned,
   magicLink,
   multiSession,
+  oneTap,
   openAPI,
   twoFactor,
   username,
@@ -16,7 +17,7 @@ import { createUsername, createUsernameGitHub } from "@/lib/string";
 import { prisma } from "@/server/prisma";
 
 export const auth = betterAuthConfig({
-  appName: "Dogokit Corgi",
+  appName: configSite.name,
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   advanced: { database: { generateId: false } },
 
@@ -72,10 +73,11 @@ export const auth = betterAuthConfig({
     anonymous(),
     haveIBeenPwned(),
     multiSession(),
+    oneTap(), // TODO: mapProfileToUser: username
     openAPI(), // Available on /api/auth/reference
     passkey({
       schema: { passkey: { modelName: "Passkey" } },
-      // rpID: configSite.id,
+      rpID: configSite.id,
       rpName: configSite.name,
       origin: process.env.BETTER_AUTH_URL,
     }),

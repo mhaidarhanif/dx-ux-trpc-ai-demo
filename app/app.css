@@ -65,13 +65,13 @@ body {
   --card-foreground: oklch(14.5% 0 0);
   --popover: var(--color-white);
   --popover-foreground: oklch(14.5% 0 0);
-  --primary: var(--color-indigo-700);
+  --primary: var(--color-indigo-800);
   --primary-foreground: oklch(98.5% 0 0);
   --secondary: var(--color-wood-200);
   --secondary-foreground: oklch(20.5% 0 0);
   --muted: oklch(97% 0 0);
   --muted-foreground: oklch(55.6% 0 0);
-  --accent: oklch(96.2% 0.059 95.617);
+  --accent: var(--color-wood-100);
   --accent-foreground: oklch(20.5% 0 0);
   --destructive: var(--color-rose-700);
   --border: oklch(92.2% 0 0);

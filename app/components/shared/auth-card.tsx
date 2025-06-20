@@ -7,6 +7,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
+import { useOneTap } from "@/hooks/use-one-tap";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
 import { AuthButtonPasskey } from "./auth-button-passkey";
@@ -22,6 +23,8 @@ export function AuthCard({
   lastResult: SubmissionResult | null | undefined;
 }) {
   const isSubmitting = useIsSubmitting();
+
+  useOneTap();
 
   const [formSignUp, fieldsSignUp] = useForm({
     lastResult,

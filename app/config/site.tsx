@@ -3,7 +3,7 @@ import type { JSX } from "react";
 import { href } from "react-router";
 
 export const configSite: ConfigSite = {
-  id: "dogokit",
+  id: "localhost",
   name: "Dogokit Corgi",
   url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "/og/dogokit.jpg",

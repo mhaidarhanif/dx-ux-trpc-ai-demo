@@ -14,8 +14,11 @@ export function AuthButtonPasskey({
   const navigate = useNavigate();
 
   const signInPasskey = async () => {
-    await authClient.signIn.passkey();
-    navigate(0);
+    await authClient.signIn.passkey({
+      fetchOptions: {
+        onSuccess: () => navigate("/dashboard"),
+      },
+    });
   };
 
   useEffect(() => {

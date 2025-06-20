@@ -43,13 +43,15 @@ export function UserInfoCard({ user }: { user: User }) {
   const userFields = createUserFields(user);
 
   const addPasskey = async () => {
-    await authClient.passkey.addPasskey();
-    navigate(0);
+    await authClient.passkey.addPasskey({
+      fetchOptions: {
+        onSuccess: () => navigate("/dashboard"),
+      },
+    });
   };
 
-  const revokeAllSessions = async () => {
+  const revokeOtherSessions = async () => {
     await authClient.revokeOtherSessions();
-    navigate(0);
   };
 
   return (
@@ -71,7 +73,7 @@ export function UserInfoCard({ user }: { user: User }) {
           <Button size="xs" variant="outline" onClick={addPasskey}>
             <span>Add Passkey</span>
           </Button>
-          <Button size="xs" variant="outline" onClick={revokeAllSessions}>
+          <Button size="xs" variant="outline" onClick={revokeOtherSessions}>
             <span>Revoke All Sessions</span>
           </Button>
           <Form method="post" action={href("/signout")}>

@@ -3,6 +3,7 @@ import * as React from "react";
 import { Button, type buttonVariants } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner-icon";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
+import { cn } from "@/lib/utils";
 
 interface ButtonLoadingProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -18,6 +19,7 @@ const ButtonLoading = React.forwardRef<HTMLButtonElement, ButtonLoadingProps>(
       hasSpinner = true,
       submittingText = "",
       isSubmittingOverride,
+      size,
       children,
       ...props
     },
@@ -27,11 +29,13 @@ const ButtonLoading = React.forwardRef<HTMLButtonElement, ButtonLoadingProps>(
     const isSubmitting = isSubmittingOverride || isSubmittingGlobal;
 
     return (
-      <Button ref={ref} disabled={isSubmitting} {...props}>
+      <Button size={size} ref={ref} disabled={isSubmitting} {...props}>
         {!isSubmitting && children}
         {isSubmitting && (
           <>
-            {hasSpinner && <Spinner />}
+            {hasSpinner && (
+              <Spinner className={cn(size?.toString() === "xs" && "size-2")} />
+            )}
             {submittingText || children}
           </>
         )}
