@@ -15,11 +15,12 @@ import {
 } from "remix-themes";
 
 import { Layout } from "@/components/shared/layout";
+import { ContentHeading } from "@/components/ui/content";
 import { TRPCReactProvider } from "@/lib/trpc-client";
 import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
+
 import "@/app.css";
-import { ContentHeading } from "./components/ui/content";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { href, Link, type LinkProps, useNavigate } from "react-router";
 import { Logo } from "@/components/shared/logo";
+import { MenuIconAnimated } from "@/components/shared/menu-icon-animated";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -37,20 +38,7 @@ export function NavigationMobile() {
           >
             <div className="relative flex items-center justify-center">
               <span className="sr-only">Toggle Menu</span>
-              <div id="menu-icon-animated" className="relative size-4">
-                <span
-                  className={cn(
-                    "absolute left-0 block h-0.5 w-4 bg-foreground transition-all duration-100",
-                    open ? "-rotate-45 top-[0.4rem]" : "top-1"
-                  )}
-                />
-                <span
-                  className={cn(
-                    "absolute left-0 block h-0.5 w-4 bg-foreground transition-all duration-100",
-                    open ? "top-[0.4rem] rotate-45" : "top-2.5"
-                  )}
-                />
-              </div>
+              <MenuIconAnimated open={open} />
             </div>
 
             <span className="flex items-center font-medium text-lg leading-none">
