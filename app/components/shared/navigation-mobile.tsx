@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { type NavLinkItem, siteConfig } from "@/config/site";
+import { configSite, type NavLinkItem } from "@/config/site";
 import { useAuthUser } from "@/hooks/use-auth-user";
 import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
@@ -57,12 +57,12 @@ export function NavigationMobile() {
           <div className="flex flex-col gap-12 overflow-auto p-4">
             <NavSection
               title="Menu"
-              items={siteConfig.navItems}
+              items={configSite.navItems}
               onOpenChange={setOpen}
             />
             <NavSection
               title="Auth"
-              items={siteConfig.navAuthItems}
+              items={configSite.navAuthItems}
               onOpenChange={setOpen}
             />
           </div>

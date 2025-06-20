@@ -21,7 +21,7 @@ import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
 
 import "@/app.css";
-import { siteConfig } from "./config/site";
+import { configSite } from "./config/site";
 import { requireAuthSession } from "./server/auth-helper";
 
 export const links: Route.LinksFunction = () => [
@@ -43,10 +43,10 @@ export const links: Route.LinksFunction = () => [
 
 export const meta: Route.MetaFunction = () => {
   return [
-    { title: siteConfig.name },
-    { name: "description", content: siteConfig.description },
-    { property: "og:title", content: siteConfig.name },
-    { property: "og:description", content: siteConfig.name },
+    { title: configSite.name },
+    { name: "description", content: configSite.description },
+    { property: "og:title", content: configSite.name },
+    { property: "og:description", content: configSite.name },
   ];
 };
 

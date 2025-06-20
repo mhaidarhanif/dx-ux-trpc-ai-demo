@@ -1,6 +1,6 @@
 import { Anchor } from "@/components/shared/anchor";
 import { ThemeSwitcherAction } from "@/components/theme/theme-switcher-action";
-import { siteConfig } from "@/config/site";
+import { configSite } from "@/config/site";
 
 export function LayoutFooter({ hasTheme }: { hasTheme?: boolean }) {
   return (
@@ -12,10 +12,10 @@ export function LayoutFooter({ hasTheme }: { hasTheme?: boolean }) {
       )}
       <div className="text-center text-muted-foreground text-sm">
         <p>
-          &copy; {new Date().getFullYear()} {siteConfig.name}.
+          &copy; {new Date().getFullYear()} {configSite.name}.
         </p>
         <p>
-          <Anchor className="font-bold" href={siteConfig.links.github}>
+          <Anchor className="font-bold" href={configSite.links.github}>
             Source Code on GitHub
           </Anchor>
         </p>

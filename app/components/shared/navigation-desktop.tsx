@@ -1,7 +1,7 @@
 import { href, Link } from "react-router";
 import { Logo } from "@/components/shared/logo";
 import { NavigationDesktopLinks } from "@/components/shared/navigation-desktop-links";
-import { siteConfig } from "@/config/site";
+import { configSite } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 export function NavigationDesktop() {
@@ -18,11 +18,11 @@ export function NavigationDesktop() {
       </Link>
 
       <div className="flex justify-center">
-        <NavigationDesktopLinks items={siteConfig.navItems} />
+        <NavigationDesktopLinks items={configSite.navItems} />
       </div>
 
       <div className="flex justify-end">
-        <NavigationDesktopLinks items={siteConfig.navAuthItems} />
+        <NavigationDesktopLinks items={configSite.navAuthItems} />
       </div>
     </nav>
   );

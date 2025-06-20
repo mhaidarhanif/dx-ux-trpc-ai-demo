@@ -1,6 +1,8 @@
+import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
+import type { JSX } from "react";
 import { href } from "react-router";
 
-export type SiteConfig = {
+export type ConfigSite = {
   name: string;
   url: string;
   ogImage: string;
@@ -10,8 +12,15 @@ export type SiteConfig = {
     github: string;
   };
   socialProviders: string[];
+  authSocials: AuthSocial[];
   navItems: NavLinkItem[];
   navAuthItems: NavLinkItem[];
+};
+
+export type AuthSocial = {
+  provider: string;
+  label: string;
+  icon: JSX.Element;
 };
 
 export type NavLinkItem = {
@@ -20,7 +29,7 @@ export type NavLinkItem = {
   auth?: boolean;
 };
 
-export const siteConfig: SiteConfig = {
+export const configSite: ConfigSite = {
   name: "Dogokit Corgi",
   url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "https://ui.shadcn.com/og.jpg",
@@ -31,6 +40,10 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/dogokit/dogokit-corgi",
   },
   socialProviders: ["github", "google", "login"],
+  authSocials: [
+    { provider: "github", label: "GitHub", icon: <SiGithub /> },
+    { provider: "google", label: "Google", icon: <SiGoogle /> },
+  ],
   navItems: [
     { to: href("/"), label: "Home" },
     { to: href("/about"), label: "About" },

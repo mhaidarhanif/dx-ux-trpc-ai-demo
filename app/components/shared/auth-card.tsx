@@ -1,13 +1,13 @@
 import { type SubmissionResult, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
-import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
-import { Form, href, Link } from "react-router";
+import { Form, href, Link, useNavigation } from "react-router";
 
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { Logo } from "@/components/shared/logo";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { configSite } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
 
@@ -20,6 +20,9 @@ export function AuthCard({
   mode: "signup" | "signin" | "signout" | "forgot-password";
   lastResult: SubmissionResult | null | undefined;
 }) {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   const [formSignUp, fieldsSignUp] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -37,28 +40,17 @@ export function AuthCard({
 
   const isSignUp = mode === "signup";
   const isSignIn = mode === "signin";
-  const buttonText = isSignIn ? "Sign In" : "Sign Up";
-  const buttonSubmittingText = isSignIn ? "Signing In..." : "Signing Up...";
-  const buttonPrimaryText = isSignIn
-    ? "Continue with Email"
-    : "Create New Account";
+  const buttonSocialText = isSignUp ? "Sign Up" : "Sign In";
+  const buttonIdleText = isSignUp
+    ? "Create New Account"
+    : "Continue with Email";
+  const buttonSubmittingText = isSignUp
+    ? "Creating New Account..."
+    : "Signing In...";
 
   const formActionPath = isSignUp ? href("/signup") : href("/signin");
   const form = isSignUp ? formSignUp : formSignIn;
   const fields = isSignUp ? fieldsSignUp : fieldsSignIn;
-
-  const authSocials = [
-    {
-      provider: "github",
-      label: "GitHub",
-      icon: <SiGithub />,
-    },
-    {
-      provider: "google",
-      label: "Google",
-      icon: <SiGoogle />,
-    },
-  ];
 
   return (
     <section
@@ -76,7 +68,7 @@ export function AuthCard({
 
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-4">
-          {authSocials.map((authSocial) => (
+          {configSite.authSocials.map((authSocial) => (
             <Form
               action="/action/social"
               method="post"
@@ -95,7 +87,7 @@ export function AuthCard({
               >
                 {authSocial.icon}
                 <span>
-                  {buttonText} with {authSocial.label}
+                  {buttonSocialText} with {authSocial.label}
                 </span>
               </ButtonLoading>
             </Form>
@@ -115,79 +107,81 @@ export function AuthCard({
           id={form.id}
           onSubmit={form.onSubmit}
         >
-          {isSignUp && (
+          <fieldset disabled={isSubmitting} className="grid gap-4">
+            {isSignUp && (
+              <div className="grid gap-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="First Last"
+                  required
+                  name={fieldsSignUp.name.name}
+                />
+              </div>
+            )}
+
+            {isSignUp && (
+              <div className="grid gap-2">
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="yourhandle"
+                  required
+                  name={fieldsSignUp.username.name}
+                />
+              </div>
+            )}
+
             <div className="grid gap-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
-                id="name"
-                type="text"
-                placeholder="First Last"
+                id="email"
+                type="email"
+                placeholder="email@example.com"
                 required
-                name={fieldsSignUp.name.name}
+                name={fields.email.name}
               />
             </div>
-          )}
 
-          {isSignUp && (
             <div className="grid gap-2">
-              <Label htmlFor="username">Username</Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Password</Label>
+
+                {isSignIn && (
+                  <Link
+                    to={href("/forgot-password")}
+                    className="text-xs leading-none"
+                  >
+                    Forgot password?
+                  </Link>
+                )}
+              </div>
               <Input
-                id="username"
-                type="text"
-                placeholder="yourhandle"
+                id="password"
+                type="password"
                 required
-                name={fieldsSignUp.username.name}
+                name={fields.password.name}
               />
             </div>
-          )}
 
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="email@example.com"
-              required
-              name={fields.email.name}
-            />
-          </div>
+            <ButtonLoading
+              type="submit"
+              className="w-full"
+              submittingText={buttonSubmittingText}
+            >
+              {buttonIdleText}
+            </ButtonLoading>
 
-          <div className="grid gap-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="password">Password</Label>
-
-              {isSignIn && (
-                <Link
-                  to={href("/forgot-password")}
-                  className="text-xs leading-none"
-                >
-                  Forgot password?
-                </Link>
-              )}
-            </div>
-            <Input
-              id="password"
-              type="password"
-              required
-              name={fields.password.name}
-            />
-          </div>
-
-          <ButtonLoading
-            type="submit"
-            className="w-full"
-            submittingText={buttonSubmittingText}
-          >
-            {buttonPrimaryText}
-          </ButtonLoading>
-
-          {form.errors && (
-            <Alert variant="destructive">
-              <AlertDescription className="text-xs">
-                {form.errors}
-              </AlertDescription>
-            </Alert>
-          )}
+            {form.errors && (
+              <Alert variant="destructive">
+                <AlertDescription className="text-xs">
+                  {form.errors}
+                </AlertDescription>
+              </Alert>
+            )}
+          </fieldset>
         </Form>
 
         {isSignIn && (

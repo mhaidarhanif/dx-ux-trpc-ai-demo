@@ -1,8 +1,8 @@
 import z from "zod/v4";
-import { siteConfig } from "@/config/site";
+import { configSite } from "@/config/site";
 
 export const AuthSocialSchema = z.object({
-  provider: z.enum(siteConfig.socialProviders),
+  provider: z.enum(configSite.socialProviders),
 });
 
 export const AuthFormSchema = z.object({
