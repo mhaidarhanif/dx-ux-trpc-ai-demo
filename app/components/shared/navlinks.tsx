@@ -25,7 +25,7 @@ export function NavLinks({
                 cn("whitespace-nowrap font-normal", isActive && "text-primary")
               }
             >
-              {item.text}
+              {item.label}
             </NavLink>
           </li>
         ))}

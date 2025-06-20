@@ -2,14 +2,14 @@ import { type SubmissionResult, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
 import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 import { Form, href, Link } from "react-router";
+import { ButtonLoading } from "@/components/shared/button-loading";
 import { Logo } from "@/components/shared/logo";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/better-auth-client";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
-import { Alert, AlertDescription } from "../ui/alert";
-import { ButtonLoading } from "./button-loading";
 
 export function AuthCard({
   mode = "signin",

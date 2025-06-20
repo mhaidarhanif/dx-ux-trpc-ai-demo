@@ -24,9 +24,10 @@
 - [x] Better Auth v1
 - [x] Docker v28
 - [x] PostgreSQL v17
-- [x] Biome v2
+- [x] Bun
 - [x] Vite v6
 - [ ] Vitest v3
+- [x] Biome v2
 - [ ] Resend
 - [ ] Uploadcare or Cloudflare R2
 - [ ] Polar

@@ -77,6 +77,7 @@ export const ThemeSwitcher = ({
                 isActive ? "text-primary-foreground" : "text-muted-foreground"
               )}
             />
+            <span className="sr-only">Toggle theme</span>
           </button>
         );
       })}

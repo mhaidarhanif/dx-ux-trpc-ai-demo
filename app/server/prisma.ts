@@ -3,7 +3,7 @@ import { PrismaClient } from "@/generated/prisma/client";
 
 const prismaClientSingleton = () => {
   return new PrismaClient({
-    log: ["query"],
+    // log: ["query"],
   }).$extends(withAccelerate());
 };
 
