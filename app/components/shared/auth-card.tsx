@@ -61,7 +61,7 @@ export function AuthCard({
       {...props}
     >
       <div className="text-center">
-        <Logo classNameText="font-black font-brand" />
+        <Logo size="xl" classNameText="hidden" />
         {mode.isSignUp && <p>Create your new account.</p>}
         {mode.isSignIn && <p>Continue with your account.</p>}
       </div>
