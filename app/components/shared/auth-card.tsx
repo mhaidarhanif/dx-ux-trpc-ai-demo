@@ -66,16 +66,11 @@ export function AuthCard({
         {mode.isSignIn && <p>Continue with your account.</p>}
       </div>
 
-      <div className="flex w-full flex-col gap-6">
-        <fieldset className="flex flex-col gap-2" disabled={isSubmitting}>
-          <AuthButtonProviders textAction={text.action} />
-          <AuthButtonPasskey
-            isSignIn={mode.isSignIn}
-            textAction={text.action}
-          />
-        </fieldset>
+      <fieldset className="flex w-full flex-col gap-2" disabled={isSubmitting}>
+        <AuthButtonProviders textAction={text.action} />
+        <AuthButtonPasskey isSignIn={mode.isSignIn} textAction={text.action} />
 
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
+        <div className="relative my-2 text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">
             or
           </span>
@@ -88,82 +83,80 @@ export function AuthCard({
           id={text.form.id}
           onSubmit={text.form.onSubmit}
         >
-          <fieldset disabled={isSubmitting} className="grid gap-4">
-            {mode.isSignUp && (
-              <div className="grid gap-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="First Last"
-                  required
-                  name={fieldsSignUp.name.name}
-                />
-              </div>
-            )}
-
-            {mode.isSignUp && (
-              <div className="grid gap-2">
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="yourhandle"
-                  required
-                  name={fieldsSignUp.username.name}
-                />
-              </div>
-            )}
-
+          {mode.isSignUp && (
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="name">Full Name</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="email@example.com"
+                id="name"
+                type="text"
+                placeholder="First Last"
                 required
-                name={text.fields.email.name}
-                autoComplete="current-password webauthn"
+                name={fieldsSignUp.name.name}
               />
             </div>
+          )}
 
+          {mode.isSignUp && (
             <div className="grid gap-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                {mode.isSignIn && (
-                  <Link
-                    to={href("/forgot-password")}
-                    className="text-xs leading-none"
-                  >
-                    Forgot password?
-                  </Link>
-                )}
-              </div>
+              <Label htmlFor="username">Username</Label>
               <Input
-                id="password"
-                type="password"
+                id="username"
+                type="text"
+                placeholder="yourhandle"
                 required
-                name={text.fields.password.name}
-                autoComplete="current-password webauthn"
+                name={fieldsSignUp.username.name}
               />
             </div>
+          )}
 
-            <ButtonLoading
-              type="submit"
-              className="w-full"
-              submittingText={text.submitting}
-            >
-              {text.idle}
-            </ButtonLoading>
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="email@example.com"
+              required
+              name={text.fields.email.name}
+              autoComplete="current-password webauthn"
+            />
+          </div>
 
-            {text.form.errors && (
-              <Alert variant="destructive">
-                <AlertDescription className="text-xs">
-                  {text.form.errors}
-                </AlertDescription>
-              </Alert>
-            )}
-          </fieldset>
+          <div className="grid gap-2">
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password">Password</Label>
+              {mode.isSignIn && (
+                <Link
+                  to={href("/forgot-password")}
+                  className="text-xs leading-none"
+                >
+                  Forgot password?
+                </Link>
+              )}
+            </div>
+            <Input
+              id="password"
+              type="password"
+              required
+              name={text.fields.password.name}
+              autoComplete="current-password webauthn"
+            />
+          </div>
+
+          <ButtonLoading
+            type="submit"
+            className="w-full"
+            submittingText={text.submitting}
+          >
+            {text.idle}
+          </ButtonLoading>
+
+          {text.form.errors && (
+            <Alert variant="destructive">
+              <AlertDescription className="text-xs">
+                {text.form.errors}
+              </AlertDescription>
+            </Alert>
+          )}
         </Form>
 
         {mode.isSignIn && (
@@ -174,7 +167,7 @@ export function AuthCard({
             </Link>
           </div>
         )}
-      </div>
+      </fieldset>
 
       {mode.isSignUp && (
         <p className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
