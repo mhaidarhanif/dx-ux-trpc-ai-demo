@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
+import { AuthButtonPasskey } from "./auth-button-passkey";
 import { AuthButtonProviders } from "./auth-button-providers";
 
 export function AuthCard({
@@ -42,8 +43,8 @@ export function AuthCard({
     isSignIn: cardMode === "signin",
   };
 
-  const modeValues = {
-    social: mode.isSignUp ? "Sign Up" : "Sign In",
+  const text = {
+    action: mode.isSignUp ? "Sign Up" : "Sign In",
     idle: mode.isSignUp ? "Create New Account" : "Continue with Email",
     submitting: mode.isSignUp ? "Creating New Account..." : "Signing In...",
     formActionPath: mode.isSignUp ? href("/signup") : href("/signin"),
@@ -66,12 +67,13 @@ export function AuthCard({
       </div>
 
       <div className="flex w-full flex-col gap-6">
-        <div className="flex flex-col gap-2">
-          <AuthButtonProviders
+        <fieldset className="flex flex-col gap-2" disabled={isSubmitting}>
+          <AuthButtonProviders textAction={text.action} />
+          <AuthButtonPasskey
             isSignIn={mode.isSignIn}
-            buttonSocialText={modeValues.social}
+            textAction={text.action}
           />
-        </div>
+        </fieldset>
 
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">
@@ -82,9 +84,9 @@ export function AuthCard({
         <Form
           className="grid gap-4"
           method="post"
-          action={modeValues.formActionPath}
-          id={modeValues.form.id}
-          onSubmit={modeValues.form.onSubmit}
+          action={text.formActionPath}
+          id={text.form.id}
+          onSubmit={text.form.onSubmit}
         >
           <fieldset disabled={isSubmitting} className="grid gap-4">
             {mode.isSignUp && (
@@ -120,7 +122,7 @@ export function AuthCard({
                 type="email"
                 placeholder="email@example.com"
                 required
-                name={modeValues.fields.email.name}
+                name={text.fields.email.name}
                 autoComplete="current-password webauthn"
               />
             </div>
@@ -141,7 +143,7 @@ export function AuthCard({
                 id="password"
                 type="password"
                 required
-                name={modeValues.fields.password.name}
+                name={text.fields.password.name}
                 autoComplete="current-password webauthn"
               />
             </div>
@@ -149,15 +151,15 @@ export function AuthCard({
             <ButtonLoading
               type="submit"
               className="w-full"
-              submittingText={modeValues.submitting}
+              submittingText={text.submitting}
             >
-              {modeValues.idle}
+              {text.idle}
             </ButtonLoading>
 
-            {modeValues.form.errors && (
+            {text.form.errors && (
               <Alert variant="destructive">
                 <AlertDescription className="text-xs">
-                  {modeValues.form.errors}
+                  {text.form.errors}
                 </AlertDescription>
               </Alert>
             )}
