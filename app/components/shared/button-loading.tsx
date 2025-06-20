@@ -8,17 +8,23 @@ interface ButtonLoadingProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   submittingText?: React.ReactNode;
+  hasSpinner?: boolean;
 }
 
 const ButtonLoading = React.forwardRef<HTMLButtonElement, ButtonLoadingProps>(
-  ({ submittingText = "", children, ...props }, ref) => {
+  ({ submittingText = "", hasSpinner = true, children, ...props }, ref) => {
     const navigation = useNavigation();
     const isSubmitting = navigation.state === "submitting";
 
     return (
       <Button ref={ref} disabled={isSubmitting} {...props}>
-        {isSubmitting && <Spinner />}
-        {isSubmitting ? submittingText : children}
+        {!isSubmitting && children}
+        {isSubmitting && (
+          <>
+            {hasSpinner && <Spinner />}
+            {submittingText || children}
+          </>
+        )}
       </Button>
     );
   }

@@ -25,6 +25,7 @@ export default [
   ]),
 
   route("/action/set-theme", "routes/action/set-theme.ts"),
+  route("/action/social", "routes/action/social.ts"),
   route("/api/auth/*", "routes/api/auth.ts"),
   route("/api/trpc/*", "routes/api/trpc.ts"),
 ] satisfies RouteConfig;

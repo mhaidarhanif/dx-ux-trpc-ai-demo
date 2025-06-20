@@ -9,6 +9,7 @@ export type SiteConfig = {
     twitter: string;
     github: string;
   };
+  socialProviders: string[];
   navItems: NavLinkItem[];
   navAuthItems: NavLinkItem[];
 };
@@ -29,6 +30,7 @@ export const siteConfig: SiteConfig = {
     twitter: "https://twitter.com/shadcn",
     github: "https://github.com/shadcn-ui/ui",
   },
+  socialProviders: ["github", "google", "login"],
   navItems: [
     { to: href("/"), label: "Home" },
     { to: href("/about"), label: "About" },

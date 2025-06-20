@@ -2,12 +2,12 @@ import { type SubmissionResult, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
 import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 import { Form, href, Link } from "react-router";
+
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { Logo } from "@/components/shared/logo";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authClient } from "@/lib/better-auth-client";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
 
@@ -20,20 +20,6 @@ export function AuthCard({
   mode: "signup" | "signin" | "signout" | "forgot-password";
   lastResult: SubmissionResult | null | undefined;
 }) {
-  const signInGitHub = async () => {
-    await authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/dashboard",
-    });
-  };
-
-  const signInGoogle = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/dashboard",
-    });
-  };
-
   const [formSignUp, fieldsSignUp] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -61,6 +47,19 @@ export function AuthCard({
   const form = isSignUp ? formSignUp : formSignIn;
   const fields = isSignUp ? fieldsSignUp : fieldsSignIn;
 
+  const authSocials = [
+    {
+      provider: "github",
+      label: "GitHub",
+      icon: <SiGithub />,
+    },
+    {
+      provider: "google",
+      label: "Google",
+      icon: <SiGoogle />,
+    },
+  ];
+
   return (
     <section
       className={cn(
@@ -77,22 +76,30 @@ export function AuthCard({
 
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-4">
-          <ButtonLoading
-            variant="secondary"
-            onClick={signInGitHub}
-            submittingText={`${buttonSubmittingText} with GitHub`}
-          >
-            <SiGithub />
-            <span>{buttonText} with GitHub</span>
-          </ButtonLoading>
-          <ButtonLoading
-            variant="secondary"
-            onClick={signInGoogle}
-            submittingText={`${buttonSubmittingText} with Google`}
-          >
-            <SiGoogle />
-            <span>{buttonText} with Google</span>
-          </ButtonLoading>
+          {authSocials.map((authSocial) => (
+            <Form
+              action="/action/social"
+              method="post"
+              key={authSocial.provider}
+            >
+              <input
+                type="hidden"
+                name="provider"
+                value={authSocial.provider}
+              />
+              <ButtonLoading
+                className="w-full"
+                key={authSocial.provider}
+                variant="secondary"
+                hasSpinner={false}
+              >
+                {authSocial.icon}
+                <span>
+                  {buttonText} with {authSocial.label}
+                </span>
+              </ButtonLoading>
+            </Form>
+          ))}
         </div>
 
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
