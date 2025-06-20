@@ -14,6 +14,7 @@
         "@prisma/client": "^6.10.1",
         "@prisma/extension-accelerate": "^2.0.1",
         "@radix-ui/react-use-controllable-state": "^1.2.2",
+        "@react-router/node": "^7.6.2",
         "@react-router/serve": "^7.6.2",
         "@shikijs/transformers": "^3.6.0",
         "@tabler/icons-react": "^3.34.0",
@@ -32,6 +33,7 @@
         "embla-carousel-react": "^8.6.0",
         "html-react-parser": "^5.2.5",
         "input-otp": "^1.4.2",
+        "isbot": "^5",
         "lucide-react": "^0.516.0",
         "motion": "^12.18.1",
         "nanoid": "^5.1.5",
@@ -1153,6 +1155,8 @@
     "is-what": ["is-what@4.1.16", "", {}, "sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A=="],
 
     "is-windows": ["is-windows@1.0.2", "", {}, "sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA=="],
+
+    "isbot": ["isbot@5.1.28", "", {}, "sha512-qrOp4g3xj8YNse4biorv6O5ZShwsJM0trsoda4y7j/Su7ZtTTfVXFzbKkpgcSoDrHS8FcTuUwcU04YimZlZOxw=="],
 
     "isexe": ["isexe@2.0.0", "", {}, "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw=="],
 

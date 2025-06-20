@@ -10,7 +10,7 @@ import {
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: process.env.VITE_APP_URL,
+  baseURL: import.meta.env.VITE_APP_URL,
   plugins: [
     adminClient(),
     magicLinkClient(),

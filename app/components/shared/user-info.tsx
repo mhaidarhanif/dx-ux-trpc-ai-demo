@@ -3,8 +3,10 @@ import { CheckIcon, MinusIcon, XIcon } from "lucide-react";
 import { AvatarAuto } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { User } from "@/generated/prisma/client";
+import { authClient } from "@/lib/better-auth-client";
 import { formatDate } from "@/lib/datetime";
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 type UserField = {
   label: string;
@@ -52,6 +54,23 @@ export function UserInfoCard({ user }: { user: User }) {
       </CardHeader>
 
       <CardContent>
+        <div className="flex items-center justify-center">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={async () => {
+              const response = await authClient.passkey.addPasskey();
+              if (!response) {
+                console.error("Failed to add passkey");
+                return;
+              }
+              console.log(response);
+            }}
+          >
+            <span>Add Passkey</span>
+          </Button>
+        </div>
+
         <dl className="divide-y divide-gray-200 dark:divide-gray-700">
           {userFields.map((item) => {
             const valueIsBoolean = typeof item.value === "boolean";
