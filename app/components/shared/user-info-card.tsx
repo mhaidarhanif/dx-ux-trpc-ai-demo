@@ -1,12 +1,13 @@
 import { CheckIcon, MinusIcon, XIcon } from "lucide-react";
-
+import { Form, href } from "react-router";
+import { ButtonLoading } from "@/components/shared/button-loading";
 import { AvatarAuto } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { User } from "@/generated/prisma/client";
 import { authClient } from "@/lib/better-auth-client";
 import { formatDate } from "@/lib/datetime";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
 
 type UserField = {
   label: string;
@@ -39,6 +40,15 @@ export function createUserFields(user: User): UserField[] {
 export function UserInfoCard({ user }: { user: User }) {
   const userFields = createUserFields(user);
 
+  const addPasskey = async () => {
+    const response = await authClient.passkey.addPasskey();
+    if (!response) {
+      console.error("Failed to add passkey");
+      return;
+    }
+    console.log(response);
+  };
+
   return (
     <Card className="w-full max-w-md rounded-xl border border-border">
       <CardHeader className="flex flex-col items-center space-y-2">
@@ -53,22 +63,21 @@ export function UserInfoCard({ user }: { user: User }) {
         </CardTitle>
       </CardHeader>
 
-      <CardContent>
-        <div className="flex items-center justify-center">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={async () => {
-              const response = await authClient.passkey.addPasskey();
-              if (!response) {
-                console.error("Failed to add passkey");
-                return;
-              }
-              console.log(response);
-            }}
-          >
+      <CardContent className="space-y-4">
+        <div className="flex items-center justify-center gap-2">
+          <Button variant="outline" size="sm" onClick={addPasskey}>
             <span>Add Passkey</span>
           </Button>
+          <Form method="post" action={href("/signout")}>
+            <ButtonLoading
+              variant="outline"
+              size="sm"
+              type="submit"
+              submittingText="Signing Out..."
+            >
+              <span>Sign Out</span>
+            </ButtonLoading>
+          </Form>
         </div>
 
         <dl className="divide-y divide-gray-200 dark:divide-gray-700">

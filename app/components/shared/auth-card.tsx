@@ -1,27 +1,26 @@
 import { type SubmissionResult, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
-import { KeyIcon } from "lucide-react";
-import { Form, href, Link, useNavigation } from "react-router";
+import { Form, href, Link } from "react-router";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { Logo } from "@/components/shared/logo";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { configSite } from "@/config/site";
+import { useIsSubmitting } from "@/hooks/use-is-submitting";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
+import { AuthButtonProviders } from "./auth-button-providers";
 
 export function AuthCard({
-  mode = "signin",
+  cardMode = "signin",
   lastResult,
   className,
   ...props
 }: React.ComponentProps<"div"> & {
-  mode: "signup" | "signin" | "signout" | "forgot-password";
+  cardMode: "signup" | "signin" | "signout" | "forgot-password";
   lastResult: SubmissionResult | null | undefined;
 }) {
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+  const isSubmitting = useIsSubmitting();
 
   const [formSignUp, fieldsSignUp] = useForm({
     lastResult,
@@ -38,19 +37,19 @@ export function AuthCard({
     },
   });
 
-  const isSignUp = mode === "signup";
-  const isSignIn = mode === "signin";
-  const buttonSocialText = isSignUp ? "Sign Up" : "Sign In";
-  const buttonIdleText = isSignUp
-    ? "Create New Account"
-    : "Continue with Email";
-  const buttonSubmittingText = isSignUp
-    ? "Creating New Account..."
-    : "Signing In...";
+  const mode = {
+    isSignUp: cardMode === "signup",
+    isSignIn: cardMode === "signin",
+  };
 
-  const formActionPath = isSignUp ? href("/signup") : href("/signin");
-  const form = isSignUp ? formSignUp : formSignIn;
-  const fields = isSignUp ? fieldsSignUp : fieldsSignIn;
+  const modeValues = {
+    social: mode.isSignUp ? "Sign Up" : "Sign In",
+    idle: mode.isSignUp ? "Create New Account" : "Continue with Email",
+    submitting: mode.isSignUp ? "Creating New Account..." : "Signing In...",
+    formActionPath: mode.isSignUp ? href("/signup") : href("/signin"),
+    form: mode.isSignUp ? formSignUp : formSignIn,
+    fields: mode.isSignUp ? fieldsSignUp : fieldsSignIn,
+  };
 
   return (
     <section
@@ -62,48 +61,16 @@ export function AuthCard({
     >
       <div className="text-center">
         <Logo classNameText="font-black font-brand" />
-        {isSignUp && <p>Create your new account.</p>}
-        {isSignIn && <p>Continue with your account.</p>}
+        {mode.isSignUp && <p>Create your new account.</p>}
+        {mode.isSignIn && <p>Continue with your account.</p>}
       </div>
 
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-2">
-          {configSite.authSocialProviders.map((authSocial) => (
-            <Form
-              method="post"
-              action="/action/social"
-              key={authSocial.provider}
-            >
-              <input
-                type="hidden"
-                name="provider"
-                value={authSocial.provider}
-              />
-              <ButtonLoading
-                className="w-full"
-                key={authSocial.provider}
-                variant="secondary"
-                hasSpinner={false}
-              >
-                {authSocial.icon}
-                <span>
-                  {buttonSocialText} with {authSocial.label}
-                </span>
-              </ButtonLoading>
-            </Form>
-          ))}
-          {isSignIn && (
-            <Form method="post" action="/action/passkey">
-              <ButtonLoading
-                className="w-full"
-                variant="secondary"
-                hasSpinner={false}
-              >
-                <KeyIcon />
-                <span>{buttonSocialText} with Passkey</span>
-              </ButtonLoading>
-            </Form>
-          )}
+          <AuthButtonProviders
+            isSignIn={mode.isSignIn}
+            buttonSocialText={modeValues.social}
+          />
         </div>
 
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
@@ -115,12 +82,12 @@ export function AuthCard({
         <Form
           className="grid gap-4"
           method="post"
-          action={formActionPath}
-          id={form.id}
-          onSubmit={form.onSubmit}
+          action={modeValues.formActionPath}
+          id={modeValues.form.id}
+          onSubmit={modeValues.form.onSubmit}
         >
           <fieldset disabled={isSubmitting} className="grid gap-4">
-            {isSignUp && (
+            {mode.isSignUp && (
               <div className="grid gap-2">
                 <Label htmlFor="name">Full Name</Label>
                 <Input
@@ -133,7 +100,7 @@ export function AuthCard({
               </div>
             )}
 
-            {isSignUp && (
+            {mode.isSignUp && (
               <div className="grid gap-2">
                 <Label htmlFor="username">Username</Label>
                 <Input
@@ -153,15 +120,15 @@ export function AuthCard({
                 type="email"
                 placeholder="email@example.com"
                 required
-                name={fields.email.name}
+                name={modeValues.fields.email.name}
+                autoComplete="current-password webauthn"
               />
             </div>
 
             <div className="grid gap-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
-
-                {isSignIn && (
+                {mode.isSignIn && (
                   <Link
                     to={href("/forgot-password")}
                     className="text-xs leading-none"
@@ -174,29 +141,30 @@ export function AuthCard({
                 id="password"
                 type="password"
                 required
-                name={fields.password.name}
+                name={modeValues.fields.password.name}
+                autoComplete="current-password webauthn"
               />
             </div>
 
             <ButtonLoading
               type="submit"
               className="w-full"
-              submittingText={buttonSubmittingText}
+              submittingText={modeValues.submitting}
             >
-              {buttonIdleText}
+              {modeValues.idle}
             </ButtonLoading>
 
-            {form.errors && (
+            {modeValues.form.errors && (
               <Alert variant="destructive">
                 <AlertDescription className="text-xs">
-                  {form.errors}
+                  {modeValues.form.errors}
                 </AlertDescription>
               </Alert>
             )}
           </fieldset>
         </Form>
 
-        {isSignIn && (
+        {mode.isSignIn && (
           <div className="text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link to={href("/signup")} className="underline underline-offset-4">
@@ -206,7 +174,7 @@ export function AuthCard({
         )}
       </div>
 
-      {isSignUp && (
+      {mode.isSignUp && (
         <p className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
           By clicking continue, you agree to our{" "}
           <Link to={href("/about")}>Terms of Service</Link>,{" "}

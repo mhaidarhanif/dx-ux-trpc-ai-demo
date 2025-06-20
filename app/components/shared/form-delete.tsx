@@ -88,7 +88,7 @@ export function FormDelete({
               name="intent"
               value={intentValue}
               submittingText="Deleting"
-              isSubmitting={isSubmitting}
+              isSubmittingOverride={isSubmitting}
             >
               Delete
             </ButtonLoading>

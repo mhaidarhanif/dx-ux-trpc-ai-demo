@@ -72,8 +72,12 @@ export const auth = betterAuthConfig({
     haveIBeenPwned(),
     multiSession(),
     openAPI(), // Available on /api/auth/reference
-    passkey(),
-    twoFactor(),
+    passkey({
+      schema: { passkey: { modelName: "Passkey" } },
+    }),
+    twoFactor({
+      schema: { twoFactor: { modelName: "TwoFactor" } },
+    }),
     magicLink({
       sendMagicLink(data, request) {
         console.info({ data, request });

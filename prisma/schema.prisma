@@ -111,8 +111,6 @@ model TwoFactor {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("twoFactor")
 }
 
 model Passkey {
@@ -132,8 +130,7 @@ model Passkey {
   aaguid       String?
 
   createdAt DateTime? @default(now())
-
-  @@map("passkey")
+  updatedAt DateTime  @updatedAt
 }
 
 model Example {

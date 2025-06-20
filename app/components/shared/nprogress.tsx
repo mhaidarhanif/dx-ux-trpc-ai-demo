@@ -1,14 +1,12 @@
 import { useNProgress } from "@tanem/react-nprogress";
-import { useNavigation } from "react-router";
-
 import { Spinner } from "@/components/ui/spinner-icon";
+import { useIsLoading } from "@/hooks/use-is-loading";
 
 export function NProgress() {
-  const navigation = useNavigation();
-  const isAnimating = navigation.state === "loading";
+  const isLoading = useIsLoading();
 
   const { animationDuration, isFinished, progress } = useNProgress({
-    isAnimating,
+    isAnimating: isLoading,
   });
 
   return (
