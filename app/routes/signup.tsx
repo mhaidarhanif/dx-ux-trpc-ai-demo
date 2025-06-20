@@ -3,8 +3,11 @@ import { href, redirect } from "react-router";
 import { AuthCard } from "@/components/shared/auth-card";
 import { createTimer } from "@/lib/timer";
 import { AuthSignUpSchema } from "@/modules/auth/schema";
-import { requireAuthFalse } from "@/server/auth-helper";
-import { type BetterAuthResponse, betterAuth } from "@/server/better-auth";
+import {
+  type BetterAuthResponse,
+  requireAuthFalse,
+} from "@/server/auth-helper";
+import { betterAuth } from "@/server/better-auth";
 import type { Route } from "./+types/signin";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -28,13 +31,13 @@ export async function action({ request }: Route.ActionArgs) {
 
   const response = await betterAuth.api.signUpEmail({
     asResponse: true,
+    headers: request.headers,
     body: {
       ...submission.value,
       firstName: submission.value.name.split(" ")[0],
       lastName: submission.value.name.split(" ")[1],
     },
   });
-
   const json: BetterAuthResponse = await response.json();
 
   if (!response.ok) {

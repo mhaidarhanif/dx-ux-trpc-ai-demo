@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/generated/prisma/client";
 
 export function convertDecimalToNumber(
   value: Prisma.Decimal | null

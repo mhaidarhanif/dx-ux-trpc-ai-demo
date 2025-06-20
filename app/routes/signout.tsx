@@ -1,11 +1,11 @@
 import { Form, href, redirect } from "react-router";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { createTimer } from "@/lib/timer";
-import { requireAuthTrue } from "@/server/auth-helper";
 import {
   type BetterAuthResponseSignOut,
-  betterAuth,
-} from "@/server/better-auth";
+  requireAuthTrue,
+} from "@/server/auth-helper";
+import { betterAuth } from "@/server/better-auth";
 import type { Route } from "./+types/signout";
 
 export async function loader({ request }: Route.LoaderArgs) {

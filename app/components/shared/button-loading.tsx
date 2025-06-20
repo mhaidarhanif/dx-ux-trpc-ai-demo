@@ -7,19 +7,29 @@ import { Spinner } from "@/components/ui/spinner-icon";
 interface ButtonLoadingProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  submittingText?: React.ReactNode;
   hasSpinner?: boolean;
+  submittingText?: React.ReactNode;
+  isSubmitting?: boolean;
 }
 
 const ButtonLoading = React.forwardRef<HTMLButtonElement, ButtonLoadingProps>(
-  ({ submittingText = "", hasSpinner = true, children, ...props }, ref) => {
+  (
+    {
+      hasSpinner = true,
+      submittingText = "",
+      isSubmitting,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const navigation = useNavigation();
-    const isSubmitting = navigation.state === "submitting";
+    const isSubmittingValue = isSubmitting || navigation.state === "submitting";
 
     return (
-      <Button ref={ref} disabled={isSubmitting} {...props}>
-        {!isSubmitting && children}
-        {isSubmitting && (
+      <Button ref={ref} disabled={isSubmittingValue} {...props}>
+        {!isSubmittingValue && children}
+        {isSubmittingValue && (
           <>
             {hasSpinner && <Spinner />}
             {submittingText || children}

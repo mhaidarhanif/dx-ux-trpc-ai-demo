@@ -12,15 +12,6 @@ import {
 import { createUsername, createUsernameGitHub } from "@/lib/string";
 import { prisma } from "@/server/prisma";
 
-export type BetterAuthResponse = {
-  code: string;
-  message: string;
-};
-
-export type BetterAuthResponseSignOut = {
-  success: string;
-};
-
 export const betterAuth = betterAuthConfig({
   appName: "Dogokit Corgi",
 

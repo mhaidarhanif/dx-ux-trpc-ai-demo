@@ -1,6 +1,6 @@
 import { useRouteLoaderData } from "react-router";
 
-import type { loader } from "@/layouts/layout-app";
+import type { loader } from "@/root";
 
 export function useAuthUser() {
   const loaderData = useRouteLoaderData<typeof loader>("root");
