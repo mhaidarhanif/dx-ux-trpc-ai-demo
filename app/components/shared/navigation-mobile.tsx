@@ -16,14 +16,15 @@ export function NavigationMobile() {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="flex w-full items-center justify-between px-2 py-1">
+    <div className="flex w-full items-center justify-between">
       <Logo size="default" className="shrink-0" />
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
+            size="lg"
             variant="ghost"
             className={cn(
-              "extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent"
+              "extend-touch-target touch-manipulation items-center justify-start gap-2.5 pr-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent"
             )}
           >
             <div className="relative flex h-8 w-4 items-center justify-center">
