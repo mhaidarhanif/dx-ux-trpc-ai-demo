@@ -1,0 +1,45 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# General Rules
+
+## UI
+
+- Inconsistent or missing use of Tailwind responsive and state variants can cause poor mobile or interactive experience. Audit for missing responsive prefixes (e.g., md:, lg:) and state classes (hover:, focus:).
+- Lack of spacing utilities (e.g., space-y-4, gap-x-2) can lead to cramped or uneven layouts. Check for hardcoded margins/paddings or missing layout classes.
+- Absence of semantic HTML elements (e.g., using divs instead of buttons/links for actions) can reduce accessibility and clarity.
+
+## UX
+
+- Manual form handling or data fetching in components (useEffect, fetch in component) is an anti-pattern. All data loading and form actions should use loader/action and <Form> from react-router.
+- Navigation links should use <Link> or <NavLink> from react-router, never raw <a> tags or manual string URLs.
+- Missing <Outlet /> in layout routes prevents child routes from rendering, breaking navigation hierarchy.
+- No global or local loading/pending UI (e.g., using useNavigation for spinners) can make the app feel unresponsive.
+
+## Maintainability
+
+- Route type imports must always use ./+types/[routeName]. Any deviation (../+types/ or ../../+types/) will break type safety and autogeneration.
+- Never manually construct URLs for navigation or redirects. Always use href() for type-safe, maintainable links.
+- Avoid custom route type definitions. Use only the generated Route types.
+- Ensure all new/renamed routes are followed by bun typecheck to generate types.
+- Avoid legacy or deprecated packages (react-router-dom, @remix-run/*, React Router v6 patterns).
+
+## Security
+
+- Forms should use <Form method="post"> and not rely on custom JS handlers, to prevent CSRF and ensure progressive enhancement.
+- Avoid exposing sensitive data in loader return values or clientLoader fetches.
+- Validate and sanitize all formData in action/clientAction handlers before processing or storing.
+
+## More
+
+All of these can be checked and fixed in short time by:
+
+- Auditing imports and usage of react-router and Tailwind classes.
+- Replacing manual data fetching/form handling with loader/action and <Form>.
+- Running bun typecheck after route changes.
+- Ensuring all navigation uses <Link> and href().
+- Adding missing responsive, state, and spacing classes in UI components.
+- Verifying semantic HTML and accessibility basics.
+- Reviewing loader/action for data exposure and input validation.
