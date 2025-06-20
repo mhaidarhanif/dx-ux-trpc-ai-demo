@@ -6,7 +6,7 @@ export type SiteConfig = {
   ogImage: string;
   description: string;
   links: {
-    twitter: string;
+    x: string;
     github: string;
   };
   socialProviders: string[];
@@ -22,13 +22,13 @@ export type NavLinkItem = {
 
 export const siteConfig: SiteConfig = {
   name: "Dogokit Corgi",
-  url: "https://ui.shadcn.com",
+  url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "https://ui.shadcn.com/og.jpg",
   description:
-    "A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.",
+    "Full stack app development kit with React Router v7 Framework, tRPC, Prisma, Better Auth, Tailwind CSS, shadcn/ui",
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn-ui/ui",
+    x: "https://x.com/mhaidarhanif",
+    github: "https://github.com/dogokit/dogokit-corgi",
   },
   socialProviders: ["github", "google", "login"],
   navItems: [

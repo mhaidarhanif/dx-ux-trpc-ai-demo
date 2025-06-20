@@ -18,7 +18,7 @@ export function createUserFields(user: User): UserField[] {
     { label: "Name", value: user.name },
     { label: "First Name", value: user.firstName },
     { label: "Last Name", value: user.lastName },
-    { label: "Username", value: user.username },
+    { label: "Username", value: `@${user.username}` },
     { label: "Display Username", value: user.displayUsername },
     { label: "Email", value: user.email },
     { label: "Email Verified", value: user.emailVerified },

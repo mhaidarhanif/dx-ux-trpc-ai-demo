@@ -1,7 +1,7 @@
 import type { Route } from "./+types/forgot-password";
 
 export const meta: Route.MetaFunction = () => {
-  return [{ title: "Forgot Password - Dogokit Corgi" }];
+  return [{ title: "Forgot Password" }];
 };
 
 export default function ForgotPasswordRoute() {

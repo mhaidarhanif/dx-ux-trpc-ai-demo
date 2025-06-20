@@ -1,5 +1,5 @@
 import * as React from "react";
-import { href, Link, type LinkProps, useNavigate } from "react-router";
+import { href, Link, type LinkProps, NavLink, useNavigate } from "react-router";
 import { Logo } from "@/components/shared/logo";
 import { MenuIconAnimated } from "@/components/shared/menu-icon-animated";
 import { Button } from "@/components/ui/button";
@@ -54,7 +54,7 @@ export function NavigationMobile() {
           alignOffset={-16}
           sideOffset={8}
         >
-          <div className="flex flex-col gap-12 overflow-auto px-6 py-6">
+          <div className="flex flex-col gap-12 overflow-auto p-4">
             <NavSection
               title="Menu"
               items={siteConfig.navItems}
@@ -84,14 +84,14 @@ function NavSection({
   const [{ isAuthenticated }] = useAuthUser();
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col items-end gap-4">
       <span className="font-medium text-muted-foreground text-sm">{title}</span>
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-3 text-right">
         {filterNavItems(items, isAuthenticated).map((item, index) => (
-          <li key={index}>
-            <MobileLink to={item.to} onOpenChange={onOpenChange}>
+          <li key={index} className="flex w-full justify-end">
+            <NavLinkMobile to={item.to} onOpenChange={onOpenChange}>
               {item.label}
-            </MobileLink>
+            </NavLinkMobile>
           </li>
         ))}
       </ul>
@@ -99,7 +99,7 @@ function NavSection({
   );
 }
 
-function MobileLink({
+function NavLinkMobile({
   to,
   onOpenChange,
   className,
@@ -112,7 +112,7 @@ function MobileLink({
 }) {
   const navigate = useNavigate();
   return (
-    <Link
+    <NavLink
       to={to}
       onClick={() => {
         navigate(to);
@@ -122,6 +122,6 @@ function MobileLink({
       {...props}
     >
       {children}
-    </Link>
+    </NavLink>
   );
 }

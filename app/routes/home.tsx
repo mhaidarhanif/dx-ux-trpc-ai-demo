@@ -1,8 +1,4 @@
-import { CodeIcon, StarIcon } from "lucide-react";
-import { Anchor } from "@/components/shared/anchor";
-import { ButtonAnchor } from "@/components/shared/button-anchor";
-import { Flex } from "@/components/shared/flex";
-import { ContentIntro } from "@/components/ui/content";
+import { HomeHero } from "@/components/contents/home-hero";
 import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/home";
 
@@ -19,51 +15,5 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     <>
       <HomeHero hello={hello} />
     </>
-  );
-}
-
-function HomeHero({ hello }: { hello: string }) {
-  return (
-    <section className="container max-w-xl">
-      <article className="prose-config">
-        <ContentIntro>
-          <p>
-            <span>{hello}</span>.
-          </p>
-          <p>
-            Welcome to{" "}
-            <Anchor href="https://github.com/dogokit/dogokit-corgi">
-              Dogokit Corgi
-            </Anchor>
-            . A full stack web app kit with React Router v7 Framework, tRPC,
-            Better Auth, Prisma, Tailwind CSS, shadcn/ui, and more.
-          </p>
-        </ContentIntro>
-
-        <p>
-          This template is one of implementation details of{" "}
-          <Anchor href="https://github.com/dogokit/dogokit-akita">
-            Dogokit Akita
-          </Anchor>
-          . Designed to help you quickly get started with your own web
-          application. With a lot of configuration and boilerplate code already
-          set up.
-        </p>
-      </article>
-
-      <Flex>
-        <ButtonAnchor size="lg" href="https://github.com/dogokit/dogokit-corgi">
-          <StarIcon />
-          <span>Star on GitHub</span>
-        </ButtonAnchor>
-        <ButtonAnchor
-          size="lg"
-          href="https://github.com/new?template_name=dogokit-corgi&template_owner=dogokit"
-        >
-          <CodeIcon />
-          <span>Use Template</span>
-        </ButtonAnchor>
-      </Flex>
-    </section>
   );
 }

@@ -21,6 +21,7 @@ import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
 
 import "@/app.css";
+import { siteConfig } from "./config/site";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -41,16 +42,10 @@ export const links: Route.LinksFunction = () => [
 
 export const meta: Route.MetaFunction = () => {
   return [
-    { title: "Dogokit Corgi" },
-    {
-      property: "og:title",
-      content: "Dogokit Corgi",
-    },
-    {
-      name: "description",
-      content:
-        "Full stack app development kit with React Router v7 Framework, tRPC, Prisma, Better Auth, Tailwind CSS, shadcn/ui",
-    },
+    { title: siteConfig.name },
+    { name: "description", content: siteConfig.description },
+    { property: "og:title", content: siteConfig.name },
+    { property: "og:description", content: siteConfig.name },
   ];
 };
 
@@ -129,7 +124,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
       <HTMLDocument>
         <div className="space-y-4 p-4">
           <ContentHeading>Error</ContentHeading>
-          <p>Dogokit: {error.message}</p>
+          <p>{error.message}</p>
           <p>The stack trace:</p>
           <pre className="text-xs">{error.stack}</pre>
         </div>

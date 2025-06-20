@@ -3,7 +3,7 @@ import { ButtonLink } from "@/components/shared/button-link";
 import type { Route } from "./+types/404";
 
 export const meta: Route.MetaFunction = () => {
-  return [{ title: "404 Not Found - Dogokit Corgi" }];
+  return [{ title: "404 Not Found" }];
 };
 
 export default function NotFoundRoute() {

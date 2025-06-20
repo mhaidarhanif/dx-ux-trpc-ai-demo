@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 const logoVariants = cva("inline-flex items-center gap-1 font-semibold", {
@@ -46,7 +46,7 @@ interface LogoProps
 export function Logo({
   imageUrl = "/images/logos/dogokit.svg",
   altText = "Logo",
-  text = "Dogokit Corgi",
+  text = siteConfig.name,
   variant,
   size,
   className,
