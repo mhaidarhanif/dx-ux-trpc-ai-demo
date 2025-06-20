@@ -6,10 +6,7 @@ import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
 
 export function NavigationDesktopLinks({ items }: { items: NavLinkItem[] }) {
-  const { isAuthenticated, user } = useAuthUser();
-
-  console.log({ isAuthenticated, user });
-
+  const { isAuthenticated } = useAuthUser();
   return (
     <ul className="inline-flex gap-2">
       {filterNavItems(items, isAuthenticated).map((item) => (

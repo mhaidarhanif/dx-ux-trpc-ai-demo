@@ -17,6 +17,10 @@ export type BetterAuthResponse = {
   message: string;
 };
 
+export type BetterAuthResponseSignOut = {
+  success: string;
+};
+
 export const betterAuth = betterAuthConfig({
   appName: "Dogokit Corgi",
 

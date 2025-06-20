@@ -42,6 +42,5 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   await timer.delay();
-
   return redirect(href("/dashboard"), { headers: response.headers });
 }

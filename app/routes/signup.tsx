@@ -45,6 +45,5 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   await timer.delay();
-
   return redirect(href("/signin"), { headers: response.headers });
 }
