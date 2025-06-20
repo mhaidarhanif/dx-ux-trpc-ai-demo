@@ -1,6 +1,25 @@
 import { href } from "react-router";
 
-export const siteConfig = {
+export type SiteConfig = {
+  name: string;
+  url: string;
+  ogImage: string;
+  description: string;
+  links: {
+    twitter: string;
+    github: string;
+  };
+  navItems: NavLinkItem[];
+  authNavLinkItems: NavLinkItem[];
+};
+
+export type NavLinkItem = {
+  to: ReturnType<typeof href>;
+  label: string;
+  auth?: boolean;
+};
+
+export const siteConfig: SiteConfig = {
   name: "Dogokit Corgi",
   url: "https://ui.shadcn.com",
   ogImage: "https://ui.shadcn.com/og.jpg",
@@ -15,6 +34,12 @@ export const siteConfig = {
     { to: href("/about"), label: "About" },
     { to: href("/examples"), label: "Examples" },
     { to: "/404", label: "404" },
+  ],
+  authNavLinkItems: [
+    { to: href("/signup"), label: "Sign Up", auth: false },
+    { to: href("/signin"), label: "Sign In", auth: false },
+    { to: href("/signout"), label: "Sign Out", auth: true },
+    { to: href("/dashboard"), label: "Dashboard", auth: true },
   ],
 };
 

@@ -6,16 +6,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import type { NavLinkItem } from "@/config/navigation";
+import { siteConfig } from "@/config/site";
+import { useAuthUser } from "@/hooks/use-auth-user";
 import { cn } from "@/lib/utils";
 
-export function MobileNav({
-  items,
-  className,
-}: {
-  items: NavLinkItem[];
-  className?: string;
-}) {
+export function NavigationMobile() {
+  const [{ isAuthenticated }] = useAuthUser();
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -24,12 +20,11 @@ export function MobileNav({
         <Button
           variant="ghost"
           className={cn(
-            "extend-touch-target !p-0 h-8 touch-manipulation items-center justify-start gap-2.5 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
-            className
+            "extend-touch-target !p-0 h-8 touch-manipulation items-center justify-start gap-2.5 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent"
           )}
         >
           <div className="relative flex h-8 w-4 items-center justify-center">
-            <div className="relative size-4">
+            <div id="menu-icon-animated" className="relative size-4">
               <span
                 className={cn(
                   "absolute left-0 block h-0.5 w-4 bg-foreground transition-all duration-100",
@@ -50,6 +45,7 @@ export function MobileNav({
           </span>
         </Button>
       </PopoverTrigger>
+
       <PopoverContent
         className="no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none bg-background/90 p-0 shadow-none backdrop-blur duration-100"
         align="start"
@@ -62,16 +58,21 @@ export function MobileNav({
             <div className="font-medium text-muted-foreground text-sm">
               Menu
             </div>
-            <div className="flex flex-col gap-3">
-              <MobileLink to="/" onOpenChange={setOpen}>
-                Home
-              </MobileLink>
-              {items.map((item, index) => (
-                <MobileLink key={index} to={item.to} onOpenChange={setOpen}>
-                  {item.label}
-                </MobileLink>
-              ))}
-            </div>
+            <ul className="flex flex-col gap-3">
+              {siteConfig.navItems
+                .filter((item) => {
+                  if (item.auth === true) return isAuthenticated;
+                  if (item.auth === false) return !isAuthenticated;
+                  return true;
+                })
+                .map((item, index) => (
+                  <li key={index}>
+                    <MobileLink to={item.to} onOpenChange={setOpen}>
+                      {item.label}
+                    </MobileLink>
+                  </li>
+                ))}
+            </ul>
           </div>
         </div>
       </PopoverContent>
