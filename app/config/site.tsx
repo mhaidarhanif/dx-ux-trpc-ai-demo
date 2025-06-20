@@ -3,6 +3,7 @@ import type { JSX } from "react";
 import { href } from "react-router";
 
 export const configSite: ConfigSite = {
+  id: "dogokit",
   name: "Dogokit Corgi",
   url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "/og/dogokit.jpg",
@@ -35,6 +36,7 @@ export const configSite: ConfigSite = {
 };
 
 export type ConfigSite = {
+  id: string;
   name: string;
   url: string;
   ogImage?: string;

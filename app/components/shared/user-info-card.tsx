@@ -1,5 +1,5 @@
 import { CheckIcon, MinusIcon, XIcon } from "lucide-react";
-import { Form, href } from "react-router";
+import { Form, href, useNavigate } from "react-router";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { AvatarAuto } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -38,15 +38,18 @@ export function createUserFields(user: User): UserField[] {
 }
 
 export function UserInfoCard({ user }: { user: User }) {
+  const navigate = useNavigate();
+
   const userFields = createUserFields(user);
 
   const addPasskey = async () => {
-    const response = await authClient.passkey.addPasskey();
-    if (!response) {
-      console.error("Failed to add passkey");
-      return;
-    }
-    console.log(response);
+    await authClient.passkey.addPasskey();
+    navigate(0);
+  };
+
+  const revokeAllSessions = async () => {
+    await authClient.revokeOtherSessions();
+    navigate(0);
   };
 
   return (
@@ -65,13 +68,16 @@ export function UserInfoCard({ user }: { user: User }) {
 
       <CardContent className="space-y-4">
         <div className="flex items-center justify-center gap-2">
-          <Button variant="outline" size="sm" onClick={addPasskey}>
+          <Button size="xs" variant="outline" onClick={addPasskey}>
             <span>Add Passkey</span>
+          </Button>
+          <Button size="xs" variant="outline" onClick={revokeAllSessions}>
+            <span>Revoke All Sessions</span>
           </Button>
           <Form method="post" action={href("/signout")}>
             <ButtonLoading
+              size="xs"
               variant="outline"
-              size="sm"
               type="submit"
               submittingText="Signing Out..."
             >

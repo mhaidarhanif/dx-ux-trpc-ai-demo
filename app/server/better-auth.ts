@@ -11,6 +11,7 @@ import {
   username,
 } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
+import { configSite } from "@/config/site";
 import { createUsername, createUsernameGitHub } from "@/lib/string";
 import { prisma } from "@/server/prisma";
 
@@ -74,9 +75,9 @@ export const auth = betterAuthConfig({
     openAPI(), // Available on /api/auth/reference
     passkey({
       schema: { passkey: { modelName: "Passkey" } },
-      authenticatorSelection: {
-        authenticatorAttachment: "platform",
-      },
+      // rpID: configSite.id,
+      rpName: configSite.name,
+      origin: process.env.BETTER_AUTH_URL,
     }),
     twoFactor({
       schema: { twoFactor: { modelName: "TwoFactor" } },
