@@ -15,10 +15,10 @@ export const configSite: ConfigSite = {
   },
 
   authOptions: ["social", "passkey", "email", "magic", "anonymous"],
-  socialProviders: ["github", "google"],
+  socialProviders: ["google", "github"],
   socialProviderButtons: [
-    { provider: "github", label: "GitHub", icon: <SiGithub /> },
     { provider: "google", label: "Google", icon: <SiGoogle /> },
+    { provider: "github", label: "GitHub", icon: <SiGithub /> },
   ],
 
   navItems: [

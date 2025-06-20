@@ -1,13 +1,8 @@
-import { useEffect } from "react";
 import { Theme, useTheme } from "remix-themes";
 
 export function ThemeToggle() {
   const [theme, setTheme, themeMetaData] = useTheme();
   const { definedBy } = themeMetaData;
-
-  useEffect(() => {
-    console.info("THEME", { theme, definedBy });
-  }, [definedBy, theme]);
 
   return (
     <div>

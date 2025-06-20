@@ -64,7 +64,7 @@ export const QRCode = ({
 
         setSVG(newSvg);
       } catch (err) {
-        console.error(err);
+        console.error("QR_CODE", err);
       }
     };
 

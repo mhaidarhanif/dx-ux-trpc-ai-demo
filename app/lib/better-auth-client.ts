@@ -1,3 +1,4 @@
+import { polarClient } from "@polar-sh/better-auth";
 import {
   adminClient,
   magicLinkClient,
@@ -32,6 +33,7 @@ export const authClient = createAuthClient({
       additionalOptions: {},
       promptOptions: { baseDelay: 2000, maxAttempts: 10 },
     }),
+    polarClient(),
   ],
 });
 

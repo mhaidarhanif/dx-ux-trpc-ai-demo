@@ -8,7 +8,6 @@ export function useOneTap() {
 
   useEffect(() => {
     void authClient.oneTap({
-      cancelOnTapOutside: true,
       fetchOptions: {
         onSuccess: () => {
           navigate("/dashboard");

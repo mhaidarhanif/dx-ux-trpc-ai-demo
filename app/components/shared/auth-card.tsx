@@ -24,8 +24,6 @@ export function AuthCard({
 }) {
   const isSubmitting = useIsSubmitting();
 
-  useOneTap();
-
   const [formSignUp, fieldsSignUp] = useForm({
     lastResult,
     onValidate({ formData }) {

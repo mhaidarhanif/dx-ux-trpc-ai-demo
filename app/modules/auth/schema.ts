@@ -7,8 +7,8 @@ export const AuthSocialSchema = z.object({
 
 export const AuthFormSchema = z.object({
   name: z.string(),
-  username: z.string(),
-  email: z.string(),
+  username: z.string().min(8).max(128),
+  email: z.email(),
   password: z.string(),
 });
 

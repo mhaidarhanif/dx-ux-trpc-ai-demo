@@ -1,8 +1,16 @@
-import { betterAuth as betterAuthConfig } from "better-auth";
+import {
+  checkout,
+  polar,
+  portal,
+  usage,
+  webhooks,
+} from "@polar-sh/better-auth";
+import { betterAuth as betterAuthConfig, type User } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import {
   admin,
   anonymous,
+  emailOTP,
   haveIBeenPwned,
   magicLink,
   multiSession,
@@ -14,11 +22,16 @@ import {
 import { passkey } from "better-auth/plugins/passkey";
 import { configSite } from "@/config/site";
 import { createUsername, createUsernameGitHub } from "@/lib/string";
+import { polarClient } from "@/server/polar";
 import { prisma } from "@/server/prisma";
 
 export const auth = betterAuthConfig({
   appName: configSite.name,
+  baseURL: process.env.BETTER_AUTH_URL,
+  basePath: "/api/auth",
+
   database: prismaAdapter(prisma, { provider: "postgresql" }),
+
   advanced: { database: { generateId: false } },
 
   user: {
@@ -29,17 +42,93 @@ export const auth = betterAuthConfig({
       lang: { type: "string", required: false, defaultValue: "en" },
       theme: { type: "string", required: false, defaultValue: "" },
     },
+    changeEmail: {
+      enabled: true,
+      sendChangeEmailVerification: async ({ user, newEmail, url, token }) => {
+        // Send change email verification
+        console.info("SEND_CHANGE_EMAIL_VERIFICATION", {
+          user,
+          newEmail,
+          url,
+          token,
+        });
+      },
+      deleteUser: {
+        enabled: true,
+        sendDeleteAccountVerification: async ({
+          user,
+          url,
+          token,
+        }: {
+          user: User;
+          url: string;
+          token: string;
+        }) => {
+          // Send delete account verification
+          console.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
+            user,
+            url,
+            token,
+          });
+        },
+        beforeDelete: async (user: User) => {
+          // Perform actions before user deletion
+          console.info("BEFORE_DELETE", { user });
+        },
+        afterDelete: async (user: User) => {
+          // Perform cleanup after user deletion
+          console.info("AFTER_DELETE", { user });
+        },
+      },
+    },
   },
+
   session: {
     modelName: "Session",
   },
+
   account: {
     modelName: "Account",
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["email-password", "google", "github"],
+      allowDifferentEmails: true,
+      allowUnlinkingAll: true,
+    },
+    updateAccountOnSignIn: true,
+  },
+
+  verification: {
+    modelName: "Verification",
+    disableCleanup: false,
+  },
+
+  rateLimit: {
+    enabled: true,
   },
 
   emailAndPassword: {
     enabled: true,
+    disableSignUp: false,
     requireEmailVerification: false,
+    minPasswordLength: 8,
+    maxPasswordLength: 128,
+    autoSignIn: true,
+    sendResetPassword: async ({ user, url, token }) => {
+      // Send reset password email
+      console.info("SEND_RESET_PASSWORD", { user, url, token });
+    },
+    resetPasswordTokenExpiresIn: 3600, // 1 hour
+  },
+
+  emailVerification: {
+    sendVerificationEmail: async ({ user, url, token }) => {
+      // Send verification email to user
+      console.info("SEND_VERIFICATION_EMAIL", { user, url, token });
+    },
+    sendOnSignUp: true,
+    autoSignInAfterVerification: true,
+    expiresIn: 3600, // 1 hour
   },
 
   socialProviders: {
@@ -75,20 +164,31 @@ export const auth = betterAuthConfig({
     multiSession(),
     oneTap(), // TODO: mapProfileToUser: username
     openAPI(), // Available on /api/auth/reference
+
+    emailOTP({
+      sendVerificationOTP: async ({ email, otp, type }) => {
+        // Send OTP to user's email
+        console.info("SEND_OTP", { email, otp, type });
+      },
+    }),
+
     passkey({
       schema: { passkey: { modelName: "Passkey" } },
       rpID: configSite.id,
       rpName: configSite.name,
       origin: process.env.BETTER_AUTH_URL,
     }),
+
     twoFactor({
       schema: { twoFactor: { modelName: "TwoFactor" } },
     }),
+
     magicLink({
       sendMagicLink(data, request) {
-        console.info({ data, request });
+        console.info("SEND_MAGIC_LINK", { data, request });
       },
     }),
+
     username({
       minUsernameLength: 2,
       maxUsernameLength: 20,
@@ -100,5 +200,52 @@ export const auth = betterAuthConfig({
         }
       },
     }),
+
+    polar({
+      client: polarClient,
+      createCustomerOnSignUp: true,
+      use: [
+        checkout({
+          products: [
+            {
+              productId: "123-456-789", // ID of Product from Polar Dashboard
+              slug: "pro", // Custom slug, reference Checkout URL /checkout/pro
+            },
+          ],
+          successUrl: "/success?checkout_id={CHECKOUT_ID}",
+          authenticatedUsersOnly: true,
+        }),
+        portal(),
+        usage(),
+        webhooks({
+          secret: process.env.POLAR_WEBHOOK_SECRET as string,
+          // onCustomerStateChanged: (payload) => // Triggered when anything regarding a customer changes
+          // onOrderPaid: (payload) => // Triggered when an order was paid (purchase, subscription renewal, etc.)
+          // // ...  // Over 25 granular webhook handlers
+          // onPayload: (payload) => // Catch-all for all events
+        }),
+      ],
+    }),
   ],
+
+  // databaseHooks: {
+  //   user: {
+  //     create: {
+  //       before: async (userData) => {
+  //         return { data: { ...userData } };
+  //       },
+  //       after: async (userData) => {
+  //         console.info("USER_CREATE_AFTER", userData);
+  //       },
+  //     },
+  //     update: {
+  //       before: async (userData) => {
+  //         return { data: { ...userData } };
+  //       },
+  //       after: async (userData) => {
+  //         console.info("USER_UPDATE_AFTER", userData);
+  //       },
+  //     },
+  //   },
+  // },
 });

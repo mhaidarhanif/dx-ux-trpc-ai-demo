@@ -31,7 +31,7 @@ export default function SignOutRoute({ loaderData }: Route.ComponentProps) {
 }
 
 export async function action({ request }: Route.ActionArgs) {
-  const timer = createTimer(1000);
+  const timer = createTimer();
 
   const response = await auth.api.signOut({
     asResponse: true,
