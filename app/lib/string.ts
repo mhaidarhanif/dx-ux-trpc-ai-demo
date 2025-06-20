@@ -58,6 +58,15 @@ export function createSlug(...args: string[]) {
   return slugify(textToSlug, { lower: true, strict: true });
 }
 
+export function createUsername(...args: string[]) {
+  const textToSlug = args.join("_").replace(/-/g, "_");
+  return slugify(textToSlug, { lower: true, strict: true, replacement: "_" });
+}
+
+export function createUsernameGitHub(login: string) {
+  return login.replace(/-/g, "_");
+}
+
 export function formatPlural(word: string, count: number) {
   return pluralize(word, count, true);
 }
