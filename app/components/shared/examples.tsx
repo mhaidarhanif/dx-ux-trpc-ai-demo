@@ -11,13 +11,11 @@ import type { RouterOutputs } from "@/lib/trpc-client";
 export function Examples({
   examples,
 }: {
-  examples: RouterOutputs["greeting"]["getExamples"];
+  examples: RouterOutputs["example"]["getExamples"];
 }) {
   return (
     <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-      {examples.length <= 0 && (
-        <div className="text-center">No examples found.</div>
-      )}
+      {examples.length <= 0 && <p>No examples found.</p>}
 
       {examples.length > 0 &&
         examples.map((example) => (
