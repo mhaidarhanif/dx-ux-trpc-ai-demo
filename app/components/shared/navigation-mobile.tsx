@@ -7,12 +7,46 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { siteConfig } from "@/config/site";
+import { type NavLinkItem, siteConfig } from "@/config/site";
 import { useAuthUser } from "@/hooks/use-auth-user";
 import { cn } from "@/lib/utils";
 
-export function NavigationMobile() {
+function filterNavItems(items: NavLinkItem[], isAuthenticated: boolean) {
+  return items.filter((item) => {
+    if (item.auth === true) return isAuthenticated;
+    if (item.auth === false) return !isAuthenticated;
+    return true;
+  });
+}
+
+function NavSection({
+  title,
+  items,
+  onOpenChange,
+}: {
+  title: string;
+  items: NavLinkItem[];
+  onOpenChange: (open: boolean) => void;
+}) {
   const [{ isAuthenticated }] = useAuthUser();
+
+  return (
+    <section className="flex flex-col gap-4">
+      <div className="font-medium text-muted-foreground text-sm">{title}</div>
+      <ul className="flex flex-col gap-3">
+        {filterNavItems(items, isAuthenticated).map((item, index) => (
+          <li key={index}>
+            <MobileLink to={item.to} onOpenChange={onOpenChange}>
+              {item.label}
+            </MobileLink>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function NavigationMobile() {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -57,26 +91,16 @@ export function NavigationMobile() {
           sideOffset={14}
         >
           <div className="flex flex-col gap-12 overflow-auto px-6 py-6">
-            <div className="flex flex-col gap-4">
-              <div className="font-medium text-muted-foreground text-sm">
-                Menu
-              </div>
-              <ul className="flex flex-col gap-3">
-                {siteConfig.navItems
-                  .filter((item) => {
-                    if (item.auth === true) return isAuthenticated;
-                    if (item.auth === false) return !isAuthenticated;
-                    return true;
-                  })
-                  .map((item, index) => (
-                    <li key={index}>
-                      <MobileLink to={item.to} onOpenChange={setOpen}>
-                        {item.label}
-                      </MobileLink>
-                    </li>
-                  ))}
-              </ul>
-            </div>
+            <NavSection
+              title="Menu"
+              items={siteConfig.navItems}
+              onOpenChange={setOpen}
+            />
+            <NavSection
+              title="Auth"
+              items={siteConfig.navAuthItems}
+              onOpenChange={setOpen}
+            />
           </div>
         </PopoverContent>
       </Popover>
