@@ -1,11 +1,11 @@
 import { NavLink } from "react-router";
 import { buttonVariants } from "@/components/ui/button";
-import type { NavLinkItem } from "@/config/site";
+import type { NavItem } from "@/config/site";
 import { useAuthUser } from "@/hooks/use-auth-user";
 import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
 
-export function NavigationDesktopLinks({ items }: { items: NavLinkItem[] }) {
+export function NavigationDesktopLinks({ items }: { items: NavItem[] }) {
   const { isAuthenticated } = useAuthUser();
   return (
     <ul className="inline-flex gap-2">

@@ -68,7 +68,7 @@ export function AuthCard({
 
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-4">
-          {configSite.authSocials.map((authSocial) => (
+          {configSite.authSocialProviders.map((authSocial) => (
             <Form
               action="/action/social"
               method="post"

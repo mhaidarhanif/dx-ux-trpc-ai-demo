@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { configSite, type NavLinkItem } from "@/config/site";
+import { configSite, type NavItem } from "@/config/site";
 import { useAuthUser } from "@/hooks/use-auth-user";
 import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
@@ -78,7 +78,7 @@ function NavSection({
   onOpenChange,
 }: {
   title: string;
-  items: NavLinkItem[];
+  items: NavItem[];
   onOpenChange: (open: boolean) => void;
 }) {
   const { isAuthenticated } = useAuthUser();
