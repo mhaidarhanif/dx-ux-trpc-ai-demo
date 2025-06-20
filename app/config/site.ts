@@ -10,7 +10,7 @@ export type SiteConfig = {
     github: string;
   };
   navItems: NavLinkItem[];
-  authNavLinkItems: NavLinkItem[];
+  navAuthItems: NavLinkItem[];
 };
 
 export type NavLinkItem = {
@@ -35,7 +35,7 @@ export const siteConfig: SiteConfig = {
     { to: href("/examples"), label: "Examples" },
     { to: "/404", label: "404" },
   ],
-  authNavLinkItems: [
+  navAuthItems: [
     { to: href("/signup"), label: "Sign Up", auth: false },
     { to: href("/signin"), label: "Sign In", auth: false },
     { to: href("/signout"), label: "Sign Out", auth: true },
