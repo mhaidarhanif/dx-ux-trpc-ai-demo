@@ -13,7 +13,7 @@ export default function SignOutRoute({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <section className="space-y-4 p-8">
-        <h1>Sign out account</h1>
+        <h1 className="text-2xl">Sign out account</h1>
         <p>
           @{loaderData.user?.username} ({loaderData.user?.email})
         </p>

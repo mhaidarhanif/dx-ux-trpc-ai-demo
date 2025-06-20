@@ -19,6 +19,7 @@ import { TRPCReactProvider } from "@/lib/trpc-client";
 import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
 import "@/app.css";
+import { ContentHeading } from "./components/ui/content";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -54,9 +55,7 @@ export const meta: Route.MetaFunction = () => {
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { getTheme } = await themeSessionResolver(request);
-  return {
-    theme: getTheme(),
-  };
+  return { theme: getTheme() };
 }
 
 export default function RootRoute({ loaderData }: Route.ComponentProps) {
@@ -65,13 +64,19 @@ export default function RootRoute({ loaderData }: Route.ComponentProps) {
       specifiedTheme={loaderData.theme}
       themeAction="/action/set-theme"
     >
-      <App />
+      <HTMLDocumentThemed>
+        <Outlet />
+      </HTMLDocumentThemed>
     </ThemeProvider>
   );
 }
 
-export function App() {
-  const loaderData = useLoaderData();
+export function HTMLDocumentThemed({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const loaderData = useLoaderData<typeof loader>();
   const [theme] = useTheme();
 
   return (
@@ -85,9 +90,7 @@ export function App() {
       </head>
 
       <body>
-        <TRPCReactProvider>
-          <Outlet />
-        </TRPCReactProvider>
+        <TRPCReactProvider>{children}</TRPCReactProvider>
 
         <ScrollRestoration />
         <Scripts />
@@ -96,30 +99,46 @@ export function App() {
   );
 }
 
+export function HTMLDocument({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
+
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   if (isRouteErrorResponse(error)) {
     return (
-      <Layout>
-        <h1>
-          {error.status} {error.statusText}
-        </h1>
-        <p>{error.data}</p>
-      </Layout>
+      <HTMLDocumentThemed>
+        <Layout>
+          <h1>
+            {error.status} {error.statusText}
+          </h1>
+          <p>{error.data}</p>
+        </Layout>
+      </HTMLDocumentThemed>
     );
   } else if (error instanceof Error) {
     return (
-      <>
-        <h1>Error</h1>
-        <p>{error.message}</p>
-        <p>The stack trace is:</p>
-        <pre>{error.stack}</pre>
-      </>
+      <HTMLDocument>
+        <div className="space-y-4 p-4">
+          <ContentHeading>Error</ContentHeading>
+          <p>Dogokit: {error.message}</p>
+          <p>The stack trace:</p>
+          <pre className="text-xs">{error.stack}</pre>
+        </div>
+      </HTMLDocument>
     );
   } else {
     return (
-      <>
+      <HTMLDocument>
         <h1>Unknown Error</h1>
-      </>
+      </HTMLDocument>
     );
   }
 }
