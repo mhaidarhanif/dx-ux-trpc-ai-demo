@@ -1,7 +1,9 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit",
-    "source.action.useSortedKeys.biome": "explicit"
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[postcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
@@ -9,8 +11,12 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.action.useSortedKeys.biome": "explicit",
+    "source.fixAll.biome": "explicit"
+  },
   "peacock.color": "#a5b4fc",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#d6ddfe",
     "activityBar.background": "#d6ddfe",
