@@ -22,6 +22,28 @@ type UserField = {
   isCode?: boolean;
 };
 
+function createUserFields(user: User): UserField[] {
+  return [
+    { label: "ID", value: user.id, isCode: true },
+    { label: "Name", value: user.name },
+    { label: "First Name", value: user.firstName },
+    { label: "Last Name", value: user.lastName },
+    { label: "Username", value: user.username },
+    { label: "Display Username", value: user.displayUsername },
+    { label: "Email", value: user.email },
+    { label: "Email Verified", value: user.emailVerified },
+    { label: "Phone Number", value: user.phoneNumber },
+    { label: "Phone Verified", value: user.phoneNumberVerified },
+    { label: "Role", value: user.role },
+    { label: "2FA", value: user.twoFactorEnabled },
+    { label: "Banned", value: user.banned },
+    { label: "Ban Reason", value: user.banReason },
+    { label: "Ban Expires", value: formatDate(user.banExpires) },
+    { label: "Created At", value: formatDate(user.createdAt) },
+    { label: "Updated At", value: formatDate(user.updatedAt) },
+  ];
+}
+
 export default function UserDashboardRoute({
   loaderData,
 }: Route.ComponentProps) {
@@ -33,26 +55,6 @@ export default function UserDashboardRoute({
         <div className="text-gray-500">No user data found.</div>
       </div>
     );
-  }
-
-  function createUserFields(user: User): UserField[] {
-    return [
-      { label: "ID", value: user.id, isCode: true },
-      { label: "Name", value: user.name },
-      { label: "First Name", value: user.firstName },
-      { label: "Last Name", value: user.lastName },
-      { label: "Email", value: user.email },
-      { label: "Email Verified", value: user.emailVerified },
-      { label: "Phone Number", value: user.phoneNumber },
-      { label: "Phone Verified", value: user.phoneNumberVerified },
-      { label: "Role", value: user.role },
-      { label: "2FA", value: user.twoFactorEnabled },
-      { label: "Banned", value: user.banned },
-      { label: "Ban Reason", value: user.banReason },
-      { label: "Ban Expires", value: formatDate(user.banExpires) },
-      { label: "Created At", value: formatDate(user.createdAt) },
-      { label: "Updated At", value: formatDate(user.updatedAt) },
-    ];
   }
 
   const userFields = createUserFields(user);

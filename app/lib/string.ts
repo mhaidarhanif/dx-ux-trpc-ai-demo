@@ -53,9 +53,9 @@ export function createNanoIdShort() {
   return nanoid();
 }
 
-export function createSlug(text: string | undefined) {
-  if (!text) return "";
-  return slugify(text, { lower: true, strict: true });
+export function createSlug(...args: string[]) {
+  const textToSlug = args.join("-");
+  return slugify(textToSlug, { lower: true, strict: true });
 }
 
 export function formatPlural(word: string, count: number) {

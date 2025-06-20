@@ -3,7 +3,6 @@ import { parseWithZod } from "@conform-to/zod/v4";
 import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 import { Form, href, Link } from "react-router";
 import { Logo } from "@/components/shared/logo";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/better-auth-client";
@@ -78,14 +77,22 @@ export function AuthCard({
 
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-4">
-          <Button variant="secondary" onClick={signInGitHub}>
+          <ButtonLoading
+            variant="secondary"
+            onClick={signInGitHub}
+            submittingText={`${buttonSubmittingText} with GitHub`}
+          >
             <SiGithub />
             <span>{buttonText} with GitHub</span>
-          </Button>
-          <Button variant="secondary" onClick={signInGoogle}>
+          </ButtonLoading>
+          <ButtonLoading
+            variant="secondary"
+            onClick={signInGoogle}
+            submittingText={`${buttonSubmittingText} with Google`}
+          >
             <SiGoogle />
             <span>{buttonText} with Google</span>
-          </Button>
+          </ButtonLoading>
         </div>
 
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">

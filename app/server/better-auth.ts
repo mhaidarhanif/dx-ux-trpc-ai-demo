@@ -9,7 +9,7 @@ import {
   twoFactor,
   username,
 } from "better-auth/plugins";
-
+import { createSlug } from "@/lib/string";
 import { prisma } from "@/server/prisma";
 
 export type BetterAuthResponse = {
@@ -56,9 +56,11 @@ export const betterAuth = betterAuthConfig({
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
       mapProfileToUser: (profile) => {
+        const nameParts = profile.name.split(" ");
         return {
-          firstName: profile.name.split(" ")[0],
-          lastName: profile.name.split(" ")[1],
+          username: profile.login,
+          firstName: nameParts.slice(0, -1).join(" "),
+          lastName: nameParts.slice(-1).join(" "),
         };
       },
     },
@@ -67,6 +69,7 @@ export const betterAuth = betterAuthConfig({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       mapProfileToUser: (profile) => {
         return {
+          username: createSlug(profile.given_name, profile.family_name),
           firstName: profile.given_name,
           lastName: profile.family_name,
         };

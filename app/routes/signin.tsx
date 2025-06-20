@@ -29,6 +29,7 @@ export async function action({ request }: Route.ActionArgs) {
   const response = await betterAuth.api.signInEmail({
     asResponse: true,
     body: submission.value,
+    headers: request.headers,
   });
 
   const json: BetterAuthResponse = await response.json();
