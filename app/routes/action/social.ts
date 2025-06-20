@@ -20,8 +20,6 @@ export async function action({ request }: Route.ActionArgs) {
     },
   });
 
-  console.log({ authSocialResponse });
-
   await timer.delay();
 
   if (!authSocialResponse.redirect || !authSocialResponse.url) {

@@ -34,8 +34,6 @@ export async function action({ request }: Route.ActionArgs) {
 
   const json: BetterAuthResponse = await response.json();
 
-  console.log({ signIn: json });
-
   if (!response.ok) {
     return submission.reply({
       formErrors: [json.message || "Failed to sign in or authenticate"],
