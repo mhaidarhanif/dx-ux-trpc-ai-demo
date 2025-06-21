@@ -9,7 +9,7 @@ export function HomeHero({ hello }: { hello: string }) {
     <section className="container max-w-xl">
       <article className="prose-config">
         <ContentIntro>
-          <p>{hello}.</p>
+          <p>{hello}</p>
           <p>
             Welcome to{" "}
             <Anchor href="https://github.com/dogokit/dogokit-corgi">

@@ -26,9 +26,7 @@ export function Examples({
                   {example.name}
                 </CardTitle>
                 <CardDescription>
-                  <p className="break-all text-gray-500 text-xs">
-                    {example.id}
-                  </p>
+                  <p className="break-all text-xs">{example.id}</p>
                 </CardDescription>
               </CardHeader>
               <CardContent>

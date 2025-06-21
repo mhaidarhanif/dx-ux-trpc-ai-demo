@@ -9,29 +9,32 @@
 
 ## Goal
 
-[Dogokit Corgi](https://github.com/dogokit/dogokit-corgi) is the implementation details of [Dogokit Akita](https://github.com/dogokit/dogokit-akita), using:
+[Dogokit Corgi](https://github.com/dogokit/dogokit-corgi) is the implementation details of [Dogokit Akita](https://github.com/dogokit/dogokit-akita). This template is optimized for the shortest time to production, but with long-term development as well.
 
+### Tech Stack
+
+- [x] TypeScript
+- [x] Bun v1
+- [x] Biome v2
+- [x] Vite v6
 - [x] React v19
-- [x] React Router v7 Framework
+- [x] React Router v7 Framework (Remix)
   - [x] Themes
+  - [x] Integration with tRPC and Better Auth
 - [x] tRPC v11
-- [x] Prisma v6
+- [x] Prisma ORM v6
 - [x] Tailwind CSS v4
   - [x] `shadcn/ui` with single `radix-ui`
-  - [ ] Google Fonts
   - [ ] React Email
 - [x] Zod v4 & Conform v1
 - [x] Better Auth v1
 - [x] Docker v28
 - [x] PostgreSQL v17
-- [x] Bun
-- [x] Vite v6
 - [ ] Vitest v3
-- [x] Biome v2
-- [ ] Resend
+- [ ] Resend or Amazon SES
 - [ ] Uploadcare or Cloudflare R2
-- [ ] Polar
-- [ ] Arcjet
+- [ ] Polar Payment
+- [ ] Arcjet Security
 
 ## Getting Started
 
@@ -98,17 +101,50 @@ bun run build
 # bun db:migrate:deploy && bun db:gen:prod && react-router build
 ```
 
-## Components
-
-Get more:
+## References
 
 - [shadcn/ui](https://ui.shadcn.com)
 - [OriginUI](https://originui.com)
 - [Kibo UI](https://kibo-ui.com)
 - [shadcn Registries](https://shadcn-registries.vercel.app)
 - [registry.directory](https://registry.directory)
-
-## Credits
-
-- This repo was initialized from [`ayoubphy/react-router-trpc-prisma-better-auth`](https://github.com/ayoubphy/react-router-trpc-prisma-better-auth)
 - [Better Auth: Demo](https://demo.better-auth.com)
+- [`ayoubphy/react-router-trpc-prisma-better-auth`](https://github.com/ayoubphy/react-router-trpc-prisma-better-auth) is the original repo source
+
+## Notes
+
+### Credits
+
+The codename ["Corgi" comes from a Welsh Corgi dog breed](https://britannica.com/animal/Welsh-Corgi) of affectionate small herding breed dog with short legs and a long body.
+
+Originally created by [🧊Haidar](https://github.com/mhaidarhanif)
+
+- [🐾Allnimal](https://allnimal.com)
+- [🐻Bearmentor](https://bearmentor.com)
+- [🐱Catamyst](https://catamyst.com)
+- [🐶Dogokit](https://dogokit.allnimal.com)
+- [🐘Elephanity](https://elephanity.allnimal.com)
+
+### Tech Stack Comparison
+
+What the tech stack choice replaces or each alternatives:
+
+- TypeScript = Java, Go, Python, Ruby, PHP
+- Bun = Node.js, Deno
+- Biome = ESLint, Prettier
+- React = Angular, Vue, Svelte
+- React Router Framework = TanStack Router, Next.js, Nuxt
+- tRPC = GraphQL, REST
+- Prisma ORM = Drizzle, TypeORM, Sequelize, Mongoose
+- Tailwind CSS = Bootstrap, MUI, Ant Design
+- Zod = Joi, Yup
+- Conform = TanStack Form, Formik, React Hook Form
+- Better Auth = Passport.js, Auth0, Firebase Auth, Auth.js/NextAuth.js, Clerk
+- Docker
+- PostgreSQL = MySQL, SQLite, MongoDB, DynamoDB, Firestore
+- Vite = Webpack, Parcel
+- Vitest = Jest, Mocha, Jasmine
+- Resend or Amazon SES = SendGrid, Mailgun, Postmark, SMTP
+- Uploadcare or Cloudflare R2 = Amazon S3, Cloudinary, MinIO, Firebase Storage
+- Polar Payment = Stripe, PayPal, Braintree
+- Arcjet Security

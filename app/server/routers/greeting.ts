@@ -8,8 +8,8 @@ export const greetingRouter = {
     .input(z.string().optional())
     .query(({ ctx, input }) => {
       const userName = ctx.user?.name;
-      if (userName) return `Hello, ${userName}`;
-      if (input) return `Hello, ${input}`;
-      return "Hello";
+      if (userName) return `Hello, ${userName}!`;
+      if (input) return `Hello, ${input}!`;
+      return "Hello!";
     }),
 } satisfies TRPCRouterRecord;
