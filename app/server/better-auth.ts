@@ -17,6 +17,7 @@ import {
   multiSession,
   oneTap,
   openAPI,
+  phoneNumber,
   twoFactor,
   username,
 } from "better-auth/plugins";
@@ -179,16 +180,19 @@ export const auth = betterAuthConfig({
 
     inferAdditionalFields({
       user: {
-        username: {
-          type: "string",
-          required: false,
-        },
+        phoneNumber: { type: "string", required: false },
       },
     }),
 
     emailOTP({
       sendVerificationOTP: async ({ email, otp, type }) => {
-        console.info("SEND_OTP", { email, otp, type });
+        console.info("SEND_OTP_EMAIL", { email, otp, type });
+      },
+    }),
+
+    phoneNumber({
+      sendOTP: ({ phoneNumber, code }) => {
+        console.info("SEND_OTP_SMS", { phoneNumber, code });
       },
     }),
 

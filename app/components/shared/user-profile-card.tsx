@@ -34,7 +34,7 @@ export function createUserFields(user: User): UserField[] {
     { label: "Ban Expires", value: formatDate(user.banExpires) },
     { label: "Language", value: user.lang },
     { label: "Theme", value: user.theme },
-    { label: "Passkey Enabled", value: true },
+    // { label: "Passkey Enabled", value: true },
     { label: "Created At", value: formatDate(user.createdAt) },
     { label: "Updated At", value: formatDate(user.updatedAt) },
   ];

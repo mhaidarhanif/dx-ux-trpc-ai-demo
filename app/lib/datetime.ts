@@ -4,7 +4,7 @@ import { format, formatDistance, parseISO } from "date-fns";
  * JavaScript built-in Intl.DateTimeFormat
  */
 
-export function formatDate(date: Date | null) {
+export function formatDate(date?: Date | null) {
   if (!date) return "N/A";
 
   return new Intl.DateTimeFormat("en-GB", {
