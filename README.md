@@ -11,7 +11,7 @@
 
 [Dogokit Corgi](https://github.com/dogokit/dogokit-corgi) is the implementation details of [Dogokit Akita](https://github.com/dogokit/dogokit-akita). This template is optimized for the shortest time to production, but with long-term development as well.
 
-### Tech Stack
+### Tech Stack and Setup
 
 - [x] TypeScript
 - [x] Bun v1
@@ -35,6 +35,7 @@
 - [ ] Uploadcare or Cloudflare R2
 - [ ] Polar Payment
 - [ ] Arcjet Security
+- [x] VS Code Settings and Cursor Rules
 
 ## Getting Started
 

@@ -20,8 +20,13 @@ import {
   username,
 } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
+import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
-import { createUsername, createUsernameGitHub } from "@/lib/string";
+import {
+  createUsername,
+  createUsernameGitHub,
+  getNameParts,
+} from "@/lib/string";
 import { polarClient } from "@/server/polar";
 import { prisma } from "@/server/prisma";
 
@@ -136,11 +141,11 @@ export const auth = betterAuthConfig({
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
       mapProfileToUser: (profile) => {
-        const nameParts = profile.name.split(" ");
+        const { firstName, lastName } = getNameParts(profile.name);
         return {
           username: createUsernameGitHub(profile.login),
-          firstName: nameParts.slice(0, -1).join(" "),
-          lastName: nameParts.slice(-1).join(" "),
+          firstName,
+          lastName,
         };
       },
     },
@@ -190,14 +195,11 @@ export const auth = betterAuthConfig({
     }),
 
     username({
-      minUsernameLength: 2,
-      maxUsernameLength: 20,
+      minUsernameLength: configSchema.username.min,
+      maxUsernameLength: configSchema.username.max,
       usernameValidator: (username) => {
-        if (username === "admin") {
-          return false;
-        } else {
-          return true;
-        }
+        if (username === "admin") return false;
+        return true;
       },
     }),
 

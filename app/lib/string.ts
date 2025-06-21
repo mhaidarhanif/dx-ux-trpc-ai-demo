@@ -75,16 +75,6 @@ export function stringifyCode(code?: string | object) {
   return JSON.stringify(code, null, 2);
 }
 
-export function getNameInitials(name = "First Last") {
-  return name
-    .split(" ")
-    .map((word, index) => {
-      if (index < 2) return word.charAt(0).toUpperCase();
-      else return "";
-    })
-    .join("");
-}
-
 export function getUsernameFromEmail(email: string) {
   // Step 1: Remove the domain part
   const atIndex = email.indexOf("@");
@@ -96,6 +86,24 @@ export function getUsernameFromEmail(email: string) {
     // Handle the case where the string doesn't contain '@'
     return email;
   }
+}
+
+export function getNameInitials(fullname = "First Last") {
+  return fullname
+    .split(" ")
+    .map((word, index) => {
+      if (index < 2) return word.charAt(0).toUpperCase();
+      else return "";
+    })
+    .join("");
+}
+
+export function getNameParts(fullname: string) {
+  const parts = fullname.split(" ");
+  return {
+    firstName: parts.slice(0, -1).join(" "),
+    lastName: parts.slice(-1).join(" "),
+  };
 }
 
 export function joinStringsFallback(strings: string[], separator = ", ") {

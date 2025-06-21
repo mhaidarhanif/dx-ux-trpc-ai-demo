@@ -7,6 +7,13 @@ export type BetterAuthResponse = {
   message: string;
 };
 
+export type BetterAuthResponseError = {
+  status: string;
+  statusCode: number;
+  headers: Headers;
+  body: BetterAuthResponse;
+};
+
 export type BetterAuthResponseSignOut = {
   success: string;
 };

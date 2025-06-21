@@ -3,15 +3,17 @@ import { parseWithZod } from "@conform-to/zod/v4";
 import { useEffect } from "react";
 import { Form, href, Link } from "react-router";
 import { toast } from "sonner";
+
+import { AuthButtonPasskey } from "@/components/shared/auth-button-passkey";
+import { AuthButtonProviders } from "@/components/shared/auth-button-providers";
 import { ButtonLoading } from "@/components/shared/button-loading";
+import { FieldErrors } from "@/components/shared/field-errors";
 import { Logo } from "@/components/shared/logo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/schemas/auth";
-import { AuthButtonPasskey } from "./auth-button-passkey";
-import { AuthButtonProviders } from "./auth-button-providers";
 
 export function AuthCard({
   cardMode = "signin",
@@ -99,7 +101,9 @@ export function AuthCard({
                 placeholder="First Last"
                 required
                 name={fieldsSignUp.name.name}
+                autoComplete="name"
               />
+              <FieldErrors>{fieldsSignUp.name}</FieldErrors>
             </div>
           )}
 
@@ -112,7 +116,9 @@ export function AuthCard({
                 placeholder="yourhandle"
                 required
                 name={fieldsSignUp.username.name}
+                autoComplete="username"
               />
+              <FieldErrors>{fieldsSignUp.username}</FieldErrors>
             </div>
           )}
 
@@ -124,8 +130,9 @@ export function AuthCard({
               placeholder="email@example.com"
               required
               name={text.fields.email.name}
-              autoComplete="current-password webauthn"
+              autoComplete="email webauthn"
             />
+            <FieldErrors>{fieldsSignIn.email}</FieldErrors>
           </div>
 
           <div className="grid gap-2">
@@ -147,6 +154,7 @@ export function AuthCard({
               name={text.fields.password.name}
               autoComplete="current-password webauthn"
             />
+            <FieldErrors>{fieldsSignIn.password}</FieldErrors>
           </div>
 
           <ButtonLoading
