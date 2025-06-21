@@ -1,5 +1,5 @@
 import type { TRPCRouterRecord } from "@trpc/server";
-
+import z from "zod";
 import { publicProcedure } from "@/server/trpc";
 
 export const exampleRouter = {
@@ -9,4 +9,14 @@ export const exampleRouter = {
       cacheStrategy: { ttl: 60 },
     });
   }),
+
+  getExampleSlug: publicProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) => {
+      return await ctx.db.example.findUnique({
+        where: { slug: input },
+        include: { items: true },
+        cacheStrategy: { ttl: 60 },
+      });
+    }),
 } satisfies TRPCRouterRecord;

@@ -76,5 +76,5 @@ export function TRPCReactProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export type RouterInputs = inferRouterInputs<AppRouter>;
-export type RouterOutputs = inferRouterOutputs<AppRouter>;
+export type AppRouterInputs = inferRouterInputs<AppRouter>;
+export type AppRouterOutputs = inferRouterOutputs<AppRouter>;

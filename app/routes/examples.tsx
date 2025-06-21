@@ -1,4 +1,4 @@
-import { Examples } from "@/components/shared/examples";
+import { Examples } from "@/components/shared/example";
 import { ContentHeading } from "@/components/ui/content";
 import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/examples";

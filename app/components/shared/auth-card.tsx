@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
 import { cn } from "@/lib/utils";
-import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
+import { AuthSignInSchema, AuthSignUpSchema } from "@/schemas/auth";
 import { AuthButtonPasskey } from "./auth-button-passkey";
 import { AuthButtonProviders } from "./auth-button-providers";
 

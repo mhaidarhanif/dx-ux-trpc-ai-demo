@@ -2,7 +2,7 @@ import { parseWithZod } from "@conform-to/zod/v4";
 import { href, redirect } from "react-router";
 import { AuthCard } from "@/components/shared/auth-card";
 import { createTimer } from "@/lib/timer";
-import { AuthSignUpSchema } from "@/modules/auth/schema";
+import { AuthSignUpSchema } from "@/schemas/auth";
 import {
   type BetterAuthResponse,
   requireAuthFalse,

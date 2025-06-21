@@ -3,7 +3,7 @@ import { href, redirect } from "react-router";
 import { AuthCard } from "@/components/shared/auth-card";
 import { useOneTap } from "@/hooks/use-one-tap";
 import { createTimer } from "@/lib/timer";
-import { AuthSignInSchema } from "@/modules/auth/schema";
+import { AuthSignInSchema } from "@/schemas/auth";
 import {
   type BetterAuthResponse,
   requireAuthFalse,
