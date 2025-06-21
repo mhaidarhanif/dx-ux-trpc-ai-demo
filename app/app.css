@@ -62,7 +62,7 @@ body {
 :root {
   --radius: 0.625rem;
   --background: var(--color-wood-50);
-  --foreground: var(--color-wood-700);
+  --foreground: var(--color-wood-800);
   --card: var(--color-white);
   --card-foreground: oklch(14.5% 0 0);
   --popover: var(--color-white);
@@ -78,7 +78,7 @@ body {
   --destructive: var(--color-rose-700);
   --border: oklch(92.2% 0 0);
   --input: oklch(92.2% 0 0);
-  --ring: oklch(70.8% 0 0);
+  --ring: var(--color-primary);
   --chart-1: oklch(6.46% 0.222 41.116);
   --chart-2: oklch(6% 0.118 184.704);
   --chart-3: oklch(3.98% 0.07 227.392);
@@ -109,7 +109,7 @@ body {
 .dark,
 :root[class~="dark"] {
   --background: var(--color-wood-950);
-  --foreground: oklch(98.5% 0 0);
+  --foreground: var(--color-wood-100);
   --card: var(--color-wood-900);
   --card-foreground: oklch(98.5% 0 0);
   --popover: oklch(20.5% 0 0);
@@ -125,7 +125,7 @@ body {
   --destructive: var(--color-red-400);
   --border: oklch(100% 0 0 / 10%);
   --input: oklch(100% 0 0 / 15%);
-  --ring: oklch(55.6% 0 0);
+  --ring: var(--color-primary);
   --chart-1: oklch(48.8% 0.243 264.376);
   --chart-2: oklch(69.6% 0.17 162.48);
   --chart-3: oklch(76.9% 0.188 70.08);
@@ -164,27 +164,22 @@ body {
 @layer utilities {
   .prose-config {
     @apply prose prose-neutral dark:prose-invert focus:outline-none text-foreground;
-    @apply prose-headings:prose-heading-styles;
-    @apply prose-a:prose-a-styles;
-    @apply prose-pre:prose-pre-styles;
-    @apply prose-code:prose-code-styles;
   }
-  .prose-heading-styles {
+  .prose-config :is(h1, h2, h3, h4, h5, h6) {
     @apply font-semibold text-foreground;
   }
-  .prose-a-styles {
-    @apply focus-ring cursor-pointer rounded-xs no-underline transition;
+  .prose-config :is(a) {
+    @apply cursor-pointer rounded-xs no-underline transition;
     @apply text-primary hover:text-primary/75;
+    @apply focus-visible:ring-offset-4 focus-visible:outline-none focus-visible:ring-2;
   }
-  .prose-pre-styles {
+  .prose-config :is(pre) {
     @apply bg-muted text-foreground;
   }
-  .prose-code-styles {
+  .prose-config :is(code) {
     @apply before:content-none after:content-none;
   }
-  .prose > ul > li > p {
-    @apply my-0;
-  }
+  .prose > ul > li > p,
   .prose > ol > li > p {
     @apply my-0;
   }
