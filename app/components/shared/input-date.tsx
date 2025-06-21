@@ -1,10 +1,7 @@
 import { CalendarIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
-export function InputDate({
-  className,
-  ...props
-}: React.ComponentProps<"input">) {
+export function InputDate({ ...props }: React.ComponentProps<"input">) {
   return (
     <div className="relative">
       <Input type="date" {...props} />
