@@ -17,8 +17,8 @@ export function NavigationDesktopLinks({ items }: { items: NavItem[] }) {
             className={({ isActive }) =>
               cn(
                 buttonVariants({ variant: "ghost", size: "sm" }),
-                "whitespace-nowrap",
-                isActive && "text-primary"
+                "whitespace-nowrap hover:text-primary dark:hover:bg-accent",
+                isActive && "bg-accent text-primary"
               )
             }
           >

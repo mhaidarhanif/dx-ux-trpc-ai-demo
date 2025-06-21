@@ -1,6 +1,6 @@
 import * as React from "react";
-import { href, Link, type LinkProps, NavLink, useNavigate } from "react-router";
-import { Logo } from "@/components/shared/logo";
+import { type LinkProps, NavLink, useNavigate } from "react-router";
+import { LogoNavigationLink } from "@/components/shared/logo";
 import { MenuIconAnimated } from "@/components/shared/menu-icon-animated";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,20 +20,18 @@ export function NavigationMobile() {
     <nav
       id="navigation-mobile"
       className={cn(
-        "bg-background px-4 py-2",
+        "bg-background p-2",
         "flex w-full items-center justify-between"
       )}
     >
-      <Link to={href("/")} className="flex items-center gap-2">
-        <Logo />
-      </Link>
+      <LogoNavigationLink />
 
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="ghost"
             className={cn(
-              "extend-touch-target touch-manipulation items-center justify-start gap-2.5 pr-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent"
+              "extend-touch-target touch-manipulation items-center justify-start gap-2.5"
             )}
           >
             <div className="relative flex items-center justify-center">

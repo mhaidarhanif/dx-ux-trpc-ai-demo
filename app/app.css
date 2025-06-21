@@ -162,6 +162,9 @@ body {
 }
 
 @layer utilities {
+  .focus-ring {
+    @apply focus-visible:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus:ring-ring focus:ring-offset-background;
+  }
   .prose-config {
     @apply prose prose-neutral dark:prose-invert focus:outline-none text-foreground;
   }
@@ -169,9 +172,9 @@ body {
     @apply font-semibold text-foreground;
   }
   .prose-config :is(a) {
+    @apply focus-visible:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus:ring-offset-background;
     @apply cursor-pointer rounded-xs no-underline transition;
     @apply text-primary hover:text-primary/75;
-    @apply focus-visible:ring-offset-4 focus-visible:outline-none focus-visible:ring-2;
   }
   .prose-config :is(pre) {
     @apply bg-muted text-foreground;

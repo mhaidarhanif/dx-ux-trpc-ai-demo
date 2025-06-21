@@ -1,9 +1,10 @@
 import { cva, type VariantProps } from "class-variance-authority";
+import { href, NavLink } from "react-router";
 import { configSite } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 const logoVariants = cva(
-  "select-none inline-flex items-center gap-1 font-semibold",
+  "rounded select-none inline-flex items-center gap-1 font-semibold",
   {
     variants: {
       variant: {
@@ -71,5 +72,15 @@ export function Logo({
         {text}
       </span>
     </span>
+  );
+}
+
+export function LogoNavigationLink() {
+  return (
+    <div className="flex items-center gap-2">
+      <NavLink to={href("/")} className="focus-ring inline-flex items-center">
+        <Logo className="p-2" />
+      </NavLink>
+    </div>
   );
 }
