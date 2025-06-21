@@ -31,7 +31,6 @@ export async function action({ request }: Route.ActionArgs) {
   if (!response.ok) {
     return submission.reply({
       formErrors: [`Failed to continue with ${submission.value.provider}`],
-      // fieldErrors
     });
   }
 

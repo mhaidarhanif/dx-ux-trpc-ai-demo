@@ -129,7 +129,11 @@ export const auth = betterAuthConfig({
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }) => {
       // Send verification email to user
-      console.info("SEND_VERIFICATION_EMAIL", { user, url, token });
+      console.info("SEND_VERIFICATION_EMAIL", {
+        email: user.email,
+        url,
+        token,
+      });
     },
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
@@ -205,7 +209,7 @@ export const auth = betterAuthConfig({
 
     polar({
       client: polarClient,
-      createCustomerOnSignUp: true,
+      createCustomerOnSignUp: false,
       use: [
         checkout({
           products: [

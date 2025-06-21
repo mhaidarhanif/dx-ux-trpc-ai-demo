@@ -45,17 +45,14 @@ export async function action({ request }: Route.ActionArgs) {
     });
     const json: BetterAuthResponse = await response.json();
 
-    console.log({ json });
-
     if (!response.ok) {
       return submission.reply({
         formErrors: [json.message || "Failed to sign up or create new account"],
-        // fieldErrors
       });
     }
 
     await timer.delay();
-    return redirect(href("/signin"), { headers: response.headers });
+    return redirect(href("/dashboard"), { headers: response.headers });
   } catch (error) {
     const authError = error as BetterAuthResponseError;
     if (

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { type LinkProps, NavLink, useNavigate } from "react-router";
+import { IconMenuAnimated } from "@/components/shared/icon-menu-animated";
 import { LogoNavigationLink } from "@/components/shared/logo";
-import { MenuIconAnimated } from "@/components/shared/menu-icon-animated";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -36,7 +36,7 @@ export function NavigationMobile() {
           >
             <div className="relative flex items-center justify-center">
               <span className="sr-only">Toggle Menu</span>
-              <MenuIconAnimated open={open} />
+              <IconMenuAnimated open={open} />
             </div>
 
             <span className="flex items-center font-medium text-lg leading-none">

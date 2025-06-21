@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export function MenuIconAnimated({ open }: { open: boolean }) {
+export function IconMenuAnimated({ open }: { open: boolean }) {
   return (
     <div id="menu-icon-animated" className="relative size-4">
       <span

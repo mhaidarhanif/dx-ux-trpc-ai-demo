@@ -1,4 +1,3 @@
-import { CheckIcon, MinusIcon, XIcon } from "lucide-react";
 import { Form, href, useNavigate } from "react-router";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { AvatarAuto } from "@/components/ui/avatar";
@@ -8,6 +7,7 @@ import type { User } from "@/generated/prisma/client";
 import { authClient } from "@/lib/better-auth-client";
 import { formatDate } from "@/lib/datetime";
 import { cn } from "@/lib/utils";
+import { IconBooleanValue } from "./icon-boolean-value";
 
 type UserField = {
   label: string;
@@ -22,7 +22,7 @@ export function createUserFields(user: User): UserField[] {
     { label: "First Name", value: user.firstName },
     { label: "Last Name", value: user.lastName },
     { label: "Username", value: `@${user.username}` },
-    { label: "Display Username", value: user.displayUsername },
+    { label: "Display Username", value: `@${user.displayUsername}` },
     { label: "Email", value: user.email },
     { label: "Email Verified", value: user.emailVerified },
     { label: "Phone Number", value: user.phoneNumber },
@@ -32,6 +32,9 @@ export function createUserFields(user: User): UserField[] {
     { label: "Banned", value: user.banned },
     { label: "Ban Reason", value: user.banReason },
     { label: "Ban Expires", value: formatDate(user.banExpires) },
+    { label: "Language", value: user.lang },
+    { label: "Theme", value: user.theme },
+    { label: "Passkey Enabled", value: true },
     { label: "Created At", value: formatDate(user.createdAt) },
     { label: "Updated At", value: formatDate(user.updatedAt) },
   ];
@@ -90,8 +93,6 @@ export function UserInfoCard({ user }: { user: User }) {
 
         <dl className="divide-y divide-gray-200 dark:divide-gray-700">
           {userFields.map((item) => {
-            const valueIsBoolean = typeof item.value === "boolean";
-
             return (
               <div
                 key={item.label}
@@ -106,14 +107,7 @@ export function UserInfoCard({ user }: { user: User }) {
                     item.isCode && "font-mono"
                   )}
                 >
-                  {!valueIsBoolean && (item.value ?? <MinusIcon />)}
-                  {valueIsBoolean && item.value && item.value === true ? (
-                    <CheckIcon className="text-green-600 dark:text-green-400"></CheckIcon>
-                  ) : (
-                    item.value === false && (
-                      <XIcon className="text-red-600 dark:text-red-400" />
-                    )
-                  )}
+                  <IconBooleanValue>{item.value}</IconBooleanValue>
                 </dd>
               </div>
             );
