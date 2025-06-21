@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { href, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { authClient } from "@/lib/better-auth-client";
 
@@ -10,7 +10,7 @@ export function useOneTap() {
     void authClient.oneTap({
       fetchOptions: {
         onSuccess: () => {
-          navigate("/dashboard");
+          navigate(href("/dashboard"));
         },
       },
       onPromptNotification: (notification) => {

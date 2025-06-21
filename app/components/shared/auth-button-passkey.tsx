@@ -1,6 +1,6 @@
 import { KeyIcon } from "lucide-react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { href, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/better-auth-client";
 
@@ -16,7 +16,7 @@ export function AuthButtonPasskey({
   const signInPasskey = async () => {
     await authClient.signIn.passkey({
       fetchOptions: {
-        onSuccess: () => navigate("/dashboard"),
+        onSuccess: () => navigate(href("/dashboard")),
       },
     });
   };

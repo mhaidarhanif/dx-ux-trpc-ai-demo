@@ -1,7 +1,6 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { href, redirect } from "react-router";
 import { AuthCard } from "@/components/shared/auth-card";
-import { useOneTap } from "@/hooks/use-one-tap";
 import { createTimer } from "@/lib/timer";
 import { AuthSignInSchema } from "@/schemas/auth";
 import {
@@ -16,8 +15,6 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function SignInRoute({ actionData }: Route.ComponentProps) {
-  useOneTap();
-
   return (
     <>
       <AuthCard cardMode="signin" lastResult={actionData} />

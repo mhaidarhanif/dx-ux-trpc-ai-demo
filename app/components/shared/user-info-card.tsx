@@ -45,7 +45,7 @@ export function UserInfoCard({ user }: { user: User }) {
   const addPasskey = async () => {
     await authClient.passkey.addPasskey({
       fetchOptions: {
-        onSuccess: () => navigate("/dashboard"),
+        onSuccess: () => navigate(href("/dashboard")),
       },
     });
   };

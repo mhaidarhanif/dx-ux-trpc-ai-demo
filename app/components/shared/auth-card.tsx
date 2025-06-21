@@ -1,9 +1,10 @@
 import { type SubmissionResult, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
+import { useEffect } from "react";
 import { Form, href, Link } from "react-router";
+import { toast } from "sonner";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { Logo } from "@/components/shared/logo";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
@@ -51,6 +52,12 @@ export function AuthCard({
     form: mode.isSignUp ? formSignUp : formSignIn,
     fields: mode.isSignUp ? fieldsSignUp : fieldsSignIn,
   };
+
+  useEffect(() => {
+    if (text.form.errors) {
+      toast.error("Auth error", { description: text.form.errors });
+    }
+  }, [text.form.errors]);
 
   return (
     <section
@@ -149,14 +156,6 @@ export function AuthCard({
           >
             {text.idle}
           </ButtonLoading>
-
-          {text.form.errors && (
-            <Alert variant="destructive">
-              <AlertDescription className="text-xs">
-                {text.form.errors}
-              </AlertDescription>
-            </Alert>
-          )}
         </Form>
 
         {mode.isSignIn && (
