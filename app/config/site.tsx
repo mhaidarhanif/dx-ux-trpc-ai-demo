@@ -30,7 +30,7 @@ export const configSite: ConfigSite = {
   navAuthItems: [
     { to: href("/signup"), label: "Sign Up", auth: false },
     { to: href("/signin"), label: "Sign In", auth: false },
-    { to: href("/signout"), label: "Sign Out", auth: true },
+    // { to: href("/signout"), label: "Sign Out", auth: true },
     { to: href("/dashboard"), label: "Dashboard", auth: true },
   ],
 };

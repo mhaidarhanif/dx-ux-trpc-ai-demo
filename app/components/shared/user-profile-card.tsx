@@ -1,6 +1,6 @@
 import { Form, href, useNavigate } from "react-router";
+import { AvatarAuto } from "@/components/shared/avatar-auto";
 import { ButtonLoading } from "@/components/shared/button-loading";
-import { AvatarAuto } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { User } from "@/generated/prisma/client";
@@ -40,7 +40,7 @@ export function createUserFields(user: User): UserField[] {
   ];
 }
 
-export function UserInfoCard({ user }: { user: User }) {
+export function UserProfileCard({ user }: { user: User }) {
   const navigate = useNavigate();
 
   const userFields = createUserFields(user);
@@ -60,7 +60,7 @@ export function UserInfoCard({ user }: { user: User }) {
   return (
     <Card className="w-full max-w-md rounded-xl border border-border">
       <CardHeader className="flex flex-col items-center space-y-2">
-        <AvatarAuto user={user} className="size-20" />
+        <AvatarAuto size="xl" user={user} />
         <CardTitle className="text-center">
           <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">
             {user.name || "No Name"}
@@ -86,7 +86,7 @@ export function UserInfoCard({ user }: { user: User }) {
               type="submit"
               submittingText="Signing Out..."
             >
-              <span>Sign Out</span>
+              Sign Out
             </ButtonLoading>
           </Form>
         </div>

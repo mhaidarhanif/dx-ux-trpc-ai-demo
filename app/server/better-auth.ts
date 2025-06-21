@@ -7,6 +7,7 @@ import {
 } from "@polar-sh/better-auth";
 import { betterAuth as betterAuthConfig, type User } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { inferAdditionalFields } from "better-auth/client/plugins";
 import {
   admin,
   anonymous,
@@ -29,6 +30,8 @@ import {
 } from "@/lib/string";
 import { polarClient } from "@/server/polar";
 import { prisma } from "@/server/prisma";
+
+export type AuthSession = typeof auth.$Infer.Session;
 
 export const auth = betterAuthConfig({
   appName: configSite.name,
@@ -173,6 +176,15 @@ export const auth = betterAuthConfig({
     multiSession(),
     oneTap(), // TODO: How to mapProfileToUser for username
     openAPI(), // Available on /api/auth/reference
+
+    inferAdditionalFields({
+      user: {
+        username: {
+          type: "string",
+          required: false,
+        },
+      },
+    }),
 
     emailOTP({
       sendVerificationOTP: async ({ email, otp, type }) => {

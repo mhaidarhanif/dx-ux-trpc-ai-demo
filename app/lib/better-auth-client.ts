@@ -1,6 +1,7 @@
 import { polarClient } from "@polar-sh/better-auth";
 import {
   adminClient,
+  inferAdditionalFields,
   magicLinkClient,
   multiSessionClient,
   oneTapClient,
@@ -10,11 +11,15 @@ import {
   usernameClient,
 } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
+import type { auth } from "@/server/better-auth";
+
+export type AuthClientSession = typeof authClient.$Infer.Session;
 
 export const authClient = createAuthClient({
   baseURL: import.meta.env.VITE_APP_URL,
   plugins: [
     adminClient(),
+    inferAdditionalFields<typeof auth>(),
     magicLinkClient(),
     multiSessionClient(),
     passkeyClient(),

@@ -1,5 +1,6 @@
 import { LogoNavigationLink } from "@/components/shared/logo";
 import { NavigationDesktopLinks } from "@/components/shared/navigation-desktop-links";
+import { UserDropdownMenu } from "@/components/shared/user-dropdown-menu";
 import { configSite } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -14,12 +15,13 @@ export function NavigationDesktop() {
     >
       <LogoNavigationLink />
 
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-2">
         <NavigationDesktopLinks items={configSite.navItems} />
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-2">
         <NavigationDesktopLinks items={configSite.navAuthItems} />
+        <UserDropdownMenu />
       </div>
     </nav>
   );

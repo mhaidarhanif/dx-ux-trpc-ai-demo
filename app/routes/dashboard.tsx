@@ -1,7 +1,7 @@
 import { href, redirect } from "react-router";
 
 import { Debug } from "@/components/shared/debug";
-import { UserInfoCard } from "@/components/shared/user-info-card";
+import { UserProfileCard } from "@/components/shared/user-profile-card";
 import { requireAuthUserData } from "@/server/auth-helper";
 import type { Route } from "./+types/dashboard";
 
@@ -26,7 +26,7 @@ export default function UserDashboardRoute({
 
   return (
     <>
-      <UserInfoCard user={user} />
+      <UserProfileCard user={user} />
       <Debug>{user}</Debug>
     </>
   );

@@ -1,5 +1,7 @@
 import { Form, href, redirect } from "react-router";
+import { ButtonCancel } from "@/components/shared/button-cancel";
 import { ButtonLoading } from "@/components/shared/button-loading";
+import { Flex } from "@/components/shared/flex";
 import { createTimer } from "@/lib/timer";
 import {
   type BetterAuthResponseSignOut,
@@ -13,17 +15,29 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function SignOutRoute({ loaderData }: Route.ComponentProps) {
+  const { user } = loaderData;
+  const username = user?.username ? `@${user?.username}` : "@anonymous";
+  const email = user?.email || "Anonymous";
+
   return (
     <>
-      <section className="space-y-4 p-8">
-        <h1 className="text-2xl">Sign out account</h1>
+      <section className="max-w-md space-y-4 p-8">
+        <h1 className="text-2xl">Sign out {username}?</h1>
         <p>
-          @{loaderData.user?.username} ({loaderData.user?.email})
+          We'll sign out account {email}. You can always log back in at any
+          time.
         </p>
+        {/* <p>
+          (Soon) If you just want to switch accounts without signing out the
+          currently active account, you can do that by adding another account.
+        </p> */}
         <Form method="post" action={href("/signout")}>
-          <ButtonLoading type="submit" submittingText="Signing Out...">
-            Sign Out
-          </ButtonLoading>
+          <Flex>
+            <ButtonLoading type="submit" submittingText="Signing Out...">
+              Sign Out {username}
+            </ButtonLoading>
+            <ButtonCancel />
+          </Flex>
         </Form>
       </section>
     </>
