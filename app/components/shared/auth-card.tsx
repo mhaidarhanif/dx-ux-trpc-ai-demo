@@ -141,7 +141,7 @@ export function AuthCard({
               {mode.isSignIn && (
                 <Link
                   to={href("/forgot-password")}
-                  className="text-xs leading-none"
+                  className="text-secondary text-xs leading-none"
                 >
                   Forgot password?
                 </Link>

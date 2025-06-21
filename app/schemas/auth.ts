@@ -7,14 +7,14 @@ export const AuthSocialSchema = z.object({
 });
 
 export const AuthFormSchema = z.object({
-  name: z.string(),
+  name: z.string({ error: "Full name is required " }),
   username: z
-    .string()
+    .string({ error: "Username is required" })
     .min(configSchema.username.min)
     .max(configSchema.username.max),
-  email: z.email(),
+  email: z.email({ error: "Email is required" }),
   password: z
-    .string()
+    .string({ error: "Password is required" })
     .min(configSchema.password.min)
     .max(configSchema.password.max),
 });
