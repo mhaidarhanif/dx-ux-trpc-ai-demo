@@ -27,8 +27,8 @@ export function HomeHero({ hello }: { hello: string }) {
           </Anchor>
           . Designed to help you quickly get started with your own web
           application. With a lot of components, configuration, and boilerplate
-          code already set up. Feel free to use and remove any parts you don't
-          need.
+          code already set up. Feel free to use, modify, and remove any parts
+          you don't need.
         </p>
       </article>
 
