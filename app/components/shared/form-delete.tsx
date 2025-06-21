@@ -28,11 +28,11 @@ export function FormDelete({
   className,
 }: {
   dialogTrigger?: React.ReactNode;
-  action: string; // Example: /user/posts/delete
-  intentValue: string; // Example: delete-post-by-id
-  itemText: string; // Example: post name
-  name?: string; // Optional because can be with/without input name=id
-  defaultValue?: string; // Optional because can be with/without id value
+  action: string; // Example: /action/user/posts/delete
+  intentValue: string; // Example: user-delete-post
+  itemText: string; // Example: Post Title
+  name?: string; // Optional: Can be with/without input name=id
+  defaultValue?: string; // Optional: Can be with/without value
   buttonText?: string;
   disabled?: boolean;
   extraComponent?: React.ReactNode;

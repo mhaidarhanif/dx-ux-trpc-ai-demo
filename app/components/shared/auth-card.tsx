@@ -8,6 +8,7 @@ import { AuthButtonPasskey } from "@/components/shared/auth-button-passkey";
 import { AuthButtonProviders } from "@/components/shared/auth-button-providers";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { FieldErrors } from "@/components/shared/field-errors";
+import { InputPassword } from "@/components/shared/input-password";
 import { Logo } from "@/components/shared/logo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -49,7 +50,9 @@ export function AuthCard({
   const text = {
     action: mode.isSignUp ? "Sign Up" : "Sign In",
     idle: mode.isSignUp ? "Create New Account" : "Continue with Email",
-    submitting: mode.isSignUp ? "Creating New Account..." : "Signing In...",
+    submitting: mode.isSignUp
+      ? "Creating New Account..."
+      : "Continuing with Email...",
     formActionPath: mode.isSignUp ? href("/signup") : href("/signin"),
     form: mode.isSignUp ? formSignUp : formSignIn,
     fields: mode.isSignUp ? fieldsSignUp : fieldsSignIn,
@@ -96,12 +99,13 @@ export function AuthCard({
             <div className="grid gap-2">
               <Label htmlFor="name">Full Name</Label>
               <Input
+                required
                 id="name"
                 type="text"
                 placeholder="First Last"
-                required
                 name={fieldsSignUp.name.name}
                 autoComplete="name"
+                autoFocus={Boolean(fieldsSignUp.name.errors)}
               />
               <FieldErrors>{fieldsSignUp.name}</FieldErrors>
             </div>
@@ -111,12 +115,13 @@ export function AuthCard({
             <div className="grid gap-2">
               <Label htmlFor="username">Username</Label>
               <Input
+                required
                 id="username"
                 type="text"
                 placeholder="yourhandle"
-                required
                 name={fieldsSignUp.username.name}
                 autoComplete="username"
+                autoFocus={Boolean(fieldsSignUp.username.errors)}
               />
               <FieldErrors>{fieldsSignUp.username}</FieldErrors>
             </div>
@@ -125,12 +130,13 @@ export function AuthCard({
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
+              required
               id="email"
               type="email"
               placeholder="email@example.com"
-              required
               name={text.fields.email.name}
               autoComplete="email webauthn"
+              autoFocus={Boolean(fieldsSignUp.email.errors)}
             />
             <FieldErrors>{fieldsSignIn.email}</FieldErrors>
           </div>
@@ -147,12 +153,12 @@ export function AuthCard({
                 </Link>
               )}
             </div>
-            <Input
-              id="password"
-              type="password"
+            <InputPassword
               required
+              id="password"
               name={text.fields.password.name}
               autoComplete="current-password webauthn"
+              autoFocus={Boolean(fieldsSignUp.password.errors)}
             />
             <FieldErrors>{fieldsSignIn.password}</FieldErrors>
           </div>

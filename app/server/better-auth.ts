@@ -171,12 +171,11 @@ export const auth = betterAuthConfig({
     anonymous(),
     haveIBeenPwned(),
     multiSession(),
-    oneTap(), // TODO: mapProfileToUser: username
+    oneTap(), // TODO: How to mapProfileToUser for username
     openAPI(), // Available on /api/auth/reference
 
     emailOTP({
       sendVerificationOTP: async ({ email, otp, type }) => {
-        // Send OTP to user's email
         console.info("SEND_OTP", { email, otp, type });
       },
     }),
@@ -209,7 +208,7 @@ export const auth = betterAuthConfig({
 
     polar({
       client: polarClient,
-      createCustomerOnSignUp: false,
+      createCustomerOnSignUp: false, // TODO: Revisit this
       use: [
         checkout({
           products: [

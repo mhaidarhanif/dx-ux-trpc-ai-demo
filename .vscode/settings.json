@@ -17,6 +17,7 @@
   },
   "peacock.color": "#a5b4fc",
   "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#d6ddfe",
     "activityBar.background": "#d6ddfe",

@@ -117,9 +117,8 @@ export const TagsTrigger = ({
 }: TagsTriggerProps) => (
   <PopoverTrigger asChild>
     <Button
+      // role="combobox"
       variant="outline"
-      // biome-ignore lint/a11y/useSemanticElements: "Required"
-      role="combobox"
       className={cn("h-auto w-full justify-between p-2", className)}
       {...props}
     >
@@ -141,7 +140,7 @@ export const TagsValue = ({
   onRemove,
   ...props
 }: TagsValueProps & { onRemove?: () => void }) => {
-  const handleRemove: MouseEventHandler<HTMLDivElement> = (event) => {
+  const handleRemove: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     event.stopPropagation();
     onRemove?.();
@@ -151,14 +150,13 @@ export const TagsValue = ({
     <Badge className={cn("flex items-center gap-2", className)} {...props}>
       {children}
       {onRemove && (
-        // biome-ignore lint/a11y/noStaticElementInteractions: temporary from shadcn
-        // biome-ignore lint/a11y/useKeyWithClickEvents: temporary from shadcn
-        <div
+        <button
+          type="button"
           onClick={handleRemove}
           className="size-auto cursor-pointer hover:text-muted-foreground"
         >
           <XIcon size={12} />
-        </div>
+        </button>
       )}
     </Badge>
   );
