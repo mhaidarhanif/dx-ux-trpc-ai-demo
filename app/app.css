@@ -163,6 +163,54 @@ body {
 
 @layer utilities {
   .prose-config {
-    @apply prose dark:prose-invert text-foreground;
+    @apply prose prose-neutral dark:prose-invert focus:outline-none text-foreground;
+    @apply prose-headings:prose-heading-styles;
+    @apply prose-a:prose-a-styles;
+    @apply prose-pre:prose-pre-styles;
+    @apply prose-code:prose-code-styles;
   }
+  .prose-heading-styles {
+    @apply font-semibold text-foreground;
+  }
+  .prose-a-styles {
+    @apply focus-ring cursor-pointer rounded-xs no-underline transition;
+    @apply text-primary hover:text-primary/75;
+  }
+  .prose-pre-styles {
+    @apply bg-muted text-foreground;
+  }
+  .prose-code-styles {
+    @apply before:content-none after:content-none;
+  }
+  .prose > ul > li > p {
+    @apply my-0;
+  }
+  .prose > ol > li > p {
+    @apply my-0;
+  }
+}
+
+/* TipTap */
+.tiptap p.is-empty::before {
+  @apply pointer-events-none float-left h-0 text-muted-foreground/30;
+
+  content: attr(data-placeholder);
+}
+
+/* Uploadcare */
+.uploadcare-config {
+  --h-accent: 244;
+  --s-accent: 55%;
+  --l-accent: calc(50% - 5% * var(--darkmode));
+  --border-radius-element: calc(var(--radius) - 2px);
+  --border-radius-frame: calc(var(--radius) - 2px);
+  --border-radius-thumb: calc(var(--radius) - 2px);
+}
+
+.uploadcare-config.light {
+  --darkmode: 0;
+}
+
+.uploadcare-config.dark {
+  --darkmode: 1;
 }

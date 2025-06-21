@@ -123,7 +123,7 @@ Originally created by [🧊Haidar](https://github.com/mhaidarhanif)
 - [🐻Bearmentor](https://bearmentor.com)
 - [🐱Catamyst](https://catamyst.com)
 - [🐶Dogokit](https://dogokit.allnimal.com)
-- [🐘Elephanity](https://elephanity.allnimal.com)
+- [🐘Elephanity](https://elevanty.allnimal.com)
 
 ### Tech Stack Comparison
 
