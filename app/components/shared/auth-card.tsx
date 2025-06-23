@@ -172,19 +172,35 @@ export function AuthCard({
           </ButtonLoading>
         </Form>
 
-        {mode.isSignIn && (
-          <div className="text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link to={href("/signup")} className="underline underline-offset-4">
-              Sign up
-            </Link>
-          </div>
-        )}
+        <div className="text-center text-sm">
+          {mode.isSignUp && (
+            <p>
+              Already have an account?{" "}
+              <Link
+                to={href("/signin")}
+                className="underline underline-offset-4"
+              >
+                Sign in
+              </Link>
+            </p>
+          )}
+          {mode.isSignIn && (
+            <p>
+              Don't have an account?{" "}
+              <Link
+                to={href("/signup")}
+                className="underline underline-offset-4"
+              >
+                Sign up
+              </Link>
+            </p>
+          )}
+        </div>
       </fieldset>
 
       {mode.isSignUp && (
         <p className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
-          By clicking continue, you agree to our{" "}
+          By creating an account, you agree to our{" "}
           <Link to={href("/about")}>Terms of Service</Link>,{" "}
           <Link to={href("/about")}>Privacy Policy</Link>, and{" "}
           <Link to={href("/about")}>Cookies Policy</Link>.
