@@ -36,7 +36,7 @@ export type AuthSession = typeof auth.$Infer.Session;
 
 export const auth = betterAuthConfig({
   appName: configSite.name,
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL: process.env.VITE_APP_URL,
   basePath: "/api/auth",
 
   database: prismaAdapter(prisma, { provider: "postgresql" }),
@@ -146,7 +146,7 @@ export const auth = betterAuthConfig({
 
   socialProviders: {
     github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientId: process.env.VITE_GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
       mapProfileToUser: (profile) => {
         const { firstName, lastName } = getNameParts(profile.name);
@@ -158,7 +158,7 @@ export const auth = betterAuthConfig({
       },
     },
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientId: process.env.VITE_GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       mapProfileToUser: (profile) => {
         return {
@@ -200,7 +200,7 @@ export const auth = betterAuthConfig({
       schema: { passkey: { modelName: "Passkey" } },
       rpID: configSite.id,
       rpName: configSite.name,
-      origin: process.env.BETTER_AUTH_URL,
+      origin: process.env.VITE_APP_URL,
     }),
 
     twoFactor({

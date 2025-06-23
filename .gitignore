@@ -1,5 +1,6 @@
 .DS_Store
 .env
+.env.prod
 .react-router/
 .react-router/*
 build/
