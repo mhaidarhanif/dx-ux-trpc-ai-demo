@@ -19,7 +19,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function SignUpRoute({ actionData }: Route.ComponentProps) {
   return (
     <>
-      <AuthCard cardMode="signup" lastResult={actionData} />
+      <AuthCard authMode="signup" lastResult={actionData} />
     </>
   );
 }

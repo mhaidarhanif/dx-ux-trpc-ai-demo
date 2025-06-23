@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { Form, href, Link } from "react-router";
 import { toast } from "sonner";
 
-import { AuthButtonPasskey } from "@/components/shared/auth-button-passkey";
-import { AuthButtonProviders } from "@/components/shared/auth-button-providers";
+import { ButtonAuthPasskey } from "@/components/shared/button-auth-passkey";
+import { ButtonAuthProviders } from "@/components/shared/button-auth-providers";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { FieldErrors } from "@/components/shared/field-errors";
 import { InputPassword } from "@/components/shared/input-password";
@@ -17,12 +17,12 @@ import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/schemas/auth";
 
 export function AuthCard({
-  cardMode = "signin",
+  authMode = "signin",
   lastResult,
   className,
   ...props
 }: React.ComponentProps<"div"> & {
-  cardMode: "signup" | "signin" | "signout" | "forgot-password";
+  authMode: "signup" | "signin" | "signout" | "forgot-password";
   lastResult: SubmissionResult | null | undefined;
 }) {
   const isSubmitting = useIsSubmitting();
@@ -43,8 +43,8 @@ export function AuthCard({
   });
 
   const mode = {
-    isSignUp: cardMode === "signup",
-    isSignIn: cardMode === "signin",
+    isSignUp: authMode === "signup",
+    isSignIn: authMode === "signin",
   };
 
   const text = {
@@ -79,8 +79,8 @@ export function AuthCard({
       </div>
 
       <fieldset className="flex w-full flex-col gap-2" disabled={isSubmitting}>
-        <AuthButtonProviders textAction={text.action} />
-        <AuthButtonPasskey isSignIn={mode.isSignIn} textAction={text.action} />
+        <ButtonAuthProviders textAction={text.action} />
+        {mode.isSignIn && <ButtonAuthPasskey textAction={text.action} />}
 
         <div className="relative my-2 text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">

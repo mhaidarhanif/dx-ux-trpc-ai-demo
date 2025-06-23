@@ -1,15 +1,13 @@
-import { KeyIcon } from "lucide-react";
+import { IconKeyFilled } from "@tabler/icons-react";
 import { useEffect } from "react";
 import { href, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/better-auth-client";
 
-export function AuthButtonPasskey({
-  isSignIn,
-  textAction,
+export function ButtonAuthPasskey({
+  textAction = "Sign In",
 }: {
-  isSignIn: boolean;
-  textAction: string;
+  textAction?: string;
 }) {
   const navigate = useNavigate();
 
@@ -33,13 +31,9 @@ export function AuthButtonPasskey({
   }, []);
 
   return (
-    <>
-      {isSignIn && (
-        <Button className="w-full" variant="secondary" onClick={signInPasskey}>
-          <KeyIcon />
-          <span>{textAction} with Passkey</span>
-        </Button>
-      )}
-    </>
+    <Button className="w-full" variant="secondary" onClick={signInPasskey}>
+      <IconKeyFilled />
+      <span>{textAction} with Passkey</span>
+    </Button>
   );
 }

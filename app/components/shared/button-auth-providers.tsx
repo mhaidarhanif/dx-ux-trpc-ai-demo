@@ -2,7 +2,7 @@ import { Form } from "react-router";
 import { Button } from "@/components/ui/button";
 import { configSite } from "@/config/site";
 
-export function AuthButtonProviders({ textAction }: { textAction: string }) {
+export function ButtonAuthProviders({ textAction }: { textAction: string }) {
   return (
     <>
       {configSite.socialProviderButtons.map((authSocial) => (

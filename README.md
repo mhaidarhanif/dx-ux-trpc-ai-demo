@@ -31,11 +31,21 @@
 - [x] Docker v28
 - [x] PostgreSQL v17
 - [ ] Vitest v3
+- [ ] Playwright
+- [ ] Storybook
+
+Optional:
+
+- [x] VS Code: Settings and Extensions
+- [ ] Cursor: Rules
 - [ ] Resend or Amazon SES
 - [ ] Uploadcare or Cloudflare R2
+- [ ] Sentry
+- [ ] Posthog
 - [ ] Polar Payment
 - [ ] Arcjet Security
-- [x] VS Code Settings and Cursor Rules
+- [ ] Unkey
+- [ ] Fumadocs
 
 ## Getting Started
 

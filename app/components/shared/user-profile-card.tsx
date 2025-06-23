@@ -1,13 +1,13 @@
 import { Form, href, useNavigate } from "react-router";
 import { AvatarAuto } from "@/components/shared/avatar-auto";
 import { ButtonLoading } from "@/components/shared/button-loading";
+import { IconBooleanValue } from "@/components/shared/icon-boolean-value";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { User } from "@/generated/prisma/client";
 import { authClient } from "@/lib/better-auth-client";
 import { formatDate } from "@/lib/datetime";
 import { cn } from "@/lib/utils";
-import { IconBooleanValue } from "./icon-boolean-value";
 
 type UserField = {
   label: string;

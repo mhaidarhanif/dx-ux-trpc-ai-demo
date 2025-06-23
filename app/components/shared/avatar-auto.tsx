@@ -18,10 +18,10 @@ export const avatarAutoVariants = cva("", {
   },
   compoundVariants: [
     { size: "xs", class: "text-base" },
-    { size: "sm", class: "text-lg" },
-    { size: "default", class: "text-3xl" },
-    { size: "lg", class: "text-4xl" },
-    { size: "xl", class: "text-5xl" },
+    { size: "sm", class: "text-sm" },
+    { size: "default", class: "text-2xl" },
+    { size: "lg", class: "text-3xl" },
+    { size: "xl", class: "text-4xl" },
   ],
   defaultVariants: {
     size: "default",
@@ -44,22 +44,25 @@ export function AvatarAuto({
   user,
   imageUrl,
   size,
+  className,
   ...props
 }: AvatarAutoProps) {
   const placeholderText = user.username || user.name;
 
   return (
     <Avatar
+      className={cn(avatarAutoVariants({ size }), "bg-secondary", className)}
       {...props}
-      className={cn(avatarAutoVariants({ size }), "bg-secondary")}
     >
       <AvatarImage
         src={imageUrl || getAvatarPlaceholderUrl(placeholderText)}
         alt={user.name}
+        className="bg-secondary"
       />
-
       {!imageUrl && (
-        <AvatarFallback>{getNameInitials(user.name)}</AvatarFallback>
+        <AvatarFallback className="bg-secondary">
+          {getNameInitials(user.name)}
+        </AvatarFallback>
       )}
     </Avatar>
   );
