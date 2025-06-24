@@ -27,7 +27,8 @@
 - [x] [Prisma ORM v6](https://prisma.io)
 - [x] [Tailwind CSS v4](https://tailwindcss.com)
   - [x] [`shadcn/ui`](https://ui.shadcn.com) with single [`radix-ui`](https://radix-ui.com)
-  - [ ] [React Email](https://react.email)
+  - [ ] More from [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com)
+  - [ ] [React Email v4](https://react.email)
 - [x] [Zod v4](https://zod.dev) & [Conform v1](https://conform.guide)
 - [x] [Better Auth v1](https://better-auth.com)
 - [x] [Docker v28](https://docker.com)
@@ -40,15 +41,18 @@
 Optional:
 
 - [x] [VS Code: Settings and Extensions](https://code.visualstudio.com/docs/configure/settings)
-- [ ] [Cursor: Rules](https://docs.cursor.com/context/rules)
-- [ ] [Resend](https://resend.com) or [Amazon SES](https://aws.amazon.com/ses)
-- [ ] [Uploadcare](https://uploadcare.com) or [Cloudflare R2](https://cloudflare.com/products/r2)
-- [ ] [Polar Payment](https://polar.sh)
-- [ ] [Sentry](https://sentry.io)
-- [ ] [Posthog](https://posthog.com)
-- [ ] [Arcjet Security](https://arcjet.com)
-- [ ] [Unkey](https://unkey.dev)
-- [ ] [Fumadocs](https://fumadocs.com)
+- [x] [Cursor: Rules](https://docs.cursor.com/context/rules)
+- [ ] Email: [Resend](https://resend.com), [Amazon SES](https://aws.amazon.com/ses)
+- [ ] File Upload & Image: [Uploadcare](https://uploadcare.com), [Cloudflare R2](https://cloudflare.com/products/r2), [Imgix](https://imgix.com)
+- [ ] Payment: [Polar](https://polar.sh)
+- [ ] Error Tracking: [Sentry](https://sentry.io)
+- [ ] Analytics: [Posthog](https://posthog.com)
+- [ ] Security: [Arcjet](https://arcjet.com)
+- [ ] API Key: [Unkey](https://unkey.dev)
+- [ ] Documentation: [Fumadocs](https://fumadocs.com)
+- AI Agents
+  - [ ] General: [Codegen](https://codegen.com)
+  - [ ] Code Review: [CodeRabbit](https://coderabbit.ai)
 
 ## Get Started
 
