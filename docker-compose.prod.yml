@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: dogokit-corgi-postgres
-    image: postgres:alpine
+    image: postgres:17-alpine
     restart: always
     volumes:
       - postgres_data:/var/lib/postgres
