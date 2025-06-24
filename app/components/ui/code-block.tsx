@@ -104,6 +104,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { devlog } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 
 export type { BundledLanguage } from "shiki";
@@ -617,8 +618,7 @@ export const CodeBlockContent = ({
 
     highlight(children as string, language, themes)
       .then(setHtml)
-      // biome-ignore lint/suspicious/noConsole: "It is fine"
-      .catch(console.error);
+      .catch(devlog.error);
   }, [children, themes, syntaxHighlighting, language]);
 
   if (!(syntaxHighlighting && html)) {

@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { devlog } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 
 interface ColorPickerContextValue {
@@ -288,8 +289,7 @@ export const ColorPickerEyeDropper = ({
       setLightness(l);
       setAlpha(100);
     } catch (error) {
-      // biome-ignore lint/suspicious/noConsole: "From shadcn/ui. Flexible to change"
-      console.error("EyeDropper failed:", error);
+      devlog.error("EyeDropper failed:", error);
     }
   };
 

@@ -25,6 +25,7 @@ import {
 import { passkey } from "better-auth/plugins/passkey";
 import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
+import { devlog } from "@/lib/logger";
 import {
   createUsername,
   createUsernameGitHub,
@@ -56,7 +57,7 @@ export const auth = betterAuthConfig({
       enabled: true,
       sendChangeEmailVerification: async ({ user, newEmail, url, token }) => {
         // Send change email verification
-        await console.info("SEND_CHANGE_EMAIL_VERIFICATION", {
+        await devlog.info("SEND_CHANGE_EMAIL_VERIFICATION", {
           user,
           newEmail,
           url,
@@ -75,7 +76,7 @@ export const auth = betterAuthConfig({
           token: string;
         }) => {
           // Send delete account verification
-          await console.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
+          await devlog.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
             user,
             url,
             token,
@@ -83,11 +84,11 @@ export const auth = betterAuthConfig({
         },
         beforeDelete: async (user: User) => {
           // Perform actions before user deletion
-          await console.info("BEFORE_DELETE", { user });
+          await devlog.info("BEFORE_DELETE", { user });
         },
         afterDelete: async (user: User) => {
           // Perform cleanup after user deletion
-          await console.info("AFTER_DELETE", { user });
+          await devlog.info("AFTER_DELETE", { user });
         },
       },
     },
@@ -126,7 +127,7 @@ export const auth = betterAuthConfig({
     autoSignIn: true,
     sendResetPassword: async ({ user, url, token }) => {
       // Send reset password email
-      await console.info("SEND_RESET_PASSWORD", { user, url, token });
+      await devlog.info("SEND_RESET_PASSWORD", { user, url, token });
     },
     resetPasswordTokenExpiresIn: 3600, // 1 hour
   },
@@ -134,7 +135,7 @@ export const auth = betterAuthConfig({
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }) => {
       // Send verification email to user
-      await console.info("SEND_VERIFICATION_EMAIL", {
+      await devlog.info("SEND_VERIFICATION_EMAIL", {
         email: user.email,
         url,
         token,
@@ -187,13 +188,13 @@ export const auth = betterAuthConfig({
 
     emailOTP({
       sendVerificationOTP: async ({ email, otp, type }) => {
-        await console.info("SEND_OTP_EMAIL", { email, otp, type });
+        await devlog.info("SEND_OTP_EMAIL", { email, otp, type });
       },
     }),
 
     phoneNumber({
       sendOTP: ({ phoneNumber: phone, code }) => {
-        console.info("SEND_OTP_SMS", { phone, code });
+        devlog.info("SEND_OTP_SMS", { phone, code });
       },
     }),
 
@@ -210,7 +211,7 @@ export const auth = betterAuthConfig({
 
     magicLink({
       sendMagicLink(data, request) {
-        console.info("SEND_MAGIC_LINK", { data, request });
+        devlog.info("SEND_MAGIC_LINK", { data, request });
       },
     }),
 
@@ -257,7 +258,7 @@ export const auth = betterAuthConfig({
   //         return { data: { ...userData } };
   //       },
   //       after: async (userData) => {
-  //         console.info("USER_CREATE_AFTER", userData);
+  //         devlog.info("USER_CREATE_AFTER", userData);
   //       },
   //     },
   //     update: {
@@ -265,7 +266,7 @@ export const auth = betterAuthConfig({
   //         return { data: { ...userData } };
   //       },
   //       after: async (userData) => {
-  //         console.info("USER_UPDATE_AFTER", userData);
+  //         devlog.info("USER_UPDATE_AFTER", userData);
   //       },
   //     },
   //   },

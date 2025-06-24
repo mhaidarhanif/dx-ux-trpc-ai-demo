@@ -12,8 +12,8 @@ export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
 
   const userEmail = authSession?.user.email;
 
-  // biome-ignore lint/suspicious/noConsole: "Still fine"
-  console.info(`🔹 tRPC Request: [${source}] by [${userEmail ?? "Anonymous"}]`);
+  // biome-ignore lint/suspicious/noConsole: "Needed on production too"
+  console.info(`🔹tRPC: [${source}] by [${userEmail ?? "Anonymous"}]`);
 
   return {
     db: prisma,

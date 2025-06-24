@@ -1,6 +1,7 @@
 import { formatHex, oklch } from "culori";
 import QR from "qrcode";
 import { type HTMLAttributes, useEffect, useState } from "react";
+import { devlog } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 
 export type QRCodeProps = HTMLAttributes<HTMLDivElement> & {
@@ -64,8 +65,7 @@ export const QRCode = ({
 
         setSVG(newSvg);
       } catch (error) {
-        // biome-ignore lint/suspicious/noConsole: "From shadcn/ui. Flexible to change"
-        console.error("QR_CODE", error);
+        devlog.error("QR_CODE", error);
       }
     };
 
