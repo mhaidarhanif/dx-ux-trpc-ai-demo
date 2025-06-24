@@ -152,8 +152,11 @@ export const auth = betterAuthConfig({
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
       mapProfileToUser: (profile) => {
         const { firstName, lastName } = getNameParts(profile.name);
+        const usernameGitHub = createUsernameGitHub(profile.login);
+
         return {
-          username: createUsernameGitHub(profile.login),
+          username: usernameGitHub,
+          displayUsername: usernameGitHub,
           firstName,
           lastName,
         };
@@ -163,8 +166,14 @@ export const auth = betterAuthConfig({
       clientId: process.env.VITE_GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       mapProfileToUser: (profile) => {
+        const usernameGoogle = createUsername(
+          profile.given_name,
+          profile.family_name
+        );
+
         return {
-          username: createUsername(profile.given_name, profile.family_name),
+          username: usernameGoogle,
+          displayUsername: usernameGoogle,
           firstName: profile.given_name,
           lastName: profile.family_name,
         };
