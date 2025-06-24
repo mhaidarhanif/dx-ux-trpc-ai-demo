@@ -13,42 +13,42 @@
 
 ### Tech Stack and Setup
 
-- [x] TypeScript
-- [x] Bun v1
-- [x] Biome v2
+- [x] [TypeScript](https://typescriptlang.org)
+- [x] [Bun v1](https://bun.sh)
+- [x] [Biome v2](https://biomejs.dev)
   - [x] [Ultracite](https://ultracite.ai)
-- [x] Vite v6
-- [x] React v19
-- [x] React Router v7 Framework (Remix)
-  - [x] Themes: System, Light, Dark
+- [x] [Vite v7](https://vitejs.dev)
+- [x] [React v19](https://react.dev)
+- [x] [React Router v7 Framework (Remix)](https://reactrouter.com)
+  - [x] [Themes: System, Light, Dark](https://github.com/abereghici/remix-themes)
   - [x] Integration with tRPC and Better Auth
-  - [x] Vercel Config, can be removed if not needed
-- [x] tRPC v11
-- [x] Prisma ORM v6
-- [x] Tailwind CSS v4
-  - [x] `shadcn/ui` with single `radix-ui`
-  - [ ] React Email
-- [x] Zod v4 & Conform v1
-- [x] Better Auth v1
-- [x] Docker v28
-- [x] PostgreSQL v17
-- [ ] Vitest v3
-- [ ] Playwright
-- [ ] Storybook
-- [ ] Turborepo
+  - [x] [Vercel Config](https://vercel.com/docs/frameworks/react-router), can be removed if not needed
+- [x] [tRPC v11](https://trpc.io)
+- [x] [Prisma ORM v6](https://prisma.io)
+- [x] [Tailwind CSS v4](https://tailwindcss.com)
+  - [x] [`shadcn/ui`](https://ui.shadcn.com) with single [`radix-ui`](https://radix-ui.com)
+  - [ ] [React Email](https://react.email)
+- [x] [Zod v4](https://zod.dev) & [Conform v1](https://conform.guide)
+- [x] [Better Auth v1](https://better-auth.com)
+- [x] [Docker v28](https://docker.com)
+- [x] [PostgreSQL v17](https://postgresql.org)
+- [ ] [Vitest v3](https://vitest.dev)
+- [ ] [Playwright](https://playwright.dev)
+- [ ] [Storybook](https://storybook.js.org)
+- [ ] [Turborepo](https://turbo.build)
 
 Optional:
 
-- [x] VS Code: Settings and Extensions
-- [ ] Cursor: Rules
-- [ ] Resend or Amazon SES
-- [ ] Uploadcare or Cloudflare R2
-- [ ] Sentry
-- [ ] Posthog
-- [ ] Polar Payment
-- [ ] Arcjet Security
-- [ ] Unkey
-- [ ] Fumadocs
+- [x] [VS Code: Settings and Extensions](https://code.visualstudio.com/docs/configure/settings)
+- [ ] [Cursor: Rules](https://docs.cursor.com/context/rules)
+- [ ] [Resend](https://resend.com) or [Amazon SES](https://aws.amazon.com/ses)
+- [ ] [Uploadcare](https://uploadcare.com) or [Cloudflare R2](https://cloudflare.com/products/r2)
+- [ ] [Polar Payment](https://polar.sh)
+- [ ] [Sentry](https://sentry.io)
+- [ ] [Posthog](https://posthog.com)
+- [ ] [Arcjet Security](https://arcjet.com)
+- [ ] [Unkey](https://unkey.dev)
+- [ ] [Fumadocs](https://fumadocs.com)
 
 ## Get Started
 
