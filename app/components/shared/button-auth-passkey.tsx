@@ -20,18 +20,15 @@ export function ButtonAuthPasskey({
   };
 
   useEffect(() => {
-    if (
-      !PublicKeyCredential.isConditionalMediationAvailable ||
-      !PublicKeyCredential.isConditionalMediationAvailable()
-    ) {
+    if (!PublicKeyCredential.isConditionalMediationAvailable?.()) {
       return;
     }
 
-    void authClient.signIn.passkey({ autoFill: true });
+    authClient.signIn.passkey({ autoFill: true });
   }, []);
 
   return (
-    <Button className="w-full" variant="secondary" onClick={signInPasskey}>
+    <Button className="w-full" onClick={signInPasskey} variant="secondary">
       <IconKeyFilled />
       <span>{textAction} with Passkey</span>
     </Button>

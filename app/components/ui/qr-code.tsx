@@ -63,8 +63,9 @@ export const QRCode = ({
         });
 
         setSVG(newSvg);
-      } catch (err) {
-        console.error("QR_CODE", err);
+      } catch (error) {
+        // biome-ignore lint/suspicious/noConsole: "From shadcn/ui. Flexible to change"
+        console.error("QR_CODE", error);
       }
     };
 

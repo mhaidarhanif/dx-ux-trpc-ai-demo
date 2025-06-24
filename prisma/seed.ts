@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/suspicious/noConsole: "Prisma seed only" */
+/** biome-ignore-all lint/nursery/noAwaitInLoop: "Prisma seed only" */
 import { PrismaClient } from "@/generated/prisma/client";
 import { dataExamples } from "./data/examples";
 

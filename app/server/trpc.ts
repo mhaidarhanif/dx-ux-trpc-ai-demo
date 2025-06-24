@@ -12,6 +12,7 @@ export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
 
   const userEmail = authSession?.user.email;
 
+  // biome-ignore lint/suspicious/noConsole: "Still fine"
   console.info(`🔹 tRPC Request: [${source}] by [${userEmail ?? "Anonymous"}]`);
 
   return {
@@ -39,7 +40,7 @@ export const router = t.router;
 
 export const publicProcedure = t.procedure;
 
-export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
+export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
   if (!ctx.user?.id) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }

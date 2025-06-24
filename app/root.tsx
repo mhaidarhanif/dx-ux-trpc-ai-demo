@@ -127,7 +127,8 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         <pre className="text-xs">{error.data}</pre>
       </HTMLDocument>
     );
-  } else if (error instanceof Error) {
+  }
+  if (error instanceof Error) {
     return (
       <HTMLDocument>
         <ContentHeading>Error</ContentHeading>
@@ -136,11 +137,10 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         <pre className="text-xs">{error.stack}</pre>
       </HTMLDocument>
     );
-  } else {
-    return (
-      <HTMLDocument>
-        <ContentHeading>Unknown Error</ContentHeading>
-      </HTMLDocument>
-    );
   }
+  return (
+    <HTMLDocument>
+      <ContentHeading>Unknown Error</ContentHeading>
+    </HTMLDocument>
+  );
 }

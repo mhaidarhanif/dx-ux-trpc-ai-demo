@@ -234,7 +234,7 @@ export const KanbanProvider = <
     const activeItem = data.find((item) => item.id === active.id);
     const overItem = data.find((item) => item.id === over.id);
 
-    if (!activeItem || !overItem) {
+    if (!(activeItem && overItem)) {
       return;
     }
 

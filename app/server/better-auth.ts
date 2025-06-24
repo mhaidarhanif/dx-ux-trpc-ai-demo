@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noConsole: "WIP" */
 import {
   checkout,
   polar,
@@ -55,7 +56,7 @@ export const auth = betterAuthConfig({
       enabled: true,
       sendChangeEmailVerification: async ({ user, newEmail, url, token }) => {
         // Send change email verification
-        console.info("SEND_CHANGE_EMAIL_VERIFICATION", {
+        await console.info("SEND_CHANGE_EMAIL_VERIFICATION", {
           user,
           newEmail,
           url,
@@ -74,7 +75,7 @@ export const auth = betterAuthConfig({
           token: string;
         }) => {
           // Send delete account verification
-          console.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
+          await console.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
             user,
             url,
             token,
@@ -82,11 +83,11 @@ export const auth = betterAuthConfig({
         },
         beforeDelete: async (user: User) => {
           // Perform actions before user deletion
-          console.info("BEFORE_DELETE", { user });
+          await console.info("BEFORE_DELETE", { user });
         },
         afterDelete: async (user: User) => {
           // Perform cleanup after user deletion
-          console.info("AFTER_DELETE", { user });
+          await console.info("AFTER_DELETE", { user });
         },
       },
     },
@@ -125,7 +126,7 @@ export const auth = betterAuthConfig({
     autoSignIn: true,
     sendResetPassword: async ({ user, url, token }) => {
       // Send reset password email
-      console.info("SEND_RESET_PASSWORD", { user, url, token });
+      await console.info("SEND_RESET_PASSWORD", { user, url, token });
     },
     resetPasswordTokenExpiresIn: 3600, // 1 hour
   },
@@ -133,7 +134,7 @@ export const auth = betterAuthConfig({
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }) => {
       // Send verification email to user
-      console.info("SEND_VERIFICATION_EMAIL", {
+      await console.info("SEND_VERIFICATION_EMAIL", {
         email: user.email,
         url,
         token,
@@ -186,13 +187,13 @@ export const auth = betterAuthConfig({
 
     emailOTP({
       sendVerificationOTP: async ({ email, otp, type }) => {
-        console.info("SEND_OTP_EMAIL", { email, otp, type });
+        await console.info("SEND_OTP_EMAIL", { email, otp, type });
       },
     }),
 
     phoneNumber({
-      sendOTP: ({ phoneNumber, code }) => {
-        console.info("SEND_OTP_SMS", { phoneNumber, code });
+      sendOTP: ({ phoneNumber: phone, code }) => {
+        console.info("SEND_OTP_SMS", { phone, code });
       },
     }),
 
@@ -216,8 +217,8 @@ export const auth = betterAuthConfig({
     username({
       minUsernameLength: configSchema.username.min,
       maxUsernameLength: configSchema.username.max,
-      usernameValidator: (username) => {
-        if (username === "admin") return false;
+      usernameValidator: (usernameToValidate) => {
+        if (usernameToValidate === "admin") return false;
         return true;
       },
     }),
