@@ -6,11 +6,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgres
     ports:
-      - ${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}
+      - "50000:5432"
     env_file:
       - path: .env
         required: true
-  api:
+  app:
+    container_name: dogokit-corgi-app
     image: dogokit-corgi:latest
     build:
       context: .
