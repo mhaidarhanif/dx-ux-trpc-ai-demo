@@ -16,6 +16,7 @@
 - [x] TypeScript
 - [x] Bun v1
 - [x] Biome v2
+  - [x] [Ultracite](https://ultracite.ai)
 - [x] Vite v6
 - [x] React v19
 - [x] React Router v7 Framework (Remix)
