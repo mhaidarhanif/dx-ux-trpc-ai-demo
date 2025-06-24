@@ -1,11 +1,11 @@
 /** biome-ignore-all lint/suspicious/noConsole: "WIP" */
-import {
-  checkout,
-  polar,
-  portal,
-  usage,
-  webhooks,
-} from "@polar-sh/better-auth";
+// import {
+//   checkout,
+//   polar,
+//   portal,
+//   usage,
+//   webhooks,
+// } from "@polar-sh/better-auth";
 import { betterAuth as betterAuthConfig, type User } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { inferAdditionalFields } from "better-auth/client/plugins";
@@ -30,7 +30,7 @@ import {
   createUsernameGitHub,
   getNameParts,
 } from "@/lib/string";
-import { polarClient } from "@/server/polar";
+// import { polarClient } from "@/server/polar";
 import { prisma } from "@/server/prisma";
 
 export type AuthSession = typeof auth.$Infer.Session;
@@ -223,31 +223,31 @@ export const auth = betterAuthConfig({
       },
     }),
 
-    polar({
-      client: polarClient,
-      createCustomerOnSignUp: false, // TODO: Revisit this
-      use: [
-        checkout({
-          products: [
-            {
-              productId: "123-456-789", // ID of Product from Polar Dashboard
-              slug: "pro", // Custom slug, reference Checkout URL /checkout/pro
-            },
-          ],
-          successUrl: "/success?checkout_id={CHECKOUT_ID}",
-          authenticatedUsersOnly: true,
-        }),
-        portal(),
-        usage(),
-        webhooks({
-          secret: process.env.POLAR_WEBHOOK_SECRET as string,
-          // onCustomerStateChanged: (payload) => // Triggered when anything regarding a customer changes
-          // onOrderPaid: (payload) => // Triggered when an order was paid (purchase, subscription renewal, etc.)
-          // // ...  // Over 25 granular webhook handlers
-          // onPayload: (payload) => // Catch-all for all events
-        }),
-      ],
-    }),
+    // polar({
+    //   client: polarClient,
+    //   createCustomerOnSignUp: false, // TODO: Revisit this
+    //   use: [
+    //     checkout({
+    //       products: [
+    //         {
+    //           productId: "123-456-789", // ID of Product from Polar Dashboard
+    //           slug: "pro", // Custom slug, reference Checkout URL /checkout/pro
+    //         },
+    //       ],
+    //       successUrl: "/success?checkout_id={CHECKOUT_ID}",
+    //       authenticatedUsersOnly: true,
+    //     }),
+    //     portal(),
+    //     usage(),
+    //     webhooks({
+    //       secret: process.env.POLAR_WEBHOOK_SECRET as string,
+    //       // onCustomerStateChanged: (payload) => // Triggered when anything regarding a customer changes
+    //       // onOrderPaid: (payload) => // Triggered when an order was paid (purchase, subscription renewal, etc.)
+    //       // // ...  // Over 25 granular webhook handlers
+    //       // onPayload: (payload) => // Catch-all for all events
+    //     }),
+    //   ],
+    // }),
   ],
 
   // databaseHooks: {

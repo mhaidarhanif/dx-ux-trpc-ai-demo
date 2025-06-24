@@ -1,1 +1,4 @@
-export * as parseHTML from "html-react-parser";
+// biome-ignore lint/style/noExportedImports: "It is fine"
+import parseHTML from "html-react-parser";
+
+export { parseHTML };
