@@ -6,9 +6,13 @@ import type { JSX } from "react";
 import { href } from "react-router";
 import { isProd } from "@/lib/is-prod";
 
+export const configSiteServer: ConfigSiteServer = {
+  id: isProd ? String(process.env.VITE_APP_URL) : "localhost",
+  origin: isProd ? String(process.env.VITE_APP_URL) : "http://localhost",
+};
+
 export const configSite: ConfigSite = {
-  id: isProd ? import.meta.env.VITE_APP_URL : "localhost",
-  origin: isProd ? import.meta.env.VITE_APP_URL : "http://localhost",
+  ...configSiteServer,
   name: "Dogokit Corgi",
   url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "/og/dogokit.jpg",
@@ -40,9 +44,15 @@ export const configSite: ConfigSite = {
   ],
 };
 
-export type ConfigSite = {
+// biome-ignore lint/suspicious/noConsole: "This is fine"
+console.info({ configSiteServer });
+
+export type ConfigSiteServer = {
   id: string;
   origin: string;
+};
+
+export type ConfigSite = ConfigSiteServer & {
   name: string;
   url: string;
   ogImage?: string;

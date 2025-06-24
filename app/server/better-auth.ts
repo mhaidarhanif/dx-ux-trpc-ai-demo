@@ -211,7 +211,7 @@ export const auth = betterAuthConfig({
       schema: { passkey: { modelName: "Passkey" } },
       rpID: configSite.id,
       rpName: configSite.name,
-      origin: process.env.VITE_APP_URL,
+      origin: configSite.origin,
     }),
 
     twoFactor({
