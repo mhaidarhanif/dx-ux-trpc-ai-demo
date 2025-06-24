@@ -20,8 +20,9 @@
 - [x] Vite v6
 - [x] React v19
 - [x] React Router v7 Framework (Remix)
-  - [x] Themes
+  - [x] Themes: System, Light, Dark
   - [x] Integration with tRPC and Better Auth
+  - [x] Vercel Config, can be removed if not needed
 - [x] tRPC v11
 - [x] Prisma ORM v6
 - [x] Tailwind CSS v4
