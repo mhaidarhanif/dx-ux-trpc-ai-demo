@@ -1,18 +1,35 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import z from "zod";
+import { configPrismaCache } from "@/config/prisma-cache";
 import { protectedProcedure, publicProcedure } from "@/server/trpc";
+
+const configPrismaUser = {
+  omit: {
+    email: true,
+    emailVerified: true,
+    phone: true,
+    phoneNumber: true,
+    phoneNumberVerified: true,
+  },
+};
 
 export const userRouter = {
   getUsers: publicProcedure.query(async ({ ctx }) => {
     return await ctx.db.user.findMany({
-      cacheStrategy: { ttl: 120 },
+      ...configPrismaUser,
+      orderBy: { createdAt: "asc" },
+      ...configPrismaCache,
     });
   }),
 
   getUserByUsername: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input }) => {
-      return await ctx.db.user.findUnique({ where: { username: input } });
+      return await ctx.db.user.findUnique({
+        where: { username: input },
+        ...configPrismaUser,
+        ...configPrismaCache,
+      });
     }),
 
   getUserByEmail: protectedProcedure
