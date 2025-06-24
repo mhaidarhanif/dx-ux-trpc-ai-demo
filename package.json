@@ -16,7 +16,6 @@
     "dep:check": "depcheck",
     "dep:update": "taze && taze major",
     "dep:update:write": "taze -w && taze major -w",
-    "auth:gen": "@better-auth/cli generate --config app/server/better-auth.ts",
     "db:up": "docker compose up -d",
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
@@ -25,7 +24,8 @@
     "db:studio": "prisma studio --browser none",
     "db:reset": "prisma migrate reset --skip-seed",
     "db:seed": "prisma db seed",
-    "db:prune": "bun db:reset && bun db:migrate && bun db:seed"
+    "db:prune": "bun db:reset && bun db:migrate && bun db:seed",
+    "auth:gen": "bunx @better-auth/cli generate --config app/server/better-auth.ts"
   },
   "prisma": {
     "seed": "bun prisma/seed.ts"

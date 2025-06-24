@@ -36,16 +36,13 @@ export const configSite: ConfigSite = {
     { to: href("/examples"), label: "Examples" },
     { to: "/404", label: "404" },
   ],
+
   navAuthItems: [
     { to: href("/signup"), label: "Sign Up", auth: false },
     { to: href("/signin"), label: "Sign In", auth: false },
-    // { to: href("/signout"), label: "Sign Out", auth: true },
     { to: href("/dashboard"), label: "Dashboard", auth: true },
   ],
 };
-
-// biome-ignore lint/suspicious/noConsole: "This is fine"
-console.info({ configSiteServer });
 
 export type ConfigSiteServer = {
   id: string;

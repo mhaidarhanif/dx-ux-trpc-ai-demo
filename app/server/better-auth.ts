@@ -44,6 +44,9 @@ export const auth = betterAuthConfig({
 
   database: prismaAdapter(prisma, { provider: "postgresql" }),
 
+  // https://better-auth.com/docs/concepts/database#secondary-storage
+  // secondaryStorage
+
   advanced: { database: { generateId: false } },
 
   user: {
@@ -120,6 +123,8 @@ export const auth = betterAuthConfig({
     enabled: isProd,
     window: 60,
     max: 100,
+    storage: "database",
+    modelName: "RateLimit",
   },
 
   // https://better-auth.com/docs/authentication/email-password

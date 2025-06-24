@@ -143,6 +143,14 @@ model Passkey {
   @@index([userId])
 }
 
+model RateLimit {
+  id String @id
+
+  key         String?
+  count       Int?
+  lastRequest BigInt?
+}
+
 model Example {
   id String @id @default(ulid())
 
