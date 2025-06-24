@@ -1,6 +1,9 @@
 .DS_Store
 .env
+.env.staging
+.env.test
 .env.prod
+.env.production
 .react-router/
 .react-router/*
 build/
