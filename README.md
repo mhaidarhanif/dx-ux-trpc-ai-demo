@@ -35,6 +35,7 @@
 - [ ] Vitest v3
 - [ ] Playwright
 - [ ] Storybook
+- [ ] Turborepo
 
 Optional:
 
@@ -49,70 +50,139 @@ Optional:
 - [ ] Unkey
 - [ ] Fumadocs
 
-## Getting Started
+## Get Started
 
-### Environment Variables
+### Setup Dependencies
 
-Crucially, replace "BetterAuth Secret" with a strong, randomly generated secret. Use openssl or the secret generator in the BetterAuth documentation to create a secure secret. Do not use the placeholder value in a production environment!
+Use [Bun](https://bun.sh) for dependency management and scripts. Ensure [Bun is installed](https://bun.sh/docs/installation):
 
-To use Google as a social provider, you need to get your Google credentials. You can get them by creating a new project in the Google Cloud Console.
-In the Google Cloud Console > Credentials > Authorized redirect URIs, make sure to set the redirect URL to http://localhost:5173/api/auth/callback/google for local development. For production, make sure to set the redirect URL as your application domain, e.g. https://example.com/api/auth/callback/google. If you change the base path of the auth routes, you should update the redirect URL accordingly.
-
-This repo is using Neon Postgres as our database. make sure to replace the placeholder connection string with your actual Neon Postgres connection string.
-
-### Setup Environment Variables and Compose
-
-Copy from `.env.example` to `.env` and fill in the required values:
-
-```bash
-cp -n .env.example .env
+```sh
+curl -fsSL https://bun.sh/install | bash
 ```
 
-Also make sure to reconfigure the default `docker-compose.yml` port for PostgreSQL.
+Install dependencies:
 
-### Installation
-
-Install the dependencies:
-
-```bash
+```sh
 bun install
 ```
 
-### Start Database
+### Code Quality
+
+Check, format, lint to ensure the setup is fine:
+
+```sh
+bun check
+```
+
+If want to automatically format & lint the code:
+
+```sh
+bun write
+```
+
+### Environment Variables
+
+Create the `.env` file from `.env.example`. This is only for local development, not production:
+
+```sh
+cp -i .env.example .env
+```
+
+Configure the required environment variables if on local, otherwise in the project settings on other environments.
+
+If necessary, create the `.env.prod` for production info. Adjust accordingly if needed for `staging`, `test`, etc. Be careful to change the `URL` variables on different domains and subdomains.
+
+```sh
+cp -i .env.example .env.prod
+```
+
+Required:
+
+- `VITE_APP_URL`
+- `BETTER_AUTH_SECRET`
+- `POSTGRES_USER`
+- `POSTGRES_PASSWORD`
+- `POSTGRES_DB`
+- `DATABASE_URL`
+
+Optional:
+
+- `*_CLIENT_ID` and `*_CLIENT_SECRET`: For OAuth related, [check Guide: OAuth](./docs/GUIDE_OAUTH.md)
+- `*_ACCESS_TOKEN` and `*_WEBHOOK_SECRET` for payment related.
+
+### Database Setup
+
+Prisma ORM is used to communicate with the database easily.
+
+The default is PostgreSQL from local system, Docker container, or with services like Prisma Postgres, Neon, Supabase.
+
+Start local database with Docker Compose:
 
 ```bash
 bun db:up
-# docker compose up -d
 ```
 
-### Database Migration
+Migrate database:
 
-Migrate the database:
-
-```bash
+```sh
 bun db:migrate
-# prisma db migrate dev
 ```
 
-### Development
+Seed initial data:
 
-Start the development server:
-
-```bash
-bun dev
-# react-router dev
+```sh
+bun db:seed
 ```
 
-Application is available at `http://localhost:5173`.
+Open Prisma Studio:
 
-## Building for Production
+```sh
+bun db:studio
+```
 
-Create a production build, that will also migrate deploy and generate Prisma client:
+Reset when needed:
 
-```bash
+```sh
+bun db:reset
+```
+
+#### Build
+
+Check if the production build is fine:
+
+```sh
 bun run build
-# bun db:migrate:deploy && bun db:gen:prod && react-router build
 ```
+
+Then run:
+
+```sh
+bun start
+```
+
+#### Deployment
+
+Pick a host to deploy it to, such as:
+
+- Vercel
+- Netlify
+- Render.com
+- Railway.com
+- Fly.io
+- Google Cloud
+- Amazon Web Services
+- Microsoft Azure
+- VPS with Coolify, Dokploy, etc
+
+#### Development
+
+Develop the app while running the development server:
+
+```sh
+bun dev
+```
+
+Open <http://localhost:8000> and we're ready to develop.
 
 ## References
 
