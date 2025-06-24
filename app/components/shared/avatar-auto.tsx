@@ -55,9 +55,9 @@ export function AvatarAuto({
       {...props}
     >
       <AvatarImage
-        src={imageUrl || getAvatarPlaceholderUrl(placeholderText)}
         alt={user.name}
         className="bg-secondary"
+        src={imageUrl || getAvatarPlaceholderUrl(placeholderText)}
       />
       {!imageUrl && (
         <AvatarFallback className="bg-secondary">
@@ -91,8 +91,8 @@ export function AvatarAutoNext({
   return (
     <Avatar className={cn("rounded-lg", className)} {...props}>
       <AvatarImage
-        src={userImageSource}
         alt={user.name || user.email || "User avatar"}
+        src={userImageSource}
       />
       <AvatarFallback>{userImageFallback}</AvatarFallback>
     </Avatar>

@@ -46,9 +46,9 @@ export function UserDropdownMenu({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="focus-ring rounded-full" asChild>
-        <button type="button" className="cursor-pointer">
-          <AvatarAuto size={size} user={user} imageUrl={user.image || null} />
+      <DropdownMenuTrigger asChild className="focus-ring rounded-full">
+        <button className="cursor-pointer" type="button">
+          <AvatarAuto imageUrl={user.image || null} size={size} user={user} />
         </button>
       </DropdownMenuTrigger>
 
@@ -56,7 +56,7 @@ export function UserDropdownMenu({
         <DropdownMenuLabel>
           <p className="font-semibold text-base">{user.name}</p>
           <p className="font-semibold text-muted-foreground text-sm">
-            <Link to={`/${user.username}`} prefetch="intent">
+            <Link prefetch="intent" to={`/${user.username}`}>
               @{user.username}
             </Link>
           </p>
@@ -92,8 +92,8 @@ function DropdownMenuGroupItems({ items }: { items: NavItem[] }) {
       {items.map((item) => {
         // const isSignOut = item.path === "/signout";
         return (
-          <DropdownMenuItem key={item.path} asChild>
-            <NavLink to={item.path} prefetch="intent">
+          <DropdownMenuItem asChild key={item.path}>
+            <NavLink prefetch="intent" to={item.path}>
               <span>{item.text}</span>
               {item.shortcut && (
                 <DropdownMenuShortcut>{item.shortcut}</DropdownMenuShortcut>

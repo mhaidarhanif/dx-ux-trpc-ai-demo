@@ -17,16 +17,16 @@ export function InputPassword({
   return (
     <div className="relative">
       <Input
-        type={isShown ? "text" : "password"}
         placeholder={placeholder}
+        type={isShown ? "text" : "password"}
         {...props}
       />
       <Button
-        type="button"
+        className="absolute inset-y-0 right-0 my-1.5 me-1.5 flex w-16 gap-0.5"
         onClick={handleClick}
         size="xs"
+        type="button"
         variant="secondary"
-        className="absolute inset-y-0 right-0 my-1.5 me-1.5 flex w-16 gap-0.5"
       >
         {isShown ? <IconEyeOff /> : <IconEye />}
         <span>{isShown ? "Hide" : "Show"}</span>

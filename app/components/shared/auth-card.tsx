@@ -73,7 +73,7 @@ export function AuthCard({
       {...props}
     >
       <div className="text-center">
-        <Logo size="xl" classNameText="hidden" />
+        <Logo classNameText="hidden" size="xl" />
         {mode.isSignUp && <p>Let's create your new account.</p>}
         {mode.isSignIn && <p>Continue with your account.</p>}
       </div>
@@ -89,23 +89,23 @@ export function AuthCard({
         </div>
 
         <Form
-          className="grid gap-4"
-          method="post"
           action={text.formActionPath}
+          className="grid gap-4"
           id={text.form.id}
+          method="post"
           onSubmit={text.form.onSubmit}
         >
           {mode.isSignUp && (
             <div className="grid gap-2">
               <Label htmlFor="name">Full Name</Label>
               <Input
-                required
-                id="name"
-                type="text"
-                placeholder="First Last"
-                name={fieldsSignUp.name.name}
                 autoComplete="name"
                 autoFocus={Boolean(fieldsSignUp.name.errors)}
+                id="name"
+                name={fieldsSignUp.name.name}
+                placeholder="First Last"
+                required
+                type="text"
               />
               <FieldErrors>{fieldsSignUp.name}</FieldErrors>
             </div>
@@ -115,13 +115,13 @@ export function AuthCard({
             <div className="grid gap-2">
               <Label htmlFor="username">Username</Label>
               <Input
-                required
-                id="username"
-                type="text"
-                placeholder="yourhandle"
-                name={fieldsSignUp.username.name}
                 autoComplete="username"
                 autoFocus={Boolean(fieldsSignUp.username.errors)}
+                id="username"
+                name={fieldsSignUp.username.name}
+                placeholder="yourhandle"
+                required
+                type="text"
               />
               <FieldErrors>{fieldsSignUp.username}</FieldErrors>
             </div>
@@ -130,13 +130,13 @@ export function AuthCard({
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
-              required
-              id="email"
-              type="email"
-              placeholder="email@example.com"
-              name={text.fields.email.name}
               autoComplete="email webauthn"
               autoFocus={Boolean(fieldsSignUp.email.errors)}
+              id="email"
+              name={text.fields.email.name}
+              placeholder="email@example.com"
+              required
+              type="email"
             />
             <FieldErrors>{fieldsSignIn.email}</FieldErrors>
           </div>
@@ -146,27 +146,27 @@ export function AuthCard({
               <Label htmlFor="password">Password</Label>
               {mode.isSignIn && (
                 <Link
-                  to={href("/forgot-password")}
                   className="text-secondary text-xs leading-none"
+                  to={href("/forgot-password")}
                 >
                   Forgot password?
                 </Link>
               )}
             </div>
             <InputPassword
-              required
-              id="password"
-              name={text.fields.password.name}
               autoComplete="current-password webauthn"
               autoFocus={Boolean(fieldsSignUp.password.errors)}
+              id="password"
+              name={text.fields.password.name}
+              required
             />
             <FieldErrors>{fieldsSignIn.password}</FieldErrors>
           </div>
 
           <ButtonLoading
-            type="submit"
             className="w-full"
             submittingText={text.submitting}
+            type="submit"
           >
             {text.idle}
           </ButtonLoading>
@@ -177,8 +177,8 @@ export function AuthCard({
             <p>
               Already have an account?{" "}
               <Link
-                to={href("/signin")}
                 className="underline underline-offset-4"
+                to={href("/signin")}
               >
                 Sign in
               </Link>
@@ -188,8 +188,8 @@ export function AuthCard({
             <p>
               Don't have an account?{" "}
               <Link
-                to={href("/signup")}
                 className="underline underline-offset-4"
+                to={href("/signup")}
               >
                 Sign up
               </Link>

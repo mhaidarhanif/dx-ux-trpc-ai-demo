@@ -68,7 +68,7 @@ export function TRPCReactProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
+      <TRPCProvider queryClient={queryClient} trpcClient={trpcClient}>
         {children}
       </TRPCProvider>
     </QueryClientProvider>
