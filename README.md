@@ -146,21 +146,17 @@ Reset when needed:
 bun db:reset
 ```
 
-#### Build
+### Development
 
-Check if the production build is fine:
-
-```sh
-bun run build
-```
-
-Then run:
+Run the development server:
 
 ```sh
-bun start
+bun dev
 ```
 
-#### Deployment
+Open <http://localhost:8000> then we're ready
+
+### Production Deployment
 
 Pick a host to deploy it to, such as:
 
@@ -169,20 +165,34 @@ Pick a host to deploy it to, such as:
 - Render.com
 - Railway.com
 - Fly.io
-- Google Cloud
-- Amazon Web Services
+- Google Cloud (GCP)
+- Amazon Web Services (AWS)
 - Microsoft Azure
 - VPS with Coolify, Dokploy, etc
 
-#### Development
+Then setup accordingly.
 
-Develop the app while running the development server:
+For example, if not using Vercel, remove `vercelPreset` in `react-router.config.ts`.
+
+### Production Build
+
+Check if the production build is fine:
 
 ```sh
-bun dev
+bun run build
 ```
 
-Open <http://localhost:8000> and we're ready to develop.
+Migrate database for production:
+
+```sh
+bun db:migrate:deploy
+```
+
+Then run:
+
+```sh
+bun start
+```
 
 ## References
 
@@ -206,7 +216,7 @@ Originally created by [🧊Haidar](https://github.com/mhaidarhanif)
 - [🐻Bearmentor](https://bearmentor.com)
 - [🐱Catamyst](https://catamyst.com)
 - [🐶Dogokit](https://dogokit.allnimal.com)
-- [🐘Elephanity](https://elevanty.allnimal.com)
+- [🐘Elevanty](https://elevanty.allnimal.com)
 
 ### Tech Stack Comparison
 

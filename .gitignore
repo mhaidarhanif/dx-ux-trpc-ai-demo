@@ -1,12 +1,13 @@
+__*
 .DS_Store
 .env
-.env.staging
-.env.test
 .env.prod
 .env.production
+.env.staging
+.env.test
 .react-router/
 .react-router/*
+.vercel
 build/
 generated/
 node_modules/
-__*

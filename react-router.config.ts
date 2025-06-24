@@ -3,5 +3,7 @@ import { vercelPreset } from "@vercel/react-router/vite";
 
 export default {
   ssr: true,
-  presets: [vercelPreset()],
+  presets: [
+    vercelPreset(), // Remove if not needed
+  ],
 } satisfies Config;
