@@ -4,9 +4,11 @@ import {
 } from "@tabler/icons-react";
 import type { JSX } from "react";
 import { href } from "react-router";
+import { isProd } from "@/lib/is-prod";
 
 export const configSite: ConfigSite = {
-  id: "localhost",
+  id: isProd ? import.meta.env.VITE_APP_URL : "localhost",
+  origin: isProd ? import.meta.env.VITE_APP_URL : "http://localhost",
   name: "Dogokit Corgi",
   url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "/og/dogokit.jpg",
@@ -40,6 +42,7 @@ export const configSite: ConfigSite = {
 
 export type ConfigSite = {
   id: string;
+  origin: string;
   name: string;
   url: string;
   ogImage?: string;

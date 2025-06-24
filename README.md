@@ -30,6 +30,7 @@
   - [ ] More from [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com)
   - [ ] [React Email v4](https://react.email)
 - [x] [Zod v4](https://zod.dev) & [Conform v1](https://conform.guide)
+- [ ] [Unpic](https://unpic.pics)
 - [x] [Better Auth v1](https://better-auth.com)
 - [x] [Docker v28](https://docker.com)
 - [x] [PostgreSQL v17](https://postgresql.org)

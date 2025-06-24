@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: "This is fine" */
 /** biome-ignore-all lint/suspicious/noConsole: "This is fine" */
-const isProd = process.env.NODE_ENV === "production";
+import { isProd } from "@/lib/is-prod";
 
 export const devlog = {
   info: (...args: any[]) => {
