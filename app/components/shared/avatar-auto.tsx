@@ -42,23 +42,19 @@ interface AvatarAutoProps
  */
 export function AvatarAuto({
   user,
-  imageUrl,
   size,
   className,
   ...props
 }: AvatarAutoProps) {
   const placeholderText = user.username || user.name;
+  const imageUrl = user.image || getAvatarPlaceholderUrl(placeholderText) || "";
 
   return (
     <Avatar
       className={cn(avatarAutoVariants({ size }), "bg-secondary", className)}
       {...props}
     >
-      <AvatarImage
-        alt={user.name}
-        className="bg-secondary"
-        src={imageUrl || getAvatarPlaceholderUrl(placeholderText)}
-      />
+      <AvatarImage alt={user.name} className="bg-secondary" src={imageUrl} />
       {!imageUrl && (
         <AvatarFallback className="bg-secondary">
           {getNameInitials(user.name)}

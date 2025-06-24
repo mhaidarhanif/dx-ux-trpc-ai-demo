@@ -48,7 +48,7 @@ export function UserDropdownMenu({
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="focus-ring rounded-full">
         <button className="cursor-pointer" type="button">
-          <AvatarAuto imageUrl={user.image || null} size={size} user={user} />
+          <AvatarAuto size={size} user={user} />
         </button>
       </DropdownMenuTrigger>
 

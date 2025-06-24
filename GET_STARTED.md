@@ -76,6 +76,12 @@ Then seed the initial data anytime when needed:
 bun db:seed
 ```
 
+Open Prisma Studio to view the data:
+
+```sh
+bun db:studio
+```
+
 ### Build
 
 Check if the production build is fine:
