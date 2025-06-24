@@ -6,7 +6,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgres
     ports:
-      - "50000:5432"
+      - ${POSTGRES_HOST_PORT}:5432
     env_file:
       - path: .env
         required: true
@@ -16,7 +16,7 @@ services:
     build:
       context: .
     ports:
-      - "3000:3000"
+      - "8000:8000"
     depends_on:
       - postgres
     env_file:

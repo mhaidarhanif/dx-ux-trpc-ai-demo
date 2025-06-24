@@ -96,6 +96,8 @@ If necessary, create the `.env.prod` for production info. Adjust accordingly if 
 cp -i .env.example .env.prod
 ```
 
+Then change all the examples.
+
 Required:
 
 - `VITE_APP_URL`
@@ -103,6 +105,7 @@ Required:
 - `POSTGRES_USER`
 - `POSTGRES_PASSWORD`
 - `POSTGRES_DB`
+- `POSTGRES_HOST_PORT`
 - `DATABASE_URL`
 
 Optional:
@@ -233,11 +236,10 @@ What the tech stack choice replaces or each alternatives:
 - Zod = Joi, Yup
 - Conform = TanStack Form, Formik, React Hook Form
 - Better Auth = Passport.js, Auth0, Firebase Auth, Auth.js/NextAuth.js, Clerk
-- Docker
+- Docker and Docker Compose = Manual install into OS
 - PostgreSQL = MySQL, SQLite, MongoDB, DynamoDB, Firestore
 - Vite = Webpack, Parcel
 - Vitest = Jest, Mocha, Jasmine
 - Resend or Amazon SES = SendGrid, Mailgun, Postmark, SMTP
 - Uploadcare or Cloudflare R2 = Amazon S3, Cloudinary, MinIO, Firebase Storage
 - Polar Payment = Stripe, PayPal, Braintree
-- Arcjet Security
