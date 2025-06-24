@@ -19,17 +19,22 @@ export const authClient = createAuthClient({
   baseURL: import.meta.env.VITE_APP_URL,
   plugins: [
     adminClient(),
+
+    // https://better-auth.com/docs/concepts/typescript#inferring-additional-fields-on-client
     inferAdditionalFields<typeof auth>(),
+
     magicLinkClient(),
     multiSessionClient(),
     passkeyClient(),
     phoneNumberClient(),
     usernameClient(),
+
     twoFactorClient({
       onTwoFactorRedirect() {
         window.location.href = "/2fa";
       },
     }),
+
     oneTapClient({
       clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       autoSelect: true,

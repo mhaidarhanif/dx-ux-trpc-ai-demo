@@ -48,7 +48,7 @@ const Ellipsis = ({ size = 24, ...props }: SpinnerVariantProps) => {
       height={size}
       viewBox="0 0 24 24"
       width={size}
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="http://w3.org/2000/svg"
       {...props}
     >
       <title>Loading...</title>
@@ -94,7 +94,7 @@ const Ring = ({ size = 24, ...props }: SpinnerVariantProps) => (
     stroke="currentColor"
     viewBox="0 0 44 44"
     width={size}
-    xmlns="http://www.w3.org/2000/svg"
+    xmlns="http://w3.org/2000/svg"
     {...props}
   >
     <title>Loading...</title>
@@ -152,7 +152,7 @@ const Bars = ({ size = 24, ...props }: SpinnerVariantProps) => (
     height={size}
     viewBox="0 0 24 24"
     width={size}
-    xmlns="http://www.w3.org/2000/svg"
+    xmlns="http://w3.org/2000/svg"
     {...props}
   >
     <title>Loading...</title>
@@ -212,7 +212,7 @@ const Infinite = ({ size = 24, ...props }: SpinnerVariantProps) => (
     preserveAspectRatio="xMidYMid"
     viewBox="0 0 100 100"
     width={size}
-    xmlns="http://www.w3.org/2000/svg"
+    xmlns="http://w3.org/2000/svg"
     {...props}
   >
     <title>Loading...</title>

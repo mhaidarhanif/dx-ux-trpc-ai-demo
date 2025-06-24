@@ -25,6 +25,7 @@ import {
 import { passkey } from "better-auth/plugins/passkey";
 import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
+import { isProd } from "@/lib/is-prod";
 import { devlog } from "@/lib/logger";
 import {
   createUsername,
@@ -114,10 +115,14 @@ export const auth = betterAuthConfig({
     disableCleanup: false,
   },
 
+  // https://better-auth.com/docs/concepts/rate-limit
   rateLimit: {
-    enabled: true,
+    enabled: isProd,
+    window: 60,
+    max: 100,
   },
 
+  // https://better-auth.com/docs/authentication/email-password
   emailAndPassword: {
     enabled: true,
     disableSignUp: false,
@@ -125,6 +130,8 @@ export const auth = betterAuthConfig({
     minPasswordLength: 8,
     maxPasswordLength: 128,
     autoSignIn: true,
+
+    // https://better-auth.com/docs/reference/options#emailandpassword
     sendResetPassword: async ({ user, url, token }) => {
       // Send reset password email
       await devlog.info("SEND_RESET_PASSWORD", { user, url, token });
@@ -183,47 +190,34 @@ export const auth = betterAuthConfig({
 
   plugins: [
     admin(),
-    anonymous(),
     haveIBeenPwned(),
     multiSession(),
-    oneTap(), // TODO: How to mapProfileToUser for username
-    openAPI(), // Available on /api/auth/reference
+
+    // https://better-auth.com/docs/plugins/open-api
+    // Available to access on /api/auth/reference
+    openAPI(),
 
     inferAdditionalFields({
       user: {
-        phoneNumber: { type: "string", required: false },
+        phoneNumber: {
+          type: "string",
+          required: false,
+        },
       },
     }),
 
-    emailOTP({
-      sendVerificationOTP: async ({ email, otp, type }) => {
-        await devlog.info("SEND_OTP_EMAIL", { email, otp, type });
+    // https://better-auth.com/docs/plugins/one-tap
+    oneTap(), // TODO: How One Tap can mapProfileToUser for username
+
+    // https://better-auth.com/docs/plugins/anonymous
+    anonymous({
+      onLinkAccount: async ({ anonymousUser, newUser }) => {
+        await devlog.info("ANONYMOUS_USER_LINKED", { anonymousUser, newUser });
+        // Move data from anonymous user to the new user
       },
     }),
 
-    phoneNumber({
-      sendOTP: ({ phoneNumber: phone, code }) => {
-        devlog.info("SEND_OTP_SMS", { phone, code });
-      },
-    }),
-
-    passkey({
-      schema: { passkey: { modelName: "Passkey" } },
-      rpID: configSite.id,
-      rpName: configSite.name,
-      origin: configSite.origin,
-    }),
-
-    twoFactor({
-      schema: { twoFactor: { modelName: "TwoFactor" } },
-    }),
-
-    magicLink({
-      sendMagicLink(data, request) {
-        devlog.info("SEND_MAGIC_LINK", { data, request });
-      },
-    }),
-
+    // https://better-auth.com/docs/plugins/username
     username({
       minUsernameLength: configSchema.username.min,
       maxUsernameLength: configSchema.username.max,
@@ -233,6 +227,46 @@ export const auth = betterAuthConfig({
       },
     }),
 
+    // https://better-auth.com/docs/plugins/email-otp
+    emailOTP({
+      sendVerificationOTP: async ({ email, otp, type }) => {
+        await devlog.info("SEND_OTP_EMAIL", { email, otp, type });
+      },
+    }),
+
+    // https://better-auth.com/docs/plugins/magic-link
+    magicLink({
+      sendMagicLink: async ({ email, token, url }, request) => {
+        await devlog.info("SEND_MAGIC_LINK", { email, token, url, request });
+      },
+    }),
+
+    // https://better-auth.com/docs/plugins/phone-number
+    phoneNumber({
+      sendOTP: ({ phoneNumber: phone, code }) => {
+        devlog.info("SEND_OTP_SMS", { phone, code });
+      },
+    }),
+
+    // https://better-auth.com/docs/plugins/passkey
+    passkey({
+      schema: { passkey: { modelName: "Passkey" } },
+      rpID: configSite.id,
+      rpName: configSite.name,
+      origin: configSite.origin,
+      authenticatorSelection: {
+        // authenticatorAttachment not set, both platform and cross-platform allowed, with platform preferred
+        residentKey: "preferred",
+        userVerification: "preferred",
+      },
+    }),
+
+    // https://better-auth.com/docs/plugins/2fa
+    twoFactor({
+      schema: { twoFactor: { modelName: "TwoFactor" } },
+    }),
+
+    // https://better-auth.com/docs/plugins/polar
     // polar({
     //   client: polarClient,
     //   createCustomerOnSignUp: false, // TODO: Revisit this
