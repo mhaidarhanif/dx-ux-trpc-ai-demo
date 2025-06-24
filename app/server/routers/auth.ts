@@ -4,16 +4,16 @@ import { protectedProcedure } from "@/server/trpc";
 
 export const authRouter = {
   getUser: protectedProcedure.query(async ({ ctx }) => {
-    return await ctx.db.user.findFirst({
+    return await ctx.db.user.findUnique({
       where: { id: ctx.user.id },
-      cacheStrategy: { ttl: 10 },
+      cacheStrategy: { ttl: 60 },
     });
   }),
 
   getUserComplete: protectedProcedure.query(async ({ ctx }) => {
-    return await ctx.db.user.findFirst({
+    return await ctx.db.user.findUnique({
       where: { id: ctx.user.id },
-      cacheStrategy: { ttl: 10 },
+      cacheStrategy: { ttl: 60 },
       include: {
         sessions: true,
         accounts: true,

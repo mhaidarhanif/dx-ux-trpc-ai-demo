@@ -4,7 +4,9 @@ import { protectedProcedure, publicProcedure } from "@/server/trpc";
 
 export const userRouter = {
   getUsers: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.db.user.findMany({ cacheStrategy: { ttl: 60 } });
+    return await ctx.db.user.findMany({
+      cacheStrategy: { ttl: 120 },
+    });
   }),
 
   getUserByUsername: publicProcedure

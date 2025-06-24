@@ -6,7 +6,7 @@ export const exampleRouter = {
   getExamples: publicProcedure.query(async ({ ctx }) => {
     return await ctx.db.example.findMany({
       include: { items: true },
-      cacheStrategy: { ttl: 60 },
+      cacheStrategy: { ttl: 120 },
     });
   }),
 
@@ -16,7 +16,7 @@ export const exampleRouter = {
       return await ctx.db.example.findUnique({
         where: { slug: input },
         include: { items: true },
-        cacheStrategy: { ttl: 60 },
+        cacheStrategy: { ttl: 120 },
       });
     }),
 } satisfies TRPCRouterRecord;
