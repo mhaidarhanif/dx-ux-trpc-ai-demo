@@ -1,3 +1,10 @@
+// Prisma Schema
+// 
+// Docs:
+// https://better-auth.com/docs/adapters/prisma
+// https://better-auth.com/docs/guides/optimizing-for-performance#database-optimizations
+// ---
+
 generator client {
   provider        = "prisma-client"
   previewFeatures = ["relationJoins"]

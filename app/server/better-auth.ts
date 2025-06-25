@@ -6,7 +6,7 @@
 //   usage,
 //   webhooks,
 // } from "@polar-sh/better-auth";
-import { betterAuth as betterAuthConfig, type User } from "better-auth";
+import { betterAuth, type User } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { inferAdditionalFields } from "better-auth/client/plugins";
 import {
@@ -37,7 +37,7 @@ import { prisma } from "@/server/prisma";
 
 export type AuthSession = typeof auth.$Infer.Session;
 
-export const auth = betterAuthConfig({
+export const auth = betterAuth({
   appName: configSite.name,
   baseURL: process.env.VITE_APP_URL,
   basePath: "/api/auth",
@@ -113,6 +113,7 @@ export const auth = betterAuthConfig({
     updateAccountOnSignIn: true,
   },
 
+  // https://better-auth.com/docs/reference/options#verification
   verification: {
     modelName: "Verification",
     disableCleanup: false,
