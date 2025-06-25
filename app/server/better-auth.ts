@@ -8,6 +8,7 @@ import {
   haveIBeenPwned,
   magicLink,
   multiSession,
+  oneTap,
   openAPI,
   phoneNumber,
   twoFactor,
@@ -19,7 +20,11 @@ import { configSite } from "@/config/site";
 import { isProd } from "@/env";
 import { envServer } from "@/env.server";
 import { devlog } from "@/lib/logger";
-import { createUsername, createUsernameGitHub, getNameParts } from "@/lib/string";
+import {
+  createUsername,
+  createUsernameGitHub,
+  getNameParts,
+} from "@/lib/string";
 import { prisma } from "@/server/prisma";
 
 export type AuthSession = typeof auth.$Infer.Session;
@@ -57,7 +62,15 @@ export const auth = betterAuth({
       },
       deleteUser: {
         enabled: true,
-        sendDeleteAccountVerification: async ({ user, url, token }: { user: User; url: string; token: string }) => {
+        sendDeleteAccountVerification: async ({
+          user,
+          url,
+          token,
+        }: {
+          user: User;
+          url: string;
+          token: string;
+        }) => {
           // Send delete account verification
           await devlog.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
             user,
@@ -158,7 +171,10 @@ export const auth = betterAuth({
       clientId: envServer.GOOGLE_CLIENT_ID,
       clientSecret: envServer.GOOGLE_CLIENT_SECRET,
       mapProfileToUser: (profile) => {
-        const usernameGoogle = createUsername(profile.given_name, profile.family_name);
+        const usernameGoogle = createUsername(
+          profile.given_name,
+          profile.family_name
+        );
 
         return {
           username: usernameGoogle,
@@ -232,7 +248,6 @@ export const auth = betterAuth({
       schema: { passkey: { modelName: "Passkey" } },
       rpID: configSite.id,
       rpName: configSite.name,
-      origin: configSite.origin,
       authenticatorSelection: {
         // authenticatorAttachment not set, both platform and cross-platform allowed, with platform preferred
         residentKey: "preferred",
@@ -246,7 +261,9 @@ export const auth = betterAuth({
     }),
 
     // https://better-auth.com/docs/plugins/one-tap
-    // oneTap(), // TODO: How One Tap can mapProfileToUser for username
+    oneTap({
+      clientId: envServer.GOOGLE_CLIENT_ID,
+    }), // TODO: How One Tap can mapProfileToUser for username
 
     // https://better-auth.com/docs/plugins/polar
     // polar({

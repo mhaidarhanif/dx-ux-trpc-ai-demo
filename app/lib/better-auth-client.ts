@@ -3,6 +3,7 @@ import {
   inferAdditionalFields,
   magicLinkClient,
   multiSessionClient,
+  oneTapClient,
   passkeyClient,
   phoneNumberClient,
   twoFactorClient,
@@ -34,14 +35,14 @@ export const authClient = createAuthClient({
       },
     }),
 
-    // oneTapClient({
-    //   clientId: envServer.GOOGLE_CLIENT_ID,
-    //   autoSelect: true,
-    //   cancelOnTapOutside: false,
-    //   context: "signin",
-    //   additionalOptions: {},
-    //   promptOptions: { baseDelay: 2000, maxAttempts: 10 },
-    // }),
+    oneTapClient({
+      clientId: envClient.VITE_GOOGLE_CLIENT_ID,
+      autoSelect: true,
+      cancelOnTapOutside: false,
+      context: "signin",
+      additionalOptions: {},
+      promptOptions: { baseDelay: 2000, maxAttempts: 10 },
+    }),
 
     // polarClient(),
   ],

@@ -8,6 +8,7 @@ export const envClient = createEnv({
   clientPrefix: "VITE_",
   client: {
     VITE_APP_URL: z.url(),
+    VITE_GOOGLE_CLIENT_ID: z.string(),
   },
   runtimeEnv: import.meta.env,
 });

@@ -8,7 +8,6 @@ import { envClient, isProd } from "@/env";
 
 export const configSiteServer: ConfigSiteServer = {
   id: isProd ? envClient.VITE_APP_URL : "localhost",
-  origin: isProd ? envClient.VITE_APP_URL : "http://localhost",
 };
 
 export const configSite: ConfigSite = {
@@ -47,7 +46,7 @@ export const configSite: ConfigSite = {
 
 export type ConfigSiteServer = {
   id: string;
-  origin: string;
+  origin?: string;
 };
 
 export type ConfigSite = ConfigSiteServer & {
