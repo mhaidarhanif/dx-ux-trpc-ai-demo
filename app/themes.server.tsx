@@ -1,16 +1,16 @@
 import { createCookieSessionStorage } from "react-router";
 import { createThemeSessionResolver } from "remix-themes";
-
-const isProduction = process.env.NODE_ENV === "production";
+import { isProd } from "@/env";
+import { envServer } from "@/env.server";
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: "dogokit_theme",
+    name: "dogokit_corgi_theme",
     path: "/",
     httpOnly: true,
     sameSite: "lax",
-    secrets: [String(process.env.BETTER_AUTH_SECRET)],
-    ...(isProduction ? { domain: "example.com", secure: true } : {}),
+    secrets: [envServer.BETTER_AUTH_SECRET],
+    ...(isProd ? { domain: envServer.APP_URL, secure: true } : {}),
   },
 });
 

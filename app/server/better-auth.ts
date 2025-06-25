@@ -1,11 +1,3 @@
-/** biome-ignore-all lint/suspicious/noConsole: "WIP" */
-// import {
-//   checkout,
-//   polar,
-//   portal,
-//   usage,
-//   webhooks,
-// } from "@polar-sh/better-auth";
 import { betterAuth, type User } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { inferAdditionalFields } from "better-auth/client/plugins";
@@ -16,7 +8,6 @@ import {
   haveIBeenPwned,
   magicLink,
   multiSession,
-  oneTap,
   openAPI,
   phoneNumber,
   twoFactor,
@@ -25,21 +16,17 @@ import {
 import { passkey } from "better-auth/plugins/passkey";
 import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
-import { isProd } from "@/lib/is-prod";
+import { isProd } from "@/env";
+import { envServer } from "@/env.server";
 import { devlog } from "@/lib/logger";
-import {
-  createUsername,
-  createUsernameGitHub,
-  getNameParts,
-} from "@/lib/string";
-// import { polarClient } from "@/server/polar";
+import { createUsername, createUsernameGitHub, getNameParts } from "@/lib/string";
 import { prisma } from "@/server/prisma";
 
 export type AuthSession = typeof auth.$Infer.Session;
 
 export const auth = betterAuth({
   appName: configSite.name,
-  baseURL: process.env.VITE_APP_URL,
+  baseURL: envServer.APP_URL,
   basePath: "/api/auth",
 
   database: prismaAdapter(prisma, { provider: "postgresql" }),
@@ -70,15 +57,7 @@ export const auth = betterAuth({
       },
       deleteUser: {
         enabled: true,
-        sendDeleteAccountVerification: async ({
-          user,
-          url,
-          token,
-        }: {
-          user: User;
-          url: string;
-          token: string;
-        }) => {
+        sendDeleteAccountVerification: async ({ user, url, token }: { user: User; url: string; token: string }) => {
           // Send delete account verification
           await devlog.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
             user,
@@ -161,8 +140,8 @@ export const auth = betterAuth({
 
   socialProviders: {
     github: {
-      clientId: process.env.VITE_GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      clientId: envServer.GITHUB_CLIENT_ID,
+      clientSecret: envServer.GITHUB_CLIENT_SECRET,
       mapProfileToUser: (profile) => {
         const { firstName, lastName } = getNameParts(profile.name);
         const usernameGitHub = createUsernameGitHub(profile.login);
@@ -176,13 +155,10 @@ export const auth = betterAuth({
       },
     },
     google: {
-      clientId: process.env.VITE_GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: envServer.GOOGLE_CLIENT_ID,
+      clientSecret: envServer.GOOGLE_CLIENT_SECRET,
       mapProfileToUser: (profile) => {
-        const usernameGoogle = createUsername(
-          profile.given_name,
-          profile.family_name
-        );
+        const usernameGoogle = createUsername(profile.given_name, profile.family_name);
 
         return {
           username: usernameGoogle,
@@ -211,9 +187,6 @@ export const auth = betterAuth({
         },
       },
     }),
-
-    // https://better-auth.com/docs/plugins/one-tap
-    oneTap(), // TODO: How One Tap can mapProfileToUser for username
 
     // https://better-auth.com/docs/plugins/anonymous
     anonymous({
@@ -272,6 +245,9 @@ export const auth = betterAuth({
       schema: { twoFactor: { modelName: "TwoFactor" } },
     }),
 
+    // https://better-auth.com/docs/plugins/one-tap
+    // oneTap(), // TODO: How One Tap can mapProfileToUser for username
+
     // https://better-auth.com/docs/plugins/polar
     // polar({
     //   client: polarClient,
@@ -290,7 +266,7 @@ export const auth = betterAuth({
     //     portal(),
     //     usage(),
     //     webhooks({
-    //       secret: process.env.POLAR_WEBHOOK_SECRET as string,
+    //       secret: envServer.POLAR_WEBHOOK_SECRET,
     //       // onCustomerStateChanged: (payload) => // Triggered when anything regarding a customer changes
     //       // onOrderPaid: (payload) => // Triggered when an order was paid (purchase, subscription renewal, etc.)
     //       // // ...  // Over 25 granular webhook handlers

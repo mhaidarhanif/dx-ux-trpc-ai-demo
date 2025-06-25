@@ -1,15 +1,17 @@
-/** biome-ignore-all lint/suspicious/noExplicitAny: "This is fine" */
 /** biome-ignore-all lint/suspicious/noConsole: "This is fine" */
-import { isProd } from "@/lib/is-prod";
+import { isProd } from "@/env";
 
 export const devlog = {
-  info: (...args: any[]) => {
+  info: (...args: unknown[]) => {
     if (!isProd) console.log(...args);
   },
-  warn: (...args: any[]) => {
+  infoAlways: (...args: unknown[]) => {
+    console.log(...args);
+  },
+  warn: (...args: unknown[]) => {
     if (!isProd) console.warn(...args);
   },
-  error: (...args: any[]) => {
+  error: (...args: unknown[]) => {
     if (!isProd) console.error(...args);
   },
 };

@@ -1,7 +1,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
-import { ZodError } from "zod";
-
+import { ZodError } from "zod/v4";
+import { devlog } from "@/lib/logger";
 import { auth } from "@/server/better-auth";
 import { prisma } from "@/server/prisma";
 
@@ -12,8 +12,7 @@ export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
 
   const userEmail = authSession?.user.email;
 
-  // biome-ignore lint/suspicious/noConsole: "Needed on production too"
-  console.info(`🔹tRPC: [${source}] by [${userEmail ?? "Anonymous"}]`);
+  devlog.infoAlways(`🔹tRPC: [${source}] by [${userEmail ?? "Anonymous"}]`);
 
   return {
     db: prisma,

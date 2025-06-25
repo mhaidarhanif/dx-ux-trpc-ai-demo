@@ -1,12 +1,10 @@
 import { customAlphabet } from "nanoid";
 import pluralize from "pluralize";
 import slugify from "slugify";
-import { z } from "zod";
-
-const URLSchema = z.string().url();
+import { z } from "zod/v4";
 
 export function isValidUrl(url: string) {
-  return URLSchema.safeParse(url).success;
+  return z.url().safeParse(url).success;
 }
 
 export function convertToSlug(...texts: string[]) {

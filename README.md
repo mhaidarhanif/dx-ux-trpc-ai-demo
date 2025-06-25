@@ -13,11 +13,8 @@
 
 ### Tech Stack and Setup
 
-- [x] [TypeScript](https://typescriptlang.org)
-- [x] [Bun v1](https://bun.sh)
-- [x] [Biome v2](https://biomejs.dev)
-  - [x] [Ultracite](https://ultracite.ai)
-- [x] [Vite v7](https://vitejs.dev)
+Core:
+
 - [x] [React v19](https://react.dev)
 - [x] [React Router v7 Framework (Remix)](https://reactrouter.com)
   - [x] [Themes: System, Light, Dark](https://github.com/abereghici/remix-themes)
@@ -30,11 +27,20 @@
   - [ ] More from [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com)
   - [ ] [React Email v4](https://react.email)
 - [x] [Zod v4](https://zod.dev) & [Conform v1](https://conform.guide)
-- [ ] [Unpic](https://unpic.pics)
 - [x] [Better Auth v1](https://better-auth.com)
+- [ ] [Unpic](https://unpic.pics)
+
+Config:
+
+- [x] [TypeScript](https://typescriptlang.org)
+- [x] [Bun v1](https://bun.sh)
+- [x] [Biome v2](https://biomejs.dev)
+  - [x] [Ultracite](https://ultracite.ai)
+- [x] [Vite v7](https://vitejs.dev)
+  - [x] [t3-env](https://env.t3.gg)
+- [ ] [Vitest v3](https://vitest.dev)
 - [x] [Docker v28](https://docker.com)
 - [x] [PostgreSQL v17](https://postgresql.org)
-- [ ] [Vitest v3](https://vitest.dev)
 - [ ] [Playwright](https://playwright.dev)
 - [ ] [Storybook](https://storybook.js.org)
 - [ ] [Turborepo](https://turbo.build)
@@ -181,6 +187,11 @@ Pick a host to deploy it to, such as:
 Then setup accordingly.
 
 For example, if not using Vercel, remove `vercelPreset` in `react-router.config.ts`.
+
+It's also recommended to use secret management for environment variables, such as:
+
+- Doppler
+- Infisical
 
 ### Production Build
 

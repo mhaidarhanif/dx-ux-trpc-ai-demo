@@ -4,16 +4,17 @@ import {
 } from "@tabler/icons-react";
 import type { JSX } from "react";
 import { href } from "react-router";
-import { isProd } from "@/lib/is-prod";
+import { envClient, isProd } from "@/env";
 
 export const configSiteServer: ConfigSiteServer = {
-  id: isProd ? String(process.env.VITE_APP_URL) : "localhost",
-  origin: isProd ? String(process.env.VITE_APP_URL) : "http://localhost",
+  id: isProd ? envClient.VITE_APP_URL : "localhost",
+  origin: isProd ? envClient.VITE_APP_URL : "http://localhost",
 };
 
 export const configSite: ConfigSite = {
   ...configSiteServer,
   name: "Dogokit Corgi",
+  domain: envClient.VITE_APP_URL,
   url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "/og/dogokit.jpg",
   description:
@@ -34,7 +35,7 @@ export const configSite: ConfigSite = {
     { to: href("/"), label: "Home" },
     { to: href("/about"), label: "About" },
     { to: href("/examples"), label: "Examples" },
-    { to: "/404", label: "404" },
+    { to: href("/*", { "*": "404" }), label: "404" },
   ],
 
   navAuthItems: [
@@ -51,6 +52,7 @@ export type ConfigSiteServer = {
 
 export type ConfigSite = ConfigSiteServer & {
   name: string;
+  domain: string;
   url: string;
   ogImage?: string;
   description: string;
