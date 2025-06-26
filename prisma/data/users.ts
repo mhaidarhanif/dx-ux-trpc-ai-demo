@@ -10,6 +10,6 @@ export const dataSeedUsers: SeedUser[] = [
     username: "example",
     email: "example@example.com",
     emailVerified: true,
-    password: "exampleexampleexample",
+    password: "example_example_example",
   },
 ];

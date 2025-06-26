@@ -2,7 +2,7 @@
 
 import { type Prisma, PrismaClient } from "@/generated/prisma/client";
 import { devlog } from "@/lib/logger";
-import { hashPassword } from "@/lib/password";
+import { auth } from "@/server/better-auth";
 import { dataExamples } from "./data/examples";
 import { dataSeedUsers } from "./data/users";
 
@@ -47,27 +47,33 @@ export async function seedUsers() {
   devlog.info("\n 🟢 Seeding users... \n");
 
   for (const dataUser of dataSeedUsers) {
-    const { password, ...user } = dataUser;
+    const { password, ...userItem } = dataUser;
 
-    const upsertedUser = await prisma.user.upsert({
-      where: { email: user.email },
-      update: user,
-      create: user,
+    const existingUser = await prisma.user.findUnique({
+      where: { email: userItem.email },
     });
+    if (existingUser) {
+      devlog.info(
+        `ℹ️ User exists: ${existingUser.email} ${existingUser.name} @${existingUser.username}`
+      );
+      continue;
+    }
 
-    const upsertedAccount = await prisma.account.upsert({
-      where: { accountId: upsertedUser.id },
-      update: {},
-      create: {
-        userId: upsertedUser.id,
-        providerId: "credential",
-        accountId: upsertedUser.id,
-        password: await hashPassword(password),
-      },
-    });
+    try {
+      const { user } = await auth.api.signUpEmail({
+        body: {
+          name: userItem.name,
+          email: userItem.email,
+          username: userItem.username,
+          password,
+        },
+      });
 
-    devlog.info(`👤 User: ${upsertedUser.name} / ${upsertedUser.username} / ${upsertedUser.email}
-   Account: ${upsertedAccount.providerId}: ${upsertedAccount.accountId}`);
+      devlog.info(`👤 User: ${user.email} ${user.name}`);
+    } catch (error) {
+      devlog.error("⚠️ Error signing up user:", error);
+      break;
+    }
   }
 }
 
