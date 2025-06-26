@@ -80,7 +80,7 @@ model Session {
 model Account {
   id String @id @default(ulid())
 
-  accountId  String
+  accountId  String @unique
   providerId String
 
   userId String

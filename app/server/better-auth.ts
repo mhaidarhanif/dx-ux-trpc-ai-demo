@@ -20,6 +20,7 @@ import { configSite } from "@/config/site";
 import { isProd } from "@/env";
 import { envServer } from "@/env.server";
 import { devlog } from "@/lib/logger";
+import { hashPassword, verifyPassword } from "@/lib/password";
 import {
   createUsername,
   createUsernameGitHub,
@@ -128,6 +129,11 @@ export const auth = betterAuth({
     minPasswordLength: 8,
     maxPasswordLength: 128,
     autoSignIn: true,
+
+    password: {
+      hash: hashPassword,
+      verify: verifyPassword,
+    },
 
     // https://better-auth.com/docs/reference/options#emailandpassword
     sendResetPassword: async ({ user, url, token }) => {

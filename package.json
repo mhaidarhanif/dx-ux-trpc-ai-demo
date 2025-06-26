@@ -25,7 +25,7 @@
     "db:studio": "prisma studio --browser none",
     "db:reset": "prisma migrate reset --skip-seed",
     "db:seed": "prisma db seed",
-    "db:prune": "bun db:reset && bun db:migrate && bun db:seed",
+    "db:prune": "bun db:reset && bun db:seed",
     "auth:gen": "bunx @better-auth/cli generate --config app/server/better-auth.ts"
   },
   "prisma": {
@@ -55,6 +55,7 @@
     "@trpc/server": "^11.4.2",
     "@trpc/tanstack-react-query": "^11.4.2",
     "@vercel/react-router": "^1.1.2",
+    "argon2": "^0.43.0",
     "better-auth": "^1.2.10",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -103,6 +104,7 @@
     "@react-router/dev": "^7.6.2",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.10",
+    "@types/bun": "^1.2.17",
     "@types/color": "^4.2.0",
     "@types/culori": "^4.0.0",
     "@types/node": "^22.15.33",
