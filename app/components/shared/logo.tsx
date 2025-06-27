@@ -59,7 +59,6 @@ export function Logo({
 }: LogoProps) {
   return (
     <span className={cn(logoVariants({ variant, size, className }))}>
-      {/** biome-ignore lint/performance/noImgElement: "It is fine" */}
       <img
         alt={altText}
         className={cn(logoImageVariants({ size, className: classNameIcon }))}

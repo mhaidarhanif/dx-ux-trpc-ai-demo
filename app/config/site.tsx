@@ -1,14 +1,12 @@
-import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
-import type { JSX } from "react";
+import {
+  IconBrandGithubFilled,
+  IconBrandGoogleFilled,
+} from "@tabler/icons-react";
 import { href } from "react-router";
 import { envClient, isProd } from "@/env";
 
-export const configSiteServer: ConfigSiteServer = {
-  id: isProd ? envClient.VITE_APP_URL : "localhost",
-};
-
 export const configSite: ConfigSite = {
-  ...configSiteServer,
+  id: isProd ? envClient.VITE_APP_URL : "localhost",
   name: envClient.VITE_APP_NAME,
   domain: envClient.VITE_APP_URL,
   url: "https://github.com/dogokit/dogokit-corgi",
@@ -23,8 +21,8 @@ export const configSite: ConfigSite = {
   authOptions: ["social", "passkey", "email", "magic", "anonymous"],
   socialProviders: ["google", "github"],
   socialProviderButtons: [
-    { provider: "google", label: "Google", icon: <SiGoogle /> },
-    { provider: "github", label: "GitHub", icon: <SiGithub /> },
+    { provider: "google", label: "Google", icon: <IconBrandGoogleFilled /> },
+    { provider: "github", label: "GitHub", icon: <IconBrandGithubFilled /> },
   ],
 
   navItems: [
@@ -46,12 +44,8 @@ export const metaThemeColor = {
   dark: "#000000",
 };
 
-export type ConfigSiteServer = {
+export type ConfigSite = {
   id: string;
-  origin?: string;
-};
-
-export type ConfigSite = ConfigSiteServer & {
   name: string;
   domain: string;
   url: string;
@@ -89,7 +83,7 @@ export type SocialProvider =
 export type SocialProviderButton = {
   provider: SocialProvider;
   label: string;
-  icon: JSX.Element;
+  icon: React.ReactNode;
 };
 
 export type NavItem = {

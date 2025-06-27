@@ -43,7 +43,7 @@
         "useUniqueElementIds": "off"
       },
       "performance": {
-        "noImgElement": "error"
+        "noImgElement": "off"
       },
       "recommended": true,
       "style": {
