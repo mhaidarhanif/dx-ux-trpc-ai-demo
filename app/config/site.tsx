@@ -1,6 +1,7 @@
 import { href } from "react-router";
-import { BrandGithubIcon } from "@/components/icons/brand-github";
-import { BrandGoogleIcon } from "@/components/icons/brand-google";
+import IconGitHub from "@/components/icons/github-fill";
+import IconGoogle from "@/components/icons/google-fill";
+import IconLinkedin from "@/components/icons/linkedin-fill";
 import { envClient, isProd } from "@/env";
 
 export const configSite: ConfigSite = {
@@ -11,17 +12,11 @@ export const configSite: ConfigSite = {
   ogImage: "/og/dogokit.jpg",
   description:
     "Full stack app development kit with React Router v7 Framework, tRPC, Prisma, Better Auth, Tailwind CSS, shadcn/ui, and more.",
+
   links: {
     x: "https://x.com/mhaidarhanif",
     github: "https://github.com/dogokit/dogokit-corgi",
   },
-
-  authOptions: ["social", "passkey", "email", "magic", "anonymous"],
-  socialProviders: ["google", "github"],
-  socialProviderButtons: [
-    { provider: "google", label: "Google", icon: <BrandGoogleIcon /> },
-    { provider: "github", label: "GitHub", icon: <BrandGithubIcon /> },
-  ],
 
   navItems: [
     { to: href("/"), label: "Home" },
@@ -34,6 +29,27 @@ export const configSite: ConfigSite = {
     { to: href("/signup"), label: "Sign Up", auth: false },
     { to: href("/signin"), label: "Sign In", auth: false },
     { to: href("/dashboard"), label: "Dashboard", auth: true },
+  ],
+
+  authOptions: ["social", "passkey", "email", "magic", "anonymous"],
+
+  authProviders: [
+    {
+      name: "google",
+      label: "Google",
+      icon: <IconGoogle />,
+    },
+    {
+      name: "github",
+      label: "GitHub",
+      icon: <IconGitHub />,
+    },
+    {
+      name: "linkedin",
+      label: "LinkedIn",
+      icon: <IconLinkedin />,
+      isEnabled: false,
+    },
   ],
 };
 
@@ -49,19 +65,26 @@ export type ConfigSite = {
   url: string;
   ogImage?: string;
   description: string;
-  links: Partial<Record<SocialProvider, string>>;
 
-  authOptions: AuthOption[];
-  socialProviders: SocialProvider[];
-  socialProviderButtons: SocialProviderButton[];
+  links: Partial<Record<AuthProviderName, string>>;
 
   navItems: NavItem[];
   navAuthItems: NavItem[];
+
+  authOptions: AuthOption[];
+
+  authProviders: AuthProvider[];
+};
+
+export type NavItem = {
+  to: ReturnType<typeof href>;
+  label: string;
+  auth?: boolean;
 };
 
 export type AuthOption = "social" | "passkey" | "email" | "magic" | "anonymous";
 
-export type SocialProvider =
+export type AuthProviderName =
   | "allnimal"
   | "apple"
   | "discord"
@@ -78,14 +101,9 @@ export type SocialProvider =
   | "zoom"
   | "x";
 
-export type SocialProviderButton = {
-  provider: SocialProvider;
+export type AuthProvider = {
+  name: AuthProviderName;
   label: string;
   icon: React.ReactNode;
-};
-
-export type NavItem = {
-  to: ReturnType<typeof href>;
-  label: string;
-  auth?: boolean;
+  isEnabled?: boolean;
 };

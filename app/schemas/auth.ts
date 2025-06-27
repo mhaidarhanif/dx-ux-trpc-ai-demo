@@ -3,7 +3,7 @@ import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
 
 export const AuthSocialSchema = z.object({
-  provider: z.enum(configSite.socialProviders),
+  provider: z.enum(configSite.authProviders.map((provider) => provider.name)),
 });
 
 export const AuthFormSchema = z.object({

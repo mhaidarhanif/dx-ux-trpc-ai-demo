@@ -156,6 +156,7 @@ export const auth = betterAuth({
     expiresIn: 3600, // 1 hour
   },
 
+  // Configure more in @/config/site.tsx
   socialProviders: {
     github: {
       clientId: envServer.GITHUB_CLIENT_ID,

@@ -5,17 +5,19 @@ import { configSite } from "@/config/site";
 export function ButtonAuthProviders({ textAction }: { textAction: string }) {
   return (
     <>
-      {configSite.socialProviderButtons.map((authSocial) => (
-        <Form action="/action/social" key={authSocial.provider} method="post">
-          <input name="provider" type="hidden" value={authSocial.provider} />
-          <Button className="w-full" variant="secondary">
-            {authSocial.icon}
-            <span>
-              {textAction} with {authSocial.label}
-            </span>
-          </Button>
-        </Form>
-      ))}
+      {configSite.authProviders
+        .filter((provider) => provider.isEnabled !== false)
+        .map((provider) => (
+          <Form action="/action/social" key={provider.name} method="post">
+            <input name="provider" type="hidden" value={provider.name} />
+            <Button className="w-full" variant="secondary">
+              {provider.icon}
+              <span>
+                {textAction} with {provider.label}
+              </span>
+            </Button>
+          </Form>
+        ))}
     </>
   );
 }

@@ -1,6 +1,5 @@
 import { GripVerticalIcon } from "lucide-react";
 import type * as React from "react";
-// biome-ignore lint/performance/noNamespaceImport: "It has no default export"
 import * as ResizablePrimitive from "react-resizable-panels";
 
 import { cn } from "@/lib/utils";

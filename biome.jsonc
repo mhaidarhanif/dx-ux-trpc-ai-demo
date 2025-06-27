@@ -1,9 +1,6 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
   "extends": ["ultracite"],
-  "files": {
-    "ignoreUnknown": true
-  },
   "assist": {
     "actions": {
       "source": {
@@ -11,6 +8,9 @@
       }
     },
     "enabled": true
+  },
+  "files": {
+    "ignoreUnknown": true
   },
   "formatter": {
     "attributePosition": "auto",
@@ -36,6 +36,9 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      },
       "nursery": {
         "noNestedComponentDefinitions": "off",
         "noUnknownAtRule": "off",
@@ -43,7 +46,8 @@
         "useUniqueElementIds": "off"
       },
       "performance": {
-        "noImgElement": "off"
+        "noImgElement": "off",
+        "noNamespaceImport": "off"
       },
       "recommended": true,
       "style": {
