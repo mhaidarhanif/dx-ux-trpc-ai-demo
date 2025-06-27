@@ -15,6 +15,8 @@
 
 Core:
 
+- [x] [TypeScript](https://typescriptlang.org)
+- [x] [Bun v1](https://bun.sh)
 - [x] [React v19](https://react.dev)
 - [x] [React Router v7 Framework (Remix)](https://reactrouter.com)
   - [x] [Themes: System, Light, Dark](https://github.com/abereghici/remix-themes)
@@ -30,27 +32,25 @@ Core:
 - [x] [Prisma ORM v6](https://prisma.io)
   - [x] Prisma Accelerate
   - [x] Prisma Postgres
+- [x] [PostgreSQL v17](https://postgresql.org)
 - [x] [Better Auth v1](https://better-auth.com)
   - [x] Email and Password
   - [x] OAuth: Google, GitHub
 - [ ] [Unpic](https://unpic.pics)
 
-Config:
+Utilities:
 
-- [x] [TypeScript](https://typescriptlang.org)
-- [x] [Bun v1](https://bun.sh)
 - [x] [Biome v2](https://biomejs.dev)
   - [x] [Ultracite](https://ultracite.ai)
+- [x] [Docker v28](https://docker.com)
 - [x] [Vite v7](https://vitejs.dev)
   - [x] [t3-env](https://env.t3.gg)
 - [ ] [Vitest v3](https://vitest.dev)
-- [x] [Docker v28](https://docker.com)
-- [x] [PostgreSQL v17](https://postgresql.org)
 - [ ] [Playwright](https://playwright.dev)
-- [ ] [Storybook](https://storybook.js.org)
-- [ ] [Turborepo](https://turbo.build)
+- [x] [Sly CLI](https://sly-cli.fly.dev)
+- [ ] [jsrepo](https://jsrepo.dev)
 
-Optional:
+Services:
 
 - [x] [VS Code: Settings and Extensions](https://code.visualstudio.com/docs/configure/settings)
 - [x] [Cursor: Rules](https://docs.cursor.com/context/rules)
