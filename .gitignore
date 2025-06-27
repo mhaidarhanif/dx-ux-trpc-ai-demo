@@ -11,4 +11,6 @@ __*
 .vercel
 build/
 generated/
+generated/prisma
+generated/prisma/client
 node_modules/

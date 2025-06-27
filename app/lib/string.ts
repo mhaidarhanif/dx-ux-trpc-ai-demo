@@ -1,7 +1,7 @@
 import { customAlphabet } from "nanoid";
 import pluralize from "pluralize";
 import slugify from "slugify";
-import { z } from "zod/v4";
+import { z } from "zod/v4-mini";
 
 export function isValidUrl(url: string) {
   return z.url().safeParse(url).success;

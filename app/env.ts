@@ -1,5 +1,5 @@
 import { createEnv } from "@t3-oss/env-core";
-import z from "zod/v4";
+import z from "zod/v4-mini";
 
 export const isDev = import.meta.env.DEV;
 export const isProd = import.meta.env.PROD;
