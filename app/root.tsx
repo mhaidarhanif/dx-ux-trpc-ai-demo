@@ -23,6 +23,7 @@ import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
 
 import "@/app.css";
+import { IndicatorNProgress } from "@/components/shared/nprogress";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -97,6 +98,7 @@ export function HTMLDocumentThemed({
         <ScrollRestoration />
         <Scripts />
 
+        <IndicatorNProgress />
         <Toaster closeButton richColors theme={theme ?? "system"} />
       </body>
     </html>

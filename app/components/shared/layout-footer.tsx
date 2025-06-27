@@ -4,7 +4,7 @@ import { configSite } from "@/config/site";
 
 export function LayoutFooter({ hasTheme }: { hasTheme?: boolean }) {
   return (
-    <footer className="space-y-4 p-2">
+    <footer className="space-y-4 p-4">
       {hasTheme && (
         <div className="flex justify-center gap-2">
           <ThemeSwitcherAction />

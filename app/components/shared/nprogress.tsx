@@ -2,7 +2,7 @@ import { useNProgress } from "@tanem/react-nprogress";
 import { Spinner } from "@/components/ui/spinner-icon";
 import { useIsLoading } from "@/hooks/use-is-loading";
 
-export function NProgress() {
+export function IndicatorNProgress() {
   const isLoading = useIsLoading();
 
   const { animationDuration, isFinished, progress } = useNProgress({
@@ -12,7 +12,7 @@ export function NProgress() {
   return (
     <Container animationDuration={animationDuration} isFinished={isFinished}>
       <Bar animationDuration={animationDuration} progress={progress} />
-      <Spinner />
+      <Spinner className="text-primary" variant="circle" />
     </Container>
   );
 }
@@ -48,7 +48,7 @@ function Bar({
 }) {
   return (
     <div
-      className="fixed top-0 left-0 z-50 h-1 w-full animate-pulse bg-primary"
+      className="fixed top-0 left-0 z-50 h-0.5 w-full animate-pulse bg-primary"
       style={{
         marginLeft: `${(-1 + progress) * 100}%`,
         transition: `margin-left ${animationDuration}ms linear`,
