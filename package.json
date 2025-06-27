@@ -26,6 +26,7 @@
     "db:reset": "prisma migrate reset --skip-seed",
     "db:seed": "prisma db seed",
     "db:prune": "bun db:reset && bun db:seed",
+    "prod:db:studio": "dotenv -e .env.prod prisma studio --browser none",
     "auth:gen": "bunx @better-auth/cli generate --config app/server/better-auth.ts"
   },
   "prisma": {
@@ -116,6 +117,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "depcheck": "^1.4.7",
+    "dotenv-cli": "^8.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prisma": "^6.10.1",

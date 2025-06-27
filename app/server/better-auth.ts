@@ -17,7 +17,6 @@ import {
 import { passkey } from "better-auth/plugins/passkey";
 import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
-import { isProd } from "@/env";
 import { envServer } from "@/env.server";
 import { devlog } from "@/lib/logger";
 import { hashPassword, verifyPassword } from "@/lib/password";
@@ -113,13 +112,13 @@ export const auth = betterAuth({
   },
 
   // https://better-auth.com/docs/concepts/rate-limit
-  rateLimit: {
-    enabled: isProd,
-    window: 60,
-    max: 100,
-    storage: "database",
-    modelName: "RateLimit",
-  },
+  // rateLimit: {
+  //   enabled: isProd,
+  //   window: 60,
+  //   max: 100,
+  //   storage: "database",
+  //   modelName: "RateLimit",
+  // },
 
   // https://better-auth.com/docs/authentication/email-password
   emailAndPassword: {
