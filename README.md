@@ -20,14 +20,19 @@ Core:
   - [x] [Themes: System, Light, Dark](https://github.com/abereghici/remix-themes)
   - [x] Integration with tRPC and Better Auth
   - [x] [Vercel Config](https://vercel.com/docs/frameworks/react-router), can be removed if not needed
-- [x] [tRPC v11](https://trpc.io)
-- [x] [Prisma ORM v6](https://prisma.io)
 - [x] [Tailwind CSS v4](https://tailwindcss.com)
   - [x] [`shadcn/ui`](https://ui.shadcn.com) with single [`radix-ui`](https://radix-ui.com)
-  - [ ] More from [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com)
+  - [x] More from [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com)
   - [ ] [React Email v4](https://react.email)
-- [x] [Zod v4](https://zod.dev) & [Conform v1](https://conform.guide)
+- [x] [tRPC v11](https://trpc.io)
+- [x] [Zod v4](https://zod.dev)
+- [x] [Conform v1](https://conform.guide)
+- [x] [Prisma ORM v6](https://prisma.io)
+  - [x] Prisma Accelerate
+  - [x] Prisma Postgres
 - [x] [Better Auth v1](https://better-auth.com)
+  - [x] Email and Password
+  - [x] OAuth: Google, GitHub
 - [ ] [Unpic](https://unpic.pics)
 
 Config:
@@ -49,10 +54,10 @@ Optional:
 
 - [x] [VS Code: Settings and Extensions](https://code.visualstudio.com/docs/configure/settings)
 - [x] [Cursor: Rules](https://docs.cursor.com/context/rules)
-- [ ] Email: [Resend](https://resend.com), [Amazon SES](https://aws.amazon.com/ses)
-- [ ] File Upload & Image: [Uploadcare](https://uploadcare.com), [Cloudflare R2](https://cloudflare.com/products/r2), [Imgix](https://imgix.com)
-- [ ] Payment: [Polar](https://polar.sh)
 - [ ] Error Tracking: [Sentry](https://sentry.io)
+- [ ] Email: [Resend](https://resend.com), [Amazon SES](https://aws.amazon.com/ses)
+- [ ] Payment: [Polar](https://polar.sh)
+- [ ] File Upload & Image: [Uploadcare](https://uploadcare.com), [Cloudflare R2](https://cloudflare.com/products/r2), [Imgix](https://imgix.com)
 - [ ] Analytics: [Posthog](https://posthog.com)
 - [ ] Security: [Arcjet](https://arcjet.com)
 - [ ] API Key: [Unkey](https://unkey.dev)
