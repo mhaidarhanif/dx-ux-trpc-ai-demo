@@ -194,6 +194,8 @@ export const auth = betterAuth({
   plugins: [
     admin(),
     haveIBeenPwned(),
+
+    // https://better-auth.com/docs/plugins/multi-session
     multiSession(),
 
     // https://better-auth.com/docs/plugins/open-api
