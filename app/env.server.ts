@@ -1,6 +1,10 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod/v4";
 
+export const isDev = process.env.NODE_ENV === "development";
+export const isTest = process.env.NODE_ENV === "test";
+export const isProd = process.env.NODE_ENV === "production";
+
 export const envServer = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "production", "test"]).optional(),

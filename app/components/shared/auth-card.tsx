@@ -13,6 +13,7 @@ import { Logo } from "@/components/shared/logo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/schemas/auth";
 
@@ -25,6 +26,7 @@ export function AuthCard({
   authMode: "signup" | "signin" | "signout" | "forgot-password";
   lastResult: SubmissionResult | null | undefined;
 }) {
+  const isMobile = useIsMobile();
   const isSubmitting = useIsSubmitting();
 
   const [formSignUp, fieldsSignUp] = useForm({
@@ -80,7 +82,10 @@ export function AuthCard({
 
       <fieldset className="flex w-full flex-col gap-2" disabled={isSubmitting}>
         <ButtonAuthProviders textAction={text.action} />
-        {mode.isSignIn && <ButtonAuthPasskey textAction={text.action} />}
+
+        {!isMobile && mode.isSignIn && (
+          <ButtonAuthPasskey textAction={text.action} />
+        )}
 
         <div className="relative my-2 text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">

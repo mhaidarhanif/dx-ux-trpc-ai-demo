@@ -1,7 +1,6 @@
 import { createCookieSessionStorage } from "react-router";
 import { createThemeSessionResolver } from "remix-themes";
-import { isProd } from "@/env";
-import { envServer } from "@/env.server";
+import { envServer, isProd } from "@/env.server";
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
@@ -9,8 +8,9 @@ const sessionStorage = createCookieSessionStorage({
     path: "/",
     httpOnly: true,
     sameSite: "lax",
+    domain: envServer.APP_URL,
+    secure: !!isProd,
     secrets: [envServer.BETTER_AUTH_SECRET],
-    ...(isProd ? { domain: envServer.APP_URL, secure: true } : {}),
   },
 });
 

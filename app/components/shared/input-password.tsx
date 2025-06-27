@@ -1,4 +1,4 @@
-import { IconEye, IconEyeOff } from "@tabler/icons-react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,7 +28,7 @@ export function InputPassword({
         type="button"
         variant="secondary"
       >
-        {isShown ? <IconEyeOff /> : <IconEye />}
+        {isShown ? <EyeOffIcon /> : <EyeIcon />}
         <span>{isShown ? "Hide" : "Show"}</span>
       </Button>
     </div>

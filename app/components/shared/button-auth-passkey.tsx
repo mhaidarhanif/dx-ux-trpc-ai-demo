@@ -1,4 +1,4 @@
-import { IconKeyFilled } from "@tabler/icons-react";
+import { KeyRoundIcon } from "lucide-react";
 import { useEffect } from "react";
 import { href, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ export function ButtonAuthPasskey({
 
   return (
     <Button className="w-full" onClick={signInPasskey} variant="secondary">
-      <IconKeyFilled />
+      <KeyRoundIcon />
       <span>{textAction} with Passkey</span>
     </Button>
   );

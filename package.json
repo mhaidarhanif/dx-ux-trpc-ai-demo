@@ -49,7 +49,6 @@
     "@react-router/serve": "^7.6.2",
     "@shikijs/transformers": "^3.7.0",
     "@t3-oss/env-core": "^0.13.8",
-    "@tabler/icons-react": "^3.34.0",
     "@tanem/react-nprogress": "^5.0.55",
     "@tanstack/react-query": "^5.81.2",
     "@trpc/client": "^11.4.2",

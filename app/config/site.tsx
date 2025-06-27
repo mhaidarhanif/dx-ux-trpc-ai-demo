@@ -1,7 +1,4 @@
-import {
-  IconBrandGithubFilled,
-  IconBrandGoogleFilled,
-} from "@tabler/icons-react";
+import { SiGithub, SiGoogle } from "@icons-pack/react-simple-icons";
 import type { JSX } from "react";
 import { href } from "react-router";
 import { envClient, isProd } from "@/env";
@@ -26,8 +23,8 @@ export const configSite: ConfigSite = {
   authOptions: ["social", "passkey", "email", "magic", "anonymous"],
   socialProviders: ["google", "github"],
   socialProviderButtons: [
-    { provider: "google", label: "Google", icon: <IconBrandGoogleFilled /> },
-    { provider: "github", label: "GitHub", icon: <IconBrandGithubFilled /> },
+    { provider: "google", label: "Google", icon: <SiGoogle /> },
+    { provider: "github", label: "GitHub", icon: <SiGithub /> },
   ],
 
   navItems: [
