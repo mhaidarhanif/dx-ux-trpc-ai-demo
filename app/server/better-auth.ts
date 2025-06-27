@@ -244,26 +244,25 @@ export const auth = betterAuth({
 
     // https://better-auth.com/docs/plugins/phone-number
     phoneNumber({
-      sendOTP: ({ phoneNumber: phone, code }) => {
-        devlog.info("SEND_OTP_SMS", { phone, code });
+      sendOTP: async ({ phoneNumber: phone, code }) => {
+        await devlog.info("SEND_OTP_SMS", { phone, code });
       },
     }),
 
     // https://better-auth.com/docs/plugins/passkey
     passkey({
-      schema: { passkey: { modelName: "Passkey" } },
+      schema: {
+        passkey: { modelName: "Passkey" },
+      },
       rpID: configSite.id,
       rpName: configSite.name,
-      authenticatorSelection: {
-        // authenticatorAttachment not set, both platform and cross-platform allowed, with platform preferred
-        residentKey: "preferred",
-        userVerification: "preferred",
-      },
     }),
 
     // https://better-auth.com/docs/plugins/2fa
     twoFactor({
-      schema: { twoFactor: { modelName: "TwoFactor" } },
+      schema: {
+        twoFactor: { modelName: "TwoFactor" },
+      },
     }),
 
     // https://better-auth.com/docs/plugins/one-tap

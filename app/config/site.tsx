@@ -12,7 +12,7 @@ export const configSiteServer: ConfigSiteServer = {
 
 export const configSite: ConfigSite = {
   ...configSiteServer,
-  name: "Dogokit Corgi",
+  name: envClient.VITE_APP_NAME,
   domain: envClient.VITE_APP_URL,
   url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "/og/dogokit.jpg",
@@ -42,6 +42,11 @@ export const configSite: ConfigSite = {
     { to: href("/signin"), label: "Sign In", auth: false },
     { to: href("/dashboard"), label: "Dashboard", auth: true },
   ],
+};
+
+export const metaThemeColor = {
+  light: "#ffffff",
+  dark: "#000000",
 };
 
 export type ConfigSiteServer = {
@@ -94,9 +99,4 @@ export type NavItem = {
   to: ReturnType<typeof href>;
   label: string;
   auth?: boolean;
-};
-
-export const metaThemeColor = {
-  light: "#ffffff",
-  dark: "#000000",
 };
