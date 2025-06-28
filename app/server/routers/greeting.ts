@@ -4,7 +4,7 @@ import z from "zod/v4";
 import { publicProcedure } from "@/server/trpc";
 
 export const greetingRouter = {
-  sayHello: publicProcedure
+  sayHelloText: publicProcedure
     .input(z.string().optional())
     .query(({ ctx, input }) => {
       const userName = ctx.user?.name;

@@ -1,3 +1,4 @@
+import { SplitText } from "@/components/blocks/text-animations/split-text";
 import IconCode from "@/components/icons/code-fill";
 import IconStar from "@/components/icons/star-fill";
 import { Anchor } from "@/components/shared/anchor";
@@ -5,12 +6,20 @@ import { ButtonAnchor } from "@/components/shared/button-anchor";
 import { Flex } from "@/components/shared/flex";
 import { ContentIntro } from "@/components/ui/content";
 
-export function HomeHero({ hello }: { hello: string }) {
+export function HomeHero({ helloText }: { helloText: string }) {
   return (
     <section className="container max-w-xl">
+      <SplitText
+        className="py-2 font-semibold text-2xl sm:text-4xl"
+        delay={10}
+        duration={2}
+        ease="elastic.out(1, 0.3)"
+        splitType="chars"
+        text={helloText}
+      />
+
       <article className="prose-config">
         <ContentIntro>
-          <p>{hello}</p>
           <p>
             Welcome to{" "}
             <Anchor href="https://github.com/dogokit/dogokit-corgi">

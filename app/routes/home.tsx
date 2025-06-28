@@ -4,16 +4,16 @@ import type { Route } from "./+types/home";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const api = await caller(request);
-  const hello = await api.greeting.sayHello();
-  return { hello };
+  const helloText = await api.greeting.sayHelloText();
+  return { helloText };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const { hello } = loaderData;
+  const { helloText } = loaderData;
 
   return (
     <>
-      <HomeHero hello={hello} />
+      <HomeHero helloText={helloText} />
     </>
   );
 }
