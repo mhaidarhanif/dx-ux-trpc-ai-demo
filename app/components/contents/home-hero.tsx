@@ -1,4 +1,5 @@
-import { CodeIcon, StarIcon } from "lucide-react";
+import IconCode from "@/components/icons/code-fill";
+import IconStar from "@/components/icons/star-fill";
 import { Anchor } from "@/components/shared/anchor";
 import { ButtonAnchor } from "@/components/shared/button-anchor";
 import { Flex } from "@/components/shared/flex";
@@ -34,14 +35,14 @@ export function HomeHero({ hello }: { hello: string }) {
 
       <Flex>
         <ButtonAnchor href="https://github.com/dogokit/dogokit-corgi" size="lg">
-          <StarIcon />
+          <IconStar />
           <span>Star on GitHub</span>
         </ButtonAnchor>
         <ButtonAnchor
           href="https://github.com/new?template_name=dogokit-corgi&template_owner=dogokit"
           size="lg"
         >
-          <CodeIcon />
+          <IconCode />
           <span>Use Template</span>
         </ButtonAnchor>
       </Flex>
