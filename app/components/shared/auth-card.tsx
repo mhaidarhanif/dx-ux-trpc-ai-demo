@@ -152,6 +152,7 @@ export function AuthCard({
               {mode.isSignIn && (
                 <Link
                   className="text-secondary text-xs leading-none"
+                  prefetch="intent"
                   to={href("/forgot-password")}
                 >
                   Forgot password?
@@ -183,6 +184,7 @@ export function AuthCard({
               Already have an account?{" "}
               <Link
                 className="underline underline-offset-4"
+                prefetch="intent"
                 to={href("/signin")}
               >
                 Sign in
@@ -194,6 +196,7 @@ export function AuthCard({
               Don't have an account?{" "}
               <Link
                 className="underline underline-offset-4"
+                prefetch="intent"
                 to={href("/signup")}
               >
                 Sign up
@@ -206,9 +209,18 @@ export function AuthCard({
       {mode.isSignUp && (
         <p className="max-w-xs text-pretty text-center text-muted-foreground text-xs *:[a]:underline *:[a]:underline-offset-4 *:[a]:hover:text-primary">
           By creating an account, you agree to our{" "}
-          <Link to={href("/about")}>Terms of Service</Link>,{" "}
-          <Link to={href("/about")}>Privacy Policy</Link>, and{" "}
-          <Link to={href("/about")}>Cookies Policy</Link>.
+          <Link prefetch="intent" to={href("/about")}>
+            Terms of Service
+          </Link>
+          ,{" "}
+          <Link prefetch="intent" to={href("/about")}>
+            Privacy Policy
+          </Link>
+          , and{" "}
+          <Link prefetch="intent" to={href("/about")}>
+            Cookies Policy
+          </Link>
+          .
         </p>
       )}
     </section>

@@ -24,6 +24,7 @@ export function Examples({
         <li key={example.id}>
           <Link
             className="block"
+            prefetch="intent"
             to={href("/examples/:slug", { slug: example.slug })}
           >
             <Card className="text-center">

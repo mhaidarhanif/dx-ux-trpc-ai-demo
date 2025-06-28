@@ -11,6 +11,7 @@ interface ButtonLinkProps
 }
 
 const ButtonLink = ({
+  prefetch = "intent",
   variant = "default",
   size = "default",
   className,
@@ -24,6 +25,7 @@ const ButtonLink = ({
         buttonVariants({ variant, size, className }),
         disabled && "pointer-events-none opacity-50"
       )}
+      prefetch={prefetch}
       {...props}
     >
       {children}
@@ -37,6 +39,7 @@ interface ButtonNavLinkProps
     VariantProps<typeof buttonVariants> {}
 
 const ButtonNavLink = ({
+  prefetch = "intent",
   variant = "default",
   size = "default",
   className,
@@ -46,6 +49,7 @@ const ButtonNavLink = ({
   return (
     <Link
       className={cn(buttonVariants({ variant, size, className }))}
+      prefetch={prefetch}
       {...props}
     >
       {children}

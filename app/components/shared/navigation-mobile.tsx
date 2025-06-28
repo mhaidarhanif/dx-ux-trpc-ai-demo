@@ -109,6 +109,7 @@ function NavLinkMobile({
   className?: string;
 }) {
   const navigate = useNavigate();
+
   return (
     <NavLink
       className={cn("font-medium text-2xl", className)}
@@ -116,6 +117,7 @@ function NavLinkMobile({
         navigate(to);
         onOpenChange?.(false);
       }}
+      prefetch="intent"
       to={to}
       {...props}
     >

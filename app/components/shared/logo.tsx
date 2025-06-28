@@ -78,7 +78,11 @@ export function Logo({
 export function LogoNavigationLink() {
   return (
     <div className="flex items-center gap-2">
-      <NavLink className="focus-ring inline-flex items-center" to={href("/")}>
+      <NavLink
+        className="focus-ring inline-flex items-center"
+        prefetch="intent"
+        to={href("/")}
+      >
         <Logo className="p-2" />
       </NavLink>
     </div>

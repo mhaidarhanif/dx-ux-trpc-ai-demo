@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 export function NavigationDesktopLinks({ items }: { items: NavItem[] }) {
   const { isAuthenticated } = useAuthUser();
+
   return (
     <ul className="inline-flex gap-2">
       {filterNavItems(items, isAuthenticated).map((item) => (
@@ -20,6 +21,7 @@ export function NavigationDesktopLinks({ items }: { items: NavItem[] }) {
               )
             }
             key={item.to}
+            prefetch="intent"
             to={item.to}
           >
             {item.label}
