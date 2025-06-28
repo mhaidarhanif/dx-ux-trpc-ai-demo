@@ -5,8 +5,8 @@
  */
 
 import { gsap } from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { SplitText as GSAPSplitText } from "gsap/SplitText";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import GSAPSplitText from "gsap/dist/SplitText";
 import type React from "react";
 import { useEffect, useRef } from "react";
 
