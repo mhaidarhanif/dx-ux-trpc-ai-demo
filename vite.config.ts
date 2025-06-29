@@ -3,15 +3,9 @@ import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-// import { analyzer } from "vite-bundle-analyzer"; // Enable if needed
 
 export default defineConfig({
-  plugins: [
-    tailwindcss(),
-    reactRouter(),
-    tsconfigPaths(),
-    // analyzer()
-  ],
+  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   resolve: {
     alias: { "@": path.resolve(__dirname, "./app") },
   },
@@ -27,7 +21,6 @@ export default defineConfig({
     reportCompressedSize: false,
     sourcemap: false,
     target: "esnext",
-    rollupOptions: { external: ["react", "react-dom"] },
     commonjsOptions: { include: [/node_modules/] },
   },
   optimizeDeps: {
