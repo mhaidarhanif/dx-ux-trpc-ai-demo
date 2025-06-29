@@ -1,4 +1,4 @@
-import { Form, href, useNavigate } from "react-router";
+import { Form, href, useFetcher, useNavigate } from "react-router";
 import { AvatarAuto } from "@/components/shared/avatar-auto";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { Flex } from "@/components/shared/flex";
@@ -28,6 +28,7 @@ export function UserProfileCard({
   user: AppRouterOutputs["auth"]["getUserComplete"];
 }) {
   const navigate = useNavigate();
+  const fetcherSesssion = useFetcher();
 
   const userFields = createUserFields(user);
   const accountFieldGroups = createAccountFieldGroups(user.accounts);
@@ -40,10 +41,6 @@ export function UserProfileCard({
         onSuccess: () => navigate(href("/dashboard")),
       },
     });
-  };
-
-  const revokeOtherSessions = async () => {
-    await authClient.revokeOtherSessions();
   };
 
   if (!user) return null;
@@ -129,9 +126,20 @@ export function UserProfileCard({
         <CardHeader>
           <CardTitle>Sessions</CardTitle>
           <CardDescription>
-            <Button onClick={revokeOtherSessions} size="xs" variant="outline">
-              Revoke All Sessions
-            </Button>
+            <fetcherSesssion.Form
+              action={href("/api/auth/*", { "*": "revoke-other-sessions" })}
+              method="post"
+            >
+              <ButtonLoading
+                fetcher={fetcherSesssion}
+                size="xs"
+                submittingText="Revoking Sessions..."
+                type="submit"
+                variant="outline"
+              >
+                Revoke Other Sessions
+              </ButtonLoading>
+            </fetcherSesssion.Form>
           </CardDescription>
         </CardHeader>
         <CardContent>

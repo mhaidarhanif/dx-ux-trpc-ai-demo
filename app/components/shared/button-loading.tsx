@@ -1,8 +1,8 @@
 import type { VariantProps } from "class-variance-authority";
 import React from "react";
+import { type FetcherWithComponents, useNavigation } from "react-router";
 import { Button, type buttonVariants } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner-icon";
-import { useIsSubmitting } from "@/hooks/use-is-submitting";
 import { cn } from "@/lib/utils";
 
 interface ButtonLoadingProps
@@ -10,23 +10,17 @@ interface ButtonLoadingProps
     VariantProps<typeof buttonVariants> {
   hasSpinner?: boolean;
   submittingText?: React.ReactNode;
-  isSubmittingOverride?: boolean;
+  fetcher?: FetcherWithComponents<unknown>;
 }
 
 const ButtonLoading = React.forwardRef<HTMLButtonElement, ButtonLoadingProps>(
   (
-    {
-      hasSpinner = true,
-      submittingText = "",
-      isSubmittingOverride,
-      size,
-      children,
-      ...props
-    },
+    { hasSpinner = true, submittingText, fetcher, size, children, ...props },
     ref
   ) => {
-    const isSubmittingGlobal = useIsSubmitting();
-    const isSubmitting = isSubmittingOverride || isSubmittingGlobal;
+    const navigation = useNavigation();
+    const theObject = fetcher || navigation;
+    const isSubmitting = theObject.state === "submitting";
 
     return (
       <Button disabled={isSubmitting} ref={ref} size={size} {...props}>

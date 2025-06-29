@@ -17,7 +17,6 @@ import { Icons } from "@/lib/icons";
 export function FormDelete({
   dialogTrigger,
   action,
-  intentValue,
   itemText,
   name = "id",
   defaultValue,
@@ -27,8 +26,7 @@ export function FormDelete({
   className,
 }: {
   dialogTrigger?: React.ReactNode;
-  action: string; // Example: /action/user/posts/delete
-  intentValue: string; // Example: user-delete-post
+  action: string; // Example: /action/user/examples/delete
   itemText: string; // Example: Post Title
   name?: string; // Optional: Can be with/without input name=id
   defaultValue?: string; // Optional: Can be with/without value
@@ -40,8 +38,6 @@ export function FormDelete({
   const [open, setOpen] = useState<boolean>();
   const location = useLocation();
   const fetcher = useFetcher();
-  const isSubmitting =
-    fetcher.state === "submitting" && fetcher.formMethod === "DELETE";
 
   return (
     <AlertDialog onOpenChange={setOpen} open={open}>
@@ -81,12 +77,10 @@ export function FormDelete({
             {extraComponent}
 
             <ButtonLoading
-              isSubmittingOverride={isSubmitting}
-              name="intent"
+              fetcher={fetcher}
               size="sm"
               submittingText="Deleting"
               type="submit"
-              value={intentValue}
               variant="destructive"
             >
               Delete
