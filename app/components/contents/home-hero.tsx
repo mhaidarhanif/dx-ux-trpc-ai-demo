@@ -41,7 +41,7 @@ export function HomeHero({ helloText }: { helloText: string }) {
         </p>
       </article>
 
-      <Flex>
+      <Flex className="gap-4">
         <ButtonAnchor href="https://github.com/dogokit/dogokit-corgi" size="lg">
           <Icons.Star />
           <span>Star on GitHub</span>

@@ -8,9 +8,8 @@ const sessionStorage = createCookieSessionStorage({
     path: "/",
     httpOnly: true,
     sameSite: "lax",
-    secure: isProd ? true : undefined,
-    domain: isProd ? envServer.APP_URL : undefined,
     secrets: [envServer.BETTER_AUTH_SECRET],
+    ...(isProd ? { domain: envServer.APP_URL, secure: true } : {}),
   },
 });
 
