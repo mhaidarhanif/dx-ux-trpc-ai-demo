@@ -6,27 +6,27 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  define: {
+    __DEV__: process.env.NODE_ENV !== "production",
+  },
+  esbuild: {
+    drop: ["console", "debugger"],
+  },
+  optimizeDeps: {
+    include: ["app/lib/icons.ts"],
+  },
   resolve: {
     alias: { "@": path.resolve(__dirname, "./app") },
   },
   server: {
     port: Number(process.env.PORT) || 8000,
   },
-  esbuild: {
-    drop: ["console", "debugger"],
-  },
-  build: {
-    cssCodeSplit: true,
-    minify: "esbuild",
-    reportCompressedSize: false,
-    sourcemap: false,
-    target: "esnext",
-    commonjsOptions: { include: [/node_modules/] },
-  },
-  optimizeDeps: {
-    include: ["app/lib/icons.ts"],
-  },
-  define: {
-    __DEV__: process.env.NODE_ENV !== "production",
-  },
+  // build: {
+  //   cssCodeSplit: true,
+  //   minify: "esbuild",
+  //   reportCompressedSize: false,
+  //   sourcemap: false,
+  //   target: "esnext",
+  //   commonjsOptions: { include: [/node_modules/] },
+  // },
 });
