@@ -155,7 +155,7 @@ export const TagsValue = ({
           onClick={handleRemove}
           type="button"
         >
-          <Icons.XIcon size={12} />
+          <Icons.X size={12} />
         </button>
       )}
     </Badge>

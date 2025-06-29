@@ -6,6 +6,14 @@
     "utils": {}
   },
   "libraries": {
+    "iconify:lucide": {
+      "name": "Lucide",
+      "config": {
+        "directory": "./public/icons",
+        "postinstall": ["bun", "dep:svg"],
+        "transformers": []
+      }
+    },
     "iconify:ri": {
       "name": "Remix Icon",
       "config": {

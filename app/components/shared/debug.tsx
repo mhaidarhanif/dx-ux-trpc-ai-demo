@@ -50,7 +50,7 @@ export function Debug({
             size="icon-xs"
             variant="outline"
           >
-            <Icons.XIcon className="size-3" />
+            <Icons.X className="size-3" />
           </Button>
         </div>
 

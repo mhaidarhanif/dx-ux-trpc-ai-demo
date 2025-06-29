@@ -1,10 +1,9 @@
 import { SplitText } from "@/components/blocks/text-animations/split-text";
-import IconCode from "@/components/icons/code-fill";
-import IconStar from "@/components/icons/star-fill";
 import { Anchor } from "@/components/shared/anchor";
 import { ButtonAnchor } from "@/components/shared/button-anchor";
 import { Flex } from "@/components/shared/flex";
 import { ContentIntro } from "@/components/ui/content";
+import { Icons } from "@/lib/icons";
 
 export function HomeHero({ helloText }: { helloText: string }) {
   return (
@@ -44,14 +43,14 @@ export function HomeHero({ helloText }: { helloText: string }) {
 
       <Flex>
         <ButtonAnchor href="https://github.com/dogokit/dogokit-corgi" size="lg">
-          <IconStar />
+          <Icons.Star />
           <span>Star on GitHub</span>
         </ButtonAnchor>
         <ButtonAnchor
           href="https://github.com/new?template_name=dogokit-corgi&template_owner=dogokit"
           size="lg"
         >
-          <IconCode />
+          <Icons.Code />
           <span>Use Template</span>
         </ButtonAnchor>
       </Flex>

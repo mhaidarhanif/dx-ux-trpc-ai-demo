@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Icons } from "@/lib/icons";
+import { Icons, type IconType } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 export type PillProps = ComponentProps<typeof Badge> & {
@@ -129,7 +129,7 @@ export const PillDelta = ({ className, delta }: PillDeltaProps) => {
 };
 
 export type PillIconProps = {
-  icon: typeof Icons.ChevronUp;
+  icon: IconType;
   className?: string;
 };
 

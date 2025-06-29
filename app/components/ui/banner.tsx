@@ -7,7 +7,7 @@ import {
   useContext,
 } from "react";
 import { Button } from "@/components/ui/button";
-import { type Icon, Icons } from "@/lib/icons";
+import { Icons, type IconType } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 type BannerContextProps = {
@@ -64,11 +64,11 @@ export const Banner = ({
 };
 
 export type BannerIconProps = HTMLAttributes<HTMLDivElement> & {
-  iconComponent: Icon;
+  icon: IconType;
 };
 
 export const BannerIcon = ({
-  iconComponent: IconComponent,
+  icon: Icon,
   className,
   ...props
 }: BannerIconProps) => (
@@ -79,7 +79,7 @@ export const BannerIcon = ({
     )}
     {...props}
   >
-    <IconComponent size={16} />
+    <Icon size={16} />
   </div>
 );
 
@@ -135,7 +135,7 @@ export const BannerClose = ({
       variant={variant}
       {...props}
     >
-      <Icons.XIcon size={18} />
+      <Icons.X size={18} />
     </Button>
   );
 };

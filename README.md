@@ -26,6 +26,7 @@ Core:
 - [x] [Tailwind CSS v4](https://tailwindcss.com)
   - [x] [`shadcn/ui`](https://ui.shadcn.com) with single [`radix-ui`](https://radix-ui.com)
   - [x] More from [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com)
+  - [x] Replace `lucide-react` with `sly` CLI to manage icons
   - [ ] [React Email v4](https://react.email)
 - [x] [tRPC v11](https://trpc.io)
 - [x] [Zod v4](https://zod.dev)

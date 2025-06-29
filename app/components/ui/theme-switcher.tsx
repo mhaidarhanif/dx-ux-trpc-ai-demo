@@ -2,16 +2,13 @@ import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import { motion } from "motion/react";
 import { useCallback } from "react";
 import type { Theme } from "remix-themes";
-import { type IconProps, Icons } from "@/lib/icons";
-
+import { Icons } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 type ThemeOption = {
   key: "" | "light" | "dark";
-  icon: React.ForwardRefExoticComponent<
-    Omit<IconProps, "ref"> & React.RefAttributes<SVGSVGElement>
-  >;
   label: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
 const themes: ThemeOption[] = [

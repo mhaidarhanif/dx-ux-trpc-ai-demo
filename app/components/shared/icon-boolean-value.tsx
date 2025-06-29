@@ -13,5 +13,5 @@ export function IconBooleanValue({
   if (children) {
     return <Icons.Check className="text-green-600 dark:text-green-400" />;
   }
-  return <Icons.XIcon className="text-red-600 dark:text-red-400" />;
+  return <Icons.X className="text-red-600 dark:text-red-400" />;
 }

@@ -1,8 +1,6 @@
 import { href } from "react-router";
-import IconGitHub from "@/components/icons/github-fill";
-import IconGoogle from "@/components/icons/google-fill";
-import IconLinkedin from "@/components/icons/linkedin-fill";
 import { envClient, isProd } from "@/env";
+import { Icons } from "@/lib/icons";
 
 export const configSite: ConfigSite = {
   id: isProd ? envClient.VITE_APP_URL : "localhost",
@@ -37,17 +35,17 @@ export const configSite: ConfigSite = {
     {
       name: "google",
       label: "Google",
-      icon: <IconGoogle />,
+      icon: <Icons.Google />,
     },
     {
       name: "github",
       label: "GitHub",
-      icon: <IconGitHub />,
+      icon: <Icons.GitHub />,
     },
     {
       name: "linkedin",
       label: "LinkedIn",
-      icon: <IconLinkedin />,
+      icon: <Icons.Linkedin />,
       isEnabled: false,
     },
   ],
