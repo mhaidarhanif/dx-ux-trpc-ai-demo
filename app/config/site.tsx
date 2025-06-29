@@ -5,7 +5,6 @@ import { Icons } from "@/lib/icons";
 export const configSite: ConfigSite = {
   id: isProd ? envClient.VITE_APP_URL : "localhost",
   name: envClient.VITE_APP_NAME,
-  domain: envClient.VITE_APP_URL,
   url: "https://github.com/dogokit/dogokit-corgi",
   ogImage: "/og/dogokit.jpg",
   description:
@@ -59,7 +58,6 @@ export const metaThemeColor = {
 export type ConfigSite = {
   id: string;
   name: string;
-  domain: string;
   url: string;
   ogImage?: string;
   description: string;
