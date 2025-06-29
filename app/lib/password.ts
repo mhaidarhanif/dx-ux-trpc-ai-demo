@@ -1,3 +1,8 @@
+/**
+ * DO NOT USE if using Better-Auth
+ * This is only for reference
+ */
+
 import argon2 from "argon2";
 
 export async function hashPassword(password: string): Promise<string> {
