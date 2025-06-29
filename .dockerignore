@@ -1,4 +1,7 @@
+.env
+.env.*
 .react-router
+.tsbuildinfo
 build
 node_modules
 README.md

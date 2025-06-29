@@ -6,30 +6,30 @@
     ".react-router/types/**/*"
   ],
   "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "incremental": true,
+    "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["bun", "node", "vite/client"],
-    "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-    "esModuleInterop": true,
-    "verbatimModuleSyntax": true,
     "noEmit": true,
+    "paths": { "@/*": ["./app/*"] },
     "resolveJsonModule": true,
+    "rootDirs": [".", "./.react-router/types"],
     "skipLibCheck": true,
     "strict": true,
-    "rootDirs": [".", "./.react-router/types"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./app/*"]
-    },
+    "strictNullChecks": true,
+    "target": "ES2022",
+    "tsBuildInfoFile": "./.tsbuildinfo",
+    "types": ["bun", "node", "vite/client"],
+    "verbatimModuleSyntax": true,
     "plugins": [
       {
-        "name": "ts-plugin-sort-import-suggestions",
+        "moveDownPatterns": ["dist"],
         "moveUpPatterns": ["react-router", "@/", "\\.{1,2}/", "\\./+types/"],
-        "moveDownPatterns": ["dist"]
+        "name": "ts-plugin-sort-import-suggestions"
       }
-    ],
-    "strictNullChecks": true
+    ]
   }
 }

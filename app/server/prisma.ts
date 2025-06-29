@@ -3,6 +3,7 @@ import { PrismaClient } from "@/generated/prisma/client";
 
 /**
  * Enable custom adapter, ONLY if not using Prisma Accelerate
+ * Then make sure to ONLY use normal `prisma generate`
  */
 // import { PrismaPg } from "@prisma/adapter-pg";
 // const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });

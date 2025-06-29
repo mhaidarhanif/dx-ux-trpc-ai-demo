@@ -7,8 +7,11 @@ __*
 .env.test
 .react-router/
 .react-router/*
+.tsbuildinfo
 .turbo
 .vercel
+*.db
+*.db-journal
 build/
 generated/
 generated/prisma
