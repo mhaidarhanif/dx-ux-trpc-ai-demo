@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "bun db:migrate && react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "build": "bun db:migrate:deploy && bun db:gen:prod && react-router build && bun check",
+    "build": "bun db:migrate:deploy && bun db:gen && react-router build && bun check",
     "check": "biome check && bun rr:check",
     "write": "bun biome:format && bun biome:lint",
     "biome:format": "biome format --write .",
@@ -22,7 +22,6 @@
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:gen": "prisma generate --no-hints",
-    "db:gen:prod": "bun db:gen --no-engine",
     "db:studio": "prisma studio --browser none",
     "db:studio:prod": "dotenv -e .env.prod bun db:studio",
     "db:reset": "prisma migrate reset --skip-seed",
