@@ -66,8 +66,8 @@ model Session {
   ipAddress String?
   userAgent String?
 
-  userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   impersonatedBy String?
 
@@ -83,8 +83,8 @@ model Account {
   accountId  String @unique
   providerId String
 
-  userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   accessToken           String?
   refreshToken          String?
@@ -116,8 +116,8 @@ model Verification {
 model TwoFactor {
   id String @id @default(ulid())
 
-  userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   secret      String?
   backupCodes String?
@@ -134,8 +134,8 @@ model Passkey {
   name      String?
   publicKey String
 
-  userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   credentialID String
   counter      Int
@@ -151,11 +151,13 @@ model Passkey {
 }
 
 model RateLimit {
-  id String @id
+  id String @id @default(ulid())
 
   key         String?
   count       Int?
   lastRequest BigInt?
+
+  @@index([key])
 }
 
 model Example {
@@ -165,6 +167,8 @@ model Example {
   name String
 
   items ExampleItem[]
+
+  @@index([slug])
 }
 
 model ExampleItem {
@@ -173,6 +177,8 @@ model ExampleItem {
   slug String @unique
   name String
 
-  example   Example? @relation(fields: [exampleId], references: [id])
+  example   Example? @relation(fields: [exampleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   exampleId String?
+
+  @@index([slug, exampleId])
 }
