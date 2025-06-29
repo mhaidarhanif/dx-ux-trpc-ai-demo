@@ -5,7 +5,6 @@
  */
 
 import { countries } from "country-data-list";
-import { CheckIcon, ChevronDown, Globe } from "lucide-react";
 import type React from "react";
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import { CircleFlag } from "react-circle-flags";
@@ -22,6 +21,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Icons } from "@/lib/icons";
 import { devlog } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 
@@ -123,11 +123,11 @@ const CountryDropdownComponent = (
             {slim === false ? (
               placeholder || setSelectedCountry.name
             ) : (
-              <Globe size={20} />
+              <Icons.Globe size={20} />
             )}
           </span>
         )}
-        <ChevronDown size={16} />
+        <Icons.ChevronDown size={16} />
       </PopoverTrigger>
       <PopoverContent
         className="min-w-[--radix-popper-anchor-width] p-0"
@@ -160,7 +160,7 @@ const CountryDropdownComponent = (
                         {option.name}
                       </span>
                     </div>
-                    <CheckIcon
+                    <Icons.Check
                       className={cn(
                         "ml-auto h-4 w-4 shrink-0",
                         option.name === selectedCountry?.name

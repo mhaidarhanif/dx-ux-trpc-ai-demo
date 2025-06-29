@@ -1,7 +1,7 @@
-import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Icons } from "@/lib/icons";
 
 export function InputPassword({
   placeholder = "Enter password",
@@ -28,7 +28,7 @@ export function InputPassword({
         type="button"
         variant="secondary"
       >
-        {isShown ? <EyeOffIcon /> : <EyeIcon />}
+        {isShown ? <Icons.EyeOff /> : <Icons.Eye />}
         <span>{isShown ? "Hide" : "Show"}</span>
       </Button>
     </div>

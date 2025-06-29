@@ -6,9 +6,9 @@
 
 import { lookup } from "country-data-list";
 import parsePhoneNumber from "libphonenumber-js";
-import { GlobeIcon } from "lucide-react";
 import { forwardRef, useEffect, useState } from "react";
 import { CircleFlag } from "react-circle-flags";
+import { Icons } from "@/lib/icons";
 import { devlog } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 import type { CountryData } from "@/schemas/country";
@@ -150,7 +150,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
             {displayFlag ? (
               <CircleFlag countryCode={displayFlag} height={16} />
             ) : (
-              <GlobeIcon size={16} />
+              <Icons.Globe size={16} />
             )}
           </div>
         )}

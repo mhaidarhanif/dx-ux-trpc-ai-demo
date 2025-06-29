@@ -1,5 +1,4 @@
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { type LucideIcon, XIcon } from "lucide-react";
 import {
   type ComponentProps,
   createContext,
@@ -8,6 +7,7 @@ import {
   useContext,
 } from "react";
 import { Button } from "@/components/ui/button";
+import { type Icon, Icons } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 type BannerContextProps = {
@@ -64,11 +64,11 @@ export const Banner = ({
 };
 
 export type BannerIconProps = HTMLAttributes<HTMLDivElement> & {
-  icon: LucideIcon;
+  iconComponent: Icon;
 };
 
 export const BannerIcon = ({
-  icon: Icon,
+  iconComponent: IconComponent,
   className,
   ...props
 }: BannerIconProps) => (
@@ -79,7 +79,7 @@ export const BannerIcon = ({
     )}
     {...props}
   >
-    <Icon size={16} />
+    <IconComponent size={16} />
   </div>
 );
 
@@ -135,7 +135,7 @@ export const BannerClose = ({
       variant={variant}
       {...props}
     >
-      <XIcon size={18} />
+      <Icons.XIcon size={18} />
     </Button>
   );
 };

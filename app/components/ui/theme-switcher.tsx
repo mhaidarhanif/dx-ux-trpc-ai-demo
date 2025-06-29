@@ -1,23 +1,23 @@
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { type LucideProps, Monitor, Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback } from "react";
 import type { Theme } from "remix-themes";
+import { type IconProps, Icons } from "@/lib/icons";
 
 import { cn } from "@/lib/utils";
 
 type ThemeOption = {
   key: "" | "light" | "dark";
   icon: React.ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+    Omit<IconProps, "ref"> & React.RefAttributes<SVGSVGElement>
   >;
   label: string;
 };
 
 const themes: ThemeOption[] = [
-  { key: "", label: "System theme", icon: Monitor },
-  { key: "light", label: "Light theme", icon: Sun },
-  { key: "dark", label: "Dark theme", icon: Moon },
+  { key: "", label: "System theme", icon: Icons.Monitor },
+  { key: "light", label: "Light theme", icon: Icons.Sun },
+  { key: "dark", label: "Dark theme", icon: Icons.Moon },
 ];
 
 export type ThemeSwitcherProps = {

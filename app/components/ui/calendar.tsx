@@ -1,9 +1,4 @@
 /** biome-ignore-all lint/nursery/noShadow: "From shadcn/ui" */
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "lucide-react";
 import React from "react";
 import {
   type DayButton,
@@ -11,6 +6,7 @@ import {
   getDefaultClassNames,
 } from "react-day-picker";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Icons } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 function Calendar({
@@ -131,13 +127,16 @@ function Calendar({
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === "left") {
             return (
-              <ChevronLeftIcon className={cn("size-4", className)} {...props} />
+              <Icons.ChevronLeft
+                className={cn("size-4", className)}
+                {...props}
+              />
             );
           }
 
           if (orientation === "right") {
             return (
-              <ChevronRightIcon
+              <Icons.ChevronRight
                 className={cn("size-4", className)}
                 {...props}
               />
@@ -145,7 +144,7 @@ function Calendar({
           }
 
           return (
-            <ChevronDownIcon className={cn("size-4", className)} {...props} />
+            <Icons.ChevronDown className={cn("size-4", className)} {...props} />
           );
         },
         DayButton: CalendarDayButton,

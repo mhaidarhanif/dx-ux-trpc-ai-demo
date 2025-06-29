@@ -1,4 +1,3 @@
-import { XIcon } from "lucide-react";
 import {
   type ComponentProps,
   createContext,
@@ -9,7 +8,6 @@ import {
   useRef,
   useState,
 } from "react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +23,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Icons } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 type TagsContextType = {
@@ -156,7 +155,7 @@ export const TagsValue = ({
           onClick={handleRemove}
           type="button"
         >
-          <XIcon size={12} />
+          <Icons.XIcon size={12} />
         </button>
       )}
     </Badge>

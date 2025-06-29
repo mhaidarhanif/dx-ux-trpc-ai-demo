@@ -77,7 +77,6 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
-import { CheckIcon, CopyIcon } from "lucide-react";
 import type {
   ComponentProps,
   HTMLAttributes,
@@ -104,6 +103,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Icons } from "@/lib/icons";
 import { devlog } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 
@@ -511,7 +511,7 @@ export const CodeBlockCopyButton = ({
     });
   }
 
-  const Icon = isCopied ? CheckIcon : CopyIcon;
+  const Icon = isCopied ? Icons.Check : Icons.Copy;
 
   return (
     <Button

@@ -1,8 +1,8 @@
-import { KeyRoundIcon } from "lucide-react";
 import { useEffect } from "react";
 import { href, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/better-auth-client";
+import { Icons } from "@/lib/icons";
 
 export function ButtonAuthPasskey({
   textAction = "Sign In",
@@ -29,7 +29,7 @@ export function ButtonAuthPasskey({
 
   return (
     <Button className="w-full" onClick={signInPasskey} variant="secondary">
-      <KeyRoundIcon />
+      <Icons.KeyRound />
       <span>{textAction} with Passkey</span>
     </Button>
   );

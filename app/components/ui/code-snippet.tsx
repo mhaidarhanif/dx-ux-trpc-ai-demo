@@ -1,4 +1,3 @@
-import { CheckIcon, CopyIcon } from "lucide-react";
 import {
   type ComponentProps,
   cloneElement,
@@ -8,6 +7,7 @@ import {
 } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Icons } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 
 export type SnippetProps = ComponentProps<typeof Tabs>;
@@ -76,7 +76,7 @@ export const SnippetCopyButton = ({
     });
   }
 
-  const icon = isCopied ? <CheckIcon size={14} /> : <CopyIcon size={14} />;
+  const icon = isCopied ? <Icons.Check size={14} /> : <Icons.Copy size={14} />;
 
   return (
     <Button

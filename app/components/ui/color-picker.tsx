@@ -1,5 +1,4 @@
 import Color from "color";
-import { PipetteIcon } from "lucide-react";
 import { Slider } from "radix-ui";
 import {
   type ComponentProps,
@@ -22,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Icons } from "@/lib/icons";
 import { devlog } from "@/lib/logger";
 import { cn } from "@/lib/utils";
 
@@ -301,7 +301,7 @@ export const ColorPickerEyeDropper = ({
       variant="outline"
       {...props}
     >
-      <PipetteIcon size={16} />
+      <Icons.Pipette size={16} />
     </Button>
   );
 };

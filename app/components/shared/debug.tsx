@@ -1,12 +1,11 @@
-import { XIcon } from "lucide-react";
 import { useState } from "react";
-
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { Icons } from "@/lib/icons";
 import { stringifyCode } from "@/lib/string";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +50,7 @@ export function Debug({
             size="icon-xs"
             variant="outline"
           >
-            <XIcon className="size-3" />
+            <Icons.XIcon className="size-3" />
           </Button>
         </div>
 
