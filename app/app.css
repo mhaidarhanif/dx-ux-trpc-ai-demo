@@ -62,7 +62,7 @@ body {
   --background: var(--color-wood-50);
   --foreground: var(--color-wood-800);
   --card: var(--color-white);
-  --card-foreground: oklch(14.5% 0 0);
+  --card-foreground: var(--color-wood-800);
   --popover: var(--color-white);
   --popover-foreground: oklch(14.5% 0 0);
   --primary: var(--color-indigo-800);
@@ -109,7 +109,7 @@ body {
   --background: var(--color-wood-950);
   --foreground: var(--color-wood-100);
   --card: var(--color-wood-900);
-  --card-foreground: oklch(98.5% 0 0);
+  --card-foreground: var(--color-wood-100);
   --popover: oklch(20.5% 0 0);
   --popover-foreground: oklch(98.5% 0 0);
   --primary: var(--color-indigo-400);
