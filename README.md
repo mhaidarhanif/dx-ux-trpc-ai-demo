@@ -15,12 +15,13 @@
 
 Core:
 
-- [x] [TypeScript](https://typescriptlang.org)
+- [x] [TypeScript v5.8](https://typescriptlang.org)
+  - [x] Optional: [TypeScript v7 with `tsgo` setup](https://github.com/microsoft/typescript-go)
 - [x] [Bun v1](https://bun.sh)
 - [x] [React v19](https://react.dev)
 - [x] [React Router v7 Framework (Remix)](https://reactrouter.com)
-  - [x] [Themes: System, Light, Dark](https://github.com/abereghici/remix-themes)
   - [x] Integration with tRPC and Better Auth
+  - [x] [Themes: System, Light, Dark](https://github.com/abereghici/remix-themes)
   - [x] [Vercel Config](https://vercel.com/docs/frameworks/react-router), can be removed if not needed
 - [x] [Tailwind CSS v4](https://tailwindcss.com)
   - [x] [`shadcn/ui`](https://ui.shadcn.com) with single [`radix-ui`](https://radix-ui.com)
@@ -40,20 +41,25 @@ Core:
 
 Utilities:
 
-- [x] [Biome v2](https://biomejs.dev)
-  - [x] [Ultracite](https://ultracite.ai)
-- [x] [Docker v28](https://docker.com)
-- [x] [Vite v7](https://vitejs.dev)
-  - [x] [t3-env](https://env.t3.gg)
-- [ ] [Vitest v3](https://vitest.dev)
-- [ ] [Playwright](https://playwright.dev)
-- [x] [Sly CLI](https://sly-cli.fly.dev)
-- [ ] [jsrepo](https://jsrepo.dev)
+- [x] Formatter and Linter: [Biome v2](https://biomejs.dev)
+  - [x] Preset: [Ultracite](https://ultracite.ai)
+- [x] Container: [Docker v28](https://docker.com)
+- [x] Bundler: [Vite v7](https://vitejs.dev)
+  - [x] Env: [t3-env](https://env.t3.gg)
+- [x] Git Hooks: [Husky v9](https://typicode.github.io/husky)
+- [ ] Testing Framework: [Vitest v3](https://vitest.dev)
+- [ ] ENd-to-End Testing: [Playwright](https://playwright.dev)
+- [x] Add Code, Not Dependencies: [Sly CLI](https://sly-cli.fly.dev)
+- [x] Maintainable Source Registries: [jsrepo](https://jsrepo.dev)
 
 Services:
 
-- [x] [VS Code: Settings and Extensions](https://code.visualstudio.com/docs/configure/settings)
-- [x] [Cursor: Rules](https://docs.cursor.com/context/rules)
+- [x] Code Editor Settings and Extensions
+  - [x] [VS Code / Cursor / Windsurf](https://code.visualstudio.com/docs/configure/settings)
+- [x] AI Rules
+  - [x] [Cursor](https://docs.cursor.com/context/rules)
+  - [x] [Windsurf](https://windsurf.com/editor/directory)
+- [ ] Rate Limiter: [Unkey](https://unkey.dev)
 - [ ] Error Tracking: [Sentry](https://sentry.io)
 - [ ] Email: [Resend](https://resend.com), [Amazon SES](https://aws.amazon.com/ses)
 - [ ] Payment: [Polar](https://polar.sh)

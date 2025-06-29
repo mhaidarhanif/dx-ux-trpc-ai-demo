@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# GSAP library for animation
+
+When importing the plugin, because we're only using ESM, NOT CommonJS, then do it like this: `"gsap/dist/PluginName"`
+
+```tsx
+import { gsap } from "gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import GSAPSplitText from "gsap/dist/SplitText";
+
+gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
+```
