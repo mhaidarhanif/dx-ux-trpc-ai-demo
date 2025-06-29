@@ -7,7 +7,7 @@
 
 generator client {
   provider        = "prisma-client"
-  previewFeatures = ["relationJoins", "queryCompiler", "driverAdapters"]
+  previewFeatures = ["relationJoins"]
   output          = "../app/generated/prisma"
 
   // Enable Rust-free engine, ONLY if not using Prisma Accelerate
