@@ -4,11 +4,10 @@ import { envServer, isProd } from "@/env.server";
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: "dogokit_corgi_theme",
+    name: "themes",
     path: "/",
     httpOnly: true,
     sameSite: "lax",
-    domain: envServer.APP_URL,
     secure: !!isProd,
     secrets: [envServer.BETTER_AUTH_SECRET],
   },
