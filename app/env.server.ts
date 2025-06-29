@@ -11,6 +11,7 @@ export const envServer = createEnv({
     PORT: z.coerce.number().default(8000),
 
     APP_URL: z.url(),
+    DOMAIN: z.string(),
 
     DATABASE_URL: z.url(),
 

@@ -9,7 +9,7 @@ const sessionStorage = createCookieSessionStorage({
     httpOnly: true,
     sameSite: "lax",
     secrets: [envServer.BETTER_AUTH_SECRET],
-    ...(isProd ? { domain: envServer.APP_URL, secure: true } : {}),
+    ...(isProd ? { domain: envServer.DOMAIN, secure: true } : {}),
   },
 });
 

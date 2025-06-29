@@ -121,17 +121,23 @@ cp -i .env.example .env.prod
 
 Then change all the examples.
 
-Required:
+Required for application:
 
+- `VITE_APP_NAME`
 - `VITE_APP_URL`
+- `APP_URL`
+- `DOMAIN`
 - `BETTER_AUTH_SECRET`
+- `DATABASE_URL`
+
+Required when using Docker Compose:
+
 - `POSTGRES_USER`
 - `POSTGRES_PASSWORD`
 - `POSTGRES_DB`
 - `POSTGRES_HOST_PORT`
-- `DATABASE_URL`
 
-Optional:
+Optional for OAuth and Payment:
 
 - `*_CLIENT_ID` and `*_CLIENT_SECRET`: For OAuth related, [check Guide: OAuth](./docs/GUIDE_OAUTH.md)
 - `*_ACCESS_TOKEN` and `*_WEBHOOK_SECRET` for payment related.
