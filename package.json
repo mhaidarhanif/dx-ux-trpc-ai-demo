@@ -43,6 +43,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@polar-sh/better-auth": "^1.0.3",
     "@polar-sh/sdk": "^0.34.2",
+    "@prisma/adapter-pg": "^6.10.1",
     "@prisma/client": "^6.10.1",
     "@prisma/extension-accelerate": "^2.0.1",
     "@radix-ui/react-use-controllable-state": "^1.2.2",

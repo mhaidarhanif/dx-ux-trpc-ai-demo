@@ -13,7 +13,7 @@ import {
   ThemeProvider,
   useTheme,
 } from "remix-themes";
-
+import { IndicatorNProgress } from "@/components/shared/nprogress";
 import { ContentHeading } from "@/components/ui/content";
 import { Toaster } from "@/components/ui/sonner";
 import { configSite } from "@/config/site";
@@ -23,7 +23,6 @@ import { themeSessionResolver } from "@/themes.server";
 import type { Route } from "./+types/root";
 
 import "@/app.css";
-import { IndicatorNProgress } from "@/components/shared/nprogress";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

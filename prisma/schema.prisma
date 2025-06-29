@@ -7,7 +7,7 @@
 
 generator client {
   provider        = "prisma-client"
-  previewFeatures = ["relationJoins"]
+  previewFeatures = ["relationJoins", "queryCompiler", "driverAdapters"]
   output          = "../app/generated/prisma"
 }
 
