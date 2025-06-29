@@ -31,7 +31,6 @@ export default defineConfig({
     commonjsOptions: { include: [/node_modules/] },
   },
   optimizeDeps: {
-    exclude: ["react", "react-dom"],
     include: ["app/lib/icons.ts"],
   },
   define: {
