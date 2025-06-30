@@ -1,3 +1,4 @@
+import { UTCDate } from "@date-fns/utc";
 import { format, formatDistance, parseISO } from "date-fns";
 
 /**
@@ -74,4 +75,8 @@ export function formatTimestamp(date: string | Date | undefined) {
 export function convertDaysToSeconds(days: number) {
   // seconds * minutes * hours * days
   return 60 * 60 * 24 * days;
+}
+
+export function normalizeDateToUTC(date: Date | string): Date {
+  return new UTCDate(date);
 }

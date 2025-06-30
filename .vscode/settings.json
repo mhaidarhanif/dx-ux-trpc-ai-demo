@@ -28,7 +28,7 @@
   "editor.formatOnSave": true,
   "emmet.showExpandedAbbreviation": "never",
   "peacock.color": "#a5b4fc",
-  "typescript.experimental.useTsgo": true,
+  "typescript.experimental.useTsgo": false,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "workbench.colorCustomizations": {
