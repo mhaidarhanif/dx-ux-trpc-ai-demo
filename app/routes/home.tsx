@@ -3,8 +3,8 @@ import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/home";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const api = await caller(request);
-  const helloText = await api.greeting.sayHelloText();
+  const trpc = await caller(request);
+  const helloText = await trpc.greeting.sayHelloText();
   return { helloText };
 }
 

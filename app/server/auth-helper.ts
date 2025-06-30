@@ -34,14 +34,17 @@ export async function requireAuthSession(request: Request) {
 }
 
 export async function requireAuthUserData(request: Request) {
+  const trpc = await caller(request);
   const session = await requireSession(request);
-  if (!session?.user.id) return { isAuthenticated: false, user: null };
 
-  const api = await caller(request);
-  const user = await api.auth.getUserComplete();
+  if (!session?.user.id) {
+    return { trpc, isAuthenticated: false, user: null };
+  }
+
+  const user = await trpc.auth.getUserComplete();
   const isAuthenticated = user !== null;
 
-  return { isAuthenticated, user };
+  return { trpc, isAuthenticated, user };
 }
 
 // Redirect to /signin if not authenticated

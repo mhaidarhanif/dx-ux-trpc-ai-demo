@@ -4,8 +4,8 @@ import { caller } from "@/server/trpc-caller";
 import type { Route } from "./+types/examples";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const api = await caller(request);
-  const examples = await api.example.getExamples();
+  const trpc = await caller(request);
+  const examples = await trpc.example.getExamples();
   return { examples };
 }
 

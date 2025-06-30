@@ -37,7 +37,7 @@ import X from "@/icons/x";
 
 /**
  * This replace:
- * import type { LucideIcon, LucideProps } from "lucide-react";
+ * import LucideIcon, LucideProps from Lucide;
  */
 
 type SVGAttributes = Partial<SVGProps<SVGSVGElement>>;
