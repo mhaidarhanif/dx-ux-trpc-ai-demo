@@ -1,6 +1,5 @@
 import { href, redirect } from "react-router";
 import { parseFormTimer } from "@/lib/form/parse";
-import { devlog } from "@/lib/system/logger";
 import { createTimer } from "@/lib/system/timer";
 import { getNameParts } from "@/lib/text/convert";
 import { auth } from "@/modules/auth/better-auth";
@@ -178,31 +177,16 @@ export async function actionSignIn(request: Request) {
 }
 
 export async function actionSignOut(request: Request) {
-  try {
-    const session = await getSession(request);
-    const timer = createTimer();
+  const timer = createTimer();
 
-    const authResponse = await auth.api.signOut({
-      headers: request.headers,
-    });
+  const authResponse = await auth.api.signOut({
+    headers: request.headers,
+  });
 
-    await timer.delay();
-    if (!authResponse.success) return null;
+  await timer.delay();
+  if (!authResponse.success) return null;
 
-    await auth.api.revokeUserSession({
-      headers: request.headers,
-      body: { sessionToken: session?.session.token || "" },
-    });
-
-    // auth.api.revokeSession({
-    //   headers: request.headers,
-    //   body: { token: session?.session.token || "" },
-    // });
-    return redirect(href("/signin"));
-  } catch (error) {
-    devlog.error("ACTION_SIGN_OUT_ERROR", { error });
-    return null;
-  }
+  return redirect(href("/signin"));
 }
 
 export async function actionSignInSocial(request: Request) {
