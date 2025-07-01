@@ -1,6 +1,9 @@
+import { parseWithZod } from "@conform-to/zod/v4";
 import { href, redirect } from "react-router";
 import { auth } from "@/lib/better-auth";
+import { createTimer } from "@/lib/timer";
 import { caller } from "@/lib/trpc-caller";
+import { AuthSignInSchema } from "@/schemas/auth";
 
 export type BetterAuthResponse = {
   code: string;
@@ -22,6 +25,10 @@ export type BetterAuthResponseOAuth = {
   url: string;
   redirect: boolean;
 };
+
+/**
+ * Require User Session
+ */
 
 export async function requireSession(request: Request) {
   return await auth.api.getSession({ headers: request.headers });
@@ -61,4 +68,33 @@ export async function requireAuthRedirectDashboard(request: Request) {
   if (isAuthenticated) return redirect(href("/dashboard"));
   if (user) return redirect(href("/dashboard"));
   return { isAuthenticated, user };
+}
+
+/**
+ * Actions for Auth
+ */
+
+export async function actionSignIn(request: Request) {
+  const timer = createTimer();
+
+  const formData = await request.formData();
+  const submission = parseWithZod(formData, { schema: AuthSignInSchema });
+  if (submission.status !== "success") return submission.reply();
+
+  const response = await auth.api.signInEmail({
+    asResponse: true,
+    headers: request.headers,
+    body: submission.value,
+  });
+
+  const data: BetterAuthResponse = await response.json();
+
+  if (!response.ok) {
+    return submission.reply({
+      formErrors: [data.message || "Failed to sign in or authenticate"],
+    });
+  }
+
+  await timer.delay();
+  return redirect(href("/dashboard"), { headers: response.headers });
 }
