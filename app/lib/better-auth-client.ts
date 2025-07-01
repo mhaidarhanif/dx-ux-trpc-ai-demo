@@ -10,8 +10,8 @@ import {
   usernameClient,
 } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
-import { envClient } from "@/env";
 import type { auth } from "@/lib/better-auth";
+import { envClient } from "@/modules/env/env";
 
 export type AuthClientSession = typeof authClient.$Infer.Session;
 

@@ -17,7 +17,6 @@ import {
 import { passkey } from "better-auth/plugins/passkey";
 import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
-import { envServer } from "@/env.server";
 import { devlog } from "@/lib/logger";
 import { prisma } from "@/lib/prisma";
 import {
@@ -25,6 +24,7 @@ import {
   createUsernameGitHub,
   getNameParts,
 } from "@/lib/string";
+import { envServer } from "@/modules/env/env.server";
 
 export type AuthSession = typeof auth.$Infer.Session;
 

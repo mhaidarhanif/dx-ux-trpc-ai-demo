@@ -1,6 +1,6 @@
 import { href } from "react-router";
-import { envClient, isProd } from "@/env";
 import { Icons } from "@/lib/icons";
+import { envClient, isProd } from "@/modules/env/env";
 
 export const configSite: ConfigSite = {
   id: isProd ? envClient.VITE_APP_URL : "localhost",

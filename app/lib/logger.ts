@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/suspicious/noConsole: "This is fine" */
-import { isProd } from "@/env";
+import { isProd } from "@/modules/env/env";
 
 export const devlog = {
   info: (...args: unknown[]) => {
