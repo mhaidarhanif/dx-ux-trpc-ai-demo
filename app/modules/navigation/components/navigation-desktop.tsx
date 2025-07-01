@@ -1,8 +1,8 @@
 import { LogoNavigationLink } from "@/components/shared/logo";
-import { NavigationDesktopLinks } from "@/components/shared/navigation-desktop-links";
-import { UserDropdownMenu } from "@/components/shared/user-dropdown-menu";
 import { configSite } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { NavigationDesktopLinks } from "@/modules/navigation/components/navigation-desktop-links";
+import { UserDropdownMenu } from "@/modules/user/components/user-dropdown-menu";
 
 export function NavigationDesktop() {
   return (

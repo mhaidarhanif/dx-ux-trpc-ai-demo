@@ -3,8 +3,8 @@ import { caller } from "@/lib/trpc-caller";
 import type { Route } from "./+types/slug";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
-  const api = await caller(request);
-  return api.example.getExampleSlug(params.slug);
+  const trpc = await caller(request);
+  return trpc.example.getExampleSlug(params.slug);
 }
 
 export default function ExampleSlugRoute({ loaderData }: Route.ComponentProps) {

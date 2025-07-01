@@ -11,10 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { authClient } from "@/lib/better-auth-client";
 import { formatDate } from "@/lib/datetime";
 import type { AppRouterOutputs } from "@/lib/trpc-client";
 import { cn } from "@/lib/utils";
+import { authClient } from "@/modules/auth/better-auth-client";
 
 export function UserProfileCard({
   user,

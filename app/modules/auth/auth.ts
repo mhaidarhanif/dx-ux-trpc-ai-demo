@@ -1,9 +1,9 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { href, redirect } from "react-router";
-import { auth } from "@/lib/better-auth";
 import { getNameParts } from "@/lib/string";
 import { createTimer } from "@/lib/timer";
 import { caller } from "@/lib/trpc-caller";
+import { auth } from "@/modules/auth/better-auth";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/schemas/auth";
 
 export type BetterAuthResponse = {

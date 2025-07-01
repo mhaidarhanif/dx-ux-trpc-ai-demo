@@ -1,5 +1,5 @@
-import { NavigationDesktop } from "@/components/shared/navigation-desktop";
-import { NavigationMobile } from "@/components/shared/navigation-mobile";
+import { NavigationDesktop } from "@/modules/navigation/components/navigation-desktop";
+import { NavigationMobile } from "@/modules/navigation/components/navigation-mobile";
 
 export function LayoutHeader() {
   return (

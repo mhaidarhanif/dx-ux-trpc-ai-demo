@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { href, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/better-auth-client";
 import { Icons } from "@/lib/icons";
+import { authClient } from "@/modules/auth/better-auth-client";
 
 export function ButtonAuthPasskey({
   textAction = "Sign In",

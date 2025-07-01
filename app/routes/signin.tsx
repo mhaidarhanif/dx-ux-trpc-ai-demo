@@ -1,5 +1,8 @@
-import { AuthCard } from "@/components/shared/auth-card";
-import { actionSignIn, requireAuthRedirectDashboard } from "@/lib/auth";
+import {
+  actionSignIn,
+  requireAuthRedirectDashboard,
+} from "@/modules/auth/auth";
+import { AuthPanel } from "@/modules/auth/components/auth-panel";
 import type { Route } from "./+types/signin";
 
 export function loader({ request }: Route.LoaderArgs) {
@@ -7,7 +10,7 @@ export function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function SignInRoute({ actionData }: Route.ComponentProps) {
-  return <AuthCard authMode="signin" lastResult={actionData} />;
+  return <AuthPanel authMode="signin" lastResult={actionData} />;
 }
 
 export function action({ request }: Route.ActionArgs) {

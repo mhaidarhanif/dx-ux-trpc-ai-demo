@@ -1,9 +1,9 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type { Avatar as AvatarPrimitive } from "radix-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { AuthSession } from "@/lib/better-auth";
 import { getAvatarPlaceholderUrl } from "@/lib/placeholder";
 import { getNameInitials } from "@/lib/string";
+import type { AppRouterOutputs } from "@/lib/trpc-client";
 import { cn } from "@/lib/utils";
 
 export const avatarAutoVariants = cva("", {
@@ -31,7 +31,7 @@ export const avatarAutoVariants = cva("", {
 interface AvatarAutoProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof avatarAutoVariants> {
-  user: AuthSession["user"];
+  user: AppRouterOutputs["auth"]["getUser"];
   imageUrl?: string | null;
 }
 

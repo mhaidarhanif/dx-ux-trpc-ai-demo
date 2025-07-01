@@ -1,8 +1,8 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { redirect } from "react-router";
-import type { BetterAuthResponseOAuth } from "@/lib/auth";
-import { auth } from "@/lib/better-auth";
 import { createTimer } from "@/lib/timer";
+import type { BetterAuthResponseOAuth } from "@/modules/auth/auth";
+import { auth } from "@/modules/auth/better-auth";
 import { AuthSocialSchema } from "@/schemas/auth";
 import type { Route } from "./+types/social";
 

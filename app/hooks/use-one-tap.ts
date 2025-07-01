@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { href, useNavigate } from "react-router";
 import { toast } from "sonner";
-import { authClient } from "@/lib/better-auth-client";
+import { authClient } from "@/modules/auth/better-auth-client";
 
 export function useOneTap() {
   const navigate = useNavigate();

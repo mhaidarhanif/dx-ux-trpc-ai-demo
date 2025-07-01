@@ -3,9 +3,6 @@ import { parseWithZod } from "@conform-to/zod/v4";
 import { useEffect } from "react";
 import { Form, href, Link } from "react-router";
 import { toast } from "sonner";
-
-import { ButtonAuthPasskey } from "@/components/shared/button-auth-passkey";
-import { ButtonAuthProviders } from "@/components/shared/button-auth-providers";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { FieldErrors } from "@/components/shared/field-errors";
 import { InputPassword } from "@/components/shared/input-password";
@@ -15,9 +12,11 @@ import { Label } from "@/components/ui/label";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { ButtonAuthPasskey } from "@/modules/auth/components/button-auth-passkey";
+import { ButtonAuthProviders } from "@/modules/auth/components/button-auth-providers";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/schemas/auth";
 
-export function AuthCard({
+export function AuthPanel({
   authMode = "signin",
   lastResult,
   className,
@@ -72,6 +71,7 @@ export function AuthCard({
         "flex w-full max-w-xs flex-col items-center gap-6",
         className
       )}
+      id="auth-panel"
       {...props}
     >
       <div className="text-center">

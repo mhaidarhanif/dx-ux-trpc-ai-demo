@@ -2,12 +2,12 @@ import { Form, href, redirect } from "react-router";
 import { ButtonCancel } from "@/components/shared/button-cancel";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { Flex } from "@/components/shared/flex";
+import { createTimer } from "@/lib/timer";
 import {
   type BetterAuthResponseSignOut,
   requireAuthRedirectSignIn,
-} from "@/lib/auth";
-import { auth } from "@/lib/better-auth";
-import { createTimer } from "@/lib/timer";
+} from "@/modules/auth/auth";
+import { auth } from "@/modules/auth/better-auth";
 import type { Route } from "./+types/signout";
 
 export function loader({ request }: Route.LoaderArgs) {

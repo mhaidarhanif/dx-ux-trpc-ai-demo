@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
 
-import { auth } from "@/lib/better-auth";
+import { auth } from "@/modules/auth/better-auth";
 
 export function loader({ request }: LoaderFunctionArgs) {
   return auth.handler(request);
