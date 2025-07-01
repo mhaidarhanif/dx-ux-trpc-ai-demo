@@ -32,6 +32,15 @@ export type AuthResponseOAuth = {
 };
 
 /**
+ * Redirects
+ */
+
+export const redirectSignIn = () => redirect(href("/signin"));
+export const redirectDashboard = () => redirect(href("/dashboard"));
+export const redirectSignUp = () => redirect(href("/signup"));
+export const redirectSignOut = () => redirect(href("/signout"));
+
+/**
  * Auth Loaders
  */
 
@@ -60,20 +69,21 @@ export async function requireSession(request: Request) {
 }
 // Redirect to /signin if not authenticated
 export async function requireSessionRedirectSignIn(request: Request) {
-  const { isAuthenticated, user } = await requireSession(request);
-  if (!isAuthenticated) return redirect(href("/signin"));
-  if (!user) return redirect(href("/signin"));
-  return { isAuthenticated, user };
+  const { isAuthenticated, user, trpc } = await requireSession(request);
+  if (!isAuthenticated) return redirectSignIn();
+  if (!user) return redirectSignIn();
+  return { isAuthenticated, user, trpc };
 }
 
-// Redirect to /dashboard if authenticated
+// Redirect to /dashboard if already authenticated
 export async function requireSessionRedirectDashboard(request: Request) {
-  const { isAuthenticated, user } = await requireSession(request);
-  if (isAuthenticated) return redirect(href("/dashboard"));
-  if (user) return redirect(href("/dashboard"));
-  return { isAuthenticated, user };
+  const { isAuthenticated, user, trpc } = await requireSession(request);
+  if (isAuthenticated) return redirectDashboard();
+  if (user) return redirectDashboard();
+  return { isAuthenticated, user, trpc };
 }
 
+// Get user data
 export async function requireUserData(request: Request) {
   const trpc = await caller(request);
   const session = await getSession(request);
@@ -93,14 +103,6 @@ export async function requireUserData(request: Request) {
     user,
     trpc,
   };
-}
-
-// Redirect to /signin if not authenticated
-export async function requireUserRedirectSignIn(request: Request) {
-  const { isAuthenticated, user } = await requireUserData(request);
-  if (!isAuthenticated) return redirect(href("/signin"));
-  if (!user) return redirect(href("/signin"));
-  return { isAuthenticated, user };
 }
 
 /**

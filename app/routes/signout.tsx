@@ -1,13 +1,16 @@
-import { href, redirect } from "react-router";
 import { AuthPanelSignOut } from "@/modules/auth/components/auth-panel";
-import { actionSignOut, requireSession } from "@/modules/auth/helpers";
+import {
+  actionSignOut,
+  redirectSignIn,
+  requireSession,
+} from "@/modules/auth/helpers";
 import type { Route } from "./+types/signout";
 
 export const meta: Route.MetaFunction = () => [{ title: "Sign Out" }];
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const { isAuthenticated, trpc } = await requireSession(request);
-  if (!isAuthenticated) return redirect(href("/signin"));
+  if (!isAuthenticated) return redirectSignIn();
   return trpc.auth.getUserMinimal();
 };
 
