@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
-import { Layout } from "@/components/shared/layout";
+import { Layout } from "@/modules/layout/components/layout";
 
-export default function LayoutApp() {
+export default function LayoutAppRoute() {
   return (
     <Layout hasTheme>
       <Outlet />
