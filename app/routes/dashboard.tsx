@@ -1,5 +1,5 @@
 import { DebugCode } from "@/components/shared/debug-code";
-import { UserProfileCard } from "@/modules/auth/components/user-profile-card";
+import { UserProfilePanel } from "@/modules/auth/components/user-profile-panel";
 import { requireAuthRedirectSignIn } from "@/modules/auth/helpers";
 import type { Route } from "./+types/dashboard";
 
@@ -14,7 +14,7 @@ export default function DashboardRoute({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <UserProfileCard user={user} />
+      <UserProfilePanel user={user} />
       <DebugCode>{user}</DebugCode>
     </>
   );

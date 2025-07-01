@@ -7,7 +7,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   return await trpc.greeting.sayHello();
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function HomeRoute({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <HomeHero helloText={loaderData} />

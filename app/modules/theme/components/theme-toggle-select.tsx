@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function ThemeToggleSelect() {
+export function ThemeToggleSelect() {
   const [theme, setTheme, { definedBy }] = useTheme();
   const value = definedBy === "SYSTEM" ? "" : (theme ?? "");
 

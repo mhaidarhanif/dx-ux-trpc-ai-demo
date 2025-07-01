@@ -87,10 +87,10 @@ export const auth = betterAuth({
 
   session: {
     modelName: "Session",
-    cookieCache: {
-      enabled: true,
-      maxAge: 60 * 5, // 5 minutes
-    },
+    // cookieCache: {
+    //   enabled: true,
+    //   maxAge: 60 * 5, // 5 minutes
+    // },
   },
 
   account: {

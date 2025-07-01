@@ -1,16 +1,17 @@
-const DEFAULT_THRESHOLD = 300;
-
 /**
  * Create Timer Delay
  *
  * Usage:
- * const timer = createTimer()
+ * timer = createTimer()
  * ...
  * await timer.delay()
  *
  * @param customThreshold number in ms
  * @returns
  */
+
+const DEFAULT_THRESHOLD = 300;
+
 export const createTimer = (customThreshold?: number) => {
   const start = Date.now();
   const threshold = customThreshold ?? DEFAULT_THRESHOLD;

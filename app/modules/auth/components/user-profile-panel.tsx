@@ -16,7 +16,7 @@ import { authClient } from "@/modules/auth/better-auth-client";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
 import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
 
-export function UserProfileCard({
+export function UserProfilePanel({
   user,
 }: {
   user: AppRouterOutputs["auth"]["getUserComplete"];
