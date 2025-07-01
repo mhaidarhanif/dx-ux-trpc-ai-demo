@@ -8,9 +8,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { configSite, type NavItem } from "@/config/site";
-import { useAuthUser } from "@/hooks/use-auth-user";
 import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
+import { useAuthUser } from "@/modules/auth/hooks/use-auth-user";
 import { LogoNavigationLink } from "@/modules/brand/components/logo";
 
 export function NavigationMobile() {

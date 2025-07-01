@@ -34,17 +34,17 @@ export const configSite: ConfigSite = {
     {
       name: "google",
       label: "Google",
-      icon: <Icons.Google />,
+      icon: Icons.Google,
     },
     {
       name: "github",
       label: "GitHub",
-      icon: <Icons.GitHub />,
+      icon: Icons.GitHub,
     },
     {
       name: "linkedin",
       label: "LinkedIn",
-      icon: <Icons.Linkedin />,
+      icon: Icons.Linkedin,
       isEnabled: false,
     },
   ],
@@ -100,6 +100,6 @@ export type AuthProviderName =
 export type AuthProvider = {
   name: AuthProviderName;
   label: string;
-  icon: React.ReactNode;
+  icon: React.ElementType;
   isEnabled?: boolean;
 };

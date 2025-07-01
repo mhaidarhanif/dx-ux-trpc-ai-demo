@@ -1,9 +1,9 @@
 import { NavLink } from "react-router";
 import { buttonVariants } from "@/components/ui/button";
 import type { NavItem } from "@/config/site";
-import { useAuthUser } from "@/hooks/use-auth-user";
 import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
+import { useAuthUser } from "@/modules/auth/hooks/use-auth-user";
 
 export function NavigationDesktopLinks({ items }: { items: NavItem[] }) {
   const { isAuthenticated } = useAuthUser();

@@ -1,6 +1,6 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import { z } from "zod/v4-mini";
-import { configPrismaCache } from "@/config/prisma-cache";
+import { configPrismaCache } from "@/config/prisma";
 import { publicProcedure } from "@/modules/trpc/trpc-config";
 
 export const exampleRouter = {

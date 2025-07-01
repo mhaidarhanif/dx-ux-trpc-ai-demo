@@ -10,8 +10,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { configNavigationItems, type NavItem } from "@/config/navigation";
-import { useAuthUser } from "@/hooks/use-auth-user";
+import { useAuthUser } from "@/modules/auth/hooks/use-auth-user";
+import {
+  configNavigationItems,
+  type NavItem,
+} from "@/modules/navigation/config-navigation";
 import {
   type avatarAutoVariants,
   UserAvatar,
