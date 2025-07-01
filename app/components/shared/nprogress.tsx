@@ -1,6 +1,6 @@
 import { useNProgress } from "@tanem/react-nprogress";
 import { Spinner } from "@/components/ui/spinner-icon";
-import { useIsLoading } from "@/hooks/use-is-loading";
+import { useIsLoading } from "@/lib/hooks/use-is-loading";
 
 export function IndicatorNProgress() {
   const isLoading = useIsLoading();
