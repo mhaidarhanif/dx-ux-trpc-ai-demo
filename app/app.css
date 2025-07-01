@@ -60,7 +60,7 @@ body {
 :root {
   --radius: 0.625rem;
   --background: var(--color-wood-50);
-  --foreground: var(--color-wood-800);
+  --foreground: var(--color-wood-900);
   --card: var(--color-white);
   --card-foreground: var(--color-wood-800);
   --popover: var(--color-white);

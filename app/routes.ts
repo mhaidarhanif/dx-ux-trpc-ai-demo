@@ -22,7 +22,7 @@ export default [
       route("/dashboard", "routes/dashboard.tsx"),
     ]),
 
-    route("*", "routes/404.tsx"),
+    route("*", "routes/not-found.tsx"), // Custom 404
   ]),
 
   route("/action/set-theme", "routes/action/set-theme.ts"),
