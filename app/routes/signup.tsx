@@ -1,5 +1,5 @@
 import { AuthCard } from "@/components/shared/auth-card";
-import { actionSignUp, requireAuthRedirectDashboard } from "@/lib/auth-helper";
+import { actionSignUp, requireAuthRedirectDashboard } from "@/lib/auth";
 import type { Route } from "./+types/signin";
 
 export function loader({ request }: Route.LoaderArgs) {

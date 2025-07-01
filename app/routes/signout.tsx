@@ -5,7 +5,7 @@ import { Flex } from "@/components/shared/flex";
 import {
   type BetterAuthResponseSignOut,
   requireAuthRedirectSignIn,
-} from "@/lib/auth-helper";
+} from "@/lib/auth";
 import { auth } from "@/lib/better-auth";
 import { createTimer } from "@/lib/timer";
 import type { Route } from "./+types/signout";
