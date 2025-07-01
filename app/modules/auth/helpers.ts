@@ -71,31 +71,6 @@ export async function requireAuthRedirectDashboard(request: Request) {
  * Actions for Auth
  */
 
-export async function actionSignIn(request: Request) {
-  const timer = createTimer();
-
-  const formData = await request.formData();
-  const submission = parseWithZod(formData, { schema: AuthSignInSchema });
-  if (submission.status !== "success") return submission.reply();
-
-  const response = await auth.api.signInEmail({
-    asResponse: true,
-    headers: request.headers,
-    body: submission.value,
-  });
-
-  const authResponse: BetterAuthResponse = await response.json();
-
-  if (!response.ok) {
-    return submission.reply({
-      formErrors: [authResponse.message || "Failed to sign in or authenticate"],
-    });
-  }
-
-  await timer.delay();
-  return redirect(href("/dashboard"), { headers: response.headers });
-}
-
 export async function actionSignUp(request: Request) {
   const timer = createTimer();
 
@@ -144,4 +119,44 @@ export async function actionSignUp(request: Request) {
       ],
     });
   }
+}
+
+export async function actionSignIn(request: Request) {
+  const timer = createTimer();
+
+  const formData = await request.formData();
+  const submission = parseWithZod(formData, { schema: AuthSignInSchema });
+  if (submission.status !== "success") return submission.reply();
+
+  const response = await auth.api.signInEmail({
+    asResponse: true,
+    headers: request.headers,
+    body: submission.value,
+  });
+
+  const authResponse: BetterAuthResponse = await response.json();
+
+  if (!response.ok) {
+    return submission.reply({
+      formErrors: [authResponse.message || "Failed to sign in or authenticate"],
+    });
+  }
+
+  await timer.delay();
+  return redirect(href("/dashboard"), { headers: response.headers });
+}
+
+export async function actionSignOut(request: Request) {
+  const timer = createTimer();
+
+  const response = await auth.api.signOut({
+    asResponse: true,
+    headers: request.headers,
+  });
+
+  const json: BetterAuthResponseSignOut = await response.json();
+
+  await timer.delay();
+  if (!json.success) return redirect(href("/dashboard"));
+  return redirect(href("/signin"));
 }

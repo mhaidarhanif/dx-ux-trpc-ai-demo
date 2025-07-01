@@ -1,11 +1,9 @@
-import { Form, href, redirect } from "react-router";
+import { Form, href } from "react-router";
 import { ButtonCancel } from "@/components/buttons/button-cancel";
 import { ButtonLoading } from "@/components/buttons/button-loading";
 import { Flex } from "@/components/shared/flex";
-import { createTimer } from "@/lib/system/timer";
-import { auth } from "@/modules/auth/better-auth";
 import {
-  type BetterAuthResponseSignOut,
+  actionSignOut,
   requireAuthRedirectSignIn,
 } from "@/modules/auth/helpers";
 import type { Route } from "./+types/signout";
@@ -44,17 +42,6 @@ export default function SignOutRoute({ loaderData }: Route.ComponentProps) {
   );
 }
 
-export async function action({ request }: Route.ActionArgs) {
-  const timer = createTimer();
-
-  const response = await auth.api.signOut({
-    asResponse: true,
-    headers: request.headers,
-  });
-
-  const json: BetterAuthResponseSignOut = await response.json();
-
-  await timer.delay();
-  if (!json.success) return redirect(href("/dashboard"));
-  return redirect(href("/signin"));
+export function action({ request }: Route.ActionArgs) {
+  return actionSignOut(request);
 }
