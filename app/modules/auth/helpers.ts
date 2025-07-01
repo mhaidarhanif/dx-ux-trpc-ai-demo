@@ -1,7 +1,7 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { href, redirect } from "react-router";
-import { getNameParts } from "@/lib/string";
-import { createTimer } from "@/lib/timer";
+import { createTimer } from "@/lib/system/timer";
+import { getNameParts } from "@/lib/text/convert";
 import { auth } from "@/modules/auth/better-auth";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
 import { caller } from "@/modules/trpc/trpc-caller";

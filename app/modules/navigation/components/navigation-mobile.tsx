@@ -8,10 +8,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { configSite, type NavItem } from "@/config/site";
-import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
 import { useAuthUser } from "@/modules/auth/hooks/use-auth-user";
 import { LogoNavigationLink } from "@/modules/brand/components/logo";
+import { filterNavItems } from "@/modules/navigation/helpers";
 
 export function NavigationMobile() {
   const [open, setOpen] = React.useState(false);

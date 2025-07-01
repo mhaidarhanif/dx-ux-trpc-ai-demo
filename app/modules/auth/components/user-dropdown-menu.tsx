@@ -10,15 +10,15 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  type avatarAutoVariants,
+  UserAvatar,
+} from "@/modules/auth/components/user-avatar";
 import { useAuthUser } from "@/modules/auth/hooks/use-auth-user";
 import {
   configNavigationItems,
   type NavItem,
-} from "@/modules/navigation/config-navigation";
-import {
-  type avatarAutoVariants,
-  UserAvatar,
-} from "@/modules/user/components/user-avatar";
+} from "@/modules/navigation/config";
 
 // Configured as a function to be near with the other navItems
 const getProfileNavItems = (username?: string | null) => [

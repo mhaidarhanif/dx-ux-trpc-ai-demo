@@ -11,7 +11,7 @@ export default [
       index("routes/home.tsx"),
       route("/about", "routes/about.tsx"),
       route("/examples", "routes/examples.tsx"),
-      route("/examples/:slug", "routes/examples/slug.tsx"),
+      route("/examples/:slug", "routes/examples-slug.tsx"),
     ]),
 
     layout("routes/layouts/layout-auth.tsx", [

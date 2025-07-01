@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { formatDate } from "@/lib/datetime";
+import { formatDate } from "@/lib/text/datetime";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/modules/auth/better-auth-client";
 import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";

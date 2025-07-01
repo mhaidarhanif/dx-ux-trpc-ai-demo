@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Icons } from "@/lib/icons";
-import { devlog } from "@/lib/logger";
+import { devlog } from "@/lib/system/logger";
 import { cn } from "@/lib/utils";
 
 interface ColorPickerContextValue {

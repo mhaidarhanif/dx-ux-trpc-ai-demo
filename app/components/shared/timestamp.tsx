@@ -1,4 +1,4 @@
-import { formatTimestamp } from "@/lib/datetime";
+import { formatTimestamp } from "@/lib/text/datetime";
 
 export function Timestamp({
   className,

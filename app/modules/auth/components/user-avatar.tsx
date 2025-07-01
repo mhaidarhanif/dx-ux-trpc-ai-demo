@@ -1,8 +1,8 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type { Avatar as AvatarPrimitive } from "radix-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getAvatarPlaceholderUrl } from "@/lib/placeholder";
-import { getNameInitials } from "@/lib/string";
+import { getAvatarPlaceholderUrl } from "@/lib/image/placeholder";
+import { getNameInitials } from "@/lib/text/convert";
 import { cn } from "@/lib/utils";
 import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
 

@@ -1,6 +1,6 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { redirect } from "react-router";
-import { createTimer } from "@/lib/timer";
+import { createTimer } from "@/lib/system/timer";
 import { auth } from "@/modules/auth/better-auth";
 import type { BetterAuthResponseOAuth } from "@/modules/auth/helpers";
 import { AuthSocialSchema } from "@/modules/auth/schema";

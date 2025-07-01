@@ -6,7 +6,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Icons } from "@/lib/icons";
-import { stringifyCode } from "@/lib/string";
+import { stringifyCode } from "@/lib/text/convert";
 import { cn } from "@/lib/utils";
 
 /**

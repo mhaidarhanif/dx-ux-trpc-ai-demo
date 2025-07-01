@@ -1,6 +1,6 @@
 import { Example } from "@/modules/example/components/example";
 import { caller } from "@/modules/trpc/trpc-caller";
-import type { Route } from "./+types/slug";
+import type { Route } from "./+types/examples-slug";
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const trpc = await caller(request);

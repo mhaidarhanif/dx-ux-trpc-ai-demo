@@ -1,7 +1,7 @@
 import { href } from "react-router";
 import { ButtonLink } from "@/components/buttons/button-link";
 import { FuzzyText } from "@/components/texts/fuzzy-text";
-import { usePathname } from "@/lib/url";
+import { usePathname } from "@/lib/text/url";
 
 export function NotFoundHero({
   baseIntensity = 0.05,

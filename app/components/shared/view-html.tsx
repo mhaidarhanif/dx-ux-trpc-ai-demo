@@ -1,4 +1,4 @@
-import { parseHTML } from "@/lib/html";
+import { parseHTML } from "@/lib/text/html";
 
 export function ViewHTML({ children }: { children: string }) {
   return (

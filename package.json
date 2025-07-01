@@ -17,7 +17,7 @@
     "dep:up": "taze && taze major",
     "dep:up:write": "taze -w && taze major -w",
     "dep:sly": "sly add --overwrite",
-    "dep:svg": "svgr --ignore-existing --typescript --jsx-runtime automatic --filename-case kebab --icon --title-prop --out-dir app/components/svgs public/icons/*.svg",
+    "dep:svg": "svgr --ignore-existing --typescript --jsx-runtime automatic --filename-case kebab --icon --title-prop --out-dir app/components/svgs public/svgs/*.svg",
     "db:up": "docker compose up -d",
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",

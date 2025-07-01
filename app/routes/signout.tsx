@@ -2,7 +2,7 @@ import { Form, href, redirect } from "react-router";
 import { ButtonCancel } from "@/components/buttons/button-cancel";
 import { ButtonLoading } from "@/components/buttons/button-loading";
 import { Flex } from "@/components/shared/flex";
-import { createTimer } from "@/lib/timer";
+import { createTimer } from "@/lib/system/timer";
 import { auth } from "@/modules/auth/better-auth";
 import {
   type BetterAuthResponseSignOut,

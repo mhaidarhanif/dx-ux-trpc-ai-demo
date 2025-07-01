@@ -17,13 +17,13 @@ import {
 import { passkey } from "better-auth/plugins/passkey";
 import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
-import { devlog } from "@/lib/logger";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/database/prisma";
+import { devlog } from "@/lib/system/logger";
 import {
   createUsername,
   createUsernameGitHub,
   getNameParts,
-} from "@/lib/string";
+} from "@/lib/text/convert";
 import { envServer } from "@/modules/env/env.server";
 
 export type AuthSession = typeof auth.$Infer.Session;

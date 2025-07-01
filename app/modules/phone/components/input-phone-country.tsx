@@ -9,9 +9,9 @@ import parsePhoneNumber from "libphonenumber-js";
 import { forwardRef, useEffect, useState } from "react";
 import { CircleFlag } from "react-circle-flags";
 import { Icons } from "@/lib/icons";
-import { devlog } from "@/lib/logger";
+import { devlog } from "@/lib/system/logger";
 import { cn } from "@/lib/utils";
-import type { CountryData } from "@/modules/country/country-schema";
+import type { CountryData } from "@/modules/country/schema";
 
 interface PhoneInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> {
