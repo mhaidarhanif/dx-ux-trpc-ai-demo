@@ -1,5 +1,5 @@
-import { parseWithZod } from "@conform-to/zod/v4";
 import { href, redirect } from "react-router";
+import { parseForm } from "@/lib/form/parse";
 import { createTimer } from "@/lib/system/timer";
 import { getNameParts } from "@/lib/text/convert";
 import { auth } from "@/modules/auth/better-auth";
@@ -32,7 +32,7 @@ export type AuthResponseOAuth = {
 };
 
 /**
- * Require User Session
+ * Auth Loaders
  */
 
 export async function getSession(request: Request) {
@@ -72,14 +72,11 @@ export async function requireAuthRedirectDashboard(request: Request) {
 }
 
 /**
- * Actions for Auth
+ * Auth Actions
  */
 
 export async function actionSignUp(request: Request) {
-  const timer = createTimer();
-
-  const formData = await request.formData();
-  const submission = parseWithZod(formData, { schema: AuthSignUpSchema });
+  const { timer, submission } = await parseForm(request, AuthSignUpSchema);
   if (submission.status !== "success") return submission.reply();
 
   const { firstName, lastName } = getNameParts(submission.value.name);
@@ -126,10 +123,7 @@ export async function actionSignUp(request: Request) {
 }
 
 export async function actionSignIn(request: Request) {
-  const timer = createTimer();
-
-  const formData = await request.formData();
-  const submission = parseWithZod(formData, { schema: AuthSignInSchema });
+  const { timer, submission } = await parseForm(request, AuthSignInSchema);
   if (submission.status !== "success") return submission.reply();
 
   const response = await auth.api.signInEmail({
@@ -166,10 +160,7 @@ export async function actionSignOut(request: Request) {
 }
 
 export async function actionSignInSocial(request: Request) {
-  const timer = createTimer();
-
-  const formData = await request.formData();
-  const submission = parseWithZod(formData, { schema: AuthSocialSchema });
+  const { timer, submission } = await parseForm(request, AuthSocialSchema);
   if (submission.status !== "success") return submission.reply();
 
   const response = await auth.api.signInSocial({
