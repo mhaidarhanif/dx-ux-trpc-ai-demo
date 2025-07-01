@@ -9,7 +9,7 @@
     "iconify:lucide": {
       "name": "Lucide",
       "config": {
-        "directory": "./public/icons",
+        "directory": "./public/svgs",
         "postinstall": ["bun", "dep:svg"],
         "transformers": []
       }
@@ -17,7 +17,7 @@
     "iconify:ri": {
       "name": "Remix Icon",
       "config": {
-        "directory": "./public/icons",
+        "directory": "./public/svgs",
         "postinstall": ["bun", "dep:svg"],
         "transformers": []
       }
