@@ -1,6 +1,6 @@
 import React from "react";
 
-export const useMutationObserver = (
+export function useMutationObserver(
   ref: React.RefObject<HTMLElement | null>,
   callback: MutationCallback,
   options: MutationObserverInit = {
@@ -9,7 +9,7 @@ export const useMutationObserver = (
     childList: true,
     subtree: true,
   }
-) => {
+): void {
   React.useEffect(() => {
     if (ref.current) {
       const observer = new MutationObserver(callback);
@@ -17,4 +17,4 @@ export const useMutationObserver = (
       return () => observer.disconnect();
     }
   }, [ref, callback, options]);
-};
+}

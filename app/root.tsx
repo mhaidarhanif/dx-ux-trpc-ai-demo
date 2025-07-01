@@ -17,8 +17,8 @@ import { IndicatorNProgress } from "@/components/shared/nprogress";
 import { ContentHeading } from "@/components/ui/content";
 import { Toaster } from "@/components/ui/sonner";
 import { configSite } from "@/config/site";
-import { requireAuthUserData } from "@/modules/auth/auth";
-import { themeSessionResolver } from "@/modules/themes/themes.server";
+import { requireAuthUserData } from "@/modules/auth/helpers";
+import { themeSessionResolver } from "@/modules/theme/themes-cookie.server";
 import { TRPCReactProvider } from "@/modules/trpc/trpc-client";
 import type { Route } from "./+types/root";
 

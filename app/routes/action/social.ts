@@ -1,9 +1,9 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { redirect } from "react-router";
 import { createTimer } from "@/lib/timer";
-import type { BetterAuthResponseOAuth } from "@/modules/auth/auth";
 import { auth } from "@/modules/auth/better-auth";
-import { AuthSocialSchema } from "@/schemas/auth";
+import type { BetterAuthResponseOAuth } from "@/modules/auth/helpers";
+import { AuthSocialSchema } from "@/modules/auth/schema";
 import type { Route } from "./+types/social";
 
 export async function action({ request }: Route.ActionArgs) {

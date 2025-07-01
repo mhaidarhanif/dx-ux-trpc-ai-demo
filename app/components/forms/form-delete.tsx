@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFetcher, useLocation } from "react-router";
-import { ButtonLoading } from "@/components/shared/button-loading";
+import { ButtonLoading } from "@/components/buttons/button-loading";
 import {
   AlertDialog,
   AlertDialogCancel,

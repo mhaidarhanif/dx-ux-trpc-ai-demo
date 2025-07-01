@@ -11,7 +11,7 @@ import { CircleFlag } from "react-circle-flags";
 import { Icons } from "@/lib/icons";
 import { devlog } from "@/lib/logger";
 import { cn } from "@/lib/utils";
-import type { CountryData } from "@/schemas/country";
+import type { CountryData } from "@/modules/country/country-schema";
 
 interface PhoneInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> {

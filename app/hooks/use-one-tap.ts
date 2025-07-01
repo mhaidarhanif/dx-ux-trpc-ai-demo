@@ -3,7 +3,7 @@ import { href, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { authClient } from "@/modules/auth/better-auth-client";
 
-export function useOneTap() {
+export function useOneTap(): void {
   const navigate = useNavigate();
 
   useEffect(() => {

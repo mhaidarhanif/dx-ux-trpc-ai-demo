@@ -1,5 +1,5 @@
 import { Form, href, useFetcher, useNavigate } from "react-router";
-import { ButtonLoading } from "@/components/shared/button-loading";
+import { ButtonLoading } from "@/components/buttons/button-loading";
 import { Flex } from "@/components/shared/flex";
 import { IconBooleanValue } from "@/components/shared/icon-boolean-value";
 import { Button } from "@/components/ui/button";

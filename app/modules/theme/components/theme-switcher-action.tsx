@@ -1,5 +1,5 @@
 import { type Theme, useTheme } from "remix-themes";
-import { ThemeSwitcher } from "@/components/ui/theme-switcher";
+import { ThemeSwitcher } from "@/modules/theme/components/theme-switcher";
 
 export const ThemeSwitcherAction = () => {
   const [theme, setTheme, { definedBy }] = useTheme();

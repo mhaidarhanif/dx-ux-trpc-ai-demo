@@ -1,7 +1,6 @@
 import { useNavigation } from "react-router";
 
-export function useIsLoading() {
+export function useIsLoading(): boolean {
   const navigation = useNavigation();
-  const isLoading = navigation.state === "loading";
-  return isLoading;
+  return navigation.state === "loading";
 }

@@ -1,5 +1,5 @@
 import { DebugCode } from "@/components/shared/debug-code";
-import { requireAuthRedirectSignIn } from "@/modules/auth/auth";
+import { requireAuthRedirectSignIn } from "@/modules/auth/helpers";
 import { UserProfileCard } from "@/modules/user/components/user-profile-card";
 import type { Route } from "./+types/dashboard";
 

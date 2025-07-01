@@ -1,7 +1,6 @@
 import { useNavigation } from "react-router";
 
-export function useIsSubmitting() {
+export function useIsSubmitting(): boolean {
   const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
-  return isSubmitting;
+  return navigation.state === "submitting";
 }

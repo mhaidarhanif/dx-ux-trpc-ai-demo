@@ -1,8 +1,8 @@
+import { AuthPanel } from "@/modules/auth/components/auth-panel";
 import {
   actionSignUp,
   requireAuthRedirectDashboard,
-} from "@/modules/auth/auth";
-import { AuthPanel } from "@/modules/auth/components/auth-panel";
+} from "@/modules/auth/helpers";
 import type { Route } from "./+types/signin";
 
 export function loader({ request }: Route.LoaderArgs) {

@@ -48,7 +48,7 @@ interface LogoProps
 }
 
 export function Logo({
-  imageUrl = "/images/logos/dogokit.svg",
+  imageUrl = "/images/logo-dogokit.svg",
   altText = "Logo",
   text = configSite.name,
   variant,

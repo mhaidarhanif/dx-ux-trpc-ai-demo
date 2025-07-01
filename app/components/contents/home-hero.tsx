@@ -1,8 +1,8 @@
+import { ButtonAnchor } from "@/components/buttons/button-anchor";
 import { Anchor } from "@/components/shared/anchor";
-import { ButtonAnchor } from "@/components/shared/button-anchor";
 import { Flex } from "@/components/shared/flex";
+import { SplitText } from "@/components/texts/split-text";
 import { ContentIntro } from "@/components/ui/content";
-import { SplitText } from "@/components/ui/text/split-text";
 import { Icons } from "@/lib/icons";
 
 export function HomeHero({ helloText }: { helloText: string }) {

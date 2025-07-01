@@ -3,8 +3,8 @@ import { href, redirect } from "react-router";
 import { getNameParts } from "@/lib/string";
 import { createTimer } from "@/lib/timer";
 import { auth } from "@/modules/auth/better-auth";
+import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
 import { caller } from "@/modules/trpc/trpc-caller";
-import { AuthSignInSchema, AuthSignUpSchema } from "@/schemas/auth";
 
 export type BetterAuthResponse = {
   code: string;

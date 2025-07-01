@@ -1,6 +1,6 @@
 import { Anchor } from "@/components/shared/anchor";
-import { ThemeSwitcherAction } from "@/components/theme/theme-switcher-action";
 import { configSite } from "@/config/site";
+import { ThemeSwitcherAction } from "@/modules/theme/components/theme-switcher-action";
 
 export function LayoutFooter({ hasTheme }: { hasTheme?: boolean }) {
   return (

@@ -1,5 +1,5 @@
-import { LayoutFooter } from "@/components/shared/layout-footer";
-import { LayoutHeader } from "@/components/shared/layout-header";
+import { LayoutFooter } from "@/modules/layout/components/layout-footer";
+import { LayoutHeader } from "@/modules/layout/components/layout-header";
 
 export function Layout({
   hasTheme = false,
