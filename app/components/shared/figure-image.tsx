@@ -19,7 +19,7 @@ export function FigureImage({
 }: FigureImageProps) {
   return (
     <figure {...props}>
-      <img alt={alt} src={src} />
+      <img alt={alt} className="rounded-sm" src={src} />
       {(caption || creditHref) && (
         <figcaption>
           {caption}
