@@ -1,7 +1,6 @@
 import React from "react";
 import { type LinkProps, NavLink, useNavigate } from "react-router";
 import { IconMenuAnimated } from "@/components/shared/icon-menu-animated";
-import { LogoNavigationLink } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -12,6 +11,7 @@ import { configSite, type NavItem } from "@/config/site";
 import { useAuthUser } from "@/hooks/use-auth-user";
 import { filterNavItems } from "@/lib/navlink";
 import { cn } from "@/lib/utils";
+import { LogoNavigationLink } from "@/modules/brand/components/logo";
 
 export function NavigationMobile() {
   const [open, setOpen] = React.useState(false);

@@ -28,7 +28,7 @@ export const avatarAutoVariants = cva("", {
   },
 });
 
-interface AvatarAutoProps
+interface UserAvatarProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof avatarAutoVariants> {
   user: AppRouterOutputs["auth"]["getUser"];
@@ -40,12 +40,12 @@ interface AvatarAutoProps
  * - placeholder function
  * - user.images[0]?.url
  */
-export function AvatarAuto({
+export function UserAvatar({
   user,
   size,
   className,
   ...props
-}: AvatarAutoProps) {
+}: UserAvatarProps) {
   const placeholderText = user.username || user.name;
   const imageUrl = user.image || getAvatarPlaceholderUrl(placeholderText) || "";
 

@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { FieldErrors } from "@/components/shared/field-errors";
 import { InputPassword } from "@/components/shared/input-password";
-import { Logo } from "@/components/shared/logo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useIsSubmitting } from "@/hooks/use-is-submitting";
@@ -14,6 +13,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { ButtonAuthPasskey } from "@/modules/auth/components/button-auth-passkey";
 import { ButtonAuthProviders } from "@/modules/auth/components/button-auth-providers";
+import { Logo } from "@/modules/brand/components/logo";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/schemas/auth";
 
 export function AuthPanel({

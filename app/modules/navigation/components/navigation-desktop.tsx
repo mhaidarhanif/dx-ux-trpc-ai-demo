@@ -1,6 +1,6 @@
-import { LogoNavigationLink } from "@/components/shared/logo";
 import { configSite } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { LogoNavigationLink } from "@/modules/brand/components/logo";
 import { NavigationDesktopLinks } from "@/modules/navigation/components/navigation-desktop-links";
 import { UserDropdownMenu } from "@/modules/user/components/user-dropdown-menu";
 

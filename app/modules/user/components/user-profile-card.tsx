@@ -1,5 +1,4 @@
 import { Form, href, useFetcher, useNavigate } from "react-router";
-import { AvatarAuto } from "@/components/shared/avatar-auto";
 import { ButtonLoading } from "@/components/shared/button-loading";
 import { Flex } from "@/components/shared/flex";
 import { IconBooleanValue } from "@/components/shared/icon-boolean-value";
@@ -15,6 +14,7 @@ import { formatDate } from "@/lib/datetime";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/modules/auth/better-auth-client";
 import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
+import { UserAvatar } from "@/modules/user/components/user-avatar";
 
 export function UserProfileCard({
   user,
@@ -43,7 +43,7 @@ export function UserProfileCard({
     <div className="w-full max-w-md space-y-4">
       <Card id="user">
         <CardHeader className="flex flex-col items-center space-y-2">
-          <AvatarAuto size="xl" user={user} />
+          <UserAvatar size="xl" user={user} />
           <CardTitle className="text-center">
             <h3 className="font-bold text-2xl text-gray-900 dark:text-gray-100">
               {user.name || "No Name"}
