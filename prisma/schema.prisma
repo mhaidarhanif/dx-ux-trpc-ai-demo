@@ -7,12 +7,14 @@
 
 generator client {
   provider        = "prisma-client"
-  previewFeatures = ["relationJoins"]
   output          = "../app/generated/prisma"
+  previewFeatures = ["relationJoins", "driverAdapters", "views", "fullTextSearchPostgres"]
 
-  // Enable Rust-free engine, ONLY if not using Prisma Accelerate
+  // Enable Rust-free engine, ONLY IF NOT using Prisma Accelerate
   // Then make sure to ONLY use normal `prisma generate`
-  // previewFeatures = ["relationJoins", "queryCompiler", "driverAdapters"]
+  // "queryCompiler"
+  // "driverAdapters"
+  // metrics
 }
 
 // https://prisma.io/docs/accelerate/local-development
@@ -21,6 +23,10 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// -----------------------------------------------------------------------------
+// Auth
+// -----------------------------------------------------------------------------
 
 model User {
   id String @id @default(ulid())
@@ -33,33 +39,38 @@ model User {
   lastName  String?
 
   username        String? @unique
-  displayUsername String?
+  displayUsername String? @unique
 
   phone               String?  @unique
   phoneNumber         String?  @unique
   phoneNumberVerified Boolean? @default(false)
 
-  image String?
-  lang  String? @default("en")
-  theme String? @default("")
+  image String? // From Better-Auth
 
-  role       String? // user | admin
+  role       String? // Must be one of: user | admin
   banned     Boolean?
-  banReason  String?
+  banReason  String?   @db.Text
   banExpires DateTime?
 
-  isAnonymous      Boolean?
-  twoFactorEnabled Boolean?
+  isAnonymous      Boolean @default(false)
+  twoFactorEnabled Boolean @default(false)
 
-  sessions   Session[]
+  // Configured in betterAuth.user.additionalFields
+  appLanguage String @default("en")
+  appTheme    String @default("")
+
   accounts   Account[]
-  twofactors TwoFactor[]
   passkeys   Passkey[]
+  twofactors TwoFactor[]
+  sessions   Session[]
+
+  // profiles Profile[]
+
+  // pages Page[]
+  // posts Post[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@index([email, username])
 }
 
 model Session {
@@ -78,13 +89,14 @@ model Session {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([userId, token])
+  @@index([userId])
+  @@index([userId, createdAt])
 }
 
 model Account {
   id String @id @default(ulid())
 
-  accountId  String @unique
+  accountId  String
   providerId String
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -96,25 +108,25 @@ model Account {
   accessTokenExpiresAt  DateTime?
   refreshTokenExpiresAt DateTime?
   scope                 String?
-  password              String?
+
+  password String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([accountId, providerId])
   @@index([userId])
 }
 
 model Verification {
   id String @id @default(ulid())
 
-  identifier String
-  value      String
+  identifier String   @unique
+  value      String   @unique // From Better-Auth
   expiresAt  DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@index([identifier])
 }
 
 model TwoFactor {
@@ -128,23 +140,21 @@ model TwoFactor {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@index([secret])
 }
 
 model Passkey {
   id String @id @default(ulid())
 
-  name      String?
-  publicKey String
-
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
-  credentialID String
+  name      String?
+  publicKey String
+
+  credentialID String  @unique
   counter      Int
   deviceType   String
-  backedUp     Boolean
+  backedUp     Boolean // From Better-Auth
   transports   String?
   aaguid       String?
 
@@ -157,12 +167,77 @@ model Passkey {
 model RateLimit {
   id String @id @default(ulid())
 
-  key         String?
-  count       Int?
-  lastRequest BigInt?
+  key         String
+  count       Int
+  lastRequest BigInt
 
   @@index([key])
 }
+
+// -----------------------------------------------------------------------------
+// Profile
+// -----------------------------------------------------------------------------
+
+model Profile {
+  id String @id @default(ulid())
+
+  // user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  // userId String
+
+  headline String?
+  bio      String? @db.Text
+
+  birthDate DateTime? @db.Date
+
+  locationShort String?
+  locations     Location[]
+
+  websiteUrl String? @default("https://example.com")
+  links      Json    @default("[]")
+  // github, xtwitter, linkedin, youtube, facebook, instagram, threads, tiktok, pinterest
+
+  label     String  @default("DEFAULT")
+  language  String  @default("en")
+  isPrimary Boolean @default(true)
+  isPublic  Boolean @default(true)
+  sequence  Int     @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // @@index([userId])
+}
+
+model Location {
+  id String @id @default(ulid())
+
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  profileId String
+
+  title String
+
+  country        String?
+  state          String?
+  city           String?
+  zip            String?
+  address        String?
+  addressDetails String?
+
+  latitude  Float
+  longitude Float
+
+  googleMapsUrl  String?
+  googlePlacesId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+}
+
+// -----------------------------------------------------------------------------
+// Example
+// -----------------------------------------------------------------------------
 
 model Example {
   id String @id @default(ulid())
@@ -171,8 +246,6 @@ model Example {
   name String
 
   items ExampleItem[]
-
-  @@index([slug])
 }
 
 model ExampleItem {
@@ -181,8 +254,123 @@ model ExampleItem {
   slug String @unique
   name String
 
-  example   Example? @relation(fields: [exampleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  exampleId String?
+  example   Example @relation(fields: [exampleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  exampleId String
 
-  @@index([slug, exampleId])
+  @@index([exampleId])
+  @@index([exampleId, slug])
+}
+
+model Image {
+  id String @id @default(ulid())
+
+  url     String
+  altText String?
+
+  width  Float?
+  height Float?
+  size   Float?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// -----------------------------------------------------------------------------
+// Page
+// -----------------------------------------------------------------------------
+
+model Page {
+  id String @id @default(ulid())
+
+  slug        String @unique
+  title       String @db.Text
+  description String @db.Text
+  content     String @db.Text
+
+  status   PageStatus? @relation(fields: [statusId], references: [id], onUpdate: Cascade)
+  statusId String?
+
+  // user   User?   @relation(fields: [userId], references: [id], onUpdate: Cascade)
+  // userId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // @@index([userId])
+  // @@index([userId, createdAt])
+
+  @@index([statusId])
+}
+
+model PageStatus {
+  id String @id @default(ulid())
+
+  sequence    Int?    @unique // 1, 2, 3, ...
+  symbol      String  @unique // DRAFT, PUBLISHED, ...
+  name        String  @unique // Draft, Published, ...
+  description String? @db.Text // Descriptive details
+
+  pages Page[]
+
+  @@index([symbol])
+}
+
+// -----------------------------------------------------------------------------
+// Post
+// -----------------------------------------------------------------------------
+
+model Post {
+  id String @id @default(ulid())
+
+  slug String @unique
+
+  title       String @default("") @db.Text
+  description String @default("") @db.Text
+  content     String @default("") @db.Text
+  excerpt     String @default("") @db.Text
+
+  images PostImage[]
+
+  status   PostStatus? @relation(fields: [statusId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  statusId String?
+
+  // user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  // userId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // @@index([userId, createdAt])
+  // @@index([userId])
+
+  @@index([slug, statusId])
+  @@index([statusId])
+}
+
+model PostStatus {
+  id String @id @default(ulid())
+
+  sequence    Int     @unique @default(1) // 1, 2, 3, ...
+  symbol      String  @unique @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  name        String  @unique @default("Draft") // Draft, Published, Archived
+  description String? @db.Text // Status definition
+
+  posts Post[]
+}
+
+model PostImage {
+  id String @id @default(ulid())
+
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId String
+
+  url     String
+  altText String?
+
+  width  Float?
+  height Float?
+  size   Float?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
 }

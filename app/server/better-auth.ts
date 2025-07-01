@@ -45,8 +45,8 @@ export const auth = betterAuth({
     additionalFields: {
       firstName: { type: "string", required: false },
       lastName: { type: "string", required: false },
-      lang: { type: "string", required: false, defaultValue: "en" },
-      theme: { type: "string", required: false, defaultValue: "" },
+      appLanguage: { type: "string", required: false, defaultValue: "en" },
+      appTheme: { type: "string", required: false, defaultValue: "" },
     },
     changeEmail: {
       enabled: true,
