@@ -19,7 +19,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { configSite } from "@/config/site";
 import { requireAuthSession } from "@/lib/auth";
 import { TRPCReactProvider } from "@/lib/trpc-client";
-import { themeSessionResolver } from "@/themes.server";
+import { themeSessionResolver } from "@/modules/themes/themes.server";
 import type { Route } from "./+types/root";
 
 import "@/app.css";
