@@ -1,8 +1,8 @@
 import { configSite } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
+import { UserDropdownMenu } from "@/modules/auth/components/user-dropdown-menu";
 import { LogoNavigationLink } from "@/modules/brand/components/logo";
 import { NavigationDesktopLinks } from "@/modules/navigation/components/navigation-desktop-links";
-import { UserDropdownMenu } from "@/modules/user/components/user-dropdown-menu";
 
 export function NavigationDesktop() {
   return (

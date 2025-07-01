@@ -13,8 +13,8 @@ import {
 import { formatDate } from "@/lib/text/datetime";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/modules/auth/better-auth-client";
+import { UserAvatar } from "@/modules/auth/components/user-avatar";
 import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
-import { UserAvatar } from "@/modules/user/components/user-avatar";
 
 export function UserProfileCard({
   user,

@@ -1,6 +1,6 @@
 import { DebugCode } from "@/components/shared/debug-code";
+import { UserProfileCard } from "@/modules/auth/components/user-profile-card";
 import { requireAuthRedirectSignIn } from "@/modules/auth/helpers";
-import { UserProfileCard } from "@/modules/user/components/user-profile-card";
 import type { Route } from "./+types/dashboard";
 
 export async function loader({ request }: Route.LoaderArgs) {
