@@ -13,6 +13,7 @@ __*
 *.db
 *.db-journal
 build/
+app/generated/
 generated/
 generated/prisma
 generated/prisma/*
