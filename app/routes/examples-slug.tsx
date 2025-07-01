@@ -6,10 +6,10 @@ export const meta: Route.MetaFunction = ({ data }) => [
   { title: data?.name || "Example" },
 ];
 
-export async function loader({ request, params }: Route.LoaderArgs) {
+export const loader = async ({ request, params }: Route.LoaderArgs) => {
   const trpc = await caller(request);
   return trpc.example.getExampleSlug(params.slug);
-}
+};
 
 export default function ExamplesSlugRoute({
   loaderData,

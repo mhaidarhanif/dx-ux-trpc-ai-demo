@@ -1,20 +1,17 @@
 import { AuthPanelSignOut } from "@/modules/auth/components/auth-panel";
 import {
   actionSignOut,
-  requireAuthRedirectSignIn,
+  requireUserRedirectSignIn,
 } from "@/modules/auth/helpers";
 import type { Route } from "./+types/signout";
 
 export const meta: Route.MetaFunction = () => [{ title: "Sign Out" }];
 
-export function loader({ request }: Route.LoaderArgs) {
-  return requireAuthRedirectSignIn(request);
-}
+export const loader = ({ request }: Route.LoaderArgs) =>
+  requireUserRedirectSignIn(request);
 
 export default function SignOutRoute({ loaderData }: Route.ComponentProps) {
-  return <AuthPanelSignOut user={loaderData} />;
+  return <AuthPanelSignOut user={loaderData.user} />;
 }
 
-export function action({ request }: Route.ActionArgs) {
-  return actionSignOut(request);
-}
+export const action = ({ request }: Route.ActionArgs) => actionSignOut(request);

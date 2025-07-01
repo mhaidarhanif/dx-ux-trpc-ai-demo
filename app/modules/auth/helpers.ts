@@ -41,7 +41,7 @@ export function getSession(request: Request) {
   return auth.api.getSession({ headers: request.headers });
 }
 
-export async function requireAuthSession(request: Request) {
+export async function requireSession(request: Request) {
   const session = await getSession(request);
   const trpc = await caller(request);
   if (!session?.user.id) {
@@ -58,8 +58,23 @@ export async function requireAuthSession(request: Request) {
     trpc,
   };
 }
+// Redirect to /signin if not authenticated
+export async function requireSessionRedirectSignIn(request: Request) {
+  const { isAuthenticated, user } = await requireSession(request);
+  if (!isAuthenticated) return redirect(href("/signin"));
+  if (!user) return redirect(href("/signin"));
+  return { isAuthenticated, user };
+}
 
-export async function requireAuthUserData(request: Request) {
+// Redirect to /dashboard if authenticated
+export async function requireSessionRedirectDashboard(request: Request) {
+  const { isAuthenticated, user } = await requireSession(request);
+  if (isAuthenticated) return redirect(href("/dashboard"));
+  if (user) return redirect(href("/dashboard"));
+  return { isAuthenticated, user };
+}
+
+export async function requireUserData(request: Request) {
   const trpc = await caller(request);
   const session = await getSession(request);
   if (!session?.user.id) {
@@ -72,9 +87,8 @@ export async function requireAuthUserData(request: Request) {
   }
 
   const user = await trpc.auth.getUser();
-  const isAuthenticated = user !== null;
   return {
-    isAuthenticated,
+    isAuthenticated: true,
     session,
     user,
     trpc,
@@ -82,18 +96,10 @@ export async function requireAuthUserData(request: Request) {
 }
 
 // Redirect to /signin if not authenticated
-export async function requireAuthRedirectSignIn(request: Request) {
-  const { isAuthenticated, user } = await requireAuthSession(request);
+export async function requireUserRedirectSignIn(request: Request) {
+  const { isAuthenticated, user } = await requireUserData(request);
   if (!isAuthenticated) return redirect(href("/signin"));
   if (!user) return redirect(href("/signin"));
-  return { isAuthenticated, user };
-}
-
-// Redirect to /dashboard if authenticated
-export async function requireAuthRedirectDashboard(request: Request) {
-  const { isAuthenticated, user } = await requireAuthSession(request);
-  if (isAuthenticated) return redirect(href("/dashboard"));
-  if (user) return redirect(href("/dashboard"));
   return { isAuthenticated, user };
 }
 
