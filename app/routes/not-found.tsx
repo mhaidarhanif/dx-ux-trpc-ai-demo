@@ -6,9 +6,5 @@ export const meta: Route.MetaFunction = () => {
 };
 
 export default function NotFoundRoute() {
-  return (
-    <>
-      <NotFoundHero />
-    </>
-  );
+  return <NotFoundHero />;
 }

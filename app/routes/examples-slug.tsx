@@ -7,7 +7,9 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   return trpc.example.getExampleSlug(params.slug);
 }
 
-export default function ExampleSlugRoute({ loaderData }: Route.ComponentProps) {
+export default function ExamplesSlugRoute({
+  loaderData,
+}: Route.ComponentProps) {
   return (
     <>
       <section className="w-full max-w-6xl">

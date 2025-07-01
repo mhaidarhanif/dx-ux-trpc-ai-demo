@@ -5,18 +5,15 @@ import type { Route } from "./+types/examples";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const trpc = await caller(request);
-  const examples = await trpc.example.getExamples();
-  return { examples };
+  return await trpc.example.getExamples();
 }
 
 export default function ExamplesRoute({ loaderData }: Route.ComponentProps) {
-  const { examples } = loaderData;
-
   return (
     <>
       <section className="w-full max-w-6xl">
         <ContentHeading className="mb-10">Examples</ContentHeading>
-        <Examples examples={examples} />
+        <Examples examples={loaderData} />
       </section>
     </>
   );
