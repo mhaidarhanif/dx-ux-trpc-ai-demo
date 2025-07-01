@@ -1,8 +1,8 @@
 import { router } from "@/lib/trpc";
-import { authRouter } from "@/server/routers/auth";
-import { exampleRouter } from "@/server/routers/example";
-import { greetingRouter } from "@/server/routers/greeting";
-import { userRouter } from "@/server/routers/user";
+import { authRouter } from "@/routers/auth";
+import { exampleRouter } from "@/routers/example";
+import { greetingRouter } from "@/routers/greeting";
+import { userRouter } from "@/routers/user";
 
 export const appRouter = router({
   greeting: greetingRouter,
