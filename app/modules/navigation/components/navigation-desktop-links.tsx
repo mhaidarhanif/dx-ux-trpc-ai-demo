@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import { buttonVariants } from "@/components/ui/button";
-import type { NavItem } from "@/config/site";
+import type { NavItem } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
 import { useAuthUser } from "@/modules/auth/hooks/use-auth-user";
 import { filterNavItems } from "@/modules/navigation/helpers";

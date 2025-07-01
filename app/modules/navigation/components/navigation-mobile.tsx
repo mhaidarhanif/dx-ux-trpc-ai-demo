@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { configSite, type NavItem } from "@/config/site";
+import { configSite, type NavItem } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
 import { useAuthUser } from "@/modules/auth/hooks/use-auth-user";
 import { LogoNavigationLink } from "@/modules/brand/components/logo";

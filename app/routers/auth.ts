@@ -1,5 +1,5 @@
 import { TRPCError, type TRPCRouterRecord } from "@trpc/server";
-import { configPrismaCache } from "@/config/prisma";
+import { configPrismaCache } from "@/lib/config/prisma";
 import { protectedProcedure } from "@/modules/trpc/trpc-config";
 
 export const authRouter = {

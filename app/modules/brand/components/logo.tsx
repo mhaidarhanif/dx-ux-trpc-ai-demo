@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { href, NavLink } from "react-router";
-import { configSite } from "@/config/site";
+import { configSite } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
 
 const logoVariants = cva(

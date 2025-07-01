@@ -1,6 +1,6 @@
 import { Form } from "react-router";
 import { Button } from "@/components/ui/button";
-import { configSite } from "@/config/site";
+import { configSite } from "@/lib/config/site";
 
 export function ButtonAuthProviders({ textAction }: { textAction: string }) {
   return (

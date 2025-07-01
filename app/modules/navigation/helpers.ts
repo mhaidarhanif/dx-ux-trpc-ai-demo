@@ -1,4 +1,4 @@
-import type { NavItem } from "@/config/site";
+import type { NavItem } from "@/lib/config/site";
 
 export function filterNavItems(items: NavItem[], isAuthenticated: boolean) {
   return items.filter((item) => {

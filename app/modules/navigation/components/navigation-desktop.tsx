@@ -1,4 +1,4 @@
-import { configSite } from "@/config/site";
+import { configSite } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
 import { LogoNavigationLink } from "@/modules/brand/components/logo";
 import { NavigationDesktopLinks } from "@/modules/navigation/components/navigation-desktop-links";

@@ -1,6 +1,6 @@
 import z from "zod/v4";
-import { configSchema } from "@/config/schema";
-import { configSite } from "@/config/site";
+import { configSchema } from "@/lib/config/schema";
+import { configSite } from "@/lib/config/site";
 
 export const AuthSocialSchema = z.object({
   provider: z.enum(configSite.authProviders.map((provider) => provider.name)),

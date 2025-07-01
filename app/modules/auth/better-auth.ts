@@ -15,8 +15,8 @@ import {
   username,
 } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
-import { configSchema } from "@/config/schema";
-import { configSite } from "@/config/site";
+import { configSchema } from "@/lib/config/schema";
+import { configSite } from "@/lib/config/site";
 import { prisma } from "@/lib/database/prisma";
 import { devlog } from "@/lib/system/logger";
 import {
