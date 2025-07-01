@@ -1,5 +1,5 @@
 import { href, redirect } from "react-router";
-import { parseForm } from "@/lib/form/parse";
+import { parseFormTimer } from "@/lib/form/parse";
 import { createTimer } from "@/lib/system/timer";
 import { getNameParts } from "@/lib/text/convert";
 import { auth } from "@/modules/auth/better-auth";
@@ -76,7 +76,7 @@ export async function requireAuthRedirectDashboard(request: Request) {
  */
 
 export async function actionSignUp(request: Request) {
-  const { timer, submission } = await parseForm(request, AuthSignUpSchema);
+  const { submission, timer } = await parseFormTimer(request, AuthSignUpSchema);
   if (submission.status !== "success") return submission.reply();
 
   const { firstName, lastName } = getNameParts(submission.value.name);
@@ -123,7 +123,7 @@ export async function actionSignUp(request: Request) {
 }
 
 export async function actionSignIn(request: Request) {
-  const { timer, submission } = await parseForm(request, AuthSignInSchema);
+  const { submission, timer } = await parseFormTimer(request, AuthSignInSchema);
   if (submission.status !== "success") return submission.reply();
 
   const response = await auth.api.signInEmail({
@@ -160,7 +160,7 @@ export async function actionSignOut(request: Request) {
 }
 
 export async function actionSignInSocial(request: Request) {
-  const { timer, submission } = await parseForm(request, AuthSocialSchema);
+  const { submission, timer } = await parseFormTimer(request, AuthSocialSchema);
   if (submission.status !== "success") return submission.reply();
 
   const response = await auth.api.signInSocial({

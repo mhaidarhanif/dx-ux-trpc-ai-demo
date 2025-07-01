@@ -1,4 +1,4 @@
-import { type SubmissionResult, useForm } from "@conform-to/react";
+import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
 import { useEffect } from "react";
 import { Form, href, Link } from "react-router";
@@ -10,6 +10,7 @@ import { Flex } from "@/components/shared/flex";
 import { InputPassword } from "@/components/shared/input-password";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import type { LastResult } from "@/lib/form/parse";
 import { useIsSubmitting } from "@/lib/hooks/use-is-submitting";
 import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -25,8 +26,8 @@ export function AuthPanel({
   className,
   ...props
 }: React.ComponentProps<"div"> & {
-  authMode: "signup" | "signin" | "signout" | "forgot-password";
-  lastResult: SubmissionResult | null | undefined;
+  authMode: "signup" | "signin";
+  lastResult: LastResult;
 }) {
   const isMobile = useIsMobile();
   const isSubmitting = useIsSubmitting();
@@ -260,5 +261,13 @@ export function AuthPanelSignOut({
         </Form>
       </section>
     </>
+  );
+}
+
+export function AuthPanelForgotPassword() {
+  return (
+    <div>
+      <h1>Forgot Password</h1>
+    </div>
   );
 }

@@ -1,14 +1,25 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: "This is fine" */
+import type { SubmissionResult } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
 import type { ZodType } from "zod/v4";
 import { createTimer } from "@/lib/system/timer";
 
-// biome-ignore lint/suspicious/noExplicitAny: "This is fine"
-export async function parseForm<T extends ZodType<any, any, any>>(
+export type LastResult = SubmissionResult<string[]> | null | undefined;
+
+export async function parseForm(
   request: Request,
-  schema: T
+  schema: ZodType<any, any, any>
+) {
+  const formData = await request.formData();
+  return parseWithZod(formData, { schema });
+}
+
+export async function parseFormTimer(
+  request: Request,
+  schema: ZodType<any, any, any>
 ) {
   const timer = createTimer();
   const formData = await request.formData();
   const submission = parseWithZod(formData, { schema });
-  return { timer, submission };
+  return { submission, timer };
 }
