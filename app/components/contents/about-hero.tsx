@@ -1,4 +1,5 @@
 import { Anchor } from "@/components/shared/anchor";
+import { FigureImage } from "@/components/shared/figure-image";
 import { ContentHeading, ContentIntro } from "@/components/ui/content";
 
 export function AboutHero() {
@@ -9,21 +10,29 @@ export function AboutHero() {
       <article className="prose-config">
         <ContentIntro>
           <p>
-            Dogokit Corgi is a React Router v7 Framework template integrating
-            tRPC, Prisma, Better Auth, Tailwind CSS, and shadcn/ui.
+            Dogokit Corgi is a web app template using React Router v7 Framework,
+            tRPC, Prisma, Better Auth, Tailwind CSS, shadcn, and more.
           </p>
         </ContentIntro>
         <p>
-          This template is designed for short setup time and long-term
-          scalability. It's the implementation details of{" "}
+          This template is created by{" "}
+          <Anchor href="https://github.com/mhaidarhanif">M Haidar Hanif</Anchor>
+          . Designed for very short setup time, but long-term scalability. It's
+          the implementation details of{" "}
           <Anchor href="https://github.com/dogokit/dogokit-akita">
             Dogokit Akita
           </Anchor>
-          , a full stack app development guideline. Codename "Corgi" is inspired
-          by the Welsh Corgi breed. Created by{" "}
-          <Anchor href="https://github.com/mhaidarhanif">M Haidar Hanif</Anchor>
-          .
+          , a full stack app development kit.
         </p>
+
+        <p>Codename "Corgi" is inspired by the Welsh Corgi breed.</p>
+        <FigureImage
+          alt="Pembroke Welsh Corgi standing outdoors in the fall"
+          caption="Pembroke Welsh Corgi standing outdoors in the fall"
+          creditHref="https://akc.org"
+          creditLabel="American Kennel Club"
+          src="https://akc.org/wp-content/uploads/2017/11/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall.jpg"
+        />
 
         <h2>References</h2>
         <ul>

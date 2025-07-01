@@ -24,7 +24,7 @@ Core:
   - [x] [Themes: System, Light, Dark](https://github.com/abereghici/remix-themes)
   - [x] [Vercel Config](https://vercel.com/docs/frameworks/react-router), can be removed if not needed
 - [x] [Tailwind CSS v4](https://tailwindcss.com)
-  - [x] [`shadcn/ui`](https://ui.shadcn.com) with single [`radix-ui`](https://radix-ui.com)
+  - [x] [`shadcn/ui`](https://ui.shadcn.com) with single [`radix-ui`](https://radix-ui.com) and some with [`base-ui`](https://base-ui.com)
   - [x] Replace `lucide-react` with `sly` CLI to manage icons
   - [x] More components with [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com), [React Bits](https://reactbits.dev)
   - [ ] [React Email v4](https://react.email)
