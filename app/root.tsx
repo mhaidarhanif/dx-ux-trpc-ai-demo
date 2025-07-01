@@ -17,7 +17,7 @@ import { IndicatorNProgress } from "@/components/shared/nprogress";
 import { ContentHeading } from "@/components/ui/content";
 import { Toaster } from "@/components/ui/sonner";
 import { configSite } from "@/lib/config/site";
-import { requireAuthUserData } from "@/modules/auth/helpers";
+import { requireAuthSession } from "@/modules/auth/helpers";
 import { themeSessionResolver } from "@/modules/theme/themes-cookie.server";
 import { TRPCReactProvider } from "@/modules/trpc/trpc-client";
 import type { Route } from "./+types/root";
@@ -52,7 +52,7 @@ export const meta: Route.MetaFunction = () => {
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { getTheme } = await themeSessionResolver(request);
-  const { isAuthenticated, user } = await requireAuthUserData(request);
+  const { isAuthenticated, user } = await requireAuthSession(request);
 
   return {
     theme: getTheme(),

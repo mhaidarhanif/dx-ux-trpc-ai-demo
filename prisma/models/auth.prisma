@@ -110,6 +110,8 @@ model TwoFactor {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // @@index([secret])
 }
 
 model Passkey {

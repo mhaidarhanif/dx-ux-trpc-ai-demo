@@ -51,7 +51,6 @@ export const auth = betterAuth({
     changeEmail: {
       enabled: true,
       sendChangeEmailVerification: async ({ user, newEmail, url, token }) => {
-        // Send change email verification
         await devlog.info("SEND_CHANGE_EMAIL_VERIFICATION", {
           user,
           newEmail,
@@ -70,7 +69,6 @@ export const auth = betterAuth({
           url: string;
           token: string;
         }) => {
-          // Send delete account verification
           await devlog.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
             user,
             url,
@@ -78,11 +76,9 @@ export const auth = betterAuth({
           });
         },
         beforeDelete: async (user: User) => {
-          // Perform actions before user deletion
           await devlog.info("BEFORE_DELETE", { user });
         },
         afterDelete: async (user: User) => {
-          // Perform cleanup after user deletion
           await devlog.info("AFTER_DELETE", { user });
         },
       },
@@ -91,6 +87,10 @@ export const auth = betterAuth({
 
   session: {
     modelName: "Session",
+    cookieCache: {
+      enabled: true,
+      maxAge: 60 * 5, // 5 minutes
+    },
   },
 
   account: {
@@ -130,15 +130,13 @@ export const auth = betterAuth({
 
     // https://better-auth.com/docs/reference/options#emailandpassword
     sendResetPassword: async ({ user, url, token }) => {
-      // Send reset password email
-      await devlog.info("SEND_RESET_PASSWORD", { user, url, token });
+      await devlog.info("SEND_RESET_PASSWORD_EMAIL", { user, url, token });
     },
     resetPasswordTokenExpiresIn: 3600, // 1 hour
   },
 
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }) => {
-      // Send verification email to user
       await devlog.info("SEND_VERIFICATION_EMAIL", {
         email: user.email,
         url,
@@ -194,8 +192,7 @@ export const auth = betterAuth({
     multiSession(),
 
     // https://better-auth.com/docs/plugins/open-api
-    // Available to access on /api/auth/reference
-    openAPI(),
+    openAPI(), // Available on /api/auth/reference
 
     inferAdditionalFields({
       user: {
@@ -209,8 +206,8 @@ export const auth = betterAuth({
     // https://better-auth.com/docs/plugins/anonymous
     anonymous({
       onLinkAccount: async ({ anonymousUser, newUser }) => {
-        await devlog.info("ANONYMOUS_USER_LINKED", { anonymousUser, newUser });
         // Move data from anonymous user to the new user
+        await devlog.info("ANONYMOUS_USER_LINKED", { anonymousUser, newUser });
       },
     }),
 
@@ -262,11 +259,13 @@ export const auth = betterAuth({
     }),
 
     // https://better-auth.com/docs/plugins/one-tap
+    // TODO: How One Tap can mapProfileToUser for username?
     oneTap({
       clientId: envServer.GOOGLE_CLIENT_ID,
-    }), // TODO: How One Tap can mapProfileToUser for username
+    }),
 
     // https://better-auth.com/docs/plugins/polar
+    // TODO: Enable later
     // polar({
     //   client: polarClient,
     //   createCustomerOnSignUp: false, // TODO: Revisit this
@@ -293,25 +292,4 @@ export const auth = betterAuth({
     //   ],
     // }),
   ],
-
-  // databaseHooks: {
-  //   user: {
-  //     create: {
-  //       before: async (userData) => {
-  //         return { data: { ...userData } };
-  //       },
-  //       after: async (userData) => {
-  //         devlog.info("USER_CREATE_AFTER", userData);
-  //       },
-  //     },
-  //     update: {
-  //       before: async (userData) => {
-  //         return { data: { ...userData } };
-  //       },
-  //       after: async (userData) => {
-  //         devlog.info("USER_UPDATE_AFTER", userData);
-  //       },
-  //     },
-  //   },
-  // },
 });

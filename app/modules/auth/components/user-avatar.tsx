@@ -1,10 +1,10 @@
+import type { User } from "better-auth";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { Avatar as AvatarPrimitive } from "radix-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAvatarPlaceholderUrl } from "@/lib/image/placeholder";
 import { getNameInitials } from "@/lib/text/convert";
 import { cn } from "@/lib/utils";
-import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
 
 export const avatarAutoVariants = cva("", {
   variants: {
@@ -31,7 +31,7 @@ export const avatarAutoVariants = cva("", {
 interface UserAvatarProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof avatarAutoVariants> {
-  user: AppRouterOutputs["auth"]["getUser"];
+  user: User;
   imageUrl?: string | null;
 }
 
@@ -46,8 +46,7 @@ export function UserAvatar({
   className,
   ...props
 }: UserAvatarProps) {
-  const placeholderText = user.username || user.name;
-  const imageUrl = user.image || getAvatarPlaceholderUrl(placeholderText) || "";
+  const imageUrl = user.image || getAvatarPlaceholderUrl(user.name) || "";
 
   return (
     <Avatar

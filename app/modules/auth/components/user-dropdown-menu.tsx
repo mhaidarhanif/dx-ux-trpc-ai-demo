@@ -43,7 +43,7 @@ export function UserDropdownMenu({
   const { user } = useAuthUser();
   if (!user) return null;
 
-  // Configure the available paths in app/configs/navigation.ts
+  // Configure the available paths in app/modules/navigation/config.ts
   const userNavItems = ["/dashboard", "/settings", "/notifications"];
   const authNavItems = ["/signout"];
 

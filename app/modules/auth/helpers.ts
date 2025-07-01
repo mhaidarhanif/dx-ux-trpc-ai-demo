@@ -35,19 +35,19 @@ export type AuthResponseOAuth = {
  * Require User Session
  */
 
-export async function requireSession(request: Request) {
+export async function getSession(request: Request) {
   return await auth.api.getSession({ headers: request.headers });
 }
 
 export async function requireAuthSession(request: Request) {
-  const session = await requireSession(request);
+  const session = await getSession(request);
   if (!session?.user.id) return { isAuthenticated: false, user: null };
   return { isAuthenticated: true, user: session.user };
 }
 
 export async function requireAuthUserData(request: Request) {
   const trpc = await caller(request);
-  const session = await requireSession(request);
+  const session = await getSession(request);
   if (!session?.user.id) return { trpc, isAuthenticated: false, user: null };
 
   const user = await trpc.auth.getUserComplete();
