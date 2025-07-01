@@ -1,0 +1,34 @@
+model Page {
+  id String @id @default(ulid())
+
+  slug        String @unique
+  title       String @db.Text
+  description String @db.Text
+  content     String @db.Text
+
+  status   PageStatus? @relation(fields: [statusId], references: [id], onUpdate: Cascade)
+  statusId String?
+
+  // user   User?   @relation(fields: [userId], references: [id], onUpdate: Cascade)
+  // userId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // @@index([userId])
+  // @@index([userId, createdAt])
+
+  @@index([statusId])
+}
+
+model PageStatus {
+  id String @id @default(ulid())
+
+  sequence    Int?    @unique // 1, 2, 3, ...
+  symbol      String  @unique // DRAFT, PUBLISHED, ...
+  name        String  @unique // Draft, Published, ...
+  description String? @db.Text // Descriptive details
+
+  pages Page[]
+
+  @@index([symbol])
+}

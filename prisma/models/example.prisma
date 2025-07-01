@@ -1,0 +1,35 @@
+model Example {
+  id String @id @default(ulid())
+
+  slug String @unique
+  name String
+
+  items ExampleItem[]
+}
+
+model ExampleItem {
+  id String @id @default(ulid())
+
+  slug String @unique
+  name String
+
+  example   Example @relation(fields: [exampleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  exampleId String
+
+  @@index([exampleId])
+  @@index([exampleId, slug])
+}
+
+model Image {
+  id String @id @default(ulid())
+
+  url     String
+  altText String?
+
+  width  Float?
+  height Float?
+  size   Float?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

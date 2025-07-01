@@ -1,0 +1,145 @@
+model User {
+  id String @id @default(ulid())
+
+  email         String  @unique
+  emailVerified Boolean @default(false)
+
+  name      String
+  firstName String?
+  lastName  String?
+
+  username        String? @unique
+  displayUsername String? @unique
+
+  phone               String?  @unique
+  phoneNumber         String?  @unique
+  phoneNumberVerified Boolean? @default(false)
+
+  image String? // From Better-Auth
+
+  role       String? // Must be one of: user | admin
+  banned     Boolean?
+  banReason  String?   @db.Text
+  banExpires DateTime?
+
+  isAnonymous      Boolean @default(false)
+  twoFactorEnabled Boolean @default(false)
+
+  // Configured in betterAuth.user.additionalFields
+  appLanguage String @default("en")
+  appTheme    String @default("")
+
+  accounts   Account[]
+  passkeys   Passkey[]
+  twofactors TwoFactor[]
+  sessions   Session[]
+
+  // profiles Profile[]
+
+  // pages Page[]
+  // posts Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id String @id @default(ulid())
+
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  impersonatedBy String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([userId, createdAt])
+}
+
+model Account {
+  id String @id @default(ulid())
+
+  accountId  String
+  providerId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+
+  password String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([accountId, providerId])
+  @@index([userId])
+}
+
+model Verification {
+  id String @id @default(ulid())
+
+  identifier String   @unique
+  value      String   @unique // From Better-Auth
+  expiresAt  DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TwoFactor {
+  id String @id @default(ulid())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  secret      String?
+  backupCodes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Passkey {
+  id String @id @default(ulid())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  name      String?
+  publicKey String
+
+  credentialID String  @unique
+  counter      Int
+  deviceType   String
+  backedUp     Boolean // From Better-Auth
+  transports   String?
+  aaguid       String?
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+
+  @@index([userId])
+}
+
+model RateLimit {
+  id String @id @default(ulid())
+
+  key         String
+  count       Int
+  lastRequest BigInt
+
+  @@index([key])
+}
