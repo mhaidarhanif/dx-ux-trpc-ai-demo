@@ -3,26 +3,30 @@ import { href, redirect } from "react-router";
 import { createTimer } from "@/lib/system/timer";
 import { getNameParts } from "@/lib/text/convert";
 import { auth } from "@/modules/auth/better-auth";
-import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
+import {
+  AuthSignInSchema,
+  AuthSignUpSchema,
+  AuthSocialSchema,
+} from "@/modules/auth/schema";
 import { caller } from "@/modules/trpc/trpc-caller";
 
-export type BetterAuthResponse = {
+export type AuthResponse = {
   code: string;
   message: string;
 };
 
-export type BetterAuthResponseError = {
+export type AuthResponseError = {
   status: string;
   statusCode: number;
   headers: Headers;
-  body: BetterAuthResponse;
+  body: AuthResponse;
 };
 
-export type BetterAuthResponseSignOut = {
+export type AuthResponseSignOut = {
   success: string;
 };
 
-export type BetterAuthResponseOAuth = {
+export type AuthResponseOAuth = {
   url: string;
   redirect: boolean;
 };
@@ -90,7 +94,7 @@ export async function actionSignUp(request: Request) {
         lastName,
       },
     });
-    const authResponse: BetterAuthResponse = await response.json();
+    const authResponse: AuthResponse = await response.json();
 
     if (!response.ok) {
       return submission.reply({
@@ -103,7 +107,7 @@ export async function actionSignUp(request: Request) {
     await timer.delay();
     return redirect(href("/dashboard"), { headers: response.headers });
   } catch (error) {
-    const authError = error as BetterAuthResponseError;
+    const authError = error as AuthResponseError;
     if (
       authError.body.code === "USERNAME_IS_ALREADY_TAKEN_PLEASE_TRY_ANOTHER"
     ) {
@@ -134,7 +138,7 @@ export async function actionSignIn(request: Request) {
     body: submission.value,
   });
 
-  const authResponse: BetterAuthResponse = await response.json();
+  const authResponse: AuthResponse = await response.json();
 
   if (!response.ok) {
     return submission.reply({
@@ -154,9 +158,38 @@ export async function actionSignOut(request: Request) {
     headers: request.headers,
   });
 
-  const json: BetterAuthResponseSignOut = await response.json();
+  const authResponse: AuthResponseSignOut = await response.json();
 
   await timer.delay();
-  if (!json.success) return redirect(href("/dashboard"));
+  if (!authResponse.success) return redirect(href("/dashboard"));
   return redirect(href("/signin"));
+}
+
+export async function actionSignInSocial(request: Request) {
+  const timer = createTimer();
+
+  const formData = await request.formData();
+  const submission = parseWithZod(formData, { schema: AuthSocialSchema });
+  if (submission.status !== "success") return submission.reply();
+
+  const response = await auth.api.signInSocial({
+    asResponse: true,
+    headers: request.headers,
+    body: {
+      provider: submission.value.provider,
+      callbackURL: "/dashboard",
+    },
+  });
+  const authResponse: AuthResponseOAuth = await response.json();
+
+  if (!response.ok) {
+    return submission.reply({
+      formErrors: [`Failed to continue with ${submission.value.provider}`],
+    });
+  }
+
+  await timer.delay();
+  if (!(authResponse.redirect && authResponse.url)) return null;
+
+  return redirect(authResponse.url);
 }
