@@ -10,6 +10,6 @@ export default function SignInRoute({ actionData }: Route.ComponentProps) {
   return <AuthCard authMode="signin" lastResult={actionData} />;
 }
 
-export async function action({ request }: Route.ActionArgs) {
-  return await actionSignIn(request);
+export function action({ request }: Route.ActionArgs) {
+  return actionSignIn(request);
 }
