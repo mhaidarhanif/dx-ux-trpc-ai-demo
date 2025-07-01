@@ -12,9 +12,7 @@ export function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function SignOutRoute({ loaderData }: Route.ComponentProps) {
-  const { user } = loaderData;
-
-  return <AuthPanelSignOut user={user} />;
+  return <AuthPanelSignOut user={loaderData} />;
 }
 
 export function action({ request }: Route.ActionArgs) {

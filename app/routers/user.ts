@@ -17,8 +17,8 @@ const configPrismaUser = {
 };
 
 export const userRouter = {
-  getUsers: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.db.user.findMany({
+  getUsers: publicProcedure.query(({ ctx }) => {
+    return ctx.db.user.findMany({
       ...configPrismaUser,
       orderBy: { createdAt: "asc" },
       ...configPrismaCache,
@@ -27,8 +27,8 @@ export const userRouter = {
 
   getUserByUsername: publicProcedure
     .input(z.string())
-    .query(async ({ ctx, input }) => {
-      return await ctx.db.user.findUnique({
+    .query(({ ctx, input }) => {
+      return ctx.db.user.findUnique({
         where: { username: input },
         ...configPrismaUser,
         ...configPrismaCache,
@@ -37,7 +37,7 @@ export const userRouter = {
 
   getUserByEmail: protectedProcedure
     .input(z.string())
-    .query(async ({ ctx, input }) => {
-      return await ctx.db.user.findUnique({ where: { email: input } });
+    .query(({ ctx, input }) => {
+      return ctx.db.user.findUnique({ where: { email: input } });
     }),
 } satisfies TRPCRouterRecord;

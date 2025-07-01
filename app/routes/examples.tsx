@@ -7,7 +7,7 @@ export const meta: Route.MetaFunction = () => [{ title: "Examples" }];
 
 export async function loader({ request }: Route.LoaderArgs) {
   const trpc = await caller(request);
-  return await trpc.example.getExamples();
+  return trpc.example.getExamples();
 }
 
 export default function ExamplesRoute({ loaderData }: Route.ComponentProps) {

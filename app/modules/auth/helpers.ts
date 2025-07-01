@@ -35,29 +35,55 @@ export type AuthResponseOAuth = {
  * Auth Loaders
  */
 
-export async function getSession(request: Request) {
-  return await auth.api.getSession({ headers: request.headers });
+export type AuthSession = Awaited<ReturnType<typeof getSession>>;
+
+export function getSession(request: Request) {
+  return auth.api.getSession({ headers: request.headers });
 }
 
 export async function requireAuthSession(request: Request) {
   const session = await getSession(request);
-  if (!session?.user.id) return { isAuthenticated: false, user: null };
-  return { isAuthenticated: true, user: session.user };
+  const trpc = await caller(request);
+  if (!session?.user.id) {
+    return {
+      isAuthenticated: false,
+      user: null,
+      trpc,
+    };
+  }
+
+  return {
+    isAuthenticated: true,
+    user: session.user,
+    trpc,
+  };
 }
 
 export async function requireAuthUserData(request: Request) {
   const trpc = await caller(request);
   const session = await getSession(request);
-  if (!session?.user.id) return { trpc, isAuthenticated: false, user: null };
+  if (!session?.user.id) {
+    return {
+      isAuthenticated: false,
+      session: null,
+      user: null,
+      trpc,
+    };
+  }
 
-  const user = await trpc.auth.getUserComplete();
+  const user = await trpc.auth.getUser();
   const isAuthenticated = user !== null;
-  return { trpc, isAuthenticated, user };
+  return {
+    isAuthenticated,
+    session,
+    user,
+    trpc,
+  };
 }
 
 // Redirect to /signin if not authenticated
 export async function requireAuthRedirectSignIn(request: Request) {
-  const { isAuthenticated, user } = await requireAuthUserData(request);
+  const { isAuthenticated, user } = await requireAuthSession(request);
   if (!isAuthenticated) return redirect(href("/signin"));
   if (!user) return redirect(href("/signin"));
   return { isAuthenticated, user };
@@ -65,7 +91,7 @@ export async function requireAuthRedirectSignIn(request: Request) {
 
 // Redirect to /dashboard if authenticated
 export async function requireAuthRedirectDashboard(request: Request) {
-  const { isAuthenticated, user } = await requireAuthUserData(request);
+  const { isAuthenticated, user } = await requireAuthSession(request);
   if (isAuthenticated) return redirect(href("/dashboard"));
   if (user) return redirect(href("/dashboard"));
   return { isAuthenticated, user };
@@ -145,17 +171,20 @@ export async function actionSignIn(request: Request) {
 }
 
 export async function actionSignOut(request: Request) {
+  const session = await getSession(request);
   const timer = createTimer();
 
-  const response = await auth.api.signOut({
-    asResponse: true,
+  const authResponse = await auth.api.signOut({
     headers: request.headers,
   });
 
-  const authResponse: AuthResponseSignOut = await response.json();
-
   await timer.delay();
-  if (!authResponse.success) return redirect(href("/dashboard"));
+  if (!authResponse.success) return null;
+
+  auth.api.revokeUserSession({
+    headers: request.headers,
+    body: { sessionToken: session?.session.token || "" },
+  });
   return redirect(href("/signin"));
 }
 

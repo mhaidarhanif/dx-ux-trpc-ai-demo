@@ -26,7 +26,7 @@ import {
 } from "@/lib/text/convert";
 import { envServer } from "@/modules/env/env.server";
 
-export type AuthSession = typeof auth.$Infer.Session;
+export type DefaultAuthSession = typeof auth.$Infer.Session;
 
 export const auth = betterAuth({
   appName: configSite.name,
