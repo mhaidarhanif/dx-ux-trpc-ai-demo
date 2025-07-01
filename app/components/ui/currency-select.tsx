@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { allCurrencies, customCurrencies } from "@/constants/currencies";
+import { allCurrencies, customCurrencies } from "@/lib/currencies";
 import { cn } from "@/lib/utils";
 
 export interface Currency {
