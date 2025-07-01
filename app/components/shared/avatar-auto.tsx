@@ -3,8 +3,8 @@ import type { Avatar as AvatarPrimitive } from "radix-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAvatarPlaceholderUrl } from "@/lib/placeholder";
 import { getNameInitials } from "@/lib/string";
-import type { AppRouterOutputs } from "@/lib/trpc-client";
 import { cn } from "@/lib/utils";
+import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
 
 export const avatarAutoVariants = cva("", {
   variants: {

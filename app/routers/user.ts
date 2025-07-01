@@ -1,7 +1,10 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import { z } from "zod/v4-mini";
 import { configPrismaCache } from "@/config/prisma-cache";
-import { protectedProcedure, publicProcedure } from "@/lib/trpc";
+import {
+  protectedProcedure,
+  publicProcedure,
+} from "@/modules/trpc/trpc-config";
 
 const configPrismaUser = {
   omit: {

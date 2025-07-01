@@ -1,3 +1,9 @@
+/**
+ * Fuzzy Text
+ *
+ * https://reactbits.dev/text-animations/fuzzy-text
+ */
+
 import { Children, type ReactNode, useEffect, useRef } from "react";
 
 interface FuzzyTextProps {

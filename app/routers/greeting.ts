@@ -1,7 +1,7 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import z from "zod/v4";
 
-import { publicProcedure } from "@/lib/trpc";
+import { publicProcedure } from "@/modules/trpc/trpc-config";
 
 export const greetingRouter = {
   sayHello: publicProcedure

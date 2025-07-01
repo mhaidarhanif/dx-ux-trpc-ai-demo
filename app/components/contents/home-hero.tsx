@@ -1,8 +1,8 @@
-import { SplitText } from "@/components/blocks/text-animations/split-text";
 import { Anchor } from "@/components/shared/anchor";
 import { ButtonAnchor } from "@/components/shared/button-anchor";
 import { Flex } from "@/components/shared/flex";
 import { ContentIntro } from "@/components/ui/content";
+import { SplitText } from "@/components/ui/text/split-text";
 import { Icons } from "@/lib/icons";
 
 export function HomeHero({ helloText }: { helloText: string }) {

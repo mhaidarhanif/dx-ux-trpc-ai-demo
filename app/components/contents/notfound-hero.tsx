@@ -1,6 +1,6 @@
 import { href } from "react-router";
-import { FuzzyText } from "@/components/blocks/text-animations/fuzzy-text";
 import { ButtonLink } from "@/components/shared/button-link";
+import { FuzzyText } from "@/components/ui/text/fuzzy-text";
 import { usePathname } from "@/lib/url";
 
 export function NotFoundHero({

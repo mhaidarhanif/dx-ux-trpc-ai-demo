@@ -1,5 +1,5 @@
 import { HomeHero } from "@/components/contents/home-hero";
-import { caller } from "@/lib/trpc-caller";
+import { caller } from "@/modules/trpc/trpc-caller";
 import type { Route } from "./+types/home";
 
 export async function loader({ request }: Route.LoaderArgs) {

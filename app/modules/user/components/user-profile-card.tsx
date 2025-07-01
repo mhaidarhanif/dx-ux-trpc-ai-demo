@@ -12,9 +12,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatDate } from "@/lib/datetime";
-import type { AppRouterOutputs } from "@/lib/trpc-client";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/modules/auth/better-auth-client";
+import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
 
 export function UserProfileCard({
   user,
