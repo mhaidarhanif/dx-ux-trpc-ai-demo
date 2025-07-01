@@ -12,6 +12,20 @@ export const authRouter = {
     return user;
   }),
 
+  getUserMinimal: protectedProcedure.query(async ({ ctx }) => {
+    const user = await ctx.db.user.findUnique({
+      where: { id: ctx.user.id },
+      select: {
+        name: true,
+        username: true,
+        email: true,
+      },
+      ...configPrismaCache,
+    });
+    if (!user) throw new TRPCError({ code: "NOT_FOUND" });
+    return user;
+  }),
+
   getUserComplete: protectedProcedure.query(async ({ ctx }) => {
     const user = await ctx.db.user.findUnique({
       where: { id: ctx.user.id },

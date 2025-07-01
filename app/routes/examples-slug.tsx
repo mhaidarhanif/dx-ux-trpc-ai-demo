@@ -15,10 +15,8 @@ export default function ExamplesSlugRoute({
   loaderData,
 }: Route.ComponentProps) {
   return (
-    <>
-      <section className="w-full max-w-6xl">
-        <Example example={loaderData} />
-      </section>
-    </>
+    <section className="w-full max-w-6xl">
+      <Example example={loaderData} />
+    </section>
   );
 }

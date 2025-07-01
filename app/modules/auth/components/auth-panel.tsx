@@ -234,33 +234,30 @@ export function AuthPanel({
 export function AuthPanelSignOut({
   user,
 }: {
-  user: AppRouterOutputs["auth"]["getUser"];
+  user: AppRouterOutputs["auth"]["getUserMinimal"];
 }) {
   const username = user.username ? `@${user.username}` : "@anonymous";
   const email = user.email || "Anonymous";
 
   return (
-    <>
-      <section className="max-w-md space-y-4 p-8">
-        <h1 className="text-2xl">Sign out {username}?</h1>
-        <p>
-          We'll sign out account {email}. You can always log back in at any
-          time.
-        </p>
-        {/* <p>
+    <section className="max-w-md space-y-4 p-8">
+      <h1 className="text-2xl">Sign out {username}?</h1>
+      <p>
+        We'll sign out account {email}. You can always log back in at any time.
+      </p>
+      {/* <p>
           (Soon) If you just want to switch accounts without signing out the
           currently active account, you can do that by adding another account.
         </p> */}
-        <Form action={href("/signout")} method="post">
-          <Flex>
-            <ButtonLoading submittingText="Signing Out..." type="submit">
-              Sign Out {username}
-            </ButtonLoading>
-            <ButtonCancel />
-          </Flex>
-        </Form>
-      </section>
-    </>
+      <Form action={href("/signout")} method="post">
+        <Flex>
+          <ButtonLoading submittingText="Signing Out..." type="submit">
+            Sign Out {username}
+          </ButtonLoading>
+          <ButtonCancel />
+        </Flex>
+      </Form>
+    </section>
   );
 }
 

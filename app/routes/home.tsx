@@ -8,9 +8,5 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 };
 
 export default function HomeRoute({ loaderData }: Route.ComponentProps) {
-  return (
-    <>
-      <HomeHero helloText={loaderData} />
-    </>
-  );
+  return <HomeHero helloText={loaderData} />;
 }

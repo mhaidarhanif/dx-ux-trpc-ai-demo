@@ -4,9 +4,5 @@ import type { Route } from "./+types/about";
 export const meta: Route.MetaFunction = () => [{ title: "About" }];
 
 export default function AboutRoute() {
-  return (
-    <>
-      <AboutHero />
-    </>
-  );
+  return <AboutHero />;
 }
