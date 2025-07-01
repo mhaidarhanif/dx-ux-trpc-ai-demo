@@ -3,6 +3,8 @@ import { UserProfileCard } from "@/modules/auth/components/user-profile-card";
 import { requireAuthRedirectSignIn } from "@/modules/auth/helpers";
 import type { Route } from "./+types/dashboard";
 
+export const meta: Route.MetaFunction = () => [{ title: "Dashboard" }];
+
 export async function loader({ request }: Route.LoaderArgs) {
   return await requireAuthRedirectSignIn(request);
 }

@@ -3,6 +3,8 @@ import { Examples } from "@/modules/example/components/example";
 import { caller } from "@/modules/trpc/trpc-caller";
 import type { Route } from "./+types/examples";
 
+export const meta: Route.MetaFunction = () => [{ title: "Examples" }];
+
 export async function loader({ request }: Route.LoaderArgs) {
   const trpc = await caller(request);
   return await trpc.example.getExamples();

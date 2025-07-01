@@ -5,6 +5,8 @@ import {
 } from "@/modules/auth/helpers";
 import type { Route } from "./+types/signin";
 
+export const meta: Route.MetaFunction = () => [{ title: "Sign Up" }];
+
 export function loader({ request }: Route.LoaderArgs) {
   return requireAuthRedirectDashboard(request);
 }
