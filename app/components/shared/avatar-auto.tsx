@@ -1,10 +1,10 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type { Avatar as AvatarPrimitive } from "radix-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import type { AuthSession } from "@/lib/better-auth";
 import { getAvatarPlaceholderUrl } from "@/lib/placeholder";
 import { getNameInitials } from "@/lib/string";
 import { cn } from "@/lib/utils";
-import type { AuthSession } from "@/server/better-auth";
 
 export const avatarAutoVariants = cva("", {
   variants: {

@@ -1,5 +1,5 @@
-import { createCallerFactory, createTRPCContext } from "@/server/trpc";
-import { appRouter } from "@/server/trpc-router";
+import { createCallerFactory, createTRPCContext } from "@/lib/trpc";
+import { appRouter } from "@/lib/trpc-router";
 
 const createContext = (opts: { headers: Headers }) => {
   const headers = new Headers(opts.headers);

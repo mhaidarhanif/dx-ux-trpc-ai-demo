@@ -167,6 +167,14 @@ body {
 }
 
 @layer utilities {
+  .text-3xs {
+    font-size: 0.5rem;
+    line-height: 0.75rem;
+  }
+  .text-2xs {
+    font-size: 0.625rem;
+    line-height: 0.875rem;
+  }
   .focus-ring {
     @apply focus-visible:ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus:ring-ring focus:ring-offset-background;
   }

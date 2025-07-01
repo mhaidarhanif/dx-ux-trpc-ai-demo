@@ -11,7 +11,7 @@ import {
 } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 import { envClient } from "@/env";
-import type { auth } from "@/server/better-auth";
+import type { auth } from "@/lib/better-auth";
 
 export type AuthClientSession = typeof authClient.$Infer.Session;
 

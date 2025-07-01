@@ -16,12 +16,6 @@ import { formatDate } from "@/lib/datetime";
 import type { AppRouterOutputs } from "@/lib/trpc-client";
 import { cn } from "@/lib/utils";
 
-export type FieldType = {
-  label: string;
-  value: string | number | boolean | null;
-  isCode?: boolean;
-};
-
 export function UserProfileCard({
   user,
 }: {
@@ -153,14 +147,22 @@ export function UserProfileCard({
   );
 }
 
+export type FieldItem = {
+  label: string;
+  value: string | number | boolean | null;
+  isCode?: boolean;
+  isLong?: boolean;
+};
+
 export function FieldGroups({
   emptyMessage,
   fieldGroups,
 }: {
   emptyMessage: string;
-  fieldGroups: FieldType[][];
+  fieldGroups: FieldItem[][];
 }) {
-  if (fieldGroups.length === 0) return <div>{emptyMessage}</div>;
+  if (fieldGroups.length === 0)
+    return <p className="text-muted-foreground text-sm">{emptyMessage}</p>;
 
   return (
     <div className="space-y-2">
@@ -169,7 +171,13 @@ export function FieldGroups({
           {group.map((item) => (
             <Flex className="justify-between" key={item.label}>
               <dt className="text-muted-foreground text-sm">{item.label}</dt>
-              <dd className={cn("text-xs", item.isCode && "font-mono")}>
+              <dd
+                className={cn(
+                  "break-all text-xs",
+                  item.isCode && "font-mono",
+                  item.isLong && "text-3xs"
+                )}
+              >
                 <IconBooleanValue>{item.value}</IconBooleanValue>
               </dd>
             </Flex>
@@ -182,7 +190,7 @@ export function FieldGroups({
 
 export function createUserFields(
   user: AppRouterOutputs["auth"]["getUserComplete"]
-): FieldType[] {
+): FieldItem[] {
   if (!user) return [];
 
   return [
@@ -201,9 +209,11 @@ export function createUserFields(
     { label: "Banned", value: user.banned },
     { label: "Ban Reason", value: user.banReason },
     { label: "Ban Expires", value: formatDate(user.banExpires) },
-    { label: "Language", value: user.lang },
-    { label: "Theme", value: user.theme },
-    // { label: "Passkey Enabled", value: true },
+    { label: "App Language", value: user.appLanguage },
+    { label: "App Theme", value: user.appTheme },
+    { label: "Accounts Count", value: user.accounts.length },
+    { label: "Passkeys Count", value: user.passkeys.length },
+    { label: "Sessions Count", value: user.sessions.length },
     { label: "Created At", value: formatDate(user.createdAt) },
     { label: "Updated At", value: formatDate(user.updatedAt) },
   ];
@@ -211,20 +221,20 @@ export function createUserFields(
 
 export function createAccountFieldGroups(
   accounts: AppRouterOutputs["auth"]["getUserComplete"]["accounts"]
-): FieldType[][] {
+): FieldItem[][] {
   if (!accounts || accounts.length === 0) return [];
 
   return accounts.map((account) => [
     { label: "Provider ID", value: account.providerId },
     { label: "Account ID", value: account.accountId, isCode: true },
-    { label: "Scope", value: account.scope, isCode: true },
     { label: "Linked At", value: formatDate(account.createdAt) },
+    { label: "Scope", value: account.scope, isCode: true, isLong: true },
   ]);
 }
 
 export function createPasskeyFieldGroups(
   passkeys: AppRouterOutputs["auth"]["getUserComplete"]["passkeys"]
-): FieldType[][] {
+): FieldItem[][] {
   if (!passkeys || passkeys.length === 0) return [];
 
   return passkeys.map((passkey) => [
@@ -237,13 +247,18 @@ export function createPasskeyFieldGroups(
 
 export function createSessionFieldGroups(
   sessions: AppRouterOutputs["auth"]["getUserComplete"]["sessions"]
-): FieldType[][] {
+): FieldItem[][] {
   if (!sessions || sessions.length === 0) return [];
 
   return sessions.map((session) => [
-    { label: "IP Address", value: session.ipAddress, isCode: true },
-    { label: "User Agent", value: session.userAgent },
     { label: "Started At", value: formatDate(session.createdAt) },
     { label: "Expires At", value: formatDate(session.expiresAt) },
+    { label: "IP Address", value: session.ipAddress, isCode: true },
+    {
+      label: "User Agent",
+      value: session.userAgent,
+      isCode: true,
+      isLong: true,
+    },
   ]);
 }

@@ -1,15 +1,10 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { redirect } from "react-router";
-
+import type { BetterAuthResponseOAuth } from "@/lib/auth-helper";
+import { auth } from "@/lib/better-auth";
 import { createTimer } from "@/lib/timer";
 import { AuthSocialSchema } from "@/schemas/auth";
-import type { BetterAuthResponseOAuth } from "@/server/auth-helper";
-import { auth } from "@/server/better-auth";
 import type { Route } from "./+types/social";
-
-export function loader() {
-  return redirect("/signin");
-}
 
 export async function action({ request }: Route.ActionArgs) {
   const timer = createTimer();

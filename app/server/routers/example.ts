@@ -1,7 +1,7 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import { z } from "zod/v4-mini";
 import { configPrismaCache } from "@/config/prisma-cache";
-import { publicProcedure } from "@/server/trpc";
+import { publicProcedure } from "@/lib/trpc";
 
 export const exampleRouter = {
   getExamples: publicProcedure.query(async ({ ctx }) => {

@@ -1,6 +1,6 @@
 import { TRPCError, type TRPCRouterRecord } from "@trpc/server";
 import { configPrismaCache } from "@/config/prisma-cache";
-import { protectedProcedure } from "@/server/trpc";
+import { protectedProcedure } from "@/lib/trpc";
 
 export const authRouter = {
   getUser: protectedProcedure.query(async ({ ctx }) => {

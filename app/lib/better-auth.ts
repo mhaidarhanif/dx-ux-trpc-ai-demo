@@ -19,12 +19,12 @@ import { configSchema } from "@/config/schema";
 import { configSite } from "@/config/site";
 import { envServer } from "@/env.server";
 import { devlog } from "@/lib/logger";
+import { prisma } from "@/lib/prisma";
 import {
   createUsername,
   createUsernameGitHub,
   getNameParts,
 } from "@/lib/string";
-import { prisma } from "@/server/prisma";
 
 export type AuthSession = typeof auth.$Infer.Session;
 

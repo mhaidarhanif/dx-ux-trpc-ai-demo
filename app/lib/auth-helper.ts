@@ -1,6 +1,6 @@
 import { href, redirect } from "react-router";
-import { auth } from "@/server/better-auth";
-import { caller } from "@/server/trpc-caller";
+import { auth } from "@/lib/better-auth";
+import { caller } from "@/lib/trpc-caller";
 
 export type BetterAuthResponse = {
   code: string;
@@ -48,15 +48,17 @@ export async function requireAuthUserData(request: Request) {
 }
 
 // Redirect to /signin if not authenticated
-export async function requireAuthTrue(request: Request) {
-  const { isAuthenticated, user } = await requireAuthSession(request);
+export async function requireAuthRedirectSignIn(request: Request) {
+  const { isAuthenticated, user } = await requireAuthUserData(request);
   if (!isAuthenticated) return redirect(href("/signin"));
+  if (!user) return redirect(href("/signin"));
   return { isAuthenticated, user };
 }
 
-// Redirect to /user if authenticated
-export async function requireAuthFalse(request: Request) {
-  const { isAuthenticated, user } = await requireAuthSession(request);
+// Redirect to /dashboard if authenticated
+export async function requireAuthRedirectDashboard(request: Request) {
+  const { isAuthenticated, user } = await requireAuthUserData(request);
   if (isAuthenticated) return redirect(href("/dashboard"));
+  if (user) return redirect(href("/dashboard"));
   return { isAuthenticated, user };
 }

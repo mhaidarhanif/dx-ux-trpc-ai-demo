@@ -1,5 +1,5 @@
 import { Example } from "@/components/shared/example";
-import { caller } from "@/server/trpc-caller";
+import { caller } from "@/lib/trpc-caller";
 import type { Route } from "./+types/slug";
 
 export async function loader({ request, params }: Route.LoaderArgs) {

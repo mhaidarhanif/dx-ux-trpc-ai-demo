@@ -1,9 +1,9 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod/v4";
+import { auth } from "@/lib/better-auth";
 import { devlog } from "@/lib/logger";
-import { auth } from "@/server/better-auth";
-import { prisma } from "@/server/prisma";
+import { prisma } from "@/lib/prisma";
 
 export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
   const authSession = await auth.api.getSession({ headers });

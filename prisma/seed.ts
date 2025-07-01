@@ -1,8 +1,8 @@
 /** biome-ignore-all lint/nursery/noAwaitInLoop: "Prisma seed only" */
 
 import { type Prisma, PrismaClient } from "@/generated/prisma/client";
+import { auth } from "@/lib/better-auth";
 import { devlog } from "@/lib/logger";
-import { auth } from "@/server/better-auth";
 import { dataExamples } from "./data/examples";
 import { dataSeedUsers } from "./data/users";
 

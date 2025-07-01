@@ -1,19 +1,19 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { href, redirect } from "react-router";
 import { AuthCard } from "@/components/shared/auth-card";
-import { getNameParts } from "@/lib/string";
-import { createTimer } from "@/lib/timer";
-import { AuthSignUpSchema } from "@/schemas/auth";
 import {
   type BetterAuthResponse,
   type BetterAuthResponseError,
-  requireAuthFalse,
-} from "@/server/auth-helper";
-import { auth } from "@/server/better-auth";
+  requireAuthRedirectDashboard,
+} from "@/lib/auth-helper";
+import { auth } from "@/lib/better-auth";
+import { getNameParts } from "@/lib/string";
+import { createTimer } from "@/lib/timer";
+import { AuthSignUpSchema } from "@/schemas/auth";
 import type { Route } from "./+types/signin";
 
 export function loader({ request }: Route.LoaderArgs) {
-  return requireAuthFalse(request);
+  return requireAuthRedirectDashboard(request);
 }
 
 export default function SignUpRoute({ actionData }: Route.ComponentProps) {
