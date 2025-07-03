@@ -9,9 +9,6 @@ export default defineConfig({
   define: {
     __DEV__: process.env.NODE_ENV !== "production",
   },
-  esbuild: {
-    drop: ["console", "debugger"],
-  },
   optimizeDeps: {
     include: ["app/lib/icons.ts"],
   },
@@ -21,12 +18,7 @@ export default defineConfig({
   server: {
     port: Number(process.env.PORT) || 8000,
   },
-  // build: {
-  //   cssCodeSplit: true,
-  //   minify: "esbuild",
-  //   reportCompressedSize: false,
-  //   sourcemap: false,
-  //   target: "esnext",
-  //   commonjsOptions: { include: [/node_modules/] },
-  // },
+  esbuild: {
+    drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
+  },
 });
