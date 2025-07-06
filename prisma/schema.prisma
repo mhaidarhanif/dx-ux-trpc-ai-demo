@@ -23,6 +23,11 @@ generator client {
   // metrics
 }
 
+generator zod {
+  provider = "zod-prisma-types"
+  output   = "../app/generated/zod"
+}
+
 // Models
 // - auth: User, Session, Account, Verification, TwoFactor, Passkey, RateLimit
 // - profile: Profile, Location
