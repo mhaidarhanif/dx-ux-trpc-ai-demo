@@ -6,27 +6,29 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  layout("routes/layouts/layout-app.tsx", [
-    layout("routes/layouts/layout-padded.tsx", [
-      index("routes/home.tsx"),
-      route("/about", "routes/about.tsx"),
-      route("/examples", "routes/examples.tsx"),
-      route("/examples/:slug", "routes/examples-slug.tsx"),
+  layout("web/layouts/layout-app.tsx", [
+    layout("web/layouts/layout-padded.tsx", [
+      index("web/home.tsx"),
+      route("/about", "web/about.tsx"),
+      route("/examples", "web/examples.tsx"),
+      route("/examples/:slug", "web/examples-slug.tsx"),
     ]),
 
-    layout("routes/layouts/layout-auth.tsx", [
-      route("/signup", "routes/signup.tsx"),
-      route("/signin", "routes/signin.tsx"),
-      route("/signout", "routes/signout.tsx"),
-      route("/forgot-password", "routes/forgot-password.tsx"),
-      route("/dashboard", "routes/dashboard.tsx"),
+    layout("web/layouts/layout-auth.tsx", [
+      route("/signup", "web/signup.tsx"),
+      route("/signin", "web/signin.tsx"),
+      route("/signout", "web/signout.tsx"),
+      route("/forgot-password", "web/forgot-password.tsx"),
+      route("/dashboard", "web/dashboard.tsx"),
     ]),
 
-    route("*", "routes/not-found.tsx"), // Custom 404
+    route("*", "web/not-found.tsx"), // Custom 404
   ]),
 
-  route("/action/set-theme", "routes/action/set-theme.ts"),
-  route("/action/social", "routes/action/social.ts"),
-  route("/api/auth/*", "routes/api/auth.ts"),
-  route("/api/trpc/*", "routes/api/trpc.ts"),
+  route("/api/auth/*", "web/api/auth.ts"),
+  route("/api/trpc/*", "web/api/trpc.ts"),
+
+  route("/action/set-theme", "web/action/set-theme.ts"),
+  route("/action/social", "web/action/social.ts"),
+  route("/action/example", "web/action/example.ts"),
 ] satisfies RouteConfig;

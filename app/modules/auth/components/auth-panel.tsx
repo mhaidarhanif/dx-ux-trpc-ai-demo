@@ -1,4 +1,4 @@
-import { useForm } from "@conform-to/react";
+import { getFormProps, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
 import { useEffect } from "react";
 import { Form, href, Link } from "react-router";
@@ -100,9 +100,8 @@ export function AuthPanel({
         <Form
           action={text.formActionPath}
           className="grid gap-4"
-          id={text.form.id}
           method="post"
-          onSubmit={text.form.onSubmit}
+          {...getFormProps(text.form)}
         >
           {mode.isSignUp && (
             <div className="grid gap-2">
