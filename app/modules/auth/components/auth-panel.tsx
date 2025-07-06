@@ -1,4 +1,9 @@
-import { getFormProps, useForm } from "@conform-to/react";
+import {
+  type FormMetadata,
+  getFormProps,
+  getInputProps,
+  useForm,
+} from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
 import { useEffect } from "react";
 import { Form, href, Link } from "react-router";
@@ -59,15 +64,16 @@ export function AuthPanel({
       ? "Creating New Account..."
       : "Continuing with Email...",
     formActionPath: mode.isSignUp ? href("/signup") : href("/signin"),
-    form: mode.isSignUp ? formSignUp : formSignIn,
-    fields: mode.isSignUp ? fieldsSignUp : fieldsSignIn,
   };
 
+  const form = mode.isSignUp ? formSignUp : formSignIn;
+  const fields = mode.isSignUp ? fieldsSignUp : fieldsSignIn;
+
   useEffect(() => {
-    if (text.form.errors) {
-      toast.error("Auth error", { description: text.form.errors });
+    if (form.errors) {
+      toast.error("Auth error", { description: form.errors });
     }
-  }, [text.form.errors]);
+  }, [form.errors]);
 
   return (
     <section
@@ -99,86 +105,81 @@ export function AuthPanel({
 
         <Form
           action={text.formActionPath}
-          className="grid gap-4"
           method="post"
-          {...getFormProps(text.form)}
+          {...getFormProps(form as FormMetadata)}
         >
-          {mode.isSignUp && (
+          <div className="grid gap-4">
+            {mode.isSignUp && (
+              <>
+                <div className="grid gap-2">
+                  <Label htmlFor={fieldsSignUp.name.id}>Full Name</Label>
+                  <Input
+                    autoComplete="name"
+                    autoFocus={Boolean(fieldsSignUp.name.errors)}
+                    placeholder="First Last"
+                    required
+                    {...getInputProps(fieldsSignUp.name, { type: "text" })}
+                  />
+                  <FieldErrors>{fieldsSignUp.name}</FieldErrors>
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor={fieldsSignUp.username.id}>Username</Label>
+                  <Input
+                    autoComplete="username"
+                    autoFocus={Boolean(fieldsSignUp.username.errors)}
+                    placeholder="yourhandle"
+                    required
+                    {...getInputProps(fieldsSignUp.username, { type: "text" })}
+                  />
+                  fields
+                  <FieldErrors>{fieldsSignUp.username}</FieldErrors>
+                </div>
+              </>
+            )}
+
             <div className="grid gap-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor={fields.email.id}>Email</Label>
               <Input
-                autoComplete="name"
-                autoFocus={Boolean(fieldsSignUp.name.errors)}
-                id="name"
-                name={fieldsSignUp.name.name}
-                placeholder="First Last"
+                autoComplete="email webauthn"
+                autoFocus={Boolean(fieldsSignUp.email.errors)}
+                placeholder="email@example.com"
                 required
-                type="text"
+                {...getInputProps(fields.email, { type: "email" })}
               />
-              <FieldErrors>{fieldsSignUp.name}</FieldErrors>
+              <FieldErrors>{fieldsSignIn.email}</FieldErrors>
             </div>
-          )}
 
-          {mode.isSignUp && (
             <div className="grid gap-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                autoComplete="username"
-                autoFocus={Boolean(fieldsSignUp.username.errors)}
-                id="username"
-                name={fieldsSignUp.username.name}
-                placeholder="yourhandle"
+              <div className="flex items-center justify-between">
+                <Label htmlFor={fields.password.id}>Password</Label>
+                {mode.isSignIn && (
+                  <Link
+                    className="text-secondary text-xs leading-none"
+                    prefetch="intent"
+                    to={href("/forgot-password")}
+                  >
+                    Forgot password?
+                  </Link>
+                )}
+              </div>
+              <InputPassword
+                autoComplete="current-password webauthn"
+                autoFocus={Boolean(fieldsSignUp.password.errors)}
                 required
-                type="text"
+                {...getInputProps(fields.password, { type: "password" })}
               />
-              <FieldErrors>{fieldsSignUp.username}</FieldErrors>
+              <FieldErrors>{fieldsSignIn.password}</FieldErrors>
             </div>
-          )}
 
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              autoComplete="email webauthn"
-              autoFocus={Boolean(fieldsSignUp.email.errors)}
-              id="email"
-              name={text.fields.email.name}
-              placeholder="email@example.com"
-              required
-              type="email"
-            />
-            <FieldErrors>{fieldsSignIn.email}</FieldErrors>
+            <ButtonLoading
+              className="w-full"
+              submittingText={text.submitting}
+              type="submit"
+            >
+              {text.idle}
+            </ButtonLoading>
           </div>
-
-          <div className="grid gap-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="password">Password</Label>
-              {mode.isSignIn && (
-                <Link
-                  className="text-secondary text-xs leading-none"
-                  prefetch="intent"
-                  to={href("/forgot-password")}
-                >
-                  Forgot password?
-                </Link>
-              )}
-            </div>
-            <InputPassword
-              autoComplete="current-password webauthn"
-              autoFocus={Boolean(fieldsSignUp.password.errors)}
-              id="password"
-              name={text.fields.password.name}
-              required
-            />
-            <FieldErrors>{fieldsSignIn.password}</FieldErrors>
-          </div>
-
-          <ButtonLoading
-            className="w-full"
-            submittingText={text.submitting}
-            type="submit"
-          >
-            {text.idle}
-          </ButtonLoading>
         </Form>
 
         <div className="text-center text-sm">
