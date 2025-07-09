@@ -5,6 +5,7 @@
     "**/.client/**/*",
     ".react-router/types/**/*"
   ],
+  "exclude": ["node_modules", "**/*.test.ts", "dist", "build"],
   "compilerOptions": {
     "baseUrl": ".",
     "esModuleInterop": true,

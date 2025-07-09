@@ -81,6 +81,7 @@ Use [Bun](https://bun.sh) for dependency management and scripts. Ensure [Bun is 
 
 ```sh
 curl -fsSL https://bun.sh/install | bash
+# or use any preferred installation methods
 ```
 
 Install dependencies:
@@ -186,7 +187,9 @@ Run the development server:
 bun dev
 ```
 
-Open <http://localhost:8000> then we're ready
+Open <http://localhost:8000> then we're ready.
+
+Note: This repo has `.vscode/settings.json` which has `"files.exclude"` to hide some configs and build assets. Reconfigure it as needed.
 
 ### Production Deployment
 
