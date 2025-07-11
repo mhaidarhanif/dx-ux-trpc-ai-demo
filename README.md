@@ -26,8 +26,9 @@ Core:
 - [x] [Tailwind CSS v4](https://tailwindcss.com)
   - [x] [`shadcn/ui`](https://ui.shadcn.com) with single [`radix-ui`](https://radix-ui.com) and some with [`base-ui`](https://base-ui.com)
   - [x] Replace `lucide-react` with `sly` CLI to manage icons
-  - [x] More components with [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com), [React Bits](https://reactbits.dev)
+  - [x] More components with [Kibo UI](https://kibo-ui.com), [Origin UI](https://originui.com), [React Bits](https://reactbits.dev), MVPBlocks, SHSF UI, Skiper UI
   - [ ] [React Email v4](https://react.email)
+  - [ ] [TipTap v2](https://tiptap.dev)
 - [x] [tRPC v11](https://trpc.io)
 - [x] [Zod v4](https://zod.dev)
 - [x] [Conform v1](https://conform.guide)
@@ -60,6 +61,10 @@ Services:
 - [x] AI Rules
   - [x] [Cursor](https://docs.cursor.com/context/rules)
   - [x] [Windsurf](https://windsurf.com/editor/directory)
+- [ ] AI Toolkits and Frameworks
+  - [ ] [AI SDK](https://ai-sdk.dev)
+  - [ ] [Mastra](https://mastra.ai)
+  - [ ] [Context7](https://context7.com)
 - [ ] Rate Limiter: [Unkey](https://unkey.dev)
 - [ ] Error Tracking: [Sentry](https://sentry.io)
 - [ ] Email: [Resend](https://resend.com), [Amazon SES](https://aws.amazon.com/ses)
@@ -193,26 +198,21 @@ Note: This repo has `.vscode/settings.json` which has `"files.exclude"` to hide 
 
 ### Production Deployment
 
-Pick a host to deploy it to, such as:
+Pick a host to deploy and setup accordingly, such as:
 
-- Vercel
-- Netlify
-- Render.com
-- Railway.com
-- Fly.io
-- Google Cloud (GCP)
-- Amazon Web Services (AWS)
-- Microsoft Azure
-- VPS with Coolify, Dokploy, etc
+- [Vercel](https://vercel.com)
+- [Netlify](https://netlify.com)
+- [Render.com](https://render.com)
+- [Railway.com](https://railway.com)
+- [Fly.io](https://fly.io)
+- [Google Cloud (GCP)](https://cloud.google.com)
+- [Amazon Web Services (AWS)](https://aws.amazon.com)
+- [Microsoft Azure](https://azure.microsoft.com)
+- VPS: [Coolify](https://coolify.io), [Dokploy](https://dokploy.com), etc
 
-Then setup accordingly.
+It's also recommended to use secret management for environment variables, such as [Doppler](https://doppler.com) or [Infisical](https://infisical.com).
 
-For example, if not using Vercel, remove `vercelPreset` in `react-router.config.ts`.
-
-It's also recommended to use secret management for environment variables, such as:
-
-- Doppler
-- Infisical
+Also if not using Vercel, remove `vercelPreset` in `react-router.config.ts`.
 
 ### Production Build
 
