@@ -5,7 +5,15 @@
     "**/.client/**/*",
     ".react-router/types/**/*"
   ],
-  "exclude": ["node_modules", "**/*.test.ts", "dist", "build"],
+  "exclude": [
+    "__*",
+    "**/*.test.ts",
+    "app/generated",
+    "build",
+    "dist",
+    "node_modules",
+    "prisma"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "esModuleInterop": true,

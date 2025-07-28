@@ -12,11 +12,9 @@ __*
 .vercel
 *.db
 *.db-journal
-app/generated/
+app/generated/*
 build/
-generated/
-generated/prisma
+generated/*
 generated/prisma/*
-generated/prisma/client
-generated/zod
+generated/zod/*
 node_modules/

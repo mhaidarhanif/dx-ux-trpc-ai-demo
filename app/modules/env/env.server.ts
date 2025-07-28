@@ -10,6 +10,8 @@ export const envServer = createEnv({
     NODE_ENV: z.enum(["development", "production", "test"]).optional(),
     PORT: z.coerce.number().default(8000),
 
+    VITE_APP_NAME: z.string().default("Dogokit Corgi"),
+
     APP_URL: z.url(),
     DOMAIN: z.string(),
 
@@ -22,6 +24,8 @@ export const envServer = createEnv({
 
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
+
+    RESEND_API_KEY: z.string(),
 
     POLAR_ACCESS_TOKEN: z.string().optional(),
     POLAR_WEBHOOK_SECRET: z.string().optional(),

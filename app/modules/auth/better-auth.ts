@@ -10,7 +10,6 @@ import {
   multiSession,
   oneTap,
   openAPI,
-  phoneNumber,
   twoFactor,
   username,
 } from "better-auth/plugins";
@@ -24,6 +23,7 @@ import {
   createUsernameGitHub,
   getNameParts,
 } from "@/lib/text/convert";
+import { sendEmail } from "@/modules/email/send-email";
 import { envServer } from "@/modules/env/env.server";
 
 export type DefaultAuthSession = typeof auth.$Infer.Session;
@@ -32,14 +32,12 @@ export const auth = betterAuth({
   appName: configSite.name,
   baseURL: envServer.APP_URL,
   basePath: "/api/auth",
-
   database: prismaAdapter(prisma, { provider: "postgresql" }),
-
-  // https://better-auth.com/docs/concepts/database#secondary-storage
-  // secondaryStorage
-
   advanced: { database: { generateId: false } },
 
+  /**
+   * Models
+   */
   user: {
     modelName: "User",
     additionalFields: {
@@ -51,11 +49,14 @@ export const auth = betterAuth({
     changeEmail: {
       enabled: true,
       sendChangeEmailVerification: async ({ user, newEmail, url, token }) => {
-        await devlog.info("SEND_CHANGE_EMAIL_VERIFICATION", {
+        await sendEmail({
+          action: "SEND_CHANGE_EMAIL_VERIFICATION",
           user,
-          newEmail,
           url,
           token,
+          to: [user.email],
+          subject: "Change your email",
+          text: `Click the link to change your email from ${user.email} to ${newEmail}: ${url}`,
         });
       },
       deleteUser: {
@@ -69,10 +70,14 @@ export const auth = betterAuth({
           url: string;
           token: string;
         }) => {
-          await devlog.info("SEND_DELETE_ACCOUNT_VERIFICATION", {
+          await sendEmail({
+            action: "SEND_DELETE_ACCOUNT_VERIFICATION",
             user,
             url,
             token,
+            to: [user.email],
+            subject: "Delete your account",
+            text: `Click the link to delete your account: ${url}`,
           });
         },
         beforeDelete: async (user: User) => {
@@ -84,7 +89,6 @@ export const auth = betterAuth({
       },
     },
   },
-
   session: {
     modelName: "Session",
     // TODO: Enable later, because confusion when signout
@@ -93,7 +97,6 @@ export const auth = betterAuth({
     //   maxAge: 60 * 5, // 5 minutes
     // },
   },
-
   account: {
     modelName: "Account",
     accountLinking: {
@@ -105,13 +108,19 @@ export const auth = betterAuth({
     updateAccountOnSignIn: true,
   },
 
-  // https://better-auth.com/docs/reference/options#verification
+  /**
+   * Verification
+   * https://better-auth.com/docs/reference/options#verification
+   */
   verification: {
     modelName: "Verification",
     disableCleanup: false,
   },
 
-  // https://better-auth.com/docs/concepts/rate-limit
+  /**
+   * Rate Limit
+   * https://better-auth.com/docs/concepts/rate-limit
+   */
   // rateLimit: {
   //   enabled: isProd,
   //   window: 60,
@@ -120,28 +129,50 @@ export const auth = betterAuth({
   //   modelName: "RateLimit",
   // },
 
-  // https://better-auth.com/docs/authentication/email-password
+  /**
+   * Email Password
+   * https://better-auth.com/docs/authentication/email-password
+   */
   emailAndPassword: {
     enabled: true,
     disableSignUp: false,
-    requireEmailVerification: false,
     minPasswordLength: 8,
     maxPasswordLength: 128,
     autoSignIn: true,
+    requireEmailVerification: false,
 
-    // https://better-auth.com/docs/reference/options#emailandpassword
+    /**
+     * Send Reset Password
+     * https://better-auth.com/docs/authentication/email-password#request-password-reset
+     */
     sendResetPassword: async ({ user, url, token }) => {
-      await devlog.info("SEND_RESET_PASSWORD_EMAIL", { user, url, token });
+      await sendEmail({
+        action: "SEND_RESET_PASSWORD_EMAIL",
+        user,
+        url,
+        token,
+        to: [user.email],
+        subject: "Reset your password",
+        text: `Click the link to reset your password: ${url}`,
+      });
     },
     resetPasswordTokenExpiresIn: 3600, // 1 hour
   },
 
+  /**
+   * Email Verification
+   * https://better-auth.com/docs/authentication/email-password#email-verification
+   */
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }) => {
-      await devlog.info("SEND_VERIFICATION_EMAIL", {
-        email: user.email,
+      await sendEmail({
+        action: "SEND_VERIFICATION_EMAIL",
+        user,
         url,
         token,
+        to: [user.email],
+        subject: "Verify your email address",
+        text: `Click the link to verify your email: ${url}`,
       });
     },
     sendOnSignUp: true,
@@ -149,23 +180,11 @@ export const auth = betterAuth({
     expiresIn: 3600, // 1 hour
   },
 
-  // Configure more in @/config/site.tsx
+  /**
+   * Social Providers
+   * Configure more in @/config/site.tsx
+   */
   socialProviders: {
-    github: {
-      clientId: envServer.GITHUB_CLIENT_ID,
-      clientSecret: envServer.GITHUB_CLIENT_SECRET,
-      mapProfileToUser: (profile) => {
-        const { firstName, lastName } = getNameParts(profile.name);
-        const usernameGitHub = createUsernameGitHub(profile.login);
-
-        return {
-          username: usernameGitHub,
-          displayUsername: usernameGitHub,
-          firstName,
-          lastName,
-        };
-      },
-    },
     google: {
       clientId: envServer.GOOGLE_CLIENT_ID,
       clientSecret: envServer.GOOGLE_CLIENT_SECRET,
@@ -183,18 +202,52 @@ export const auth = betterAuth({
         };
       },
     },
+    github: {
+      clientId: envServer.GITHUB_CLIENT_ID,
+      clientSecret: envServer.GITHUB_CLIENT_SECRET,
+      mapProfileToUser: (profile) => {
+        const { firstName, lastName } = getNameParts(profile.name);
+        const usernameGitHub = createUsernameGitHub(profile.login);
+
+        return {
+          username: usernameGitHub,
+          displayUsername: usernameGitHub,
+          firstName,
+          lastName,
+        };
+      },
+    },
   },
 
   plugins: [
+    /**
+     * Admin
+     * https://better-auth.com/docs/plugins/admin
+     */
     admin(),
+
+    /**
+     * Have I Been Pwned
+     * https://better-auth.com/docs/plugins/have-i-been-pwned
+     */
     haveIBeenPwned(),
 
-    // https://better-auth.com/docs/plugins/multi-session
+    /**
+     * Multi Session
+     * https://better-auth.com/docs/plugins/multi-session
+     */
     multiSession(),
 
-    // https://better-auth.com/docs/plugins/open-api
+    /**
+     * Open API
+     * https://better-auth.com/docs/plugins/open-api
+     */
     openAPI(), // Available on /api/auth/reference
 
+    /**
+     * Infer Additional Fields
+     * https://better-auth.com/docs/concepts/typescript#inferring-additional-fields-on-server
+     */
     inferAdditionalFields({
       user: {
         phoneNumber: {
@@ -204,15 +257,21 @@ export const auth = betterAuth({
       },
     }),
 
-    // https://better-auth.com/docs/plugins/anonymous
+    /**
+     * Anonymous
+     * https://better-auth.com/docs/plugins/anonymous
+     */
     anonymous({
-      onLinkAccount: async ({ anonymousUser, newUser }) => {
+      onLinkAccount: ({ anonymousUser, newUser }) => {
         // Move data from anonymous user to the new user
-        await devlog.info("ANONYMOUS_USER_LINKED", { anonymousUser, newUser });
+        devlog.info("ANONYMOUS_USER_LINKED", { anonymousUser, newUser });
       },
     }),
 
-    // https://better-auth.com/docs/plugins/username
+    /**
+     * Username
+     * https://better-auth.com/docs/plugins/username
+     */
     username({
       minUsernameLength: configSchema.username.min,
       maxUsernameLength: configSchema.username.max,
@@ -222,28 +281,43 @@ export const auth = betterAuth({
       },
     }),
 
-    // https://better-auth.com/docs/plugins/email-otp
+    /**
+     * Email OTP
+     * https://better-auth.com/docs/plugins/email-otp
+     */
     emailOTP({
       sendVerificationOTP: async ({ email, otp, type }) => {
-        await devlog.info("SEND_OTP_EMAIL", { email, otp, type });
+        await sendEmail({
+          action: "SEND_OTP_EMAIL",
+          type,
+          to: [email],
+          subject: "Verify your email address",
+          text: `OTP Verification Code: ${otp}`,
+        });
       },
     }),
 
-    // https://better-auth.com/docs/plugins/magic-link
+    /**
+     * Magic Link
+     * https://better-auth.com/docs/plugins/magic-link
+     */
     magicLink({
-      sendMagicLink: async ({ email, token, url }, request) => {
-        await devlog.info("SEND_MAGIC_LINK", { email, token, url, request });
+      sendMagicLink: async ({ email, url, token }) => {
+        await sendEmail({
+          action: "SEND_MAGIC_LINK_EMAIL",
+          type: "sign-in",
+          to: [email],
+          subject: "Sign in to your account",
+          text: `Click the link to sign in: ${url}`,
+          token,
+        });
       },
     }),
 
-    // https://better-auth.com/docs/plugins/phone-number
-    phoneNumber({
-      sendOTP: async ({ phoneNumber: phone, code }) => {
-        await devlog.info("SEND_OTP_SMS", { phone, code });
-      },
-    }),
-
-    // https://better-auth.com/docs/plugins/passkey
+    /**
+     * Passkey
+     * https://better-auth.com/docs/plugins/passkey
+     */
     passkey({
       schema: {
         passkey: { modelName: "Passkey" },
@@ -252,21 +326,42 @@ export const auth = betterAuth({
       rpName: configSite.name,
     }),
 
-    // https://better-auth.com/docs/plugins/2fa
+    /**
+     * Two Factor Authentication
+     * https://better-auth.com/docs/plugins/2fa
+     */
     twoFactor({
       schema: {
         twoFactor: { modelName: "TwoFactor" },
       },
     }),
 
-    // https://better-auth.com/docs/plugins/one-tap
-    // TODO: How One Tap can mapProfileToUser for username?
+    /**
+     * One Tap
+     * https://better-auth.com/docs/plugins/one-tap
+     *
+     * TODO: How One Tap can mapProfileToUser for username?
+     */
     oneTap({
       clientId: envServer.GOOGLE_CLIENT_ID,
     }),
 
-    // https://better-auth.com/docs/plugins/polar
-    // TODO: Enable later
+    /**
+     * Phone Number
+     * https://better-auth.com/docs/plugins/phone-number
+     */
+    // phoneNumber({
+    //   sendOTP: async ({ phoneNumber: phone, code }) => {
+    //     await devlog.info("SEND_OTP_SMS", { phone, code });
+    //   },
+    // }),
+
+    /**
+     * Polar Payment
+     * https://better-auth.com/docs/plugins/polar
+     *
+     * TODO: Enable later
+     */
     // polar({
     //   client: polarClient,
     //   createCustomerOnSignUp: false, // TODO: Revisit this

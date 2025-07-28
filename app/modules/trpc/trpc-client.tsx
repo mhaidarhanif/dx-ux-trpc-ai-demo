@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink, loggerLink } from "@trpc/client";
-import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { createTRPCContext } from "@trpc/tanstack-react-query";
 import { useState } from "react";
 import SuperJSON from "superjson";
@@ -71,6 +70,3 @@ export function TRPCReactProvider({ children }: { children: React.ReactNode }) {
     </QueryClientProvider>
   );
 }
-
-export type AppRouterInputs = inferRouterInputs<AppRouter>;
-export type AppRouterOutputs = inferRouterOutputs<AppRouter>;
