@@ -14,7 +14,7 @@ import { formatDate } from "@/lib/text/datetime";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/modules/auth/better-auth-client";
 import { UserAvatar } from "@/modules/auth/components/user-avatar";
-import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
+import type { AppRouterOutputs } from "@/modules/trpc/trpc-router";
 
 export function UserProfilePanel({
   user,

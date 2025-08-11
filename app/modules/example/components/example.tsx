@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
+import type { AppRouterOutputs } from "@/modules/trpc/trpc-router";
 
 export function Examples({
   examples,

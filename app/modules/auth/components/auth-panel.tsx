@@ -23,7 +23,7 @@ import { ButtonAuthPasskey } from "@/modules/auth/components/button-auth-passkey
 import { ButtonAuthProviders } from "@/modules/auth/components/button-auth-providers";
 import { AuthSignInSchema, AuthSignUpSchema } from "@/modules/auth/schema";
 import { Logo } from "@/modules/brand/components/logo";
-import type { AppRouterOutputs } from "@/modules/trpc/trpc-client";
+import type { AppRouterOutputs } from "@/modules/trpc/trpc-router";
 
 export function AuthPanel({
   authMode = "signin",

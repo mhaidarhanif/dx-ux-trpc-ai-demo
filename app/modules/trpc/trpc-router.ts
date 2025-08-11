@@ -13,5 +13,7 @@ export const appRouter = router({
 });
 
 export type AppRouter = typeof appRouter;
+
 export type AppRouterInputs = inferRouterInputs<AppRouter>;
+
 export type AppRouterOutputs = inferRouterOutputs<AppRouter>;
