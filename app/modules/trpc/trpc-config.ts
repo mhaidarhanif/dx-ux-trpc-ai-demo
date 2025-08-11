@@ -12,7 +12,7 @@ export const createTRPCContext = async ({ headers }: { headers: Headers }) => {
 
   const userEmail = authSession?.user.email;
 
-  devlog.infoAlways(`🔹tRPC: [${source}] by [${userEmail ?? "Anonymous"}]`);
+  devlog.info(`🔹tRPC: [${source}] by [${userEmail ?? "Anonymous"}]`);
 
   return {
     db: prisma,

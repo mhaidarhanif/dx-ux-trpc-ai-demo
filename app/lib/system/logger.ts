@@ -2,11 +2,11 @@
 import { isProd } from "@/modules/env/env";
 
 export const devlog = {
-  info: (...args: unknown[]) => {
-    if (!isProd) console.log(...args);
-  },
   infoAlways: (...args: unknown[]) => {
     console.log(...args);
+  },
+  info: (...args: unknown[]) => {
+    if (!isProd) console.log(...args);
   },
   warn: (...args: unknown[]) => {
     if (!isProd) console.warn(...args);
