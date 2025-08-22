@@ -5,8 +5,7 @@ import type { Route } from "./+types/home";
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const trpc = await caller(request);
   const result = await trpc.greeting.example();
-
-  console.log({ result });
+  console.log(result);
 
   return null;
 };
