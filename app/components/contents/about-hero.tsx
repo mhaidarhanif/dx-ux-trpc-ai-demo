@@ -19,9 +19,7 @@ export function AboutHero() {
           Originally created by{" "}
           <Anchor href="https://github.com/mhaidarhanif">M Haidar Hanif</Anchor>
           . Designed for very short setup time, but long-term scalability.{" "}
-          <Anchor href="https://github.com/dogokit/dogokit-corgi">
-            Dogokit Corgi
-          </Anchor>{" "}
+          <Anchor href="https://github.com/dogokit/demo">Dogokit Corgi</Anchor>{" "}
           is the implementation details of{" "}
           <Anchor href="https://github.com/dogokit/dogokit-akita">
             Dogokit Akita

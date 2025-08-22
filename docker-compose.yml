@@ -1,6 +1,6 @@
 services:
   postgres:
-    container_name: dogokit-corgi-postgres
+    container_name: demo-postgres
     image: postgres:17-alpine
     restart: no
     volumes:

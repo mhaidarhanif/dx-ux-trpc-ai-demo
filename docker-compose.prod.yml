@@ -1,6 +1,6 @@
 services:
   postgres:
-    container_name: dogokit-corgi-postgres
+    container_name: demo-postgres
     image: postgres:17-alpine
     restart: always
     volumes:
@@ -11,8 +11,8 @@ services:
       - path: .env
         required: true
   app:
-    container_name: dogokit-corgi-app
-    image: dogokit-corgi:latest
+    container_name: demo-app
+    image: demo:latest
     build:
       context: .
       dockerfile: Dockerfile.bun

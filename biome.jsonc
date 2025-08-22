@@ -62,7 +62,8 @@
       },
       "suspicious": {
         "noArrayIndexKey": "off",
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noConsole": "off"
       }
     }
   },

@@ -5,14 +5,14 @@ import { envClient, isProd } from "@/modules/env/env";
 export const configSite: ConfigSite = {
   id: isProd ? envClient.VITE_APP_URL : "localhost",
   name: envClient.VITE_APP_NAME,
-  url: "https://github.com/dogokit/dogokit-corgi",
+  url: "https://github.com/dogokit/demo",
   ogImage: "/og/dogokit.jpg",
   description:
     "Full stack app development kit with React Router v7 Framework, tRPC, Prisma, Better Auth, Tailwind CSS, shadcn/ui, and more.",
 
   links: {
     x: "https://x.com/mhaidarhanif",
-    github: "https://github.com/dogokit/dogokit-corgi",
+    github: "https://github.com/dogokit/demo",
   },
 
   navItems: [
