@@ -1,17 +1,9 @@
-import { withAccelerate } from "@prisma/extension-accelerate";
 import { PrismaClient } from "@/generated/prisma/client";
-
-/**
- * Enable custom adapter, ONLY if not using Prisma Accelerate
- * Then make sure to ONLY use normal `prisma generate`
- */
-// import { PrismaPg } from "@prisma/adapter-pg";
-// const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 
 const prismaClientSingleton = () => {
   return new PrismaClient({
-    // log: ["query", "info", "warn", "error"],
-  }).$extends(withAccelerate());
+    log: ["query", "info", "warn", "error"],
+  });
 };
 
 type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
