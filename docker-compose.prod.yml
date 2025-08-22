@@ -15,6 +15,7 @@ services:
     image: dogokit-corgi:latest
     build:
       context: .
+      dockerfile: Dockerfile.bun
     ports:
       - ${PORT}:3000
     depends_on:

@@ -250,7 +250,6 @@ bun start
 - [shadcn/ui](https://ui.shadcn.com)
 - [OriginUI](https://originui.com)
 - [Kibo UI](https://kibo-ui.com)
-- [shadcn Registries](https://shadcn-registries.vercel.app)
 - [registry.directory](https://registry.directory)
 - [Better Auth: Demo](https://demo.better-auth.com)
 - [`ayoubphy/react-router-trpc-prisma-better-auth`](https://github.com/ayoubphy/react-router-trpc-prisma-better-auth) is the original repo source

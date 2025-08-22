@@ -10,16 +10,19 @@ export function AboutHero() {
       <article className="prose-config">
         <ContentIntro>
           <p>
-            Dogokit Corgi is a web app template using React Router v7 Framework,
-            tRPC, Prisma, Better Auth, Tailwind CSS, shadcn, and more.
+            This is a web app using React Router v7 Framework, tRPC, Prisma,
+            Better Auth, Tailwind CSS, shadcn, and more.
           </p>
         </ContentIntro>
 
         <p>
-          This template is created by{" "}
+          Originally created by{" "}
           <Anchor href="https://github.com/mhaidarhanif">M Haidar Hanif</Anchor>
-          . Designed for very short setup time, but long-term scalability. It's
-          the implementation details of{" "}
+          . Designed for very short setup time, but long-term scalability.{" "}
+          <Anchor href="https://github.com/dogokit/dogokit-corgi">
+            Dogokit Corgi
+          </Anchor>{" "}
+          is the implementation details of{" "}
           <Anchor href="https://github.com/dogokit/dogokit-akita">
             Dogokit Akita
           </Anchor>
@@ -27,11 +30,7 @@ export function AboutHero() {
         </p>
 
         <p>
-          This is one of implementation details of{" "}
-          <Anchor href="https://github.com/dogokit/dogokit-akita">
-            Dogokit Akita
-          </Anchor>
-          . Designed to help you quickly get started with your own web
+          Designed to help you quickly get started with your own web
           application. With a lot of components, configuration, and boilerplate
           code already set up. Feel free to use, modify, and remove any parts
           you don't need.
@@ -58,11 +57,6 @@ export function AboutHero() {
             <Anchor href="https://kibo-ui.com">Kibo UI</Anchor>
           </li>
           <li>
-            <Anchor href="https://shadcn-registries.vercel.app">
-              shadcn Registries
-            </Anchor>
-          </li>
-          <li>
             <Anchor href="https://registry.directory">
               registry.directory
             </Anchor>
@@ -79,7 +73,7 @@ export function AboutHero() {
           </li>
         </ul>
 
-        <h2>Relations</h2>
+        <h2>Related</h2>
         <ul>
           <li>
             <Anchor href="https://github.com/allnimal">🐾Allnimal</Anchor>
