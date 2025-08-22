@@ -14,13 +14,13 @@ datasource db {
 generator client {
   provider        = "prisma-client"
   output          = "../../app/generated/prisma"
-  previewFeatures = ["relationJoins", "driverAdapters", "views", "fullTextSearchPostgres"]
+  previewFeatures = ["relationJoins", "views", "fullTextSearchPostgres"]
 
-  // Enable Rust-free engine, ONLY IF NOT using Prisma Accelerate
+  // Enable Rust-free engine ONLY IF NOT using Prisma Accelerate
   // Then make sure to ONLY use normal `prisma generate`
   // "queryCompiler"
   // "driverAdapters"
-  // metrics
+  // "metrics"
 }
 
 generator zod {
