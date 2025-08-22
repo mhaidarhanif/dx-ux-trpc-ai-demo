@@ -200,19 +200,21 @@ Note: This repo has `.vscode/settings.json` which has `"files.exclude"` to hide 
 
 Pick a host to deploy and setup accordingly, such as:
 
+- [Railway.com](https://railway.com)
+- [Render.com](https://render.com)
 - [Vercel](https://vercel.com)
 - [Netlify](https://netlify.com)
-- [Render.com](https://render.com)
-- [Railway.com](https://railway.com)
 - [Fly.io](https://fly.io)
 - [Google Cloud (GCP)](https://cloud.google.com)
 - [Amazon Web Services (AWS)](https://aws.amazon.com)
 - [Microsoft Azure](https://azure.microsoft.com)
 - VPS: [Coolify](https://coolify.io), [Dokploy](https://dokploy.com), etc
 
-It's also recommended to use secret management for environment variables, such as [Doppler](https://doppler.com) or [Infisical](https://infisical.com).
+Notes:
 
-Also if not using Vercel, remove `vercelPreset` in `react-router.config.ts`.
+- Railway and Render supports `Dockerfile`.
+- Only if using Vercel, enable `vercelPreset` in `react-router.config.ts`.
+- It's recommended to use secret management for environment variables, such as [Doppler](https://doppler.com) or [Infisical](https://infisical.com).
 
 ### Production Build
 
@@ -220,6 +222,12 @@ Check if the production build is fine:
 
 ```sh
 bun run build
+```
+
+Production build if using Docker (without database migration):
+
+```sh
+bun run build:docker
 ```
 
 Migrate database for production:
