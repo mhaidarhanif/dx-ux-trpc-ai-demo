@@ -108,6 +108,30 @@ export const auth = betterAuth({
     updateAccountOnSignIn: true,
   },
 
+  // https://better-auth.com/docs/reference/options#databasehooks
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
+          await devlog.info("DB_HOOKS_CREATE_BEFORE");
+          return { data: user };
+        },
+        after: async () => {
+          await devlog.info("DB_HOOKS_CREATE_AFTER");
+        },
+      },
+    },
+    session: {
+      // Session hooks
+    },
+    account: {
+      // Account hooks
+    },
+    verification: {
+      // Verification hooks
+    },
+  },
+
   /**
    * Verification
    * https://better-auth.com/docs/reference/options#verification
