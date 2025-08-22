@@ -150,5 +150,8 @@
     "vite-bundle-analyzer": "^1.2.1",
     "vite-tsconfig-paths": "^5.1.4",
     "zod-prisma-types": "^3.2.4"
+  },
+  "overrides": {
+    "better-sqlite3": "npm:noop@^1.0.0"
   }
 }
