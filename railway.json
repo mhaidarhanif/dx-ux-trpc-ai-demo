@@ -5,7 +5,7 @@
     "buildCommand": "bun run build"
   },
   "deploy": {
-    "preDeployCommand": ["bun run db:migrate"],
+    "preDeployCommand": ["bun run db:migrate:deploy"],
     "startCommand": "bun run start",
     "healthcheckPath": "/",
     "healthcheckTimeout": 300,

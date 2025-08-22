@@ -6,7 +6,7 @@ export default defineConfig({
   schema: path.join("prisma", "models"),
   migrations: {
     path: path.join("prisma", "migrations"),
-    seed: "bun prisma/seed.ts",
+    seed: "bun app/lib/database/seed.ts",
   },
   views: {
     path: path.join("prisma", "views"),

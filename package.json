@@ -28,7 +28,7 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:prod": "dotenv -e .env.prod bun db:migrate:deploy",
     "db:gen": "prisma generate --no-hints",
-    "db:gen:prod": "bun db:gen",
+    "db:gen:prod": "bun db:gen --no-engine",
     "db:studio": "prisma studio --browser none",
     "db:studio:prod": "dotenv -e .env.prod bun db:studio",
     "db:reset": "prisma migrate reset --skip-seed",
@@ -112,7 +112,8 @@
     "ts-plugin-sort-import-suggestions": "^1.0.4",
     "tunnel-rat": "^0.1.2",
     "vaul": "^1.1.2",
-    "zod": "^4.0.17"
+    "zod": "^4.0.17",
+    "pg": "^8.13.1"
   },
   "devDependencies": {
     "@better-auth/cli": "^1.3.7",
@@ -127,6 +128,7 @@
     "@types/color": "^4.2.0",
     "@types/culori": "^4.0.0",
     "@types/node": "^22.17.2",
+    "@types/pg": "^8.11.10",
     "@types/pluralize": "^0.0.33",
     "@types/qrcode": "^1.5.5",
     "@types/react": "^19.1.10",

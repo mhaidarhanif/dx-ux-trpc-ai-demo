@@ -1,10 +1,9 @@
-import { type Prisma, PrismaClient } from "../app/generated/prisma/client";
-import { devlog } from "../app/lib/system/logger";
-import { auth } from "../app/modules/auth/better-auth";
-import { dataExamples } from "../app/modules/example/data";
-import { dataSeedUsers } from "../app/modules/user/data";
-
-const prisma = new PrismaClient();
+import type { Prisma } from "@/generated/prisma/client";
+import { prisma } from "@/lib/database/prisma";
+import { devlog } from "@/lib/system/logger";
+import { auth } from "@/modules/auth/better-auth";
+import { dataExamples } from "@/modules/example/data";
+import { dataSeedUsers } from "@/modules/user/data";
 
 async function main() {
   await seedExamples();
