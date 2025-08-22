@@ -1,8 +1,8 @@
 import { type Prisma, PrismaClient } from "../app/generated/prisma/client";
 import { devlog } from "../app/lib/system/logger";
 import { auth } from "../app/modules/auth/better-auth";
-import { dataExamples } from "./data/examples";
-import { dataSeedUsers } from "./data/users";
+import { dataExamples } from "../app/modules/example/data";
+import { dataSeedUsers } from "../app/modules/user/data";
 
 const prisma = new PrismaClient();
 
