@@ -9,7 +9,6 @@ export const envClient = createEnv({
   client: {
     VITE_APP_NAME: z.string().default("Dogokit Corgi"),
     VITE_APP_URL: z.url().default("http://localhost:8000"),
-    VITE_GOOGLE_CLIENT_ID: z.string(),
   },
   runtimeEnv: import.meta.env,
 });

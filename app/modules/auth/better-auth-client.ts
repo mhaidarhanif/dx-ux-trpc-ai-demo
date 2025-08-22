@@ -3,7 +3,6 @@ import {
   inferAdditionalFields,
   magicLinkClient,
   multiSessionClient,
-  oneTapClient,
   passkeyClient,
   phoneNumberClient,
   twoFactorClient,
@@ -33,15 +32,6 @@ export const authClient = createAuthClient({
       onTwoFactorRedirect() {
         window.location.href = "/2fa";
       },
-    }),
-
-    oneTapClient({
-      clientId: envClient.VITE_GOOGLE_CLIENT_ID,
-      autoSelect: true,
-      cancelOnTapOutside: false,
-      context: "signin",
-      additionalOptions: {},
-      promptOptions: { baseDelay: 2000, maxAttempts: 10 },
     }),
 
     // polarClient(),

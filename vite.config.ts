@@ -30,9 +30,12 @@ export default defineConfig({
 
       // https://github.com/remix-run/react-router/issues/12568
       // https://github.com/oven-sh/bun/issues/9949
-      ...(process.env.NODE_ENV === "production"
-        ? { "react-dom/server.bun": "react-dom/server.browser" }
-        : {}),
+
+      // ...(process.env.NODE_ENV !== "development"
+      //   ? { "react-dom/server": "react-dom/server.node" }
+      //   : {}),
+
+      "react-dom/server": "react-dom/server.node",
     },
   },
 });
