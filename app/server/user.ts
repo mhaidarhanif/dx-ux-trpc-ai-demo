@@ -1,6 +1,5 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import { z } from "zod/v4-mini";
-import { configPrismaCache } from "@/lib/config/prisma";
 import {
   protectedProcedure,
   publicProcedure,
@@ -21,7 +20,6 @@ export const userRouter = {
     return ctx.db.user.findMany({
       ...configPrismaUser,
       orderBy: { createdAt: "asc" },
-      ...configPrismaCache,
     });
   }),
 
@@ -31,7 +29,6 @@ export const userRouter = {
       return ctx.db.user.findUnique({
         where: { username: input },
         ...configPrismaUser,
-        ...configPrismaCache,
       });
     }),
 

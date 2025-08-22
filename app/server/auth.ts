@@ -1,12 +1,10 @@
 import { TRPCError, type TRPCRouterRecord } from "@trpc/server";
-import { configPrismaCache } from "@/lib/config/prisma";
 import { protectedProcedure } from "@/modules/trpc/trpc-config";
 
 export const authRouter = {
   getUser: protectedProcedure.query(async ({ ctx }) => {
     const user = await ctx.db.user.findUnique({
       where: { id: ctx.user.id },
-      ...configPrismaCache,
     });
     if (!user) throw new TRPCError({ code: "NOT_FOUND" });
     return user;
@@ -20,7 +18,6 @@ export const authRouter = {
         username: true,
         email: true,
       },
-      ...configPrismaCache,
     });
     if (!user) throw new TRPCError({ code: "NOT_FOUND" });
     return user;
@@ -35,7 +32,6 @@ export const authRouter = {
         twofactors: true,
         sessions: true,
       },
-      ...configPrismaCache,
     });
     if (!user) throw new TRPCError({ code: "NOT_FOUND" });
     return user;
