@@ -6,8 +6,8 @@
   "packageManager": "bun@1.2.20",
   "scripts": {
     "dev": "bun db:migrate && react-router dev",
-    "build": "bun env:check && bun db:migrate:deploy && bun db:gen:prod && react-router build",
-    "build:docker": "bun db:gen:prod && react-router build",
+    "build": "bun db:gen:prod && react-router build",
+    "build:local": "bun env:check && bun db:migrate:deploy && bun db:gen:prod && react-router build",
     "start": "react-router-serve ./build/server/index.js",
     "start:local": "dotenv -e .env react-router-serve ./build/server/index.js",
     "start:prod": "dotenv -e .env.prod react-router-serve ./build/server/index.js",

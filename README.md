@@ -212,8 +212,10 @@ Pick a host to deploy and setup accordingly, such as:
 
 Notes:
 
-- Railway and Render supports `Dockerfile`.
-- Only if using Vercel, enable `vercelPreset` in `react-router.config.ts`.
+- Railway supports `Dockerfile`.
+  - Keep in mind the private network is not available during build time, so have to [migrate during pre-deploy](https://docs.railway.com/guides/pre-deploy-command)
+- Render supports `Dockerfile`.
+- Vercel needs `vercelPreset` in `react-router.config.ts`.
 - It's recommended to use secret management for environment variables, such as [Doppler](https://doppler.com) or [Infisical](https://infisical.com).
 
 ### Production Build
