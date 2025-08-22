@@ -16,11 +16,11 @@ services:
     build:
       context: .
     ports:
-      - "8000:8000"
+      - ${PORT}:3000
     depends_on:
       - postgres
     env_file:
-      - path: .env
+      - path: .env.prod
         required: true
 
 volumes:

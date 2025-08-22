@@ -1,3 +1,5 @@
+# https://bun.com/guides/ecosystem/docker
+
 FROM oven/bun:alpine AS dependencies-env
 RUN apk add --no-cache build-base python3 py3-pip
 COPY . /app
