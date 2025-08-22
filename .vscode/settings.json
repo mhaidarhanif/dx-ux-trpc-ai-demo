@@ -26,15 +26,6 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "emmet.showExpandedAbbreviation": "never",
-  "files.exclude": {
-    "**/.husky": true,
-    "**/.react-router": true,
-    "**/.vercel": true,
-    "**/.windsurf": true,
-    "**/build": true,
-    "**/generated": true,
-    "**/node_modules": true
-  },
   "peacock.color": "#a5b4fc",
   "typescript.experimental.useTsgo": false,
   "typescript.preferences.importModuleSpecifier": "non-relative",
