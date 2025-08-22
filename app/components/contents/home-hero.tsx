@@ -4,6 +4,7 @@ import { Flex } from "@/components/shared/flex";
 import { SplitText } from "@/components/texts/split-text";
 import { ContentIntro } from "@/components/ui/content";
 import { Icons } from "@/lib/icons";
+import { envClient } from "@/modules/env/env";
 
 export function HomeHero({ helloText }: { helloText: string }) {
   return (
@@ -22,22 +23,14 @@ export function HomeHero({ helloText }: { helloText: string }) {
           <p>
             Welcome to{" "}
             <Anchor href="https://github.com/dogokit/dogokit-corgi">
-              Dogokit Corgi
+              {envClient.VITE_APP_NAME}
             </Anchor>
-            . A full stack web app kit with React Router v7 Framework, tRPC,
-            Better Auth, Prisma, Tailwind CSS, shadcn/ui, and more.
           </p>
         </ContentIntro>
 
         <p>
-          This template is one of implementation details of{" "}
-          <Anchor href="https://github.com/dogokit/dogokit-akita">
-            Dogokit Akita
-          </Anchor>
-          . Designed to help you quickly get started with your own web
-          application. With a lot of components, configuration, and boilerplate
-          code already set up. Feel free to use, modify, and remove any parts
-          you don't need.
+          A full stack web app kit with React Router v7 Framework, tRPC, Better
+          Auth, Prisma, Tailwind CSS, shadcn/ui, and more.
         </p>
       </article>
 
@@ -49,6 +42,7 @@ export function HomeHero({ helloText }: { helloText: string }) {
         <ButtonAnchor
           href="https://github.com/new?template_name=dogokit-corgi&template_owner=dogokit"
           size="lg"
+          variant="secondary"
         >
           <Icons.Code />
           <span>Use Template</span>

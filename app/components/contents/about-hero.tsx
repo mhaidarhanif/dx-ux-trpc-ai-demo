@@ -14,6 +14,7 @@ export function AboutHero() {
             tRPC, Prisma, Better Auth, Tailwind CSS, shadcn, and more.
           </p>
         </ContentIntro>
+
         <p>
           This template is created by{" "}
           <Anchor href="https://github.com/mhaidarhanif">M Haidar Hanif</Anchor>
@@ -23,6 +24,17 @@ export function AboutHero() {
             Dogokit Akita
           </Anchor>
           , a full stack app development kit.
+        </p>
+
+        <p>
+          This is one of implementation details of{" "}
+          <Anchor href="https://github.com/dogokit/dogokit-akita">
+            Dogokit Akita
+          </Anchor>
+          . Designed to help you quickly get started with your own web
+          application. With a lot of components, configuration, and boilerplate
+          code already set up. Feel free to use, modify, and remove any parts
+          you don't need.
         </p>
 
         <p>Codename "Corgi" is inspired by the Welsh Corgi breed.</p>
