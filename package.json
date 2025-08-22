@@ -28,7 +28,7 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:prod": "dotenv -e .env.prod bun db:migrate:deploy",
     "db:gen": "prisma generate --no-hints",
-    "db:gen:prod": "bun db:gen --no-engine",
+    "db:gen:prod": "bun db:gen",
     "db:studio": "prisma studio --browser none",
     "db:studio:prod": "dotenv -e .env.prod bun db:studio",
     "db:reset": "prisma migrate reset --skip-seed",
