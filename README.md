@@ -213,6 +213,7 @@ Pick a host to deploy and setup accordingly, such as:
 Notes:
 
 - Railway supports `Dockerfile`.
+  - Make sure to use [`Railpack`](https://railpack.com/languages/node/) to have the latest Node.js version.
   - Keep in mind the private network is not available during build time, so have to [migrate during pre-deploy](https://docs.railway.com/guides/pre-deploy-command)
 - Render supports `Dockerfile`.
 - Vercel needs `vercelPreset` in `react-router.config.ts`.

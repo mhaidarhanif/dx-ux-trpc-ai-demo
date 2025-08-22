@@ -13,7 +13,7 @@ datasource db {
 
 generator client {
   provider        = "prisma-client"
-  output          = "../app/generated/prisma"
+  output          = "../../app/generated/prisma"
   previewFeatures = ["relationJoins", "driverAdapters", "views", "fullTextSearchPostgres"]
 
   // Enable Rust-free engine, ONLY IF NOT using Prisma Accelerate
@@ -25,7 +25,7 @@ generator client {
 
 generator zod {
   provider = "zod-prisma-types"
-  output   = "../app/generated/zod"
+  output   = "../../app/generated/zod"
 }
 
 // Models
