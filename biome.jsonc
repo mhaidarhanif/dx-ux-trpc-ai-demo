@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
   "extends": ["ultracite"],
   "assist": {
     "actions": {
@@ -37,13 +37,15 @@
     "enabled": true,
     "rules": {
       "a11y": {
-        "noSvgWithoutTitle": "off"
+        "noSvgWithoutTitle": "off",
+        "useSemanticElements": "off"
       },
       "nursery": {
-        "noNestedComponentDefinitions": "off",
-        "noUnknownAtRule": "off",
         "useSortedClasses": "on",
-        "useUniqueElementIds": "off"
+        "useConsistentTypeDefinitions": "off",
+        "useAnchorHref": "off",
+        "useImageSize": "off",
+        "noUnnecessaryConditions": "off"
       },
       "performance": {
         "noImgElement": "off",
@@ -51,10 +53,16 @@
       },
       "recommended": true,
       "style": {
-        "useBlockStatements": "off"
+        "useBlockStatements": "off",
+        "noMagicNumbers": "off"
+      },
+      "correctness": {
+        "useUniqueElementIds": "off",
+        "noNestedComponentDefinitions": "off"
       },
       "suspicious": {
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noUnknownAtRules": "off"
       }
     }
   },
