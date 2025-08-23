@@ -6,4 +6,8 @@ export const greetingRouter = {
   example: publicProcedure.query(() => {
     return "Example";
   }),
+  sayHello: publicProcedure.query(({ ctx }) => {
+    const userName = ctx.user?.name || "Guest";
+    return `Hello ${userName}! 👋`;
+  }),
 } satisfies TRPCRouterRecord;
