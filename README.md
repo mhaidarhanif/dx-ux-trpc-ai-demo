@@ -8,6 +8,8 @@
 
 ## Goal
 
+> This is just a very specific demo fork from <https://github.com/dogokit/dogokit-corgi>
+
 This template is optimized for the shortest time to production, but with long-term development as well.
 
 ### Tech Stack and Setup
